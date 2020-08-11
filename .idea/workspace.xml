@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="userSettingsFile" value="C:\maven-repository\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1fv2krwDJY0HH2q5hnOvYJAa0KI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunManager" selected="JUnit.updateTest.importQuestionTest">
+    <configuration name="updateTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-mybatis-generator-test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.updateTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="updateTest (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="circuitQA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.updateTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="updateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-mybatis-generator-test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="com.example.circuitQA.updateTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="updateTest.importQuestionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="circuitQA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.updateTest" />
+      <option name="METHOD_NAME" value="importQuestionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="updateTest.updateQuestionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-mybatis-generator-test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="com.example.circuitQA.updateTest" />
+      <option name="METHOD_NAME" value="updateQuestionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.updateTest.importQuestionTest" />
+        <item itemvalue="JUnit.updateTest (2)" />
+        <item itemvalue="JUnit.updateTest (1)" />
+        <item itemvalue="JUnit.updateTest" />
+        <item itemvalue="JUnit.updateTest.updateQuestionTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="" />
+      <created>1597084391348</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597084391348</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597084667662">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597084667662" />
+    <state x="449" y="113" key="FileChooserDialogImpl" timestamp="1597159179841">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="449" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1597159179841" />
+    <state width="1323" height="509" key="GridCell.Tab.0.bottom" timestamp="1597159002607">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="509" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597159002607" />
+    <state width="1323" height="509" key="GridCell.Tab.0.center" timestamp="1597159002606">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="509" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597159002606" />
+    <state width="1323" height="509" key="GridCell.Tab.0.left" timestamp="1597159002606">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="509" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597159002606" />
+    <state width="1323" height="509" key="GridCell.Tab.0.right" timestamp="1597159002607">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="509" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597159002607" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1597084492342">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1597084492342" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1597160005733">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1597160005733" />
+    <state x="466" y="141" key="chooseDestDirectoryDialog" timestamp="1597157154707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="466" y="141" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1597157154707" />
+    <state x="353" y="93" width="806" height="614" key="find.popup" timestamp="1597157028380">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="353" y="93" width="806" height="614" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1597157028380" />
+  </component>
+</project>

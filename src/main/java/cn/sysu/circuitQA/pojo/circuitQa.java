@@ -50,9 +50,4 @@ public class circuitQa {
     public void setParentid(String parentid) {
         this.parentid = parentid == null ? null : parentid.trim();
     }
-
-    @Override
-    public String toString(){
-        return this.question + this.answer;
-    }
 }

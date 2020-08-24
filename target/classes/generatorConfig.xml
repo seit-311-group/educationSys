@@ -57,5 +57,8 @@
 
         <table tableName="circuitqa" domainObjectName="circuitQa"></table>
 
+        <table tableName="keyword" domainObjectName="keyWord"></table>
+
+
     </context>
 </generatorConfiguration>

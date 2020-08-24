@@ -8,5 +8,6 @@ public interface CircuitQAService {
     List<circuitQa> importQuestions();
 
     void updateQuestion(int id, String parentId, String childrenID);
+
 }
 

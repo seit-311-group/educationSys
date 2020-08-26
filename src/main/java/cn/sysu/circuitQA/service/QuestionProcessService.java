@@ -16,15 +16,13 @@ public class QuestionProcessService {
     @Autowired
     private KeyWordService keyWordService;
 
-    @Autowired
     private List<circuitQa> circuitQas;
 
-    @Autowired
     private List<keyWord> keyWords;
 
     public List<circuitQa> extractCandidates(String question) {
-        circuitQas = circuitQAService.importQuestions();
-        keyWords = keyWordService.importKeyWords();
+        this.circuitQas = circuitQAService.importQuestions();
+        this.keyWords = keyWordService.importKeyWords();
         String keyword = extract(question);
         List<circuitQa> candidates = new ArrayList<circuitQa>();
         for (keyWord word : keyWords) {

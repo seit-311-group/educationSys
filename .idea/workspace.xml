@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20200826">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/keyWordMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/keyWordMapper.xml" afterDir="false" />
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/KeyWordServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/updateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/updateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/updateTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/updateTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,23 +57,8 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
-  <component name="RunManager" selected="JUnit.updateTest.importQuestionTest">
-    <configuration name="updateTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-mybatis-generator-test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.updateTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="updateTest (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProcessServiceTest.extractCandidatesTest">
+    <configuration name="KeyWordServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="circuitQA" />
       <extension name="coverage">
         <pattern>
@@ -90,23 +67,55 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.updateTest" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.KeyWordServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="updateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-mybatis-generator-test" />
+    <configuration name="ProcessServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="circuitQA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.circuitQA.*" />
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.example.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="com.example.circuitQA.updateTest" />
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProcessServiceTest.extractCandidatesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="circuitQA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
+      <option name="METHOD_NAME" value="extractCandidatesTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProcessServiceTest.extractTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="circuitQA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
+      <option name="METHOD_NAME" value="extractTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,29 +136,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="updateTest.updateQuestionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-mybatis-generator-test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="com.example.circuitQA.updateTest" />
-      <option name="METHOD_NAME" value="updateQuestionTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProcessServiceTest.extractCandidatesTest" />
+        <item itemvalue="JUnit.ProcessServiceTest.extractTest" />
+        <item itemvalue="JUnit.KeyWordServiceTest" />
+        <item itemvalue="JUnit.ProcessServiceTest" />
         <item itemvalue="JUnit.updateTest.importQuestionTest" />
-        <item itemvalue="JUnit.updateTest (2)" />
-        <item itemvalue="JUnit.updateTest (1)" />
-        <item itemvalue="JUnit.updateTest" />
-        <item itemvalue="JUnit.updateTest.updateQuestionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -172,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598429152647</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="20200826">
+      <created>1598442311455</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598442311455</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -197,10 +197,10 @@
     </state>
     <state x="387" y="103" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1598441792738" />
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597084667662" />
-    <state x="172" y="0" key="CommitChangelistDialog2" timestamp="1598429378241">
+    <state x="172" y="0" key="CommitChangelistDialog2" timestamp="1598442310891">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="172" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1598429378241" />
+    <state x="172" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1598442310891" />
     <state x="421" y="106" key="FileChooserDialogImpl" timestamp="1598280789899">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -210,35 +210,51 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="548" y="253" width="280" height="222" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1597161771672" />
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom" timestamp="1598442264475">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1598446380346">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1598446380346" />
     <state width="1323" height="509" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1237" height="328" key="GridCell.Tab.0.center" timestamp="1598442264475">
+    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1598446380346">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1598446380346" />
     <state width="1323" height="509" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1237" height="328" key="GridCell.Tab.0.left" timestamp="1598442264475">
+    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1598446380346">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1598446380346" />
     <state width="1323" height="509" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597331409604" />
-    <state width="1237" height="328" key="GridCell.Tab.0.right" timestamp="1598442264475">
+    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1598446380346">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1598446380346" />
     <state width="1323" height="509" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
+    <state width="1237" height="55" key="GridCell.Tab.1.bottom" timestamp="1598445106463">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="55" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1598445106463" />
+    <state width="1237" height="55" key="GridCell.Tab.1.center" timestamp="1598445106463">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="55" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1598445106463" />
+    <state width="1237" height="55" key="GridCell.Tab.1.left" timestamp="1598445106463">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="55" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1598445106463" />
+    <state width="1237" height="55" key="GridCell.Tab.1.right" timestamp="1598445106463">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="55" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1598445106463" />
     <state x="12" y="0" width="1243" height="680" key="SettingsEditor" timestamp="1598286486351">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="12" y="0" width="1243" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1598286486351" />
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1597162004435" />
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1598429160563">
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1598442313140">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1598429160563" />
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1598442313140" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1597160005733" />
     <state x="466" y="141" key="chooseDestDirectoryDialog" timestamp="1597157154707">
       <screen x="0" y="0" width="1366" height="728" />

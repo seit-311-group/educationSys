@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CircuitQAServiceImpl implements CircuitQAService {
     @Autowired
-    private circuitQaMapper circuitQaMapper;
+    private cn.sysu.circuitQA.mapper.circuitQaMapper circuitQaMapper;
 
     @Scheduled(cron="0 0 2 * * ?")
     @Override

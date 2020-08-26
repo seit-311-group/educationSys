@@ -1,10 +1,8 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-import cn.sysu.circuitQA.pojo.keyWord;
-import cn.sysu.circuitQA.pojo.keyWordExample;
 import cn.sysu.circuitQA.mapper.keyWordMapper;
-import cn.sysu.circuitQA.pojo.keyWordExample;
 import cn.sysu.circuitQA.pojo.keyWord;
+import cn.sysu.circuitQA.pojo.keyWordExample;
 import cn.sysu.circuitQA.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,7 @@ import java.util.List;
 @Service
 public class KeyWordServiceImpl implements KeyWordService {
     @Autowired
-    private keyWordMapper keyWordMapper;
+    private cn.sysu.circuitQA.mapper.keyWordMapper keyWordMapper;
 
     @Override
     public List<keyWord> importKeyWords(){

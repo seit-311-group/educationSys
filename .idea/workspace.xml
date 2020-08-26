@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/KeyWordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20200826">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/keyWordMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/keyWordMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CircuitQAService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CircuitQAService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionProcessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/circuitQaMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/CircuitQAService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/updateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/updateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/updateTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/updateTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +42,8 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="userSettingsFile" value="C:\maven-repository\settings.xml" />
+        <option name="mavenHome" value="C:\Users\10173\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="C:\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -57,16 +53,17 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager" selected="JUnit.updateTest.importQuestionTest">
     <configuration name="updateTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -156,18 +153,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -179,49 +165,80 @@
       <option name="presentableId" value="Default" />
       <updated>1597084391348</updated>
     </task>
+    <task id="LOCAL-00001" summary="20200826">
+      <created>1598429152647</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598429152647</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+    <MESSAGE value="20200826" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200826" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597084667662">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="121" y="0" key="#Project_Structure" timestamp="1598328215664">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="121" y="0" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1598328215664" />
+    <state x="446" y="46" key="#com.intellij.ide.util.MemberChooser" timestamp="1598442111502">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="446" y="46" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1598442111502" />
+    <state x="387" y="103" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598441792738">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="387" y="103" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1598441792738" />
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597084667662" />
-    <state x="449" y="113" key="FileChooserDialogImpl" timestamp="1597159179841">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="172" y="0" key="CommitChangelistDialog2" timestamp="1598429378241">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="172" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1598429378241" />
+    <state x="421" y="106" key="FileChooserDialogImpl" timestamp="1598280789899">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="106" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1598280789899" />
     <state x="449" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1597159179841" />
     <state x="548" y="253" width="280" height="222" key="Github.ShareDialog" timestamp="1597161771672">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="548" y="253" width="280" height="222" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1597161771672" />
-    <state width="1323" height="509" key="GridCell.Tab.0.bottom" timestamp="1597331409605">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1237" height="328" key="GridCell.Tab.0.bottom" timestamp="1598442264475">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="328" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
     <state width="1323" height="509" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1323" height="509" key="GridCell.Tab.0.center" timestamp="1597331409605">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1237" height="328" key="GridCell.Tab.0.center" timestamp="1598442264475">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="328" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
     <state width="1323" height="509" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1323" height="509" key="GridCell.Tab.0.left" timestamp="1597331409604">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1237" height="328" key="GridCell.Tab.0.left" timestamp="1598442264475">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="328" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
     <state width="1323" height="509" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597331409604" />
-    <state width="1323" height="509" key="GridCell.Tab.0.right" timestamp="1597331409605">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1237" height="328" key="GridCell.Tab.0.right" timestamp="1598442264475">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="328" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1598442264475" />
     <state width="1323" height="509" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1597162004435">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="12" y="0" width="1243" height="680" key="SettingsEditor" timestamp="1598286486351">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="12" y="0" width="1243" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1598286486351" />
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1597162004435" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1597160005733">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1598429160563">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1598429160563" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1597160005733" />
     <state x="466" y="141" key="chooseDestDirectoryDialog" timestamp="1597157154707">
       <screen x="0" y="0" width="1366" height="728" />
@@ -231,5 +248,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="353" y="93" width="806" height="614" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1597506563475" />
+    <state x="418" y="240" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1598429357964">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="418" y="240" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.680@0.0.1280.680" timestamp="1598429357964" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1598332242571">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1598332242571" />
   </component>
 </project>

@@ -1,8 +1,6 @@
 package cn.sysu.circuitQA;
 
-import cn.sysu.circuitQA.mapper.circuitQaMapper;
 import cn.sysu.circuitQA.pojo.circuitQa;
-import cn.sysu.circuitQA.service.CircuitQAService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sysu.circuitQA.mapper.circuitQaMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.circuitQa" >
-    <result column="questionID" property="questionid" jdbcType="INTEGER" />
-    <result column="question" property="question" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="childID" property="childid" jdbcType="VARCHAR" />
-    <result column="parentID" property="parentid" jdbcType="VARCHAR" />
+<mapper namespace="cn.sysu.circuitQA.mapper.keyWordMapper" >
+  <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.keyWord" >
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="questionIDs" property="questionids" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    questionID, question, answer, childID, parentID
+    keyword, questionIDs
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.circuitQA.pojo.circuitQaExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.circuitQA.pojo.keyWordExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from circuitqa
+    from keyword
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,78 +80,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.circuitQaExample" >
-    delete from circuitqa
+  <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.keyWordExample" >
+    delete from keyword
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
-    insert into circuitqa (questionID, question, answer, 
-      childID, parentID)
-    values (#{questionid,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
-      #{childid,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.keyWord" >
+    insert into keyword (keyword, questionIDs)
+    values (#{keyword,jdbcType=VARCHAR}, #{questionids,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
-    insert into circuitqa
+  <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.keyWord" >
+    insert into keyword
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="questionid != null" >
-        questionID,
+      <if test="keyword != null" >
+        keyword,
       </if>
-      <if test="question != null" >
-        question,
-      </if>
-      <if test="answer != null" >
-        answer,
-      </if>
-      <if test="childid != null" >
-        childID,
-      </if>
-      <if test="parentid != null" >
-        parentID,
+      <if test="questionids != null" >
+        questionIDs,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="questionid != null" >
-        #{questionid,jdbcType=INTEGER},
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
       </if>
-      <if test="question != null" >
-        #{question,jdbcType=VARCHAR},
-      </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="childid != null" >
-        #{childid,jdbcType=VARCHAR},
-      </if>
-      <if test="parentid != null" >
-        #{parentid,jdbcType=VARCHAR},
+      <if test="questionids != null" >
+        #{questionids,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.circuitQA.pojo.circuitQaExample" resultType="java.lang.Integer" >
-    select count(*) from circuitqa
+  <select id="countByExample" parameterType="cn.sysu.circuitQA.pojo.keyWordExample" resultType="java.lang.Integer" >
+    select count(*) from keyword
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update circuitqa
+    update keyword
     <set >
-      <if test="record.questionid != null" >
-        questionID = #{record.questionid,jdbcType=INTEGER},
+      <if test="record.keyword != null" >
+        keyword = #{record.keyword,jdbcType=VARCHAR},
       </if>
-      <if test="record.question != null" >
-        question = #{record.question,jdbcType=VARCHAR},
-      </if>
-      <if test="record.answer != null" >
-        answer = #{record.answer,jdbcType=VARCHAR},
-      </if>
-      <if test="record.childid != null" >
-        childID = #{record.childid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.parentid != null" >
-        parentID = #{record.parentid,jdbcType=VARCHAR},
+      <if test="record.questionids != null" >
+        questionIDs = #{record.questionids,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,12 +130,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update circuitqa
-    set questionID = #{record.questionid,jdbcType=INTEGER},
-      question = #{record.question,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=VARCHAR},
-      childID = #{record.childid,jdbcType=VARCHAR},
-      parentID = #{record.parentid,jdbcType=VARCHAR}
+    update keyword
+    set keyword = #{record.keyword,jdbcType=VARCHAR},
+      questionIDs = #{record.questionids,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

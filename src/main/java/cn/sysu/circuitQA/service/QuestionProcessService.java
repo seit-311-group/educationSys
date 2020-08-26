@@ -16,9 +16,15 @@ public class QuestionProcessService {
     @Autowired
     private KeyWordService keyWordService;
 
+    @Autowired
+    private List<circuitQa> circuitQas;
+
+    @Autowired
+    private List<keyWord> keyWords;
+
     public List<circuitQa> extractCandidates(String question) {
-        List<circuitQa> circuitQas = circuitQAService.importQuestions();
-        List<keyWord> keyWords = keyWordService.importKeyWords();
+        circuitQas = circuitQAService.importQuestions();
+        keyWords = keyWordService.importKeyWords();
         String keyword = extract(question);
         List<circuitQa> candidates = new ArrayList<circuitQa>();
         for (keyWord word : keyWords) {
@@ -38,6 +44,17 @@ public class QuestionProcessService {
         return candidates;
     }
     private String extract(String question) {
-        return
+        String word = "";
+        try {
+            for (keyWord keyword : keyWords) {
+                if (question.indexOf(keyword.getKeyword()) > -1) {
+                    word = keyword.getKeyword();
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return word;
     }
 }

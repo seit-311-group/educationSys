@@ -15,7 +15,7 @@ public class CircuitQAServiceImpl implements CircuitQAService {
     @Autowired
     private cn.sysu.circuitQA.mapper.circuitQaMapper circuitQaMapper;
 
-    @Scheduled(cron="0 0 2 * * ?")
+    //@Scheduled(cron="0 0 2 * * ?")
     @Override
     public List<circuitQa> importQuestions() {
         circuitQaExample circuitQaExample = new circuitQaExample();

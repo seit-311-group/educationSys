@@ -1,7 +1,9 @@
 package cn.sysu.circuitQA;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
-import cn.sysu.circuitQA.service.QuestionProcessService;
+import cn.sysu.circuitQA.service.CircuitQAService;
+import cn.sysu.circuitQA.service.CoreProcessService;
+import cn.sysu.circuitQA.service.QuestionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +16,30 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 public class ProcessServiceTest {
     @Autowired
-    private QuestionProcessService questionProcessService;
+    private CoreProcessService coreProcessService;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private cn.sysu.circuitQA.service.CircuitQAService CircuitQAService;
 
     @Test
     public void extractCandidatesTest() {
-        List<circuitQa> candidates = questionProcessService.extractCandidates("什么是过渡过程？");
+        List<circuitQa> candidates = coreProcessService.extractCandidates("什么是过渡过程？");
         if (candidates.size() == 0) {
             System.out.println("");
         }
         System.out.println(candidates.get(0));
+        System.out.println(candidates.get(1));
     }
-//    @Test
-//    public void extractTest() {
-//        System.out.println(questionProcessService.extract("什么是过渡过程？"));
-//    }
+    @Test
+    public void subQueryTest() {
+        List<circuitQa> questions = CircuitQAService.importQuestions();
+        coreProcessService.subQuery(questions.get(0));
+    }
+    @Test
+    public void processTest() {
+        questionService.process("什么是过渡过程？");
+    }
 }

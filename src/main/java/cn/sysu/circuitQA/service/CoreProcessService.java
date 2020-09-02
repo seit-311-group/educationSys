@@ -45,7 +45,6 @@ public class CoreProcessService {
         this.circuitQas = circuitQAService.importQuestions();
         this.keyWords = keyWordService.importKeyWords();
         this.questionMap = new HashMap<String, circuitQa>();
-        System.out.println(circuitQas.get(0).getChildid());
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);
         }
@@ -141,7 +140,6 @@ public class CoreProcessService {
         for (int i = 0; i < childQuestions.length; i++) {
             circuitQa question = questionMap.get(childIDs[i]);
             childQuestions[i] = question;
-            System.out.println(String.valueOf(i) + " " + question.getQuestion());
         }
         Scanner sc = new Scanner(System.in);
         while (true) {

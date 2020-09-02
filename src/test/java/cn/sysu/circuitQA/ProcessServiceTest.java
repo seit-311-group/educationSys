@@ -34,11 +34,6 @@ public class ProcessServiceTest {
         System.out.println(candidates.get(1));
     }
     @Test
-    public void subQueryTest() {
-        List<circuitQa> questions = CircuitQAService.importQuestions();
-        coreProcessService.subQuery(questions.get(0));
-    }
-    @Test
     public void processTest() {
         questionService.process("什么是过渡过程？");
     }

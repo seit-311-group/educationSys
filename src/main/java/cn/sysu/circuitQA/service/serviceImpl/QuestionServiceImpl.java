@@ -23,7 +23,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void process(String query) {
         circuitQa target = coreProcess.analysis(query);
         System.out.println(target.getAnswer());
-        coreProcess.subQuery(target);
+        coreProcess.subQuery(query);
     }
 
 }

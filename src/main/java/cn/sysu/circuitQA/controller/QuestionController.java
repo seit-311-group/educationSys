@@ -19,4 +19,15 @@ public class QuestionController {
         return target.getAnswer();
     }
 
+    @RequestMapping("/subQuery")
+    public String subQuery(@RequestParam(value = "question") String question) throws Exception {
+        String questions = coreProcess.subQuery(question);
+        return questions;
+    }
+
+    @RequestMapping("/getAnswerByOrder")
+    public String getAnswerByOrder(@RequestParam(value = "order") String order, @RequestParam(value = "questions") String questions ) throws Exception {
+        String target =  coreProcess.getAnswerByOrder(order, questions);
+        return target;
+    }
 }

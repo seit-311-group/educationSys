@@ -24,12 +24,17 @@ public class CoreProcessService {
 
     private Map<String, circuitQa> questionMap;
 
-    //解析提问
+    /**
+     *
+     * @param query
+     * @return 匹配到的qa对象
+     */
     public circuitQa analysis(String query) {
 
         System.out.println("原始问句：" + query);
 
         List<circuitQa> candidates = extractCandidates(query);
+        if (candidates.isEmpty()) {return null;}
         System.out.println("候选问题集：");
         for (int i = 0; i < candidates.size(); i++) {
             System.out.println(String.valueOf(i) + " " + candidates.get(i).getQuestion());
@@ -131,28 +136,40 @@ public class CoreProcessService {
         }
         return min;
     }
-    //继续提问
-    public void subQuery(circuitQa qa) {
-        System.out.println("回复数字序号，选择继续了解以下问题：");
+
+    /**
+     *
+     * @param ques
+     * @return 所有衍生问题内容
+     */
+    public String subQuery(String ques) {
+        circuitQa qa = analysis(ques);
         String[] childIDs = qa.getChildid().split(" ");
-        System.out.println(qa);
         circuitQa[] childQuestions = new circuitQa[childIDs.length];
+
+        String res = "";
         for (int i = 0; i < childQuestions.length; i++) {
             circuitQa question = questionMap.get(childIDs[i]);
-            childQuestions[i] = question;
+            res = res + String.valueOf(i+1) + "." + question.getQuestion() + "\n";
         }
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            if (sc.hasNext()) {
-                try {
-                    String str = sc.next();
-                    System.out.println(childQuestions[Integer.valueOf(str)].getAnswer());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("请输入正确数字");
-                }
+        return res;
+    }
+
+    public String getAnswerByOrder(String order, String questions) {
+        circuitQas = circuitQAService.importQuestions();
+        String[] qas = questions.split("\n");
+        String target = "";
+        for (String question : qas) {
+            if (question.substring(0,1).equals(order)) {
+                target =  question.substring(2);
             }
         }
-        sc.close();
+        System.out.println(target);
+        for (circuitQa qa : circuitQas) {
+            if (qa.getQuestion().equals(target)) {
+                return qa.getAnswer();
+            }
+        }
+        return "";
     }
 }

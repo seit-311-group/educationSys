@@ -96,8 +96,9 @@ position: fixed;
 }
 </style>
 <script type="text/javascript">
+    // <![CDATA[
 	window.onload = function() {
-
+        var questions = '';
 		var input = document.getElementById('msg_input');//查找缓存
 		document.getElementById('sendbtn').onclick = function() {
 			sendMsg();
@@ -112,7 +113,6 @@ position: fixed;
 				sendMsg()
 			}
 		}
-
 		function sendMsg() {
 			var input = document.getElementById('msg_input');//查找缓存
 			var ul = document.getElementById('content');
@@ -125,23 +125,60 @@ position: fixed;
 			var div = document.createElement('div');
 			div.style = 'clear:both';
 			ul.appendChild(div);
+            if (input.value.length > 1) {
+                ajax({
+                    url: '/qa/query?question=' + input.value,
+                    success: function (res) {
+                        console.log(res);
+                        var newLi = document.createElement('li');
+                        newLi.innerHTML = res;
+                        newLi.className = 'msgContent left';
+                        ul.appendChild(newLi);
 
-			ajax({
-				url : '/qa/query?question='+ input.value,
-				success : function(res) {
-					console.log(res);
-					var newLi = document.createElement('li');
-					newLi.innerHTML = res;
-					newLi.className = 'msgContent left';
-					ul.appendChild(newLi);
+                        var div = document.createElement('div');
+                        div.style = 'clear:both';
+                        ul.appendChild(div);
+                        input.value = '';
+                        newLi.scrollIntoView();//将元素滚动到可见位置
+                    }
+                });
+                sleep(1000);
+                ajax({
+                    url: '/qa/subQuery?question=' + input.value,
+                    success: function (res) {
+                        console.log(res);
+                        questions = res;
+                        var newLi = document.createElement('li');
+                        newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + res;
+                        newLi.className = 'msgContent left';
+                        ul.appendChild(newLi);
 
-					var div = document.createElement('div');
-					div.style = 'clear:both';
-					ul.appendChild(div);
-					input.value = '';
-					newLi.scrollIntoView();//将元素滚动到可见位置
-				}
-			})
+                        var div = document.createElement('div');
+                        div.style = 'clear:both';
+                        ul.appendChild(div);
+                        input.value = '';
+                        newLi.scrollIntoView();//将元素滚动到可见位置
+                    }
+                });
+            } else {
+                ajax({
+                    url: '/qa/getAnswerByOrder?order=' + input.value + '&' + 'questions=' + questions,
+                    success: function (res) {
+                        console.log(res);
+                        questions = res;
+                        var newLi = document.createElement('li');
+                        newLi.innerHTML = res;
+                        newLi.className = 'msgContent left';
+                        ul.appendChild(newLi);
+
+                        var div = document.createElement('div');
+                        div.style = 'clear:both';
+                        ul.appendChild(div);
+                        input.value = '';
+                        newLi.scrollIntoView();//将元素滚动到可见位置
+                    }
+                });
+            }
 
 			input.value = '';
 			newLi.scrollIntoView();//将元素滚动到可见位置
@@ -193,6 +230,17 @@ position: fixed;
 
 		}
 	}
+
+    function sleep(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
+    // ]]>
 </script>
 
 <body>

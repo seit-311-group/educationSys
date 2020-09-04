@@ -1,6 +1,7 @@
 package cn.sysu.circuitQA;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
+import cn.sysu.circuitQA.pojo.keyWord;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +12,17 @@ import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class updateTest {
+public class KeyWordServiceTest {
     @Autowired
-    private cn.sysu.circuitQA.service.CircuitQAService CircuitQAService;
-//    @Autowired
-//    private circuitQaMapper circuitQaMapper;
+    private cn.sysu.circuitQA.service.KeyWordService keyWordService;
+
     @Test
-    public void updateQuestionTest(){
-        CircuitQAService.updateQuestion(1,"1 2","1");
+    public void getIDByKeyWordTest(){
+        System.out.println(keyWordService.getIDByKeyWord("过渡过程"));
     }
     @Test
-    public void importQuestionTest(){
-        List<circuitQa> questions = CircuitQAService.importQuestions();
-        System.out.println(questions.get(0));
+    public void importKeyWordsTest(){
+        List<keyWord> keyWords = keyWordService.importKeyWords();
+        System.out.println(keyWords.get(0));
     }
 }
-

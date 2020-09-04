@@ -53,6 +53,6 @@ public class circuitQa {
 
     @Override
     public String toString() {
-        return this.getQuestion() + this.getAnswer();
+        return this.getQuestion();
     }
 }

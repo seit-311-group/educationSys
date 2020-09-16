@@ -19,13 +19,13 @@
 	margin: 20px auto;
 	border: 1px solid steelblue;
 	width: 430px;
-	height: 400px;
+	height: 600px;
 }
 
 .msgInput {
 	display: block;
 	width: 406px;
-	height: 60px;
+	height: 90px;
 	margin: 10px auto;
 }
 
@@ -40,7 +40,7 @@
 .content {
 	list-style: none;
 	width: 410px;
-	height: 280px;
+	height: 450px;
 	margin: 5px auto;
 	border: 1px dotted #D1D3D6;
 	overflow-y: scroll;
@@ -129,7 +129,7 @@ position: fixed;
                 ajax({
                     url: '/qa/query?question=' + input.value,
                     success: function (res) {
-                        console.log(res);
+                        //console.log(res);
                         var newLi = document.createElement('li');
                         newLi.innerHTML = res;
                         newLi.className = 'msgContent left';
@@ -146,10 +146,13 @@ position: fixed;
                 ajax({
                     url: '/qa/subQuery?question=' + input.value,
                     success: function (res) {
-                        console.log(res);
+                        //console.log(res);
                         questions = res;
+                        var array = res.split("@");
+                        var output = "";
+                        for(i = 0;i<array.length;i++) {output += i.toString() + "." + array[i] + "\n";}
                         var newLi = document.createElement('li');
-                        newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + res;
+                        newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + output;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
 
@@ -164,8 +167,6 @@ position: fixed;
                 ajax({
                     url: '/qa/getAnswerByOrder?order=' + input.value + '&' + 'questions=' + questions,
                     success: function (res) {
-                        console.log(res);
-                        questions = res;
                         var newLi = document.createElement('li');
                         newLi.innerHTML = res;
                         newLi.className = 'msgContent left';

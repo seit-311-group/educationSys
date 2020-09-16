@@ -24,6 +24,7 @@ public class CoreProcessService {
 
     private Map<String, circuitQa> questionMap;
 
+
     /**
      *
      * @param query
@@ -145,26 +146,21 @@ public class CoreProcessService {
     public String subQuery(String ques) {
         circuitQa qa = analysis(ques);
         String[] childIDs = qa.getChildid().split(" ");
+        if(childIDs.length == 0) {return "";}
         circuitQa[] childQuestions = new circuitQa[childIDs.length];
 
         String res = "";
         for (int i = 0; i < childQuestions.length; i++) {
             circuitQa question = questionMap.get(childIDs[i]);
-            res = res + String.valueOf(i+1) + "." + question.getQuestion() + "\n";
+            res = res + "@" + question.getQuestion();
         }
-        return res;
+        return res.substring(1);
     }
 
     public String getAnswerByOrder(String order, String questions) {
         circuitQas = circuitQAService.importQuestions();
-        String[] qas = questions.split("\n");
-        String target = "";
-        for (String question : qas) {
-            if (question.substring(0,1).equals(order)) {
-                target =  question.substring(2);
-            }
-        }
-        System.out.println(target);
+        String[] qas = questions.split("@");
+        String target = qas[Integer.parseInt(order)];
         for (circuitQa qa : circuitQas) {
             if (qa.getQuestion().equals(target)) {
                 return qa.getAnswer();

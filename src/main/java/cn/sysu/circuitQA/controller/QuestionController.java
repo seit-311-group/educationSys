@@ -22,6 +22,7 @@ public class QuestionController {
     @RequestMapping("/subQuery")
     public String subQuery(@RequestParam(value = "question") String question) throws Exception {
         String questions = coreProcess.subQuery(question);
+        if (questions.equals("")) {return "";}
         return questions;
     }
 

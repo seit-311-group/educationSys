@@ -1,9 +1,7 @@
 package cn.sysu.circuitQA;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
-import cn.sysu.circuitQA.service.CircuitQAService;
 import cn.sysu.circuitQA.service.CoreProcessService;
-import cn.sysu.circuitQA.service.QuestionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ public class ProcessServiceTest {
     private CoreProcessService coreProcessService;
 
     @Autowired
-    private QuestionService questionService;
-
-    @Autowired
     private cn.sysu.circuitQA.service.CircuitQAService CircuitQAService;
 
     @Test
@@ -33,15 +28,16 @@ public class ProcessServiceTest {
         System.out.println(candidates.get(0));
         System.out.println(candidates.get(1));
     }
-    @Test
-    public void processTest() {
-        questionService.process("什么是过渡过程？");
-    }
+
     @Test
     public void subQueryTest() {
         System.out.println(coreProcessService.subQuery("什么是电路的过渡过程？"));}
     @Test
     public void getTest() {
-        System.out.println(coreProcessService.getAnswerByOrder("2", "1.二阶电路中，过渡过程的性质取决于什么因素？" + "\n" + "2.什么是电路的过渡过程？" + "\n"));
+        System.out.println(coreProcessService.getAnswerByOrder("2", "RL一阶电路的阶跃响应（t=0时接入电源），流过电感的电流如何变化？.二阶电路在单位阶跃响应中曲线变化情况是怎样的？.处理RC电路、RL电路阶跃响应的关键"));
+    }
+    @Test
+    public void orderTest() {
+        System.out.println(coreProcessService.getAnswerByOrder("0", coreProcessService.subQuery("什么是阶跃响应")));
     }
 }

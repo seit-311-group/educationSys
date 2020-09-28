@@ -22,15 +22,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20200904">
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20200916">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/ExtractUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/MatchUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hanlp.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/jar/hanlp-1.7.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/hanlpTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/circuitQA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/circuitQA.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/QuestionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/QuestionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/QuestionServiceTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,14 +86,15 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/jar/hanlp-1.7.8.jar" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15703824" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.CircuitQA">
+  <component name="RunManager" selected="JUnit.ProcessServiceTest.subQueryTest">
     <configuration name="CircuitQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.CircuitQA" />
       <module name="circuitQA" />
@@ -104,8 +108,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProcessServiceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
+    <configuration name="hanlpTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.hanlpTest" />
       <module name="circuitQA" />
       <extension name="coverage">
         <pattern>
@@ -128,7 +132,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProcessServiceTest.getTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProcessServiceTest.extractCandidatesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="circuitQA" />
       <extension name="coverage">
         <pattern>
@@ -138,7 +142,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
       <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
-      <option name="METHOD_NAME" value="getTest" />
+      <option name="METHOD_NAME" value="extractCandidatesTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,15 +189,18 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProcessServiceTest.subQueryTest" />
+        <item itemvalue="JUnit.ProcessServiceTest.extractCandidatesTest" />
+        <item itemvalue="Application.hanlpTest" />
         <item itemvalue="Application.CircuitQA" />
         <item itemvalue="JUnit.ProcessServiceTest.orderTest" />
-        <item itemvalue="JUnit.ProcessServiceTest.getTest" />
-        <item itemvalue="JUnit.ProcessServiceTest.subQueryTest" />
-        <item itemvalue="Application.ProcessServiceTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringMvcView">
+    <option name="showControllers" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -215,6 +222,20 @@
       <workItem from="1599808192755" duration="8809000" />
       <workItem from="1600081524699" duration="2427000" />
       <workItem from="1600243223869" duration="14000" />
+      <workItem from="1600244942012" duration="568000" />
+      <workItem from="1600245562984" duration="241000" />
+      <workItem from="1600588332842" duration="9013000" />
+      <workItem from="1600653133927" duration="4591000" />
+      <workItem from="1600667938061" duration="198000" />
+      <workItem from="1600668178880" duration="20000" />
+      <workItem from="1600673816854" duration="1683000" />
+      <workItem from="1601020360634" duration="1470000" />
+      <workItem from="1601105841102" duration="7000" />
+      <workItem from="1601109429434" duration="7000" />
+      <workItem from="1601124838774" duration="3000" />
+      <workItem from="1601127982125" duration="595000" />
+      <workItem from="1601188911095" duration="66000" />
+      <workItem from="1601277733464" duration="153000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>
@@ -258,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599194307327</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="20200916">
+      <created>1600244965133</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1600244965133</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +313,8 @@
     <MESSAGE value="20200828" />
     <MESSAGE value="20200902" />
     <MESSAGE value="20200904" />
-    <option name="LAST_COMMIT_MESSAGE" value="20200904" />
+    <MESSAGE value="20200916" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200916" />
   </component>
   <component name="WindowStateProjectService">
     <state x="121" y="0" key="#Project_Structure" timestamp="1599039547213">
@@ -329,68 +358,83 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1599047964390" />
-    <state x="421" y="106" key="FileChooserDialogImpl" timestamp="1598280789899">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="2425" y="128" key="FileChooserDialogImpl" timestamp="1600604671753">
+      <screen x="1920" y="0" width="1536" height="824" />
     </state>
+    <state x="2425" y="128" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600604671753" />
     <state x="421" y="106" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1598280789899" />
     <state x="449" y="113" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1597159179841" />
     <state x="548" y="253" width="280" height="222" key="Github.ShareDialog" timestamp="1597161771672">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="548" y="253" width="280" height="222" key="Github.ShareDialog/0.0.1366.728@0.0.1366.728" timestamp="1597161771672" />
-    <state width="1237" height="141" key="GridCell.Tab.0.bottom" timestamp="1600090958390">
+    <state width="1237" height="169" key="GridCell.Tab.0.bottom" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
+    <state width="1493" height="145" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600609129570" />
     <state width="1237" height="141" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1600090958390" />
     <state width="1323" height="509" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1237" height="141" key="GridCell.Tab.0.center" timestamp="1600090958390">
+    <state width="1237" height="169" key="GridCell.Tab.0.center" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
+    <state width="1493" height="145" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600609129570" />
     <state width="1237" height="141" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1600090958390" />
     <state width="1323" height="509" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1237" height="141" key="GridCell.Tab.0.left" timestamp="1600090958390">
+    <state width="1237" height="169" key="GridCell.Tab.0.left" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
+    <state width="1493" height="145" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600609129570" />
     <state width="1237" height="141" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1600090958390" />
     <state width="1323" height="509" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597331409604" />
-    <state width="1237" height="141" key="GridCell.Tab.0.right" timestamp="1600090958390">
+    <state width="1237" height="169" key="GridCell.Tab.0.right" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
+    <state width="1493" height="145" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600609129570" />
     <state width="1237" height="141" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1600090958390" />
     <state width="1323" height="509" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597331409605" />
-    <state width="1237" height="169" key="GridCell.Tab.1.bottom" timestamp="1599819089997">
+    <state width="1237" height="169" key="GridCell.Tab.1.bottom" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.1.bottom/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
     <state width="1237" height="169" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599819089997" />
-    <state width="1237" height="169" key="GridCell.Tab.1.center" timestamp="1599819089996">
+    <state width="1237" height="169" key="GridCell.Tab.1.center" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.1.center/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
     <state width="1237" height="169" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1599819089996" />
-    <state width="1237" height="169" key="GridCell.Tab.1.left" timestamp="1599819089996">
+    <state width="1237" height="169" key="GridCell.Tab.1.left" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.1.left/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
     <state width="1237" height="169" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1599819089996" />
-    <state width="1237" height="169" key="GridCell.Tab.1.right" timestamp="1599819089996">
+    <state width="1237" height="169" key="GridCell.Tab.1.right" timestamp="1600660645329">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state width="1237" height="169" key="GridCell.Tab.1.right/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660645329" />
     <state width="1237" height="169" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1599819089996" />
-    <state x="-63" y="0" width="1243" height="680" key="SettingsEditor" timestamp="1599049847800">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="1937" y="0" width="1243" height="680" key="SettingsEditor" timestamp="1600604735469">
+      <screen x="1920" y="0" width="1536" height="824" />
     </state>
+    <state x="1937" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600604735469" />
     <state x="-63" y="0" width="1243" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1599049847800" />
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1597162004435" />
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1599194310061">
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2" timestamp="1600244967414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1599194310061" />
+    <state x="258" y="91" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1600244967414" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1597160005733" />
     <state x="466" y="141" key="chooseDestDirectoryDialog" timestamp="1597157154707">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="466" y="141" key="chooseDestDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1597157154707" />
-    <state x="464" y="86" width="756" height="594" key="find.popup" timestamp="1599815505969">
+    <state x="464" y="86" width="756" height="594" key="find.popup" timestamp="1600660183105">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="464" y="86" width="756" height="594" key="find.popup/0.0.1280.680/1920.0.1536.824@0.0.1280.680" timestamp="1600660183105" />
     <state x="464" y="86" width="756" height="594" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1599815505969" />
     <state x="353" y="93" width="806" height="614" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1597506563475" />
     <state x="418" y="240" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1598429357964">
@@ -401,20 +445,13 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="28" y="0" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1599487588746" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1598332242571">
+    <state x="297" y="151" key="run.anything.popup" timestamp="1601124838790">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1598332242571" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1601124838790" />
+    <state x="2252" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1600601196904">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2252" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1536.824@1920.0.1536.824" timestamp="1600601196904" />
   </component>
 </project>

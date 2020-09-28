@@ -4,9 +4,12 @@ import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.pojo.keyWord;
 import cn.sysu.circuitQA.service.CircuitQAService;
 import cn.sysu.circuitQA.service.KeyWordService;
+import cn.sysu.circuitQA.utils.ExtractUtil;
+import cn.sysu.circuitQA.utils.MatchUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -30,7 +33,7 @@ public class CoreProcessService {
      * @param query
      * @return 匹配到的qa对象
      */
-    public circuitQa analysis(String query) {
+    public circuitQa analysis(String query) throws IOException {
 
         System.out.println("原始问句：" + query);
 
@@ -40,8 +43,8 @@ public class CoreProcessService {
         for (int i = 0; i < candidates.size(); i++) {
             System.out.println(String.valueOf(i) + " " + candidates.get(i).getQuestion());
         }
-
-        circuitQa target = questionMatch(candidates, query);
+//        circuitQa target = questionMatch(candidates, query);
+        circuitQa target = MatchUtil.match(candidates, query);
         System.out.println("匹配结果：" + target);
 
         return target;
@@ -54,13 +57,14 @@ public class CoreProcessService {
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);
         }
+//        String keyword = ExtractUtil.extract(question);
         String keyword = extract(question);
         if (keyword == "") {
             return null;
         }
         List<circuitQa> candidates = new ArrayList<circuitQa>();
         for (keyWord word : keyWords) {
-            if (keyword == word.getKeyword()){
+            if (keyword.equals(word.getKeyword())){
                 String ids = word.getQuestionids();
                 String[] IDs = ids.split(",");
                 for (String ID : IDs) {
@@ -73,8 +77,6 @@ public class CoreProcessService {
     }
     //提取关键词
     private String extract(String question) {
-        //测试的本方法的时候可以取消注释，并把方法改为public
-        //if (keyWords == null) {this.keyWords = keyWordService.importKeyWords();}
         String word = "";
         try {
             for (keyWord keyword : keyWords) {
@@ -141,9 +143,9 @@ public class CoreProcessService {
     /**
      *
      * @param ques
-     * @return 所有衍生问题内容
+     * @return 所有衍生问题
      */
-    public String subQuery(String ques) {
+    public String subQuery(String ques) throws IOException {
         circuitQa qa = analysis(ques);
         String[] childIDs = qa.getChildid().split(" ");
         if(childIDs.length == 0) {return "";}

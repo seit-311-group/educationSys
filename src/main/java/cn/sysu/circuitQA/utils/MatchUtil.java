@@ -13,8 +13,7 @@ import java.util.Map;
 public class MatchUtil {
     public static circuitQa match (List<circuitQa> candidates, String query) throws IOException {
         DocVectorModel docVectorModel = new DocVectorModel(new WordVectorModel("C:/hanLP/data/polyglot-zh.txt"));
-        Map<circuitQa, Integer> map = new HashMap<circuitQa, Integer>();
-        float score = -1;
+        float score = -2;
         circuitQa target = null;
         for (circuitQa candidate : candidates){
             float cur = docVectorModel.similarity(candidate.getQuestion(), query);

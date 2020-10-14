@@ -15,14 +15,10 @@ import java.util.List;
 public class hanlpTest
 {
     public static void main(String[] args) throws IOException {
-        List<Term> termList = StandardTokenizer.segment("什么是电路的过渡过程");
-        for (Term term : termList)
-        {
-            System.out.println(term.word);
-        }
-        String content = "什么是电路的过渡过程";
-        List<String> keywordList = HanLP.extractKeyword(content, 2);
-        System.out.println(keywordList);
+        String query = "什么是过渡过程？";
+        DocVectorModel docVectorModel = new DocVectorModel(new WordVectorModel("C:/hanLP/data/polyglot-zh.txt"));
+        System.out.println(docVectorModel.similarity("什么是电路的过渡过程？", "什么是过渡过程？"));
+        System.out.println(docVectorModel.similarity("二阶电路中，过渡过程的性质取决于什么因素？", query));
     }
 }
 

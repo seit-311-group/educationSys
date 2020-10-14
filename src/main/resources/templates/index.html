@@ -142,7 +142,17 @@ position: fixed;
                         newLi.scrollIntoView();//将元素滚动到可见位置
                     }
                 });
-                sleep(1000);
+                var Li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = "http://localhost:8081/1";
+                a.innerHTML = "网孔法例题";
+                Li.className = 'msgContent left';
+                Li.appendChild(a);
+                ul.appendChild(Li);
+                var div = document.createElement('div');
+                div.style = 'clear:both';
+                ul.appendChild(div);
+                newLi.scrollIntoView();//将元素滚动到可见位置
                 ajax({
                     url: '/qa/subQuery?question=' + input.value,
                     success: function (res) {
@@ -197,9 +207,9 @@ position: fixed;
 
 		//打开与服务器的连接
 		if (obj.method) {
-			xhr.open(obj.method, obj.url, true);
+			xhr.open(obj.method, obj.url, false);
 		} else {
-			xhr.open('get', obj.url, true);
+			xhr.open('get', obj.url, false);
 		}
 		xhr.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded");

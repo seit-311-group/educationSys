@@ -1,9 +1,12 @@
 # circuitQA
 A QA-system about circuit knowledge for students
-20200920 增加了HanLP工具的使用，参照https://github.com/hankcs/HanLP/tree/1.x需要：
+20200920 增加了HanLP工具的使用，参照https://github.com/hankcs/HanLP/tree/1.x
+需要：
 
-1.下载HanLP的两个文件data.ziphttp://nlp.hankcs.com/download.php?file=data
-和hanlp-release.ziphttp://nlp.hankcs.com/download.php?file=jar
+1.下载HanLP的两个文件data.zip
+http://nlp.hankcs.com/download.php?file=data
+和hanlp-release.zip
+http://nlp.hankcs.com/download.php?file=jar
 
 2.分别解压后得到hanlp-1.7.6.jar和data文件夹
 

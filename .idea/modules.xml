@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/circuitQA.iml" filepath="$PROJECT_DIR$/circuitQA.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springboot-mybatis-generator-test.iml" filepath="$PROJECT_DIR$/springboot-mybatis-generator-test.iml" />
     </modules>
   </component>
 </project>

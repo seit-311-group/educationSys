@@ -1,6 +1,5 @@
 package cn.sysu.circuitQA;
 
-import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.pojo.keyWord;
 import org.junit.Test;
 import org.junit.runner.RunWith;

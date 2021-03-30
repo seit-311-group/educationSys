@@ -1,11 +1,9 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-import cn.sysu.circuitQA.mapper.circuitQaMapper;
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.pojo.circuitQaExample;
 import cn.sysu.circuitQA.service.CircuitQAService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

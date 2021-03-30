@@ -2,10 +2,11 @@ package cn.sysu.circuitQA.service;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.pojo.keyWord;
-import cn.sysu.circuitQA.service.CircuitQAService;
-import cn.sysu.circuitQA.service.KeyWordService;
-import cn.sysu.circuitQA.utils.ExtractUtil;
+import cn.sysu.circuitQA.utils.KGUtil;
 import cn.sysu.circuitQA.utils.MatchUtil;
+import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.tokenizer.NLPTokenizer;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +16,28 @@ import java.util.*;
 @Service
 public class CoreProcessService {
 
+    private static Logger logger = Logger.getLogger(CoreProcessService.class);
+
     @Autowired
     private CircuitQAService circuitQAService;
 
     @Autowired
     private KeyWordService keyWordService;
 
+    @Autowired
+    private RecordService RecordService;
+
     private List<circuitQa> circuitQas;
 
     private List<keyWord> keyWords;
 
-    private Map<String, circuitQa> questionMap;
+    private Map<String, circuitQa> questionMap; //id对应问题对象
+
+//    private Map<keyword, id>
+
+    {
+        NLPTokenizer.ANALYZER.enableCustomDictionary(true);
+    }
 
 
     /**
@@ -34,25 +46,40 @@ public class CoreProcessService {
      * @return 匹配到的qa对象
      */
     public circuitQa analysis(String query) throws IOException {
+        logger.info("原始问句：" + query);
 
-        System.out.println("原始问句：" + query);
-
-        List<circuitQa> candidates = extractCandidates(query);
-        if (candidates.isEmpty()) {return null;}
-        System.out.println("候选问题集：");
-        for (int i = 0; i < candidates.size(); i++) {
-            System.out.println(String.valueOf(i) + " " + candidates.get(i).getQuestion());
+        List<circuitQa> candidates = null;
+        try {
+            candidates = extractCandidates(query);
+        } catch (Exception e) {
+            logger.error("没有相关问题");
         }
-//        circuitQa target = questionMatch(candidates, query);
-        circuitQa target = MatchUtil.match(candidates, query);
-        System.out.println("匹配结果：" + target);
-
+        if (candidates == null) {
+            logger.info("没有候选问题集！");
+            return null;
+        }
+        logger.info("候选问题集：");
+        for (int i = 0; i < candidates.size(); i++) {
+            logger.info(i + " " + candidates.get(i).getQuestion());
+        }
+        circuitQa target = null;
+        try {
+//            target = MatchUtil.matchByRPC(candidates, query);
+            target = MatchUtil.match2(candidates, query);
+            logger.info("匹配结果：" + target.getQuestion());
+        } catch (Exception e) {
+            if (e instanceof InterruptedException) {
+                logger.error("gRPC通信故障");
+            } else{
+                logger.error("没有匹配到你的问题");
+            }
+        }
         return target;
     }
     //提取候选问题集
     public List<circuitQa> extractCandidates(String question) {
         this.circuitQas = circuitQAService.importQuestions();
-        this.keyWords = keyWordService.importKeyWords();
+        keyWords = keyWordService.importKeyWords();
         this.questionMap = new HashMap<String, circuitQa>();
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);
@@ -68,7 +95,11 @@ public class CoreProcessService {
                 String ids = word.getQuestionids();
                 String[] IDs = ids.split(",");
                 for (String ID : IDs) {
-                    candidates.add(questionMap.get(ID));
+                    if (questionMap.containsKey(ID)) {
+                        candidates.add(questionMap.get(ID));
+                    } else {
+                        logger.error("问题表里没有这个ID："+ID+",属于关键词"+keyword);
+                    }
                 }
                 break;
             }
@@ -76,13 +107,17 @@ public class CoreProcessService {
         return candidates;
     }
     //提取关键词
-    private String extract(String question) {
+    public String extract(String question) {
         String word = "";
+        List<Term> seg = NLPTokenizer.segment(question);
         try {
-            for (keyWord keyword : keyWords) {
-                if (question.indexOf(keyword.getKeyword()) > -1) {
-                    word = keyword.getKeyword();
-                    break;
+            for (Term term : seg) {
+                for (keyWord keyword : keyWords) {
+                    if (term.word.equals(keyword.getKeyword())) {
+                        word = keyword.getKeyword();
+                        logger.info("关键词：" + word);
+                        return word;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -90,83 +125,67 @@ public class CoreProcessService {
         }
         return word;
     }
-    //相似度匹配
-    private circuitQa questionMatch(List<circuitQa> candidates, String query) {
-        circuitQa target = candidates.get(0);
-        float similarity = levenshtein(query, target.getQuestion());
-        for (circuitQa candidate : candidates) {
-            float new_similarity = levenshtein(query, candidate.getQuestion());
-            if (new_similarity > similarity) {
-                target = candidate;
-                similarity = new_similarity;
-            }
-        }
-        return target;
-    }
-    //相似度计算
-    private float levenshtein(String str1, String str2) {
-        int len1 = str1.length();
-        int len2 = str2.length();
-        int[][] dif = new int[len1 + 1][len2 + 1];
-        for (int a = 0; a <= len1; a++) {
-            dif[a][0] = a;
-        }
-        for (int a = 0; a <= len2; a++) {
-            dif[0][a] = a;
-        }
-        int temp;
-        for (int i = 1; i <= len1; i++) {
-            for (int j = 1; j <= len2; j++) {
-                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
-                    temp = 0;
-                } else {
-                    temp = 1;
-                }
-                dif[i][j] = min(dif[i - 1][j - 1] + temp, dif[i][j - 1] + 1,
-                        dif[i - 1][j] + 1);
-            }
-        }
-        float similarity =1 - (float) dif[len1][len2] / Math.max(str1.length(), str2.length());
-        return similarity;
-    }
-
-    private int min(int... is) {
-        int min = Integer.MAX_VALUE;
-        for (int i : is) {
-            if (min > i) {
-                min = i;
-            }
-        }
-        return min;
-    }
 
     /**
      *
      * @param ques
-     * @return 所有衍生问题
+     * @return 查找子问题
      */
-    public String subQuery(String ques) throws IOException {
+    public String subQuery(String ques) throws IOException, InterruptedException {
         circuitQa qa = analysis(ques);
+        if((qa == null) || qa.getChildid().length() == 0) {return "";}
         String[] childIDs = qa.getChildid().split(" ");
-        if(childIDs.length == 0) {return "";}
-        circuitQa[] childQuestions = new circuitQa[childIDs.length];
+        List<String> childIDList = Arrays.asList(childIDs);
+        List childIDlist = new ArrayList(childIDList);
+        if (childIDlist.size() <= 2) {
+            String keyword = extract(ques);
+            String[] words = KGUtil.extend(keyword);
+            for (String word:words) {
+                String ids = keyWordService.getIDByKeyWord(word);
+                if (ids != null) {
+                    String[] IDs = ids.split(",");
+                    for (String ID : IDs) {
+                        childIDlist.add(ID);
+                    }
+                } else {
+                    continue;
+                }
+                if (childIDlist.size() == 3) {
+                    break;
+                }
+            }
+        }
 
         String res = "";
-        for (int i = 0; i < childQuestions.length; i++) {
-            circuitQa question = questionMap.get(childIDs[i]);
-            res = res + "@" + question.getQuestion();
+        for (int i = 0; i < childIDlist.size(); i++) {
+            circuitQa question = null;
+            try {
+                question = questionMap.get(childIDlist.get(i));
+                res = res + "@" + question.getQuestion();
+            } catch (Exception e) {
+                continue;
+            }
+
         }
-        return res.substring(1);
+        return (res.length() == 0) ? null : res.substring(1);
     }
 
     public String getAnswerByOrder(String order, String questions) {
-        circuitQas = circuitQAService.importQuestions();
-        String[] qas = questions.split("@");
-        String target = qas[Integer.parseInt(order)];
-        for (circuitQa qa : circuitQas) {
-            if (qa.getQuestion().equals(target)) {
-                return qa.getAnswer();
+        if (questions == null || questions.length() == 0) {
+            return "";
+        }
+        try {
+            circuitQas = circuitQAService.importQuestions();
+            String[] qas = questions.split("@");
+            String target = qas[Integer.parseInt(order)];
+            logger.info("后续提问：" + target);
+            for (circuitQa qa : circuitQas) {
+                if (qa.getQuestion().equals(target)) {
+                    return qa.getAnswer();
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "输入错误，请重新输入！";
         }
         return "";
     }

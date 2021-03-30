@@ -1,6 +1,5 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-import cn.sysu.circuitQA.mapper.keyWordMapper;
 import cn.sysu.circuitQA.pojo.keyWord;
 import cn.sysu.circuitQA.pojo.keyWordExample;
 import cn.sysu.circuitQA.service.KeyWordService;
@@ -26,8 +25,14 @@ public class KeyWordServiceImpl implements KeyWordService {
         keyWordExample keyWordExample = new keyWordExample();
         keyWordExample.Criteria criteria = keyWordExample.createCriteria();
         criteria.andKeywordEqualTo(keyword);
-        keyWord keyWord = keyWordMapper.selectByExample(keyWordExample).get(0);
-        return keyWord.getQuestionids();
+        keyWord keyWord = null;
+        try {
+            keyWord = keyWordMapper.selectByExample(keyWordExample).get(0);
+            return keyWord.getQuestionids();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     };
     
 }

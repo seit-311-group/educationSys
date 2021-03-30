@@ -20,8 +20,4 @@ public class keyWord {
     public void setQuestionids(String questionids) {
         this.questionids = questionids == null ? null : questionids.trim();
     }
-    @Override
-    public String toString() {
-        return this.getKeyword();
-    }
 }

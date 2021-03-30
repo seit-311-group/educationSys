@@ -22,78 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210329">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_android_annotations_4_1_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_grpc_proto_google_common_protos_1_12_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_26_0_android.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_context_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_core_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_netty_shaded_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_protobuf_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_protobuf_lite_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_stub_1_20_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_api_0_19_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_contrib_grpc_metrics_0_19_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_compat_qual_2_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PicController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/gRPCclient/KGClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/gRPCclient/matchClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/messageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/recordMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/messageExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/record.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/recordExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/MessageServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/KGUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/proto/grpc.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/proto/match.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/messageMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/recordMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/CircuitQAServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/grpcTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/grpc-java/io/grpc/examples/helloworld/GreeterGrpc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/grpc-java/io/grpc/examples/match/MatchGrpc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/HelloReply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/HelloReplyOrBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/HelloRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/HelloRequestOrBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/HelloWorldProto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/circuitReply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/circuitReplyOrBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/circuitRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/generated-sources/protobuf/java/io/grpc/examples/helloworld/circuitRequestOrBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/circuitQA_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/circuitQA_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_25.xml" beforeDir="false" />
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210330">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/circuitQA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/circuitQA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/MatchUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/MatchUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/KeyWordServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/KeyWordServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/hanlpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/hanlpTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +314,7 @@
       <workItem from="1617015632033" duration="10350000" />
       <workItem from="1617028288256" duration="8162000" />
       <workItem from="1617066387747" duration="652000" />
-      <workItem from="1617106765619" duration="139000" />
+      <workItem from="1617106765619" duration="1131000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>
@@ -447,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602684713789</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="20210330">
+      <created>1617106959353</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617106959353</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +417,8 @@
     <MESSAGE value="20200928" />
     <MESSAGE value="20201014" />
     <MESSAGE value="20210329" />
-    <option name="LAST_COMMIT_MESSAGE" value="20210329" />
+    <MESSAGE value="20210330" />
+    <option name="LAST_COMMIT_MESSAGE" value="20210330" />
   </component>
   <component name="WindowStateProjectService">
     <state x="381" y="142" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610970951627">
@@ -493,6 +433,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1617018383335" />
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1617107595132">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1617107595132" />
     <state width="1237" height="197" key="GridCell.Tab.0.bottom" timestamp="1617067043950">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -529,6 +473,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1617016240447" />
+    <state x="233" y="60" key="Vcs.Push.Dialog.v2" timestamp="1617106962090">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="60" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1617106962090" />
     <state x="93" y="93" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1615779586353">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -537,5 +485,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="339" y="72" width="603" height="536" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1615824945601" />
+    <state x="28" y="1" key="new project wizard" timestamp="1617107611635">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="28" y="1" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1617107611635" />
   </component>
 </project>

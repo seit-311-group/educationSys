@@ -55,7 +55,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/getRecordByDate")
-    public String addRecord(@RequestParam(value = "fromdate") String date) throws Exception {
+    public String getRecordByDate(@RequestParam(value = "fromdate") String date) throws Exception {
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         String nowDate = format.format(now);

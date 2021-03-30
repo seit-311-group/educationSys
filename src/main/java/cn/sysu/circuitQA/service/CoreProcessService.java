@@ -137,24 +137,24 @@ public class CoreProcessService {
         String[] childIDs = qa.getChildid().split(" ");
         List<String> childIDList = Arrays.asList(childIDs);
         List childIDlist = new ArrayList(childIDList);
-        if (childIDlist.size() <= 2) {
-            String keyword = extract(ques);
-            String[] words = KGUtil.extend(keyword);
-            for (String word:words) {
-                String ids = keyWordService.getIDByKeyWord(word);
-                if (ids != null) {
-                    String[] IDs = ids.split(",");
-                    for (String ID : IDs) {
-                        childIDlist.add(ID);
-                    }
-                } else {
-                    continue;
-                }
-                if (childIDlist.size() == 3) {
-                    break;
-                }
-            }
-        }
+//        if (childIDlist.size() <= 2) { # 与KG通信
+//            String keyword = extract(ques);
+//            String[] words = KGUtil.extend(keyword);
+//            for (String word:words) {
+//                String ids = keyWordService.getIDByKeyWord(word);
+//                if (ids != null) {
+//                    String[] IDs = ids.split(",");
+//                    for (String ID : IDs) {
+//                        childIDlist.add(ID);
+//                    }
+//                } else {
+//                    continue;
+//                }
+//                if (childIDlist.size() == 3) {
+//                    break;
+//                }
+//            }
+//        }
 
         String res = "";
         for (int i = 0; i < childIDlist.size(); i++) {

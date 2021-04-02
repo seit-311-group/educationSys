@@ -110,13 +110,12 @@ position: fixed;
 			var keycode = e.keyCode || e.which;
 			console.log(e)
 			if (keycode == 13) {//按下enter键
-				sendMsg()
+				sendMsg();
 			}
 		}
 		function sendMsg() {
 			var input = document.getElementById('msg_input');//查找缓存
 			var ul = document.getElementById('content');
-
 			var newLi = document.createElement('li');
 			newLi.innerHTML = input.value;
 			newLi.className = 'msgContent right';
@@ -250,8 +249,9 @@ position: fixed;
             <li class="msgContent left">你好，有什么电路基础课程相关的问题可以问我哦</li>
                 <div style="clear: both"></div>
         </ul>
-        <textarea id="msg_input" class="msgInput"></textarea>
+        <textarea name="question" id="msg_input" class="msgInput" placeholder="请输入问题"></textarea>
         <button id="sendbtn" class="sendbtn">发送</button>
+        <button id="returnbtn" class="returnbtn" onclick="javascript:window.location.href= '/'">返回主页</button>
     </div>
 </body>
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>学生注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">中山大学</span>
+                </button>
+
+                <a class="navbar-brand" href="/">电路问答系统</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入问题/知识点"/>
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/systemQA">问答系统</a></li>
+                    <li><a href="http://localhost:8081/">答题系统</a></li>
+                    <li><a href="/student/record">问答历史</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">我的主页</a></li>
+                            <li><a href="#">设置中心</a></li>
+                            <li><a href="#">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="login_banner">
+        <div id="content">
+            <div class="login_form">
+                <div class="login_box">
+                    <div class="tit">
+                        <h1>欢迎注册</h1>
+                    </div>
+                    <div class="form">
+                        <form  id="input_f" action="/student/registStatus" method="post">
+                            <div  class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>
+                                <input name="id" type="text" class="form-control" width="30vm" placeholder="必填" aria-describedby="basic-addon1"/>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon2">学生姓名</span>
+                                <input name="username" type="text" class="form-control"  aria-describedby="basic-addon1"/>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon3">学生密码</span>
+                                <input name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon4">确认密码</span>
+                                <input type="password" class="form-control" placeholder="请再次输入密码" aria-describedby="basic-addon1"/>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon5">年级班级</span>
+                                <input name="classAndGrade" type="text" class="form-control" placeholder="班级和年级" aria-describedby="basic-addon1"/>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="submit" class="btn btn-default" id="sub_btn1">注册</button>
+                            </div>
+                            <br/>
+                            <div  class="btn-group" role="group" aria-label="...">
+                                <button  type="button" onclick="javascript:window.location.href='/student/login'" class="btn btn-default" id="sub_btn2">返回登录页面</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom" style="text-align: center">
+			<span class="bottom_text" >
+				电路问答系统.Copyright &copy;2021
+			</span>
+    </div>
+
+
+
+
+</body>
+</html>

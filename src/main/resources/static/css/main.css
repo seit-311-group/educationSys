@@ -1,0 +1,100 @@
+@CHARSET "UTF-8";
+
+
+
+/*登录页面CSS样式  */
+
+#login_header{
+    height: 82px;
+    width: 1200px;
+}
+
+.login_banner{
+    height:500px;
+    background-color: #39987c;
+}
+
+#content {
+    height: 475px;
+    width: 1200px;
+}
+
+.login_form{
+    height:350px;
+    width:406px;
+    float: right;
+    margin-right:50px;
+    margin-top: 50px;
+    background-color: #fff;
+}
+
+
+.login_box{
+    margin: 20px;
+    height: 260px;
+    width: 366px;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+
+.form .itxt {
+    border: 0 none;
+    float: none;
+    font-family: "宋体";
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    width: 220px;
+    border: 1px #e3e3e3 solid;
+}
+
+#sub_btn1{
+
+    /*background-color: #39987c;*/
+    /*color: black;*/
+    width: 360px;
+    height: 35px;
+}
+
+#sub_btn2{
+    /*color: black;*/
+    width: 360px;
+    height: 35px;
+}
+
+
+
+#l_content span {
+    font-size: 60px;
+    color: white;
+}
+
+.tit h1 {
+    float: left;
+    margin-top: 15px;
+}
+
+.tit a {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: red;
+    text-decoration: none;
+}
+
+.tit .errorMsg {
+    float: right;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #ff0000;
+}
+
+.tit {
+    height: 70px;
+}
+

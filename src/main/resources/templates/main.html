@@ -25,17 +25,19 @@
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/systemQA">问答系统</a></li>
-                    <li><a href="http://localhost:8081/">答题系统</a></li>
-                    <li><a href="/record">问答历史</a></li>
-                    <li><a href="/student/regist">登录/注册</a></li>
-                    <li class="dropdown">
+                    <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
+                    <li th:if="${session.studentName != null}"><a href="http://localhost:8081/">答题系统</a></li>
+                    <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
+                    <li class="dropdown" th:if="${session.studentName != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">我的主页</a></li>
                             <li><a href="#">设置中心</a></li>
                             <li><a href="#">退出登录</a></li>
                         </ul>
+                    </li>
+                    <li th:if="${session.studentName == null}">
+                        <a href="/student/regist">登录/注册</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

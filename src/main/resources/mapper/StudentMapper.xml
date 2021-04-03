@@ -3,5 +3,5 @@
 <mapper namespace="cn.sysu.circuitQA.mapper.StudentMapper" >
     <select id="findById" resultType="cn.sysu.circuitQA.pojo.Student">select * from student where id = #{id}</select>
     <select id="findPswById" resultType="java.lang.String">select password from student where id = #{id}</select>
-    <select id="save">insert into student(id,username,password,classAndGrade) values(#{id},#{username},#{password},#{classAndGrade}) </select>
+    <select id="save">insert into student(id,studentName,password,classAndGrade) values(#{id},#{studentName},#{password},#{classAndGrade}) </select>
 </mapper>

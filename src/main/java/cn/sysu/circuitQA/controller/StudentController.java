@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.print.Printable;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 现存问题：1.学生登录后自己的页面，自己的信息。
@@ -22,12 +23,17 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping("/loginCallBack")
-    public String loginCallback(Student student,HttpServletRequest request){
-        String studentName = studentService.login(student);
-        if (studentName != null) {
-            // 登陆成功，写cookie和session
-            request.getSession().setAttribute("studentName", studentName);
+    @RequestMapping("/loginCallBack")                                                           // HttpServletRequest request 写到形参自动注入
+    public String loginCallback(Student student, HttpServletResponse response){                  // HttpServletResponse response
+        Student studentExist = studentService.login(student);
+        if (studentExist != null) {
+            // 登陆成功，在页面上添加一个cookie
+            String studentId = studentExist.getId().toString();
+            Cookie cookie = new Cookie("studentId", studentId);
+            // 通过设置domain、path可以获取到这个cookie，不加重定向后获取不到
+            cookie.setDomain("localhost");
+            cookie.setPath("/");
+            response.addCookie(cookie);
             return "redirect:/";
         }else {
             // 登陆失败，重新登录
@@ -36,16 +42,29 @@ public class StudentController {
     }
 
     @RequestMapping("/registCallBack")
-    public String registCallback(Student student,HttpServletRequest request){
-        String studentName = studentService.regist(student);
-        if (studentName != null) {
-            // 注册成功，写cookie和session
-            request.getSession().setAttribute("studentName", studentName);
-            return "redirect:/";
+    public String registCallback(Student student,HttpServletRequest request,
+                                 HttpServletResponse response){
+        Student studentExist = studentService.regist(student);
+        if (studentExist != null) {
+            // 注册成功，在页面上添加一个cookie
+            String studentId = studentExist.getId().toString();
+            Cookie cookie = new Cookie("studentId", studentId);
+            // 通过设置domain、path可以获取到这个cookie，不加重定向后获取不到
+            cookie.setDomain("localhost");
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            response.addCookie(cookie);
+            return "/";
         }else {
             // 注册失败，重新注册
             return "redirect:/student/regist";
         }
+    }
+
+
+    @RequestMapping("/adminCallBack")
+    public String adminCallBack(){
+        return "mian";
     }
 
 }

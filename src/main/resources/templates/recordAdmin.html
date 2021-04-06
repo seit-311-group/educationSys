@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>学生登录</title>
+    <title>问答历史</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+
 </head>
-        <!--bootstrap模板-->
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -39,44 +38,42 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-
-
-    <div class="banner" >
-        <div id="content" >
-            <div class="login_form" >
-                <div class="login_box">
-                    <div class="tit">
-                        <h1>欢迎登录</h1>
-                    </div>
-                    <div class="form">
-                        <form  action="/student/loginCallBack" method="post">
-                            <div class="input-group">
-                                <span  class="input-group-addon" id="basic-addon1">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>
-                                <input name="id" type="text" class="form-control" placeholder="学号" aria-describedby="basic-addon1"/>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon2">学生密码</span>
-                                <input name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="submit"  class="btn btn-default" id="sub_btn1">登录</button>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button"  onclick="javascript:window.location.href='/student/regist'" value="去注册页面" class="btn btn-default" id="sub_btn2">返回注册页面</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <div style="margin: 25px">
+        <form class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入问题/知识点"/>
             </div>
-        </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
     </div>
+    <div style="margin: 40px">
+        <table border="1" width="1000" align="center" style="text-align: center" class="table table-striped">
+            <thead>
+            <tr>
+                <td>问题序号</td>
+                <td>问题</td>
+                <td>时间</td>
+                <td>学生学号</td>
+                <td>学生姓名</td>
+            </tr>
+            </thead>
+            <tr th:each="item : ${records}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.question}"></td>
+                <td th:text="${item.time}"></td>
+                <td th:text="${item.studentName}"></td>
+                <td th:text="${item.studentid}"></td>
+            </tr>
+        </table>
+    </div>
+
+
 
     <div class="bottom" style="text-align: center">
-			<span class="bottom_text">
-				电路问答系统.Copyright &copy;2021
-			</span>
+        <span class="bottom_text" >
+            电路问答系统.Copyright &copy;2021
+        </span>
     </div>
-
 
 
 </body>

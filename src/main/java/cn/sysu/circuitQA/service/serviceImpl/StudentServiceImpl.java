@@ -15,19 +15,19 @@ public class StudentServiceImpl implements StudentService {
     StudentMapper studentMapper;
 
     @Override
-    public String login(Student student) {
+    public Student login(Student student) {
         Student studentExist = studentMapper.findById(student.getId());
         if (studentExist != null) {
             String studentPassword = studentMapper.findPswById(student.getId());
             if (student.getPassword().equals(studentPassword)){
-                return studentExist.getStudentName();
+                return studentExist;
             }
         }
         return null;
     }
 
     @Override
-    public String regist(Student student) {
+    public Student regist(Student student) {
         Student studentExist = studentMapper.findById(student.getId());
         if (student.getId() == null){
             return null;
@@ -40,6 +40,6 @@ public class StudentServiceImpl implements StudentService {
         } else {
             studentMapper.save(student);
         }
-        return  student.getStudentName();
+        return  student;
     }
 }

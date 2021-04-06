@@ -11,5 +11,6 @@ public class Record {
     private Integer id;
     private String question;
     private String time;
-    private Integer studentid;
+    private String studentName;
+    private Long studentid;
 }

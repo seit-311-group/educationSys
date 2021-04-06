@@ -4,12 +4,12 @@
 
 /*登录页面CSS样式  */
 
-#login_header{
-    height: 82px;
-    width: 1200px;
-}
+/*#login_header{*/
+/*    height: 82px;*/
+/*    width: 1200px;*/
+/*}*/
 
-.login_banner{
+.banner{
     height:500px;
     background-color: #39987c;
 }
@@ -20,11 +20,20 @@
 }
 
 .login_form{
-    height:350px;
+    height:280px;
     width:406px;
     float: right;
-    margin-right:50px;
-    margin-top: 50px;
+    margin-right:220px;
+    margin-top: 75px;
+    background-color: #fff;
+}
+
+.regist_form{
+    height:370px;
+    width:406px;
+    float: right;
+    margin-right:220px;
+    margin-top: 75px;
     background-color: #fff;
 }
 

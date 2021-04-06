@@ -4,29 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210330">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" afterDir="false" />
-    </list>
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210406 new student record" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,9 +17,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
+        <option value="spring-beans.schema" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -48,6 +31,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="hiddenUrls">
@@ -59,7 +43,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Users\10173\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2" />
+        <option name="mavenHome" value="C:\Users\zry\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2" />
         <option name="userSettingsFile" value="C:\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -86,11 +70,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/proto" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../github/code/circuitQA" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15703824" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -102,15 +87,19 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="cn.sysu.circuitQA" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.sysu.circuitQA.controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Programing\实验室工程\circuitQA\src\main\resources\templates" />
+      <recent name="F:\Programing\github\code\circuitQA\src\main\resources\templates" />
       <recent name="C:\Users\10173\IdeaProjects\circuitQA\src\main\proto" />
       <recent name="C:\Users\10173\IdeaProjects\circuitQA\src\main\resources\proto" />
       <recent name="C:\Users\10173\IdeaProjects\circuitQA\src\main\java\cn\sysu\circuitQA\utils" />
-      <recent name="C:\Users\10173\IdeaProjects\circuitQA\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CircuitQA">
-    <configuration name="CircuitQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.CircuitQA">
+    <configuration name="CircuitQA" type="Application" factoryName="Application" singleton="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.CircuitQA" />
       <module name="circuitQA" />
       <extension name="coverage">
@@ -123,98 +112,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProcessServiceTest.subQueryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="circuitQA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.ProcessServiceTest" />
-      <option name="METHOD_NAME" value="subQueryTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="grpcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="circuitQA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.grpcTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="grpcTest.hwtest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="circuitQA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.grpcTest" />
-      <option name="METHOD_NAME" value="hwtest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="grpcTest.kgtest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="circuitQA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.sysu.circuitQA.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.sysu.circuitQA" />
-      <option name="MAIN_CLASS_NAME" value="cn.sysu.circuitQA.grpcTest" />
-      <option name="METHOD_NAME" value="kgtest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CircuitQA" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="circuitQA" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cn.sysu.circuitQA.CircuitQA" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.CircuitQA" />
-        <item itemvalue="JUnit.grpcTest.kgtest" />
-        <item itemvalue="JUnit.grpcTest.hwtest" />
-        <item itemvalue="JUnit.grpcTest" />
-        <item itemvalue="JUnit.ProcessServiceTest.subQueryTest" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="Application.CircuitQA" />
+      <item itemvalue="Spring Boot.CircuitQA" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SpringMvcView">
@@ -315,6 +226,24 @@
       <workItem from="1617028288256" duration="8162000" />
       <workItem from="1617066387747" duration="652000" />
       <workItem from="1617106765619" duration="1131000" />
+      <workItem from="1617156105902" duration="12186000" />
+      <workItem from="1617175759290" duration="401000" />
+      <workItem from="1617176252252" duration="1273000" />
+      <workItem from="1617178899547" duration="1407000" />
+      <workItem from="1617206814127" duration="2980000" />
+      <workItem from="1617235808808" duration="28576000" />
+      <workItem from="1617284034858" duration="67000" />
+      <workItem from="1617284161952" duration="895000" />
+      <workItem from="1617285134997" duration="473000" />
+      <workItem from="1617285632477" duration="2106000" />
+      <workItem from="1617287872962" duration="1242000" />
+      <workItem from="1617333455755" duration="123000" />
+      <workItem from="1617368406259" duration="3723000" />
+      <workItem from="1617375363855" duration="643000" />
+      <workItem from="1617451729802" duration="7403000" />
+      <workItem from="1617460097654" duration="1267000" />
+      <workItem from="1617586474978" duration="22359000" />
+      <workItem from="1617673770284" duration="1279000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>
@@ -386,7 +315,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617106959353</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="20210402 student record">
+      <created>1617368977299</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617368977299</updated>
+    </task>
+    <task id="LOCAL-00012" summary="20210406 new student record">
+      <created>1617674730355</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617674730355</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,11 +338,41 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
@@ -418,13 +391,27 @@
     <MESSAGE value="20201014" />
     <MESSAGE value="20210329" />
     <MESSAGE value="20210330" />
-    <option name="LAST_COMMIT_MESSAGE" value="20210330" />
+    <MESSAGE value="20210402 student record" />
+    <MESSAGE value="20210406 new student record" />
+    <option name="LAST_COMMIT_MESSAGE" value="20210406 new student record" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="91" key="#Inspections" timestamp="1617459490217">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="91" key="#Inspections/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617459490217" />
+    <state x="223" y="67" width="1089" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617617583980">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" width="1089" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1617617583980" />
     <state x="381" y="142" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610970951627">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="381" y="142" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1610970951627" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1617615608988">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1617615608988" />
     <state x="419" y="208" width="443" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1615783118599">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -433,61 +420,127 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1617018383335" />
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1617107595132">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1617675006478">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1617107595132" />
-    <state width="1237" height="197" key="GridCell.Tab.0.bottom" timestamp="1617067043950">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1617675006478" />
+    <state width="1493" height="203" key="GridCell.Tab.0.bottom" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1617067043950" />
-    <state width="1237" height="197" key="GridCell.Tab.0.center" timestamp="1617067043950">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282740" />
+    <state width="1493" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="203" key="GridCell.Tab.0.center" timestamp="1617624324897">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1617067043950" />
-    <state width="1237" height="197" key="GridCell.Tab.0.left" timestamp="1617067043950">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282739" />
+    <state width="1493" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617624324897" />
+    <state width="1493" height="203" key="GridCell.Tab.0.left" timestamp="1617624324897">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1617067043950" />
-    <state width="1237" height="197" key="GridCell.Tab.0.right" timestamp="1617067043950">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282739" />
+    <state width="1493" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617624324897" />
+    <state width="1493" height="203" key="GridCell.Tab.0.right" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1617067043950" />
-    <state width="1237" height="197" key="GridCell.Tab.1.bottom" timestamp="1615779598260">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282739" />
+    <state width="1493" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="203" key="GridCell.Tab.1.bottom" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1615779598260" />
-    <state width="1237" height="197" key="GridCell.Tab.1.center" timestamp="1615779598260">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282740" />
+    <state width="1493" height="203" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="203" key="GridCell.Tab.1.center" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1615779598260" />
-    <state width="1237" height="197" key="GridCell.Tab.1.left" timestamp="1615779598259">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282740" />
+    <state width="1493" height="203" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="203" key="GridCell.Tab.1.left" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1615779598259" />
-    <state width="1237" height="197" key="GridCell.Tab.1.right" timestamp="1615779598260">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1493" height="203" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282740" />
+    <state width="1493" height="203" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="203" key="GridCell.Tab.1.right" timestamp="1617624324898">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1237" height="197" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1615779598260" />
+    <state width="1493" height="203" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617461282740" />
+    <state width="1493" height="203" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1617624324898" />
+    <state width="1493" height="251" key="GridCell.Tab.2.bottom" timestamp="1617593028921">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="251" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617593028921" />
+    <state width="1493" height="251" key="GridCell.Tab.2.center" timestamp="1617593028921">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="251" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1617593028921" />
+    <state width="1493" height="251" key="GridCell.Tab.2.left" timestamp="1617593028921">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="251" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1617593028921" />
+    <state width="1493" height="251" key="GridCell.Tab.2.right" timestamp="1617593028921">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="251" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1617593028921" />
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1617265493970">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1617265493970" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1617016240447">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1617016240447" />
-    <state x="233" y="60" key="Vcs.Push.Dialog.v2" timestamp="1617106962090">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="280" y="73" key="Vcs.Push.Dialog.v2" timestamp="1617674732037">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="233" y="60" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1617106962090" />
+    <state x="280" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617452157363" />
+    <state x="280" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1617674732037" />
     <state x="93" y="93" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1615779586353">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1615779586353" />
-    <state x="339" y="72" width="603" height="536" key="find.popup" timestamp="1615824945601">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="442" y="31" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1617592706519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="442" y="31" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1617592706519" />
+    <state x="573" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617608363977">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="573" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1617608363977" />
+    <state x="407" y="87" width="724" height="650" key="find.popup" timestamp="1617615997662">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="339" y="72" width="603" height="536" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1615824945601" />
-    <state x="28" y="1" key="new project wizard" timestamp="1617107611635">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="407" y="87" width="724" height="650" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1617615997662" />
+    <state x="529" y="124" key="git4idea.branch.GitSmartOperationDialog" timestamp="1617608394075">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="529" y="124" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1617608394075" />
+    <state x="34" y="1" key="new project wizard" timestamp="1617157844647">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="28" y="1" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1617107611635" />
+    <state x="34" y="1" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1617157844647" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1617375409393">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617375409393" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1617157732641" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1617614987872">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617452884352" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1617614987872" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/circuitQA$CircuitQA.ic" NAME="CircuitQA Coverage Results" MODIFIED="1617272270091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

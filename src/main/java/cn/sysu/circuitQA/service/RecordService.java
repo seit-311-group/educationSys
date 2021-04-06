@@ -1,6 +1,8 @@
 package cn.sysu.circuitQA.service;
 
+
+import javax.servlet.http.HttpServletRequest;
+
 public interface RecordService {
-    void addRecord(String query, String question, String answer, String success);
-    String findRecord(String date);
+    String wordsSave(String question);
 }

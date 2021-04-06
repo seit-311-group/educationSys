@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sysu.circuitQA.mapper.RecordMapper" >
+    <select id="findAll" resultType="cn.sysu.circuitQA.pojo.Record">select * from record</select>
+    <select id="save">insert into record(id,question,time,studentName,studentid) values(#{id},#{question},#{time},#{studentName},#{studentid}) </select>
+    <select id="getAllQuestion" resultType="java.lang.String">SELECT question FROM record</select>
+</mapper>

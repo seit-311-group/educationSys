@@ -8,25 +8,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210402 student record">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/recordStudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/getRecordByDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/getRecordByDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RecordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/record.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recordAdmin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/regist.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/regist.html" afterDir="false" />
-    </list>
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210406 new student record" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +70,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../github/code/circuitQA" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15703824" />
@@ -261,7 +243,7 @@
       <workItem from="1617451729802" duration="7403000" />
       <workItem from="1617460097654" duration="1267000" />
       <workItem from="1617586474978" duration="22359000" />
-      <workItem from="1617673770284" duration="662000" />
+      <workItem from="1617673770284" duration="1279000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>
@@ -340,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617368977299</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="20210406 new student record">
+      <created>1617674730355</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617674730355</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,7 +392,8 @@
     <MESSAGE value="20210329" />
     <MESSAGE value="20210330" />
     <MESSAGE value="20210402 student record" />
-    <option name="LAST_COMMIT_MESSAGE" value="20210402 student record" />
+    <MESSAGE value="20210406 new student record" />
+    <option name="LAST_COMMIT_MESSAGE" value="20210406 new student record" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="91" key="#Inspections" timestamp="1617459490217">
@@ -430,11 +420,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1617018383335" />
-    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1617608633533">
+    <state x="505" y="116" key="FileChooserDialogImpl" timestamp="1617675006478">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1617107595132" />
-    <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1617608633533" />
+    <state x="505" y="116" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1617675006478" />
     <state width="1493" height="203" key="GridCell.Tab.0.bottom" timestamp="1617624324898">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -507,12 +497,12 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1617016240447" />
-    <state x="280" y="73" key="Vcs.Push.Dialog.v2" timestamp="1617452157363">
+    <state x="280" y="73" key="Vcs.Push.Dialog.v2" timestamp="1617674732037">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="233" y="60" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1617106962090" />
     <state x="280" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1617452157363" />
-    <state x="280" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1617369522570" />
+    <state x="280" y="73" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1617674732037" />
     <state x="93" y="93" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1615779586353">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

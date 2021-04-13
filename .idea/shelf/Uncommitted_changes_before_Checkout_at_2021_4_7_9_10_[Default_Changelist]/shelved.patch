@@ -1,0 +1,1059 @@
+Index: src/main/java/cn/sysu/circuitQA/pojo/Record.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/Record.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/Record.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,16 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-import lombok.AllArgsConstructor;
+-import lombok.Data;
+-import lombok.NoArgsConstructor;
+-
+-@Data
+-@AllArgsConstructor
+-@NoArgsConstructor
+-public class Record {
+-    private Integer id;
+-    private String question;
+-    private String time;
+-    private String studentName;
+-    private Long studentid;
+-}
+Index: src/main/java/cn/sysu/circuitQA/pojo/keyWord.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/keyWord.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/keyWord.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,27 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-public class keyWord {
+-    private String keyword;
+-
+-    private String questionids;
+-
+-    public String getKeyword() {
+-        return keyword;
+-    }
+-
+-    public void setKeyword(String keyword) {
+-        this.keyword = keyword == null ? null : keyword.trim();
+-    }
+-
+-    public String getQuestionids() {
+-        return questionids;
+-    }
+-
+-    public void setQuestionids(String questionids) {
+-        this.questionids = questionids == null ? null : questionids.trim();
+-    }
+-    @Override
+-    public String toString() {
+-        return this.getKeyword();
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,58 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-public class circuitQa {
+-    private Integer questionid;
+-
+-    private String question;
+-
+-    private String answer;
+-
+-    private String childid;
+-
+-    private String parentid;
+-
+-    public Integer getQuestionid() {
+-        return questionid;
+-    }
+-
+-    public void setQuestionid(Integer questionid) {
+-        this.questionid = questionid;
+-    }
+-
+-    public String getQuestion() {
+-        return question;
+-    }
+-
+-    public void setQuestion(String question) {
+-        this.question = question == null ? null : question.trim();
+-    }
+-
+-    public String getAnswer() {
+-        return answer;
+-    }
+-
+-    public void setAnswer(String answer) {
+-        this.answer = answer == null ? null : answer.trim();
+-    }
+-
+-    public String getChildid() {
+-        return childid;
+-    }
+-
+-    public void setChildid(String childid) {
+-        this.childid = childid == null ? null : childid.trim();
+-    }
+-
+-    public String getParentid() {
+-        return parentid;
+-    }
+-
+-    public void setParentid(String parentid) {
+-        this.parentid = parentid == null ? null : parentid.trim();
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return this.getQuestion();
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/cn/sysu/circuitQA/mapper/RecordMapper.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/mapper/RecordMapper.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/mapper/RecordMapper.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,14 +0,0 @@
+-package cn.sysu.circuitQA.mapper;
+-
+-import cn.sysu.circuitQA.pojo.Record;
+-import org.apache.ibatis.annotations.Mapper;
+-import org.apache.ibatis.annotations.Select;
+-
+-import java.util.List;
+-
+-
+-public interface RecordMapper {
+-    List<Record> findAll();
+-    void save(Record record);
+-    String getAllQuestion();
+-}
+Index: src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,340 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class keyWordExample {
+-    protected String orderByClause;
+-
+-    protected boolean distinct;
+-
+-    protected List<Criteria> oredCriteria;
+-
+-    public keyWordExample() {
+-        oredCriteria = new ArrayList<Criteria>();
+-    }
+-
+-    public void setOrderByClause(String orderByClause) {
+-        this.orderByClause = orderByClause;
+-    }
+-
+-    public String getOrderByClause() {
+-        return orderByClause;
+-    }
+-
+-    public void setDistinct(boolean distinct) {
+-        this.distinct = distinct;
+-    }
+-
+-    public boolean isDistinct() {
+-        return distinct;
+-    }
+-
+-    public List<Criteria> getOredCriteria() {
+-        return oredCriteria;
+-    }
+-
+-    public void or(Criteria criteria) {
+-        oredCriteria.add(criteria);
+-    }
+-
+-    public Criteria or() {
+-        Criteria criteria = createCriteriaInternal();
+-        oredCriteria.add(criteria);
+-        return criteria;
+-    }
+-
+-    public Criteria createCriteria() {
+-        Criteria criteria = createCriteriaInternal();
+-        if (oredCriteria.size() == 0) {
+-            oredCriteria.add(criteria);
+-        }
+-        return criteria;
+-    }
+-
+-    protected Criteria createCriteriaInternal() {
+-        Criteria criteria = new Criteria();
+-        return criteria;
+-    }
+-
+-    public void clear() {
+-        oredCriteria.clear();
+-        orderByClause = null;
+-        distinct = false;
+-    }
+-
+-    protected abstract static class GeneratedCriteria {
+-        protected List<Criterion> criteria;
+-
+-        protected GeneratedCriteria() {
+-            super();
+-            criteria = new ArrayList<Criterion>();
+-        }
+-
+-        public boolean isValid() {
+-            return criteria.size() > 0;
+-        }
+-
+-        public List<Criterion> getAllCriteria() {
+-            return criteria;
+-        }
+-
+-        public List<Criterion> getCriteria() {
+-            return criteria;
+-        }
+-
+-        protected void addCriterion(String condition) {
+-            if (condition == null) {
+-                throw new RuntimeException("Value for condition cannot be null");
+-            }
+-            criteria.add(new Criterion(condition));
+-        }
+-
+-        protected void addCriterion(String condition, Object value, String property) {
+-            if (value == null) {
+-                throw new RuntimeException("Value for " + property + " cannot be null");
+-            }
+-            criteria.add(new Criterion(condition, value));
+-        }
+-
+-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+-            if (value1 == null || value2 == null) {
+-                throw new RuntimeException("Between values for " + property + " cannot be null");
+-            }
+-            criteria.add(new Criterion(condition, value1, value2));
+-        }
+-
+-        public Criteria andKeywordIsNull() {
+-            addCriterion("keyword is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordIsNotNull() {
+-            addCriterion("keyword is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordEqualTo(String value) {
+-            addCriterion("keyword =", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordNotEqualTo(String value) {
+-            addCriterion("keyword <>", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordGreaterThan(String value) {
+-            addCriterion("keyword >", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordGreaterThanOrEqualTo(String value) {
+-            addCriterion("keyword >=", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordLessThan(String value) {
+-            addCriterion("keyword <", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordLessThanOrEqualTo(String value) {
+-            addCriterion("keyword <=", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordLike(String value) {
+-            addCriterion("keyword like", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordNotLike(String value) {
+-            addCriterion("keyword not like", value, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordIn(List<String> values) {
+-            addCriterion("keyword in", values, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordNotIn(List<String> values) {
+-            addCriterion("keyword not in", values, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordBetween(String value1, String value2) {
+-            addCriterion("keyword between", value1, value2, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andKeywordNotBetween(String value1, String value2) {
+-            addCriterion("keyword not between", value1, value2, "keyword");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsIsNull() {
+-            addCriterion("questionIDs is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsIsNotNull() {
+-            addCriterion("questionIDs is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsEqualTo(String value) {
+-            addCriterion("questionIDs =", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsNotEqualTo(String value) {
+-            addCriterion("questionIDs <>", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsGreaterThan(String value) {
+-            addCriterion("questionIDs >", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsGreaterThanOrEqualTo(String value) {
+-            addCriterion("questionIDs >=", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsLessThan(String value) {
+-            addCriterion("questionIDs <", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsLessThanOrEqualTo(String value) {
+-            addCriterion("questionIDs <=", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsLike(String value) {
+-            addCriterion("questionIDs like", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsNotLike(String value) {
+-            addCriterion("questionIDs not like", value, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsIn(List<String> values) {
+-            addCriterion("questionIDs in", values, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsNotIn(List<String> values) {
+-            addCriterion("questionIDs not in", values, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsBetween(String value1, String value2) {
+-            addCriterion("questionIDs between", value1, value2, "questionids");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidsNotBetween(String value1, String value2) {
+-            addCriterion("questionIDs not between", value1, value2, "questionids");
+-            return (Criteria) this;
+-        }
+-    }
+-
+-    public static class Criteria extends GeneratedCriteria {
+-
+-        protected Criteria() {
+-            super();
+-        }
+-    }
+-
+-    public static class Criterion {
+-        private String condition;
+-
+-        private Object value;
+-
+-        private Object secondValue;
+-
+-        private boolean noValue;
+-
+-        private boolean singleValue;
+-
+-        private boolean betweenValue;
+-
+-        private boolean listValue;
+-
+-        private String typeHandler;
+-
+-        public String getCondition() {
+-            return condition;
+-        }
+-
+-        public Object getValue() {
+-            return value;
+-        }
+-
+-        public Object getSecondValue() {
+-            return secondValue;
+-        }
+-
+-        public boolean isNoValue() {
+-            return noValue;
+-        }
+-
+-        public boolean isSingleValue() {
+-            return singleValue;
+-        }
+-
+-        public boolean isBetweenValue() {
+-            return betweenValue;
+-        }
+-
+-        public boolean isListValue() {
+-            return listValue;
+-        }
+-
+-        public String getTypeHandler() {
+-            return typeHandler;
+-        }
+-
+-        protected Criterion(String condition) {
+-            super();
+-            this.condition = condition;
+-            this.typeHandler = null;
+-            this.noValue = true;
+-        }
+-
+-        protected Criterion(String condition, Object value, String typeHandler) {
+-            super();
+-            this.condition = condition;
+-            this.value = value;
+-            this.typeHandler = typeHandler;
+-            if (value instanceof List<?>) {
+-                this.listValue = true;
+-            } else {
+-                this.singleValue = true;
+-            }
+-        }
+-
+-        protected Criterion(String condition, Object value) {
+-            this(condition, value, null);
+-        }
+-
+-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+-            super();
+-            this.condition = condition;
+-            this.value = value;
+-            this.secondValue = secondValue;
+-            this.typeHandler = typeHandler;
+-            this.betweenValue = true;
+-        }
+-
+-        protected Criterion(String condition, Object value, Object secondValue) {
+-            this(condition, value, secondValue, null);
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/cn/sysu/circuitQA/pojo/circuitQaExample.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/circuitQaExample.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/circuitQaExample.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,540 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-public class circuitQaExample {
+-    protected String orderByClause;
+-
+-    protected boolean distinct;
+-
+-    protected List<Criteria> oredCriteria;
+-
+-    public circuitQaExample() {
+-        oredCriteria = new ArrayList<Criteria>();
+-    }
+-
+-    public void setOrderByClause(String orderByClause) {
+-        this.orderByClause = orderByClause;
+-    }
+-
+-    public String getOrderByClause() {
+-        return orderByClause;
+-    }
+-
+-    public void setDistinct(boolean distinct) {
+-        this.distinct = distinct;
+-    }
+-
+-    public boolean isDistinct() {
+-        return distinct;
+-    }
+-
+-    public List<Criteria> getOredCriteria() {
+-        return oredCriteria;
+-    }
+-
+-    public void or(Criteria criteria) {
+-        oredCriteria.add(criteria);
+-    }
+-
+-    public Criteria or() {
+-        Criteria criteria = createCriteriaInternal();
+-        oredCriteria.add(criteria);
+-        return criteria;
+-    }
+-
+-    public Criteria createCriteria() {
+-        Criteria criteria = createCriteriaInternal();
+-        if (oredCriteria.size() == 0) {
+-            oredCriteria.add(criteria);
+-        }
+-        return criteria;
+-    }
+-
+-    protected Criteria createCriteriaInternal() {
+-        Criteria criteria = new Criteria();
+-        return criteria;
+-    }
+-
+-    public void clear() {
+-        oredCriteria.clear();
+-        orderByClause = null;
+-        distinct = false;
+-    }
+-
+-    protected abstract static class GeneratedCriteria {
+-        protected List<Criterion> criteria;
+-
+-        protected GeneratedCriteria() {
+-            super();
+-            criteria = new ArrayList<Criterion>();
+-        }
+-
+-        public boolean isValid() {
+-            return criteria.size() > 0;
+-        }
+-
+-        public List<Criterion> getAllCriteria() {
+-            return criteria;
+-        }
+-
+-        public List<Criterion> getCriteria() {
+-            return criteria;
+-        }
+-
+-        protected void addCriterion(String condition) {
+-            if (condition == null) {
+-                throw new RuntimeException("Value for condition cannot be null");
+-            }
+-            criteria.add(new Criterion(condition));
+-        }
+-
+-        protected void addCriterion(String condition, Object value, String property) {
+-            if (value == null) {
+-                throw new RuntimeException("Value for " + property + " cannot be null");
+-            }
+-            criteria.add(new Criterion(condition, value));
+-        }
+-
+-        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+-            if (value1 == null || value2 == null) {
+-                throw new RuntimeException("Between values for " + property + " cannot be null");
+-            }
+-            criteria.add(new Criterion(condition, value1, value2));
+-        }
+-
+-        public Criteria andQuestionidIsNull() {
+-            addCriterion("questionID is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidIsNotNull() {
+-            addCriterion("questionID is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidEqualTo(Integer value) {
+-            addCriterion("questionID =", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidNotEqualTo(Integer value) {
+-            addCriterion("questionID <>", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidGreaterThan(Integer value) {
+-            addCriterion("questionID >", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidGreaterThanOrEqualTo(Integer value) {
+-            addCriterion("questionID >=", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidLessThan(Integer value) {
+-            addCriterion("questionID <", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidLessThanOrEqualTo(Integer value) {
+-            addCriterion("questionID <=", value, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidIn(List<Integer> values) {
+-            addCriterion("questionID in", values, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidNotIn(List<Integer> values) {
+-            addCriterion("questionID not in", values, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidBetween(Integer value1, Integer value2) {
+-            addCriterion("questionID between", value1, value2, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionidNotBetween(Integer value1, Integer value2) {
+-            addCriterion("questionID not between", value1, value2, "questionid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionIsNull() {
+-            addCriterion("question is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionIsNotNull() {
+-            addCriterion("question is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionEqualTo(String value) {
+-            addCriterion("question =", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionNotEqualTo(String value) {
+-            addCriterion("question <>", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionGreaterThan(String value) {
+-            addCriterion("question >", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionGreaterThanOrEqualTo(String value) {
+-            addCriterion("question >=", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionLessThan(String value) {
+-            addCriterion("question <", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionLessThanOrEqualTo(String value) {
+-            addCriterion("question <=", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionLike(String value) {
+-            addCriterion("question like", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionNotLike(String value) {
+-            addCriterion("question not like", value, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionIn(List<String> values) {
+-            addCriterion("question in", values, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionNotIn(List<String> values) {
+-            addCriterion("question not in", values, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionBetween(String value1, String value2) {
+-            addCriterion("question between", value1, value2, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andQuestionNotBetween(String value1, String value2) {
+-            addCriterion("question not between", value1, value2, "question");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerIsNull() {
+-            addCriterion("answer is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerIsNotNull() {
+-            addCriterion("answer is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerEqualTo(String value) {
+-            addCriterion("answer =", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerNotEqualTo(String value) {
+-            addCriterion("answer <>", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerGreaterThan(String value) {
+-            addCriterion("answer >", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerGreaterThanOrEqualTo(String value) {
+-            addCriterion("answer >=", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerLessThan(String value) {
+-            addCriterion("answer <", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerLessThanOrEqualTo(String value) {
+-            addCriterion("answer <=", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerLike(String value) {
+-            addCriterion("answer like", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerNotLike(String value) {
+-            addCriterion("answer not like", value, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerIn(List<String> values) {
+-            addCriterion("answer in", values, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerNotIn(List<String> values) {
+-            addCriterion("answer not in", values, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerBetween(String value1, String value2) {
+-            addCriterion("answer between", value1, value2, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andAnswerNotBetween(String value1, String value2) {
+-            addCriterion("answer not between", value1, value2, "answer");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidIsNull() {
+-            addCriterion("childID is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidIsNotNull() {
+-            addCriterion("childID is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidEqualTo(String value) {
+-            addCriterion("childID =", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidNotEqualTo(String value) {
+-            addCriterion("childID <>", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidGreaterThan(String value) {
+-            addCriterion("childID >", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidGreaterThanOrEqualTo(String value) {
+-            addCriterion("childID >=", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidLessThan(String value) {
+-            addCriterion("childID <", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidLessThanOrEqualTo(String value) {
+-            addCriterion("childID <=", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidLike(String value) {
+-            addCriterion("childID like", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidNotLike(String value) {
+-            addCriterion("childID not like", value, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidIn(List<String> values) {
+-            addCriterion("childID in", values, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidNotIn(List<String> values) {
+-            addCriterion("childID not in", values, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidBetween(String value1, String value2) {
+-            addCriterion("childID between", value1, value2, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andChildidNotBetween(String value1, String value2) {
+-            addCriterion("childID not between", value1, value2, "childid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidIsNull() {
+-            addCriterion("parentID is null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidIsNotNull() {
+-            addCriterion("parentID is not null");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidEqualTo(String value) {
+-            addCriterion("parentID =", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidNotEqualTo(String value) {
+-            addCriterion("parentID <>", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidGreaterThan(String value) {
+-            addCriterion("parentID >", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidGreaterThanOrEqualTo(String value) {
+-            addCriterion("parentID >=", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidLessThan(String value) {
+-            addCriterion("parentID <", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidLessThanOrEqualTo(String value) {
+-            addCriterion("parentID <=", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidLike(String value) {
+-            addCriterion("parentID like", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidNotLike(String value) {
+-            addCriterion("parentID not like", value, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidIn(List<String> values) {
+-            addCriterion("parentID in", values, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidNotIn(List<String> values) {
+-            addCriterion("parentID not in", values, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidBetween(String value1, String value2) {
+-            addCriterion("parentID between", value1, value2, "parentid");
+-            return (Criteria) this;
+-        }
+-
+-        public Criteria andParentidNotBetween(String value1, String value2) {
+-            addCriterion("parentID not between", value1, value2, "parentid");
+-            return (Criteria) this;
+-        }
+-    }
+-
+-    public static class Criteria extends GeneratedCriteria {
+-
+-        protected Criteria() {
+-            super();
+-        }
+-    }
+-
+-    public static class Criterion {
+-        private String condition;
+-
+-        private Object value;
+-
+-        private Object secondValue;
+-
+-        private boolean noValue;
+-
+-        private boolean singleValue;
+-
+-        private boolean betweenValue;
+-
+-        private boolean listValue;
+-
+-        private String typeHandler;
+-
+-        public String getCondition() {
+-            return condition;
+-        }
+-
+-        public Object getValue() {
+-            return value;
+-        }
+-
+-        public Object getSecondValue() {
+-            return secondValue;
+-        }
+-
+-        public boolean isNoValue() {
+-            return noValue;
+-        }
+-
+-        public boolean isSingleValue() {
+-            return singleValue;
+-        }
+-
+-        public boolean isBetweenValue() {
+-            return betweenValue;
+-        }
+-
+-        public boolean isListValue() {
+-            return listValue;
+-        }
+-
+-        public String getTypeHandler() {
+-            return typeHandler;
+-        }
+-
+-        protected Criterion(String condition) {
+-            super();
+-            this.condition = condition;
+-            this.typeHandler = null;
+-            this.noValue = true;
+-        }
+-
+-        protected Criterion(String condition, Object value, String typeHandler) {
+-            super();
+-            this.condition = condition;
+-            this.value = value;
+-            this.typeHandler = typeHandler;
+-            if (value instanceof List<?>) {
+-                this.listValue = true;
+-            } else {
+-                this.singleValue = true;
+-            }
+-        }
+-
+-        protected Criterion(String condition, Object value) {
+-            this(condition, value, null);
+-        }
+-
+-        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+-            super();
+-            this.condition = condition;
+-            this.value = value;
+-            this.secondValue = secondValue;
+-            this.typeHandler = typeHandler;
+-            this.betweenValue = true;
+-        }
+-
+-        protected Criterion(String condition, Object value, Object secondValue) {
+-            this(condition, value, secondValue, null);
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/mapper/RecordMapper.xml
+===================================================================
+--- src/main/resources/mapper/RecordMapper.xml	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/resources/mapper/RecordMapper.xml	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,7 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8" ?>
+-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+-<mapper namespace="cn.sysu.circuitQA.mapper.RecordMapper" >
+-    <select id="findAll" resultType="cn.sysu.circuitQA.pojo.Record">select * from record</select>
+-    <select id="save">insert into record(id,question,time,studentName,studentid) values(#{id},#{question},#{time},#{studentName},#{studentid}) </select>
+-    <select id="getAllQuestion" resultType="java.lang.String">SELECT question FROM record</select>
+-</mapper>
+\ No newline at end of file
+Index: src/main/java/cn/sysu/circuitQA/pojo/Student.java
+===================================================================
+--- src/main/java/cn/sysu/circuitQA/pojo/Student.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
++++ src/main/java/cn/sysu/circuitQA/pojo/Student.java	(revision eaa8eb0144c2c74ff666c83fa285b78261e75921)
+@@ -1,12 +0,0 @@
+-package cn.sysu.circuitQA.pojo;
+-
+-import lombok.Data;
+-import lombok.NoArgsConstructor;
+-
+-@Data
+-public class Student {
+-    private Long id;
+-    private String studentName;
+-    private String password;
+-    private String classAndGrade;
+-}

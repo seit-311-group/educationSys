@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-    String flag = null;
+
 
     @Autowired
     StudentMapper studentMapper;
 
     @Override
     public Student login(Student student) {
-        Student studentExist = studentMapper.findById(student.getId());
+        Student studentExist = studentMapper.findById(student.getId().longValue());
         if (studentExist != null) {
-            String studentPassword = studentMapper.findPswById(student.getId());
+            String studentPassword = studentMapper.findPswById(student.getId().longValue());
             if (student.getPassword().equals(studentPassword)){
                 return studentExist;
             }
@@ -28,10 +28,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student regist(Student student) {
-        Student studentExist = studentMapper.findById(student.getId());
+        if(studentMapper.findById(student.getId().longValue()) == null){
+            return null;
+        }
+        Student studentExist = studentMapper.findById(student.getId().longValue());
         if (student.getId() == null){
             return null;
-        }else if (student.getStudentName() == null){
+        }else if (student.getStudentname() == null){
             return null;
         }else if (student.getPassword() == null){
             return null;

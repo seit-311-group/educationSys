@@ -24,4 +24,5 @@ public class CircuitQAServiceTest {
         System.out.println("".equals(null));
         System.out.println(qa.getChildid().equals("\\N"));
     }
+
 }

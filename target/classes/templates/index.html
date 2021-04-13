@@ -3,8 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="utf-8" />
     <title>电路知识问答</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 
 <style type="text/css">
@@ -19,13 +23,13 @@
 	margin: 20px auto;
 	border: 1px solid steelblue;
 	width: 430px;
-	height: 400px;
+	height: 600px;
 }
 
 .msgInput {
 	display: block;
 	width: 406px;
-	height: 60px;
+	height: 90px;
 	margin: 10px auto;
 }
 
@@ -36,11 +40,27 @@
 	bottom: 5px;
 	right: 10px;
 }
+#herf {
+    position: absolute;
+    width: 100px;
+    height: 29px;
+    bottom: 0px;
+    left: 10px;
+    color: white;
+}
+
+#returnbtn{
+    position: absolute;
+    width: 100px;
+    height: 29px;
+    bottom: 5px;
+    left: 10px;
+}
 
 .content {
 	list-style: none;
 	width: 410px;
-	height: 280px;
+	height: 450px;
 	margin: 5px auto;
 	border: 1px dotted #D1D3D6;
 	overflow-y: scroll;
@@ -92,67 +112,83 @@ img {
 }
 canvas{
 position: fixed;
-    top: 0px;
+    top: 52px;
 }
 </style>
 <script type="text/javascript">
     // <![CDATA[
 	window.onload = function() {
-        var questions = '';
-		var input = document.getElementById('msg_input');//查找缓存
+        let questions = '';
+        let question = '';
+		let input = document.getElementById('msg_input');//查找缓存
 		document.getElementById('sendbtn').onclick = function() {
 			sendMsg();
 		}
-
 		//enter键 发送
 		document.onkeypress = function(event) {
-			var e = event || window.event;
-			var keycode = e.keyCode || e.which;
+			let e = event || window.event;
+			let keycode = e.keyCode || e.which;
 			console.log(e)
 			if (keycode == 13) {//按下enter键
-				sendMsg();
+				sendMsg()
 			}
 		}
 		function sendMsg() {
-			var input = document.getElementById('msg_input');//查找缓存
-			var ul = document.getElementById('content');
-			var newLi = document.createElement('li');
+			let input = document.getElementById('msg_input');//查找缓存
+			let ul = document.getElementById('content');
+			let newLi = document.createElement('li');
 			newLi.innerHTML = input.value;
 			newLi.className = 'msgContent right';
 			ul.appendChild(newLi);
 
-			var div = document.createElement('div');
+			let div = document.createElement('div');
 			div.style = 'clear:both';
 			ul.appendChild(div);
-            if (input.value.length > 1) {
+            if (isNaN(input.value)) {
+                question = input.value;
                 ajax({
-                    url: '/qa/query?question=' + input.value,
+                    url: '/qa/query?question=' + question,
                     success: function (res) {
-                        console.log(res);
-                        var newLi = document.createElement('li');
+                        let newLi = document.createElement('li');
                         newLi.innerHTML = res;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
 
-                        var div = document.createElement('div');
+                        let div = document.createElement('div');
                         div.style = 'clear:both';
                         ul.appendChild(div);
                         input.value = '';
                         newLi.scrollIntoView();//将元素滚动到可见位置
                     }
                 });
-                sleep(1000);
+                // let Li = document.createElement('li');
+                // let a = document.createElement('a');
+                // a.href = "http://localhost:8081/1";
+                // a.innerHTML = "网孔法例题";
+                // Li.className = 'msgContent left';
+                // Li.appendChild(a);
+                // ul.appendChild(Li);
+                let div = document.createElement('div');
+                div.style = 'clear:both';
+                ul.appendChild(div);
+                newLi.scrollIntoView();//将元素滚动到可见位置
                 ajax({
-                    url: '/qa/subQuery?question=' + input.value,
+                    url: '/qa/subQuery?question=' + question,
                     success: function (res) {
-                        console.log(res);
+                        //console.log(res);
+                        if (res.length < 1) {
+                            return;
+                        }
                         questions = res;
-                        var newLi = document.createElement('li');
-                        newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + res;
+                        let array = res.split("@");
+                        let output = "";
+                        for(i = 0;i<array.length;i++) {output += i.toString() + "." + array[i] + "\n";}
+                        let newLi = document.createElement('li');
+                        newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + output;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
 
-                        var div = document.createElement('div');
+                        let div = document.createElement('div');
                         div.style = 'clear:both';
                         ul.appendChild(div);
                         input.value = '';
@@ -163,30 +199,31 @@ position: fixed;
                 ajax({
                     url: '/qa/getAnswerByOrder?order=' + input.value + '&' + 'questions=' + questions,
                     success: function (res) {
-                        console.log(res);
-                        questions = res;
-                        var newLi = document.createElement('li');
+                        if (res.length < 1) {
+                            return;
+                        }
+                        let newLi = document.createElement('li');
                         newLi.innerHTML = res;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
 
-                        var div = document.createElement('div');
+                        let div = document.createElement('div');
                         div.style = 'clear:both';
                         ul.appendChild(div);
                         input.value = '';
-                        newLi.scrollIntoView();//将元素滚动到可见位置
+                        newLi.scrollIntoView();
                     }
                 });
             }
 
 			input.value = '';
-			newLi.scrollIntoView();//将元素滚动到可见位置
+			newLi.scrollIntoView();
 		}
 
 	}
 
 	function ajax(obj) {
-		var xhr = null;
+		let xhr = null;
 		if (window.ActiveXObject) {
 			xhr = new ActiveXObject('Microsoft.XMLHTTP')
 		} else {
@@ -195,9 +232,9 @@ position: fixed;
 
 		//打开与服务器的连接
 		if (obj.method) {
-			xhr.open(obj.method, obj.url, true);
+			xhr.open(obj.method, obj.url, false);
 		} else {
-			xhr.open('get', obj.url, true);
+			xhr.open('get', obj.url, false);
 		}
 		xhr.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded");
@@ -231,8 +268,8 @@ position: fixed;
 	}
 
     function sleep(numberMillis) {
-        var now = new Date();
-        var exitTime = now.getTime() + numberMillis;
+        let now = new Date();
+        let exitTime = now.getTime() + numberMillis;
         while (true) {
             now = new Date();
             if (now.getTime() > exitTime)
@@ -243,15 +280,16 @@ position: fixed;
 </script>
 
 <body>
+    <div th:include="navigation :: nav"></div>
     <canvas id="canvas" width="1293" height="717"></canvas>
     <div id="main" class="main">
         <ul id="content" class="content">
             <li class="msgContent left">你好，有什么电路基础课程相关的问题可以问我哦</li>
                 <div style="clear: both"></div>
         </ul>
-        <textarea name="question" id="msg_input" class="msgInput" placeholder="请输入问题"></textarea>
+        <textarea id="msg_input" class="msgInput"></textarea>
+        <a href="/record" id="herf" target="_blank">反馈入口在这里</a>
         <button id="sendbtn" class="sendbtn">发送</button>
-        <button id="returnbtn" class="returnbtn" onclick="javascript:window.location.href= '/'">返回主页</button>
     </div>
 </body>
 
@@ -264,18 +302,18 @@ window.requestAnimFrame = (function () {
             window.setTimeout(callback, 1000 / 60);
         };
 })();
-var can = document.getElementById("canvas");
-var cxt = can.getContext("2d");
+let can = document.getElementById("canvas");
+let cxt = can.getContext("2d");
 can.width = 1920;
 can.height = 950;
 cxt.lineWidth = 0.3;
 //初始链接线条显示位置
-var mousePosition = {
+let mousePosition = {
     x: 30 * can.width / 100,
     y: 30 * can.height / 100
 }
 //圆形粒子对象参数
-var dots = {
+let dots = {
     n: 500,//圆形粒子个数
     distance: 50,//圆形粒子之间的距离
     d_radius: 100,//粒子距离鼠标点的距离
@@ -294,11 +332,11 @@ function mixConnect(c1, r1, c2, r2) {//圆的颜色 半径
 };
 //生成线条的颜色
 function lineColor(dot1, dot2) {//获取具体的圆的颜色再计算
-    var color1 = dot1.color,
+    let color1 = dot1.color,
         color2 = dot2.color;
-    var r = mixConnect(color1.r, dot1.radius, color2.r, dot2.radius);
-    var g = mixConnect(color1.g, dot1.radius, color2.g, dot2.radius);
-    var b = mixConnect(color1.b, dot1.radius, color2.b, dot2.radius);
+    let r = mixConnect(color1.r, dot1.radius, color2.r, dot2.radius);
+    let g = mixConnect(color1.g, dot1.radius, color2.g, dot2.radius);
+    let b = mixConnect(color1.b, dot1.radius, color2.b, dot2.radius);
     return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
 }
 //生成圆形粒子的颜色对象
@@ -331,14 +369,14 @@ Dot.prototype.draw = function () {
 }
 //添加圆形粒子
 function createCircle() {
-	/*<![CDATA[*/  for (var i = 0; i < dots.n; i++) {
+	/*<![CDATA[*/  for (let i = 0; i < dots.n; i++) {
         dots.array.push(new Dot());
     }/*<![CDATA[*/
 }
 //绘制出圆形粒子
 function drawDots() {
-    for (var i = 0; i < dots.n; i++) {
-        var dot = dots.array[i];
+    for (let i = 0; i < dots.n; i++) {
+        let dot = dots.array[i];
         dot.draw();
     }
 }
@@ -346,8 +384,8 @@ function drawDots() {
 //drawDots();
 //移动
 function moveDots() {
-    for (var i = 0; i < dots.n; i++) {
-        var dot = dots.array[i];
+    for (let i = 0; i < dots.n; i++) {
+        let dot = dots.array[i];
         //当圆形粒子对象碰壁的时候就反弹回来
         if (dot.y < 0 || dot.y > can.height) {
             dot.vx = dot.vx;
@@ -363,8 +401,8 @@ function moveDots() {
 }
 //链接粒子对象
 function connectDots() {
-    for (var i = 0; i < dots.n; i++) {
-        for (var j = 0; j < dots.n; j++) {
+    for (let i = 0; i < dots.n; i++) {
+        for (let j = 0; j < dots.n; j++) {
             iDot = dots.array[i];
             jDot = dots.array[j];
             /*<![CDATA[*/  if ((iDot.x - jDot.x) < dots.distance && (iDot.y - jDot.y) < dots.distance && (iDot.x - jDot.x) > -dots.distance && (iDot.y - jDot.y) > -dots.distance) {

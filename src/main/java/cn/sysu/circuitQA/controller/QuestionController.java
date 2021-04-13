@@ -2,13 +2,11 @@ package cn.sysu.circuitQA.controller;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.service.CoreProcessService;
-import cn.sysu.circuitQA.service.MessageService;
 import cn.sysu.circuitQA.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 @RestController
 @RequestMapping("/qa")
@@ -17,19 +15,12 @@ public class QuestionController {
     private CoreProcessService coreProcess;
 
     @Autowired
-    private MessageService MessageService;
-
-    @Autowired
-    private RecordService RecordService;
+    RecordService recordService;
 
     @RequestMapping("/query")
     public String query(@RequestParam(value = "question") String query) throws Exception {
         circuitQa target =  coreProcess.analysis(query);
-        if (target == null) {
-            RecordService.addRecord(query, "", "", "0");
-            return "没有收录你的问题o(╯□╰)o";
-        }
-        RecordService.addRecord(query, target.getQuestion(), target.getAnswer(), "1");
+        if (target == null) {return "没有收录你的问题";}
         return target.getAnswer();
     }
 
@@ -46,24 +37,24 @@ public class QuestionController {
         return target;
     }
 
-    @RequestMapping("/addMessage")
-    public void addMessage(@RequestParam(value = "message") String message) throws Exception {
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        String nowDate = format.format(now);
-        MessageService.addMessage(message, nowDate);
-    }
-
-    @RequestMapping("/getRecordByDate")
-    public String getRecordByDate(@RequestParam(value = "fromdate") String date) throws Exception {
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        String nowDate = format.format(now);
-        if (date.length() != 8 || Integer.parseInt(date) > Integer.parseInt(nowDate)){
-            return "请输入正确的日期";
-        }
-        return RecordService.findRecord(date);
-    }
+    // @RequestMapping("/addMessage")
+    // public void addMessage(@RequestParam(value = "message") String message) throws Exception {
+    //     Date now = new Date();
+    //     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    //     String nowDate = format.format(now);
+    //     MessageService.addMessage(message, nowDate);
+    // }
+    //
+    // @RequestMapping("/getRecordByDate")
+    // public String getRecordByDate(@RequestParam(value = "fromdate") String date) throws Exception {
+    //     Date now = new Date();
+    //     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+    //     String nowDate = format.format(now);
+    //     if (date.length() != 8 || Integer.parseInt(date) > Integer.parseInt(nowDate)){
+    //         return "请输入正确的日期";
+    //     }
+    //     return RecordService.findRecord(date);
+    // }
 
 //    @RequestMapping("/upload")
 //    public String uploadFile(MultipartFile mFile) throws IOException {

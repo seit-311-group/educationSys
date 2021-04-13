@@ -59,9 +59,9 @@
 
         <table tableName="keyword" domainObjectName="keyWord"></table>
 
-        <table tableName="message" domainObjectName="message"></table>
+        <table tableName="student" domainObjectName="Student"></table>
 
-        <table tableName="record" domainObjectName="record"></table>
+        <table tableName="record" domainObjectName="Record"></table>
 
     </context>
 </generatorConfiguration>

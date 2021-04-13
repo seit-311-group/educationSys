@@ -1,8 +1,10 @@
 package cn.sysu.circuitQA.service;
 
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
 
 public interface RecordService {
     String wordsSave(String question);
+
+    void pagingAndShow(String seatch,String pageNumber, Model model);
 }

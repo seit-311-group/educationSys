@@ -22,7 +22,7 @@ public class ProcessServiceTest {
 
     @Test
     public void extractCandidatesTest() {
-        List<circuitQa> candidates = coreProcessService.extractCandidates("如何理解电流、电压、功率的正负？");
+        List<circuitQa> candidates = coreProcessService.extractCandidates("什么是换路定律？");
         if (candidates.size() == 0) {
             System.out.println("没有候选问题");
         }

@@ -1,6 +1,7 @@
 package cn.sysu.circuitQA.controller;
 
 
+import cn.sysu.circuitQA.mapper.StudentMapper;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    StudentMapper studentMapper;
 
     @RequestMapping("/loginCallBack")                                                           // HttpServletRequest request 写到形参自动注入
     public String loginCallback(Student student, HttpServletResponse response){                  // HttpServletResponse response
@@ -53,7 +57,6 @@ public class StudentController {
             cookie.setDomain("localhost");
             cookie.setPath("/");
             response.addCookie(cookie);
-            response.addCookie(cookie);
             return "/";
         }else {
             // 注册失败，重新注册
@@ -61,10 +64,23 @@ public class StudentController {
         }
     }
 
-
-    @RequestMapping("/adminCallBack")
-    public String adminCallBack(){
-        return "mian";
+    @RequestMapping("/logOut")
+    public String logOut(HttpServletRequest request,
+                         HttpServletResponse response){
+        // 清除session 和 cookie
+        request.getSession().removeAttribute("userId");
+        Cookie cookie1 = new Cookie("studentId", null);
+        cookie1.setMaxAge(0);
+        cookie1.setDomain("localhost");
+        cookie1.setPath("/");
+        response.addCookie(cookie1);
+        Cookie cookie2 = new Cookie("JSESSIONID", null);
+        cookie2.setMaxAge(0);
+        cookie2.setDomain("localhost");
+        cookie2.setPath("/");
+        response.addCookie(cookie2);
+        return "redirect:/";
     }
+
 
 }

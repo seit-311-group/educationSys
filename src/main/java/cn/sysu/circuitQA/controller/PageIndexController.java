@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -28,11 +27,11 @@ public class PageIndexController {
                 Student student = studentMapper.findById(studentId);
                 if (student != null){
                     // 写到session中
-                    request.getSession().setAttribute("studentName",student.getStudentName());
+                    request.getSession().setAttribute("studentName",student.getStudentname());
+                    request.getSession().setAttribute("userId", student.getId());
                 }
                 break;
             }
-
         }
         return "main";}
 

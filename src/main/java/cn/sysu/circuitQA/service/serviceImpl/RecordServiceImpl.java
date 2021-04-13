@@ -1,66 +1,29 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-<<<<<<< HEAD
-import cn.sysu.circuitQA.pojo.keyWord;
-import cn.sysu.circuitQA.pojo.keyWordExample;
-import cn.sysu.circuitQA.pojo.record;
-import cn.sysu.circuitQA.pojo.recordExample;
-import cn.sysu.circuitQA.service.RecordService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-=======
 import cn.sysu.circuitQA.mapper.RecordMapper;
 import cn.sysu.circuitQA.mapper.StudentMapper;
 import cn.sysu.circuitQA.pojo.Record;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.RecordService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.thymeleaf.util.StringUtils;
+
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> origin/dev_reyo
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class RecordServiceImpl implements RecordService {
 
     @Autowired
-<<<<<<< HEAD
-    private cn.sysu.circuitQA.mapper.recordMapper recordMapper;
-
-    public void addRecord(String query, String question, String answer, String success){
-        record record = new record();
-        record.setQuestion(question);
-        record.setAnswer(answer);
-        record.setSuccess(success);
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
-        String nowDate = format.format(now);
-        record.setDate(nowDate);
-        record.setQuery(query);
-        recordMapper.insert(record);
-    };
-
-    public String findRecord(String date){
-        recordExample recordExample = new recordExample();
-        recordExample.Criteria criteria = recordExample.createCriteria();
-        String day = date.substring(0,8);
-        criteria.andDateGreaterThanOrEqualTo(day);
-        List<record> records = recordMapper.selectByExample(recordExample);
-
-        String res = "";
-        for (int i = 0; i < records.size(); i++){
-            res = res + " " + records.get(i).getQuery();
-        }
-        return (res.length() == 0) ? null : res.substring(1);
-=======
     RecordMapper recordMapper;
 
     @Autowired
@@ -68,6 +31,8 @@ public class RecordServiceImpl implements RecordService {
 
     @Autowired
     HttpServletRequest request;
+
+
 
     @Override
     public String wordsSave(String question) {
@@ -88,11 +53,61 @@ public class RecordServiceImpl implements RecordService {
         Record record = new Record();
         record.setQuestion(question);
         record.setTime(nowTime);
-        record.setStudentName(student.getStudentName());
+        record.setStudentname(student.getStudentname());
         record.setStudentid(student.getId());
 
         recordMapper.save(record);
         return "问题保存成功";
->>>>>>> origin/dev_reyo
     }
+
+    // 分页和显示
+
+    /**
+     * 有bug
+     * @param search
+     * @param pageNumber
+     * @param model
+     */
+    @Override
+    public void pagingAndShow(String search,String pageNumber, Model model) {
+        String spPage= pageNumber;
+        //设置每页条数
+        int pageSize=13;
+        //页数
+        int pageNo=0;
+        if (search == null) search = "";
+        if(spPage==null){
+            pageNo=1;
+        }else {
+            pageNo = Integer.valueOf(spPage);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        }
+        //设置最大页数
+        int totalCount=0;
+        int count=recordMapper.getCount(search);
+        if(count>0){
+            totalCount=count;
+        }
+        int maxPage=totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+        if(pageNo>maxPage){
+            pageNo=maxPage;
+        }
+        int tempPageNo=(pageNo-1)*pageSize;
+        //计算总数量
+        //分页查询
+        Map map=new HashMap();
+        map.put("pageNo",tempPageNo);
+        map.put("pageSize",pageSize);
+        map.put("search", search);
+        List<Record> records = recordMapper.pageList(map);
+        //最后把信息放入model转发到页面把信息带过去
+        model.addAttribute("records",records);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalCount",totalCount);
+        model.addAttribute("maxPage",maxPage);
+        model.addAttribute("search", search);
+    }
+
 }

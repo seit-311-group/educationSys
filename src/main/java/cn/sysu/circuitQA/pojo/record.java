@@ -1,22 +1,28 @@
 package cn.sysu.circuitQA.pojo;
 
-public class record {
-    private String query;
+import java.util.Date;
+
+public class Record {
+    private Integer id;
 
     private String question;
 
+    private String time;
+
+    private String studentname;
+
+    private Integer studentid;
+
+    private String query;
+
     private String answer;
 
-    private String success;
-
-    private String date;
-
-    public String getQuery() {
-        return query;
+    public Integer getId() {
+        return id;
     }
 
-    public void setQuery(String query) {
-        this.query = query == null ? null : query.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getQuestion() {
@@ -27,27 +33,43 @@ public class record {
         this.question = question == null ? null : question.trim();
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getStudentname() {
+        return studentname;
+    }
+
+    public void setStudentname(String studentname) {
+        this.studentname = studentname == null ? null : studentname.trim();
+    }
+
+    public Integer getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(Integer studentid) {
+        this.studentid = studentid;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query == null ? null : query.trim();
+    }
+
     public String getAnswer() {
         return answer;
     }
 
     public void setAnswer(String answer) {
         this.answer = answer == null ? null : answer.trim();
-    }
-
-    public String getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(String success) {
-        this.success = success == null ? null : success.trim();
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
     }
 }

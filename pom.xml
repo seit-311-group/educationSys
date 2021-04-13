@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<grpc.version>1.4.0</grpc.version>
+		<os.detected.classifier>windows-x86_64</os.detected.classifier>
 	</properties>
 
 	<dependencies>
@@ -45,6 +46,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -80,11 +85,32 @@
 			<artifactId>grpc-stub</artifactId>
 			<version>1.20.0</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.xolstice.maven.plugins</groupId>-->
-<!--			<artifactId>protobuf-maven-plugin</artifactId>-->
-<!--			<version>0.5.1</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+        <!--<dependency>-->
+        <!--    <groupId>cn.sysu</groupId>-->
+        <!--    <artifactId>circuitQA</artifactId>-->
+        <!--    <version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
+		<dependency>
+			<groupId>org.xolstice.maven.plugins</groupId>
+			<artifactId>protobuf-maven-plugin</artifactId>
+			<version>0.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.18</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.73</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -92,7 +118,7 @@
 			<extension>
 				<groupId>kr.motd.maven</groupId>
 				<artifactId>os-maven-plugin</artifactId>
-				<version>1.5.0.Final</version>
+				<version>1.4.1.Final</version>
 			</extension>
 		</extensions>
 
@@ -100,9 +126,9 @@
 			<plugin>
 				<groupId>org.xolstice.maven.plugins</groupId>
 				<artifactId>protobuf-maven-plugin</artifactId>
-				<version>0.5.1</version>
+				<version>0.5.0</version>
 				<configuration>
-					<protocArtifact>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}</protocArtifact>
+					<protocArtifact>com.google.protobuf:protoc:3.1.0:exe:${os.detected.classifier}</protocArtifact>
 					<pluginId>grpc-java</pluginId>
 					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.20.0:exe:${os.detected.classifier}</pluginArtifact>
 				</configuration>
@@ -132,7 +158,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.38</version>
+						<version>5.1.45</version>
 					</dependency>
 				</dependencies>
 			</plugin>

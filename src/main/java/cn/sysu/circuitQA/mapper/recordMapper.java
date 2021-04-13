@@ -1,22 +1,42 @@
 package cn.sysu.circuitQA.mapper;
 
-import cn.sysu.circuitQA.pojo.record;
-import cn.sysu.circuitQA.pojo.recordExample;
+import cn.sysu.circuitQA.pojo.Record;
+import cn.sysu.circuitQA.pojo.RecordExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
-public interface recordMapper {
-    int countByExample(recordExample example);
+public interface RecordMapper {
+    int countByExample(RecordExample example);
 
-    int deleteByExample(recordExample example);
+    int deleteByExample(RecordExample example);
 
-    int insert(record record);
+    int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(record record);
+    int insert(Record record);
 
-    List<record> selectByExample(recordExample example);
+    int insertSelective(Record record);
 
-    int updateByExampleSelective(@Param("record") record record, @Param("example") recordExample example);
+    List<Record> selectByExample(RecordExample example);
 
-    int updateByExample(@Param("record") record record, @Param("example") recordExample example);
+    Record selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Record record, @Param("example") RecordExample example);
+
+    int updateByExample(@Param("record") Record record, @Param("example") RecordExample example);
+
+    int updateByPrimaryKeySelective(Record record);
+
+    int updateByPrimaryKey(Record record);
+
+    List<Record> findAll();
+
+    void save(Record record);
+
+    String getAllQuestion();
+
+    int getCount(String search);
+
+    List<Record> pageList(Map map);
 }

@@ -19,5 +19,4 @@ public interface circuitQaMapper {
     int updateByExampleSelective(@Param("record") circuitQa record, @Param("example") circuitQaExample example);
 
     int updateByExample(@Param("record") circuitQa record, @Param("example") circuitQaExample example);
-
 }

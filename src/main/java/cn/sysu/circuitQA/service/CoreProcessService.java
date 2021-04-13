@@ -24,8 +24,8 @@ public class CoreProcessService {
     @Autowired
     private KeyWordService keyWordService;
 
-    @Autowired
-    private RecordService RecordService;
+    // @Autowired
+    // private RecordService recordService;
 
     private List<circuitQa> circuitQas;
 
@@ -65,7 +65,7 @@ public class CoreProcessService {
         circuitQa target = null;
         try {
 //            target = MatchUtil.matchByRPC(candidates, query);
-            target = MatchUtil.match2(candidates, query);
+            target = MatchUtil.match1(candidates, query);
             logger.info("匹配结果：" + target.getQuestion());
         } catch (Exception e) {
             if (e instanceof InterruptedException) {
@@ -80,6 +80,7 @@ public class CoreProcessService {
     public List<circuitQa> extractCandidates(String question) {
         this.circuitQas = circuitQAService.importQuestions();
         keyWords = keyWordService.importKeyWords();
+        System.out.println(keyWords.size());
         this.questionMap = new HashMap<String, circuitQa>();
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sysu.circuitQA.mapper.recordMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.record" >
-    <result column="query" property="query" jdbcType="VARCHAR" />
+<mapper namespace="cn.sysu.circuitQA.mapper.RecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.Record" >
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="studentName" property="studentname" jdbcType="VARCHAR" />
+    <result column="studentId" property="studentid" jdbcType="INTEGER" />
+    <result column="query" property="query" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="success" property="success" jdbcType="VARCHAR" />
-    <result column="date" property="date" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,9 +69,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    query, question, answer, success, date
+    id, question, time, studentName, studentId, query, answer
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.circuitQA.pojo.recordExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.circuitQA.pojo.RecordExample" >
     select
     <if test="distinct" >
       distinct
@@ -83,56 +85,80 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.recordExample" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.RecordExample" >
     delete from record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.record" >
-    insert into record (query, question, answer, 
-      success, date)
-    values (#{query,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
-      #{success,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.Record" >
+    insert into record (id, question, time, 
+      studentName, studentId, query, 
+      answer)
+    values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{studentname,jdbcType=VARCHAR}, #{studentid,jdbcType=INTEGER}, #{query,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.record" >
+  <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.Record" >
     insert into record
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="query != null" >
-        query,
+      <if test="id != null" >
+        id,
       </if>
       <if test="question != null" >
         question,
       </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="studentname != null" >
+        studentName,
+      </if>
+      <if test="studentid != null" >
+        studentId,
+      </if>
+      <if test="query != null" >
+        query,
+      </if>
       <if test="answer != null" >
         answer,
       </if>
-      <if test="success != null" >
-        success,
-      </if>
-      <if test="date != null" >
-        date,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="query != null" >
-        #{query,jdbcType=VARCHAR},
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="question != null" >
         #{question,jdbcType=VARCHAR},
       </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentname != null" >
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="query != null" >
+        #{query,jdbcType=VARCHAR},
+      </if>
       <if test="answer != null" >
         #{answer,jdbcType=VARCHAR},
       </if>
-      <if test="success != null" >
-        #{success,jdbcType=VARCHAR},
-      </if>
-      <if test="date != null" >
-        #{date,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.circuitQA.pojo.recordExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.sysu.circuitQA.pojo.RecordExample" resultType="java.lang.Integer" >
     select count(*) from record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -141,20 +167,26 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update record
     <set >
-      <if test="record.query != null" >
-        query = #{record.query,jdbcType=VARCHAR},
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.question != null" >
         question = #{record.question,jdbcType=VARCHAR},
       </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.studentname != null" >
+        studentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentid != null" >
+        studentId = #{record.studentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.query != null" >
+        query = #{record.query,jdbcType=VARCHAR},
+      </if>
       <if test="record.answer != null" >
         answer = #{record.answer,jdbcType=VARCHAR},
-      </if>
-      <if test="record.success != null" >
-        success = #{record.success,jdbcType=VARCHAR},
-      </if>
-      <if test="record.date != null" >
-        date = #{record.date,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -163,13 +195,60 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update record
-    set query = #{record.query,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
       question = #{record.question,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=VARCHAR},
-      success = #{record.success,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=VARCHAR}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      studentName = #{record.studentname,jdbcType=VARCHAR},
+      studentId = #{record.studentid,jdbcType=INTEGER},
+      query = #{record.query,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sysu.circuitQA.pojo.Record" >
+    update record
+    <set >
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentname != null" >
+        studentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null" >
+        studentId = #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="query != null" >
+        query = #{query,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sysu.circuitQA.pojo.Record" >
+    update record
+    set question = #{question,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      studentName = #{studentname,jdbcType=VARCHAR},
+      studentId = #{studentid,jdbcType=INTEGER},
+      query = #{query,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="cn.sysu.circuitQA.pojo.Record">select * from record</select>
+  <select id="save">insert into record(id,question,time,studentName,studentId,query,answer) values(#{id},#{question},#{time},#{studentname},#{studentid},#{query},#{answer}) </select>
+  <select id="getAllQuestion" resultType="java.lang.String">SELECT question FROM record</select>
+  <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from record where question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
+        or query like concat('%',#{search},'%')
+  </select>
+  <select id="pageList" resultType="cn.sysu.circuitQA.pojo.Record">
+        select * from record where question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
+        or query like concat('%',#{search},'%') limit #{pageNo},#{pageSize}
+  </select>
 </mapper>

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/circuitqa?serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/circuitqa?characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
   thymeleaf:
@@ -14,3 +14,4 @@ mybatis:
   type-aliases-package: cn.sysu.circuitQA.pojo
 server:
   port: 8080
+

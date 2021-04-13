@@ -3,8 +3,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="utf-8" />
     <title>电路知识问答</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 
 <style type="text/css">
@@ -40,9 +44,17 @@
     position: absolute;
     width: 100px;
     height: 29px;
-    bottom: 2px;
-    left: 8px;
+    bottom: 0px;
+    left: 10px;
     color: white;
+}
+
+#returnbtn{
+    position: absolute;
+    width: 100px;
+    height: 29px;
+    bottom: 5px;
+    left: 10px;
 }
 
 .content {
@@ -100,7 +112,7 @@ img {
 }
 canvas{
 position: fixed;
-    top: 0px;
+    top: 52px;
 }
 </style>
 <script type="text/javascript">
@@ -268,6 +280,7 @@ position: fixed;
 </script>
 
 <body>
+    <div th:include="navigation :: nav"></div>
     <canvas id="canvas" width="1293" height="717"></canvas>
     <div id="main" class="main">
         <ul id="content" class="content">
@@ -275,7 +288,7 @@ position: fixed;
                 <div style="clear: both"></div>
         </ul>
         <textarea id="msg_input" class="msgInput"></textarea>
-        <a href="/message" id="herf" target="_blank">反馈入口在这里</a>
+        <a href="/record" id="herf" target="_blank">反馈入口在这里</a>
         <button id="sendbtn" class="sendbtn">发送</button>
     </div>
 </body>

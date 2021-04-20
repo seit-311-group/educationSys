@@ -8,68 +8,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="20210406 new student record">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_13_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/RecordMapperCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/StudentMapperCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Questionspider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/QuestionspiderExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/HtmlParseUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapperCustom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/recordMapperCustom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/DatabaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/circuitQA_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/circuitQA_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_6_22_19__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_6_22_19__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_09_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_09__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_09__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_09__Default_Changelist_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_10_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_4_7_9_10__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/circuitQA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/circuitQA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/StudentMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/circuitQaMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/keyWordMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/recordMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/RecordExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/RecordExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/keyWordMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/recordMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recordStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recordStudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/PageIndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/PageIndexController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/QuestionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/QuestionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/StudentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/RecordMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/RecordMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/StudentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/StudentMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/Record.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/Record.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$Criteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$Criteria.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$Criterion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$Criterion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$GeneratedCriteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample$GeneratedCriteria.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordExample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/CoreProcessService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/CoreProcessService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/RecordService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/RecordService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/RecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/RecordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/recordStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/recordStudent.html" afterDir="false" />
-    </list>
+    <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="202104020 jsoup questionSpider" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -415,7 +354,7 @@
       <workItem from="1618558749483" duration="9947000" />
       <workItem from="1618837064883" duration="4142000" />
       <workItem from="1618888665199" duration="13782000" />
-      <workItem from="1618910263954" duration="4612000" />
+      <workItem from="1618910263954" duration="5011000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>
@@ -501,7 +440,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617674730355</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="202104020 jsoup questionSpider">
+      <created>1618918629394</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1618918629394</updated>
+    </task>
+    <task id="LOCAL-00014" summary="202104020 jsoup questionSpider">
+      <created>1618918646036</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1618918646036</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +518,8 @@
     <MESSAGE value="20210330" />
     <MESSAGE value="20210402 student record" />
     <MESSAGE value="20210406 new student record" />
-    <option name="LAST_COMMIT_MESSAGE" value="20210406 new student record" />
+    <MESSAGE value="202104020 jsoup questionSpider" />
+    <option name="LAST_COMMIT_MESSAGE" value="202104020 jsoup questionSpider" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="91" key="#Inspections" timestamp="1618909456212">

@@ -1,11 +1,13 @@
 package cn.sysu.circuitQA.pojo;
 
-import java.util.Date;
-
 public class Record {
     private Integer id;
 
+    private String query;
+
     private String question;
+
+    private String answer;
 
     private String time;
 
@@ -13,16 +15,20 @@ public class Record {
 
     private Integer studentid;
 
-    private String query;
-
-    private String answer;
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query == null ? null : query.trim();
     }
 
     public String getQuestion() {
@@ -33,12 +39,20 @@ public class Record {
         this.question = question == null ? null : question.trim();
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
+    }
+
     public String getTime() {
         return time;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.time = time == null ? null : time.trim();
     }
 
     public String getStudentname() {
@@ -55,21 +69,5 @@ public class Record {
 
     public void setStudentid(Integer studentid) {
         this.studentid = studentid;
-    }
-
-    public String getQuery() {
-        return query;
-    }
-
-    public void setQuery(String query) {
-        this.query = query == null ? null : query.trim();
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
     }
 }

@@ -193,7 +193,4 @@
       classAndGrade = #{classandgrade,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findById" resultType="cn.sysu.circuitQA.pojo.Student">select * from student where id = #{id}</select>
-  <select id="findPswById" resultType="java.lang.String">select password from student where id = #{id}</select>
-  <select id="save">insert into student(id,studentName,password,classAndGrade) values(#{id},#{studentName},#{password},#{classAndGrade}) </select>
 </mapper>

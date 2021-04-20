@@ -63,5 +63,8 @@
 
         <table tableName="record" domainObjectName="Record"></table>
 
+        <table tableName="questionspider" domainObjectName="Questionspider"></table>
+
+
     </context>
 </generatorConfiguration>

@@ -25,17 +25,18 @@
     <table border="1" width="1000" align="center" style="text-align: center" class="table table-striped">
         <thead>
         <tr>
-            <td>问题序号</td>
-            <td>问题</td>
-            <td>匹配问题</td>
+            <td style="width: 73px">问题序号</td>
+            <td style="width: 140px">问题</td>
+            <td style="width: 200px">匹配问题</td>
             <td>答案</td>
-            <td>时间</td>
+            <td style="width: 90px">时间</td>
             <td th:if="${session.userId == 1}">学号</td>
-            <td th:if="${session.userId == 1}">姓名</td>
+            <td th:if="${session.userId == 1}" style="width: 60px;">姓名</td>
         </tr>
         </thead>
         <tr th:each="item : ${records}">
-            <td th:text="${itemStat.index+1}"></td>
+            <td th:if="${search != ''}" th:text="${itemStat.index + 1}"></td>
+            <td th:if="${search == ''}" th:text="${item.id}"></td>
             <td th:text="${item.query}"></td>
             <td th:text="${item.question}"></td>
             <td th:text="${item.answer}"></td>

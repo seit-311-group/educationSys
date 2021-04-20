@@ -22,13 +22,13 @@
 	position: relative;
 	margin: 20px auto;
 	border: 1px solid steelblue;
-	width: 430px;
+	width: 1000px;
 	height: 600px;
 }
 
 .msgInput {
 	display: block;
-	width: 406px;
+	width: 980px;
 	height: 90px;
 	margin: 10px auto;
 }
@@ -59,16 +59,16 @@
 
 .content {
 	list-style: none;
-	width: 410px;
+	width: 980px;
 	height: 450px;
 	margin: 5px auto;
-	border: 1px dotted #D1D3D6;
+	border: 1px dotted #d1d3d6;
 	overflow-y: scroll;
 }
 
 .msgContent {
 	width: auto;
-	max-width: 250px;
+	max-width: 600px;
 	height: auto;
 	word-break: break-all;
 	margin: 5px;
@@ -118,6 +118,8 @@ position: fixed;
 <script type="text/javascript">
     // <![CDATA[
 	window.onload = function() {
+	    // 点击或者按enter调用sendMsg
+        let questionSpider = '';
         let questions = '';
         let question = '';
 		let input = document.getElementById('msg_input');//查找缓存
@@ -133,6 +135,7 @@ position: fixed;
 				sendMsg()
 			}
 		}
+
 		function sendMsg() {
 			let input = document.getElementById('msg_input');//查找缓存
 			let ul = document.getElementById('content');
@@ -142,18 +145,19 @@ position: fixed;
 			ul.appendChild(newLi);
 
 			let div = document.createElement('div');
-			div.style = 'clear:both';
+			div.style = 'clear:both';   //clear:both 指定段落的左侧或右侧不允许浮动的元素
 			ul.appendChild(div);
-            if (isNaN(input.value)) {
+
+            if (isNaN(input.value)) {   //isNaN() 函数用于检查其参数是否是非数字值，是数字返回false 不是返回ture
                 question = input.value;
                 ajax({
                     url: '/qa/query?question=' + question,
                     success: function (res) {
+                        questionSpider = res;
                         let newLi = document.createElement('li');
                         newLi.innerHTML = res;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
-
                         let div = document.createElement('div');
                         div.style = 'clear:both';
                         ul.appendChild(div);
@@ -161,6 +165,35 @@ position: fixed;
                         newLi.scrollIntoView();//将元素滚动到可见位置
                     }
                 });
+                // 没有匹配到问题就爬虫解决
+                if(questionSpider == "没有匹配到该答案"){
+                    ajax({
+                        url: '/qa/questionSpider?question=' + question,
+                        success: function (res) {
+                            let newLi = document.createElement('li');
+                            newLi.innerHTML = "已为您从网上寻找可能的答案如下:";
+                            newLi.className = 'msgContent left';
+                            ul.appendChild(newLi);
+                            let div = document.createElement('div');
+                            div.style = 'clear:both';
+                            ul.appendChild(div);
+                            input.value = '';
+                            newLi.scrollIntoView();//将元素滚动到可见位置
+
+                            let newLi1 = document.createElement('li');
+                            newLi1.innerHTML = res;
+                            newLi1.className = 'msgContent left';
+                            ul.appendChild(newLi1);
+                            let div1 = document.createElement('div');
+                            div1.style = 'clear:both';
+                            ul.appendChild(div1);
+                            input.value = '';
+                            newLi.scrollIntoView();//将元素滚动到可见位置
+
+                        }
+                    });
+                }
+
                 // let Li = document.createElement('li');
                 // let a = document.createElement('a');
                 // a.href = "http://localhost:8081/1";
@@ -187,7 +220,6 @@ position: fixed;
                         newLi.innerHTML = '你还可以回复序号来了解以下问题： ' + output;
                         newLi.className = 'msgContent left';
                         ul.appendChild(newLi);
-
                         let div = document.createElement('div');
                         div.style = 'clear:both';
                         ul.appendChild(div);
@@ -287,7 +319,7 @@ position: fixed;
             <li class="msgContent left">你好，有什么电路基础课程相关的问题可以问我哦</li>
                 <div style="clear: both"></div>
         </ul>
-        <textarea id="msg_input" class="msgInput"></textarea>
+        <textarea id="msg_input" class="msgInput" th:placeholder="请输入您的问题"></textarea>
         <a href="/record" id="herf" target="_blank">反馈入口在这里</a>
         <button id="sendbtn" class="sendbtn">发送</button>
     </div>

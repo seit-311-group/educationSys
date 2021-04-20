@@ -1,11 +1,15 @@
 package cn.sysu.circuitQA.controller;
 
+import cn.sysu.circuitQA.CircuitQA;
+import cn.sysu.circuitQA.pojo.Questionspider;
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.service.CoreProcessService;
 import cn.sysu.circuitQA.service.RecordService;
+import cn.sysu.circuitQA.utils.HtmlParseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 
 
 @RestController
@@ -17,11 +21,27 @@ public class QuestionController {
     @Autowired
     RecordService recordService;
 
+    @Autowired
+    HtmlParseUtil htmlParseUtil;
+
     @RequestMapping("/query")
     public String query(@RequestParam(value = "question") String query) throws Exception {
         circuitQa target =  coreProcess.analysis(query);
-        if (target == null) {return "没有收录你的问题";}
+        recordService.wordsSave(query, target.getQuestion(), target.getAnswer());     // 保存query和question、answer对
+        System.out.println(target.getAnswer());
         return target.getAnswer();
+    }
+
+    /**
+     * 问题爬虫 存在bug 百度知道网站爬不了
+     * @param question
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/questionSpider")
+    public String questionSpider(@RequestParam(value = "question") String question) throws IOException {
+        Questionspider questionspider = htmlParseUtil.paraseQuetion(question);
+        return questionspider.getAnswer();
     }
 
     @RequestMapping("/subQuery")
@@ -35,6 +55,11 @@ public class QuestionController {
     public String getAnswerByOrder(@RequestParam(value = "order") String order, @RequestParam(value = "questions") String questions ) throws Exception {
         String target =  coreProcess.getAnswerByOrder(order, questions);
         return target;
+    }
+
+    @RequestMapping("/feedback")
+    public String feedback(){
+        return "";
     }
 
     // @RequestMapping("/addMessage")

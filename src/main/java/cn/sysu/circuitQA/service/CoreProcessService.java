@@ -56,7 +56,10 @@ public class CoreProcessService {
         }
         if (candidates == null) {
             logger.info("没有候选问题集！");
-            return null;
+            circuitQa targetNull = new circuitQa();
+            targetNull.setQuestion("没有匹配到该问题");
+            targetNull.setAnswer("没有匹配到该答案");
+            return targetNull;
         }
         logger.info("候选问题集：");
         for (int i = 0; i < candidates.size(); i++) {
@@ -79,8 +82,9 @@ public class CoreProcessService {
     //提取候选问题集
     public List<circuitQa> extractCandidates(String question) {
         this.circuitQas = circuitQAService.importQuestions();
+        System.out.println("数据库中有" + circuitQas.size() + "个问题答案对");
         keyWords = keyWordService.importKeyWords();
-        System.out.println(keyWords.size());
+        System.out.println("数据库中有" + keyWords.size() + "个关键词");
         this.questionMap = new HashMap<String, circuitQa>();
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);

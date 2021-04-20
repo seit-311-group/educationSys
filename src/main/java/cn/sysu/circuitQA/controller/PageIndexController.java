@@ -1,7 +1,7 @@
 package cn.sysu.circuitQA.controller;
 
 
-import cn.sysu.circuitQA.mapper.StudentMapper;
+import cn.sysu.circuitQA.mapper.StudentMapperCustom;
 import cn.sysu.circuitQA.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class PageIndexController {
 
     @Autowired
-    StudentMapper studentMapper;
+    StudentMapperCustom studentMapperCustom;
 
     @RequestMapping("/")
     public String index(HttpServletRequest request) {
@@ -24,7 +24,7 @@ public class PageIndexController {
             // equals和==有区别 “==”比较的是两个引用的对象是否相等，而equals()方法比较的是两个对象的实际内容
             if (cookie.getName().equals("studentId")) {
                 long studentId = Integer.parseInt(cookie.getValue());
-                Student student = studentMapper.findById(studentId);
+                Student student = studentMapperCustom.findById(studentId);
                 if (student != null){
                     // 写到session中
                     request.getSession().setAttribute("studentName",student.getStudentname());

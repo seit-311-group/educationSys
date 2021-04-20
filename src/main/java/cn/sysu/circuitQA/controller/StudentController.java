@@ -1,7 +1,7 @@
 package cn.sysu.circuitQA.controller;
 
 
-import cn.sysu.circuitQA.mapper.StudentMapper;
+import cn.sysu.circuitQA.mapper.StudentMapperCustom;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class StudentController {
     StudentService studentService;
 
     @Autowired
-    StudentMapper studentMapper;
+    StudentMapperCustom studentMapperCustom;
 
     @RequestMapping("/loginCallBack")                                                           // HttpServletRequest request 写到形参自动注入
     public String loginCallback(Student student, HttpServletResponse response){                  // HttpServletResponse response

@@ -1,6 +1,6 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-import cn.sysu.circuitQA.mapper.StudentMapper;
+import cn.sysu.circuitQA.mapper.StudentMapperCustom;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.StudentService;
 
@@ -12,13 +12,13 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Autowired
-    StudentMapper studentMapper;
+    StudentMapperCustom studentMapperCustom;
 
     @Override
     public Student login(Student student) {
-        Student studentExist = studentMapper.findById(student.getId().longValue());
+        Student studentExist = studentMapperCustom.findById(student.getId().longValue());
         if (studentExist != null) {
-            String studentPassword = studentMapper.findPswById(student.getId().longValue());
+            String studentPassword = studentMapperCustom.findPswById(student.getId().longValue());
             if (student.getPassword().equals(studentPassword)){
                 return studentExist;
             }
@@ -28,10 +28,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student regist(Student student) {
-        if(studentMapper.findById(student.getId().longValue()) == null){
+        if(studentMapperCustom.findById(student.getId().longValue()) == null){
             return null;
         }
-        Student studentExist = studentMapper.findById(student.getId().longValue());
+        Student studentExist = studentMapperCustom.findById(student.getId().longValue());
         if (student.getId() == null){
             return null;
         }else if (student.getStudentname() == null){
@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
         }else if (studentExist != null){
             return null;
         } else {
-            studentMapper.save(student);
+            studentMapperCustom.insert(student);
         }
         return  student;
     }

@@ -1,14 +1,13 @@
 package cn.sysu.circuitQA.service.serviceImpl;
 
-import cn.sysu.circuitQA.mapper.RecordMapper;
-import cn.sysu.circuitQA.mapper.StudentMapper;
+import cn.sysu.circuitQA.mapper.RecordMapperCustom;
+import cn.sysu.circuitQA.mapper.StudentMapperCustom;
 import cn.sysu.circuitQA.pojo.Record;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.thymeleaf.util.StringUtils;
 
 
 import javax.servlet.http.Cookie;
@@ -24,10 +23,10 @@ import java.util.Map;
 public class RecordServiceImpl implements RecordService {
 
     @Autowired
-    RecordMapper recordMapper;
+    RecordMapperCustom recordMapperCustom;
 
     @Autowired
-    StudentMapper studentMapper;
+    StudentMapperCustom studentMapperCustom;
 
     @Autowired
     HttpServletRequest request;
@@ -35,7 +34,7 @@ public class RecordServiceImpl implements RecordService {
 
 
     @Override
-    public String wordsSave(String question) {
+    public void wordsSave(String query,String question, String answer) {
         Date date = new Date();//获得系统当前时间.
         SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
         String nowTime = sdf.format(date);
@@ -46,25 +45,34 @@ public class RecordServiceImpl implements RecordService {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("studentId")) {
                 long studentId = Integer.parseInt(cookie.getValue());
-                student = studentMapper.findById(studentId);
+                student = studentMapperCustom.findById(studentId);
             }
         }
 
-        Record record = new Record();
-        record.setQuestion(question);
-        record.setTime(nowTime);
-        record.setStudentname(student.getStudentname());
-        record.setStudentid(student.getId());
+        // 如果相同的用户问了相同的问题不计入
+        List<String> allQuery = recordMapperCustom.getAllQuery();
+        if(!allQuery.contains(query)){
+            Record record = new Record();
+            record.setQuery(query);
+            record.setAnswer(answer);
+            record.setQuestion(question);
+            record.setTime(nowTime);
+            record.setStudentname(student.getStudentname());
+            record.setStudentid(student.getId());
 
-        recordMapper.save(record);
-        return "问题保存成功";
+            recordMapperCustom.insert(record);
+            System.out.println("问题保存成功");
+
+        }
+
+        System.out.println("问题保存失败，是相同问题");
     }
 
     // 分页和显示
 
     /**
-     * 有bug
-     * @param search
+     * 问答历史页面
+     * @param search 目前搜索使用的是like匹配 没有用正则
      * @param pageNumber
      * @param model
      */
@@ -72,7 +80,7 @@ public class RecordServiceImpl implements RecordService {
     public void pagingAndShow(String search,String pageNumber, Model model) {
         String spPage= pageNumber;
         //设置每页条数
-        int pageSize=13;
+        int pageSize=15;
         //页数
         int pageNo=0;
         if (search == null) search = "";
@@ -86,7 +94,7 @@ public class RecordServiceImpl implements RecordService {
         }
         //设置最大页数
         int totalCount=0;
-        int count=recordMapper.getCount(search);
+        int count=recordMapperCustom.getCount(search);
         if(count>0){
             totalCount=count;
         }
@@ -101,7 +109,7 @@ public class RecordServiceImpl implements RecordService {
         map.put("pageNo",tempPageNo);
         map.put("pageSize",pageSize);
         map.put("search", search);
-        List<Record> records = recordMapper.pageList(map);
+        List<Record> records = recordMapperCustom.pageList(map);
         //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("records",records);
         model.addAttribute("pageNo",pageNo);

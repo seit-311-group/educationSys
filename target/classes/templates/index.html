@@ -122,7 +122,8 @@ position: fixed;
         let questionSpider = '';
         let questions = '';
         let question = '';
-		let input = document.getElementById('msg_input');//查找缓存
+        // let answerSpider = '';
+        let questionBegin = true;   // 所有流程进行完之后flag倒下
 		document.getElementById('sendbtn').onclick = function() {
 			sendMsg();
 		}
@@ -148,7 +149,25 @@ position: fixed;
 			div.style = 'clear:both';   //clear:both 指定段落的左侧或右侧不允许浮动的元素
 			ul.appendChild(div);
 
-            if (isNaN(input.value)) {   //isNaN() 函数用于检查其参数是否是非数字值，是数字返回false 不是返回ture
+            if((questionBegin == false) && (input.value == "Y" || input.value == "y" || input.value == "N" || input.value == "n")){
+                let newLi1 = document.createElement('li');
+                newLi1.innerHTML = "感谢您的反馈！";
+                newLi1.className = 'msgContent left';
+                ul.appendChild(newLi1);
+                let div1 = document.createElement('div');
+                div1.style = 'clear:both';
+                ul.appendChild(div1);
+
+                questionBegin = true;
+
+                // 把反馈送到后端
+                ajax({
+                    url: '/qa/feedback?satisfaction=' + input.value + '&' + 'question=' + question + '&' + 'answer=' + questionSpider,
+
+                });
+                input.value = '';
+                newLi.scrollIntoView();//将元素滚动到可见位置
+            }else if (isChinese(input.value)) {   //输入包含中文
                 question = input.value;
                 ajax({
                     url: '/qa/query?question=' + question,
@@ -170,6 +189,7 @@ position: fixed;
                     ajax({
                         url: '/qa/questionSpider?question=' + question,
                         success: function (res) {
+                            questionSpider = res;
                             let newLi = document.createElement('li');
                             newLi.innerHTML = "已为您从网上寻找可能的答案如下:";
                             newLi.className = 'msgContent left';
@@ -189,11 +209,10 @@ position: fixed;
                             ul.appendChild(div1);
                             input.value = '';
                             newLi.scrollIntoView();//将元素滚动到可见位置
-
+                            questionBegin = false;
                         }
                     });
                 }
-
                 // let Li = document.createElement('li');
                 // let a = document.createElement('a');
                 // a.href = "http://localhost:8081/1";
@@ -210,6 +229,7 @@ position: fixed;
                     success: function (res) {
                         //console.log(res);
                         if (res.length < 1) {
+                            questionBegin = false;
                             return;
                         }
                         questions = res;
@@ -227,11 +247,12 @@ position: fixed;
                         newLi.scrollIntoView();//将元素滚动到可见位置
                     }
                 });
-            } else {
+            } else if(!isNaN(input.value)){ // 输入为数字
                 ajax({
                     url: '/qa/getAnswerByOrder?order=' + input.value + '&' + 'questions=' + questions,
                     success: function (res) {
                         if (res.length < 1) {
+                            questionBegin = false;
                             return;
                         }
                         let newLi = document.createElement('li');
@@ -244,15 +265,42 @@ position: fixed;
                         ul.appendChild(div);
                         input.value = '';
                         newLi.scrollIntoView();
+                        questionBegin = false;
                     }
                 });
             }
-
-			input.value = '';
-			newLi.scrollIntoView();
+            if(questionBegin == false){
+                let newLi1 = document.createElement('li');
+                newLi1.innerHTML = "请问您对这次问答是否满意？回复y满意，n不满意";
+                newLi1.className = 'msgContent left';
+                ul.appendChild(newLi1);
+                let div1 = document.createElement('div');
+                div1.style = 'clear:both';
+                ul.appendChild(div1);
+                input.value = '';
+                newLi.scrollIntoView();//将元素滚动到可见位置
+            }
+            input.value = '';
+            newLi.scrollIntoView();
 		}
 
 	}
+    //判断是否为中文
+    function isChinese(s){
+        var patrn=/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+        if(!patrn.exec(s)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    // 清空textarea
+    function ClearTextArea()
+    {
+        document.getElementById("msg_input").value="";
+    }
 
 	function ajax(obj) {
 		let xhr = null;

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.circuitQA.mapper.QuestionspiderMapper" >
   <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.Questionspider" >
-    <result column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="question" property="question" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="satisfaction" property="satisfaction" jdbcType="BIT" />
+    <result column="satisfaction" property="satisfaction" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,6 +82,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from questionspider
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from questionspider
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.QuestionspiderExample" >
     delete from questionspider
     <if test="_parameter != null" >
@@ -92,7 +102,7 @@
     insert into questionspider (id, question, answer, 
       satisfaction)
     values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
-      #{satisfaction,jdbcType=BIT})
+      #{satisfaction,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.Questionspider" >
     insert into questionspider
@@ -121,7 +131,7 @@
         #{answer,jdbcType=VARCHAR},
       </if>
       <if test="satisfaction != null" >
-        #{satisfaction,jdbcType=BIT},
+        #{satisfaction,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -144,7 +154,7 @@
         answer = #{record.answer,jdbcType=VARCHAR},
       </if>
       <if test="record.satisfaction != null" >
-        satisfaction = #{record.satisfaction,jdbcType=BIT},
+        satisfaction = #{record.satisfaction,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -156,9 +166,31 @@
     set id = #{record.id,jdbcType=INTEGER},
       question = #{record.question,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
-      satisfaction = #{record.satisfaction,jdbcType=BIT}
+      satisfaction = #{record.satisfaction,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sysu.circuitQA.pojo.Questionspider" >
+    update questionspider
+    <set >
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfaction != null" >
+        satisfaction = #{satisfaction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sysu.circuitQA.pojo.Questionspider" >
+    update questionspider
+    set question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      satisfaction = #{satisfaction,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

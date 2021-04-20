@@ -31,8 +31,6 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     HttpServletRequest request;
 
-
-
     @Override
     public void wordsSave(String query,String question, String answer) {
         Date date = new Date();//获得系统当前时间.

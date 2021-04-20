@@ -2,7 +2,6 @@ package cn.sysu.circuitQA.service;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.pojo.keyWord;
-import cn.sysu.circuitQA.utils.KGUtil;
 import cn.sysu.circuitQA.utils.MatchUtil;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.NLPTokenizer;

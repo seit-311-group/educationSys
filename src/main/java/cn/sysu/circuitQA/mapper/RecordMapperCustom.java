@@ -1,6 +1,5 @@
 package cn.sysu.circuitQA.mapper;
 
-import cn.sysu.circuitQA.mapper.RecordMapper;
 import cn.sysu.circuitQA.pojo.Record;
 
 import java.util.List;

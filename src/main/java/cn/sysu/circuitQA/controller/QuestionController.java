@@ -1,6 +1,6 @@
 package cn.sysu.circuitQA.controller;
 
-import cn.sysu.circuitQA.CircuitQA;
+import cn.sysu.circuitQA.mapper.QuestionspiderMapper;
 import cn.sysu.circuitQA.pojo.Questionspider;
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.service.CoreProcessService;
@@ -23,6 +23,9 @@ public class QuestionController {
 
     @Autowired
     HtmlParseUtil htmlParseUtil;
+
+    @Autowired
+    QuestionspiderMapper questionspiderMapper;
 
     @RequestMapping("/query")
     public String query(@RequestParam(value = "question") String query) throws Exception {
@@ -57,9 +60,23 @@ public class QuestionController {
         return target;
     }
 
+    /**
+     * bug 点完按钮 光标跳到第二行
+     * @param satisfaction
+     */
     @RequestMapping("/feedback")
-    public String feedback(){
-        return "";
+    public void feedback(@RequestParam(value = "satisfaction") String satisfaction,
+                         @RequestParam(value = "question") String question,
+                         @RequestParam(value = "answer") String answer){
+
+        if (satisfaction == "Y" || satisfaction == "y"){
+            Questionspider questionspider = new Questionspider();
+            questionspider.setAnswer(answer);
+            questionspider.setQuestion(question);
+            questionspiderMapper.insert(questionspider);
+        }
+
+
     }
 
     // @RequestMapping("/addMessage")

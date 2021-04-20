@@ -8,10 +8,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +24,6 @@ public class HtmlParseUtil {
     public static Questionspider paraseQuetion(String question) throws IOException {
         question = "百度知道电路" + question;
         // 从百度知道上面爬取问题 把问题转换为GBK编码
-
 
         // 获取请求 从百度搜索找到页面上百度知道的URL来跳转
         String url = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=" + question;

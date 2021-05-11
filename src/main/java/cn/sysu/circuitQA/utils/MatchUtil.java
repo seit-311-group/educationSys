@@ -8,8 +8,11 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.toMap;
 
 public class MatchUtil {
     public static circuitQa matchByRPC(List<circuitQa> candidates, String query) throws InterruptedException {
@@ -44,8 +47,9 @@ public class MatchUtil {
         return target;
     }
 
+
     public static circuitQa match1(List<circuitQa> candidates, String query) {
-        circuitQa target = candidates.get(0);
+        circuitQa target = candidates.get(0); //得到第一个question 计算其和query的相似度
         float similarity = levenshtein(query, target.getQuestion());
         for (circuitQa candidate : candidates) {
             float new_similarity = levenshtein(query, candidate.getQuestion());
@@ -56,6 +60,44 @@ public class MatchUtil {
         }
         return target;
     }
+
+    /**
+     * 找到前3个相似度最高的问题返回
+     * @param candidates
+     * @param query
+     * @return list
+     */
+    public static List<circuitQa> matchTop3(List<circuitQa> candidates, String query){
+        List<circuitQa> questionList = new ArrayList<>();
+        Map<circuitQa, Float> map = new HashMap<>();        //TreeMap的key不能为对象
+        for (circuitQa candidate: candidates){
+            float similarity = levenshtein(query,candidate.getQuestion());
+            map.put(candidate, similarity);
+        }
+        // map按值排序 降序
+        Map<circuitQa, Float> sortedMap = map
+                .entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(comparingByValue()))
+                .collect(
+                        toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                                LinkedHashMap::new));
+
+        if(map.size() >= 3){
+            int num = 3;
+            for (circuitQa circuitQa1 : sortedMap.keySet()){
+                questionList.add(circuitQa1);
+                num--;
+                if (num == 0) break;
+            }
+        }else {
+            for (circuitQa circuitQa1: sortedMap.keySet()){
+                questionList.add(circuitQa1);
+            }
+        }
+        return questionList;
+    }
+
     private static float levenshtein(String str1, String str2) {
         int len1 = str1.length();
         int len2 = str2.length();

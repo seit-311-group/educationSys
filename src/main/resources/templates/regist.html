@@ -9,6 +9,143 @@
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 
 </head>
+<script type="text/javascript">
+    // <![CDATA[
+
+    window.onload = function (){
+        // 点击注册或者enter键
+        document.getElementById('sub_btn1').onclick = function() {
+            regist();
+        }
+        document.onkeypress = function(event) {
+            let e = event || window.event;
+            let keycode = e.keyCode || e.which;
+            console.log(e)
+            if (keycode == 13) {//按下enter键
+                regist();
+            }
+        }
+
+        // 创建一个类
+        function student(id, name, password, classandgrade){
+            this.id = id;
+            this.name = name;
+            this.password = password;
+            this.classandgrade = classandgrade;
+        }
+
+        function regist(){
+            student_regist = validate_add_form();
+            let id = student_regist.id;
+            let name = student_regist.name;
+            let password = student_regist.password;
+            let classandgrade = student_regist.classandgrade;
+            if(student_regist.id != ''){
+                //用ajax把student对象传回到后端
+                ajax({
+                    url: '/student/registCallBack?id=' + id + '&name=' + name + '&password=' + password + '&classandgrade' + classandgrade,
+                    success:function (res){ // 如果id存在注册失败
+                        let succeed = "注册成功";
+                        alert(res);
+                        if(res == succeed){
+                            window.location.href="http://localhost:8080/";
+                        }
+                    }
+                });
+            }
+        }
+
+
+        // 前端验证
+        function validate_add_form() {
+            // 创建student对象返回
+            var student1 = new student();
+            // 前端验证ID
+            var studentId = document.getElementById('studentId').value;
+            var reg_studentId = /^\d{1,}$/;
+            if (!reg_studentId.test(studentId)) {
+                alert("学号必须为纯数字");
+                return student1;
+            }
+
+            // 前端验证用户名
+            var studentName = document.getElementById('studentName').value;
+            var reg_studentName = /(^[\u2E80-\u9FFF]{2,5})/;
+            if (!reg_studentName.test(studentName)) {
+                alert("用户名必须是2-5位中文");
+                return student1;
+            }
+
+            // 验证密码
+            var password = document.getElementById('password').value;
+            var reg_password = /(^[a-zA-Z0-9_-]{6,19}$)/;
+            if (!reg_password.test(password)) {
+                alert("密码必须是6-19位英文和数字的组合");
+                return student1;
+            }
+
+            // 验证确认密码
+            var passwordAgain = document.getElementById('passwordAgain').value;
+            if(passwordAgain != password) {
+                alert("两次输入的密码不正确");
+                return student1;
+            }
+            var classAndGrade = document.getElementById('classAndGrade').value;
+            var student1 = new student(studentId, studentName, password, classAndGrade);
+            return student1;
+        }
+
+
+
+
+    }
+
+    function ajax(obj) {
+        let xhr = null;
+        if (window.ActiveXObject) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        } else {
+            xhr = new XMLHttpRequest();
+        }
+
+        //打开与服务器的连接
+        if (obj.method) {
+            xhr.open(obj.method, obj.url, false);
+        } else {
+            xhr.open('get', obj.url, false);
+        }
+        xhr.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Authorization",
+            "APPCODE 3e9dfb924f464e9593a95f9d2bbf4348")
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4) {
+                //数据接收完毕
+                if (xhr.status == 200) {
+                    //console.log('请求成功',xhr.responseText)
+                    if (obj.success) {
+                        obj.success(xhr.responseText)
+                    }
+
+                } else {
+                    //console.log(xhr.status,'请求出错')
+                    if (obj.failure) {
+                        obj.failure('请求失败')
+                    }
+                }
+            }
+        }
+        if (obj.method == undefined || obj.method.toLowerCase() == 'get') {
+            xhr.send(null);
+        } else {
+            xhr.send(obj.params);
+
+        }
+    }
+    // ]]>
+</script>
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -46,33 +183,33 @@
                         <h1>欢迎注册</h1>
                     </div>
                     <div class="form">
-                        <form  id="input_f" action="/student/registCallBack" method="post">
+                        <form  id="input_f" method="post">
                             <div  class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>
-                                <input name="id" type="text" class="form-control" width="30vm" placeholder="必填" aria-describedby="basic-addon1"/>
+                                <input name="id" id="studentId" type="text" class="form-control" width="30vm" placeholder="必填" aria-describedby="basic-addon1"/>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon2">学生姓名</span>
-                                <input name="studentName" type="text" class="form-control"  aria-describedby="basic-addon1"/>
+                                <input name="studentName" id="studentName" type="text" class="form-control"  aria-describedby="basic-addon1"/>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon3">学生密码</span>
-                                <input name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
+                                <input name="password" id="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon4">确认密码</span>
-                                <input type="password" class="form-control" placeholder="请再次输入密码" aria-describedby="basic-addon1"/>
+                                <input type="password" id="passwordAgain" class="form-control" placeholder="请再次输入密码" aria-describedby="basic-addon1"/>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon5">年级班级</span>
-                                <input name="classAndGrade" type="text" class="form-control" placeholder="班级和年级" aria-describedby="basic-addon1"/>
+                                <input name="classAndGrade" id="classAndGrade" type="text" class="form-control" placeholder="班级和年级" aria-describedby="basic-addon1"/>
                             </div>
                             <div class="btn-group" role="group" aria-label="...">
-                                <button type="submit" class="btn btn-default" id="sub_btn1">注册</button>
+                                <a class="btn btn-default" id="sub_btn1">注册</a>
                             </div>
                             <br/>
                             <div  class="btn-group" role="group" aria-label="...">

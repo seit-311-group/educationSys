@@ -18,11 +18,14 @@ public class CircuitQAServiceTest {
     @Test
     public void questionTest() {
         List<circuitQa> list= circuitQAService.importQuestions();
-        circuitQa qa= list.get(2);
-        System.out.println("是啥"+qa.getChildid());
-        System.out.println(qa.getChildid().equals(" "));
-        System.out.println("".equals(null));
-        System.out.println(qa.getChildid().equals("\\N"));
+        for (circuitQa circuitQa : list) {
+            System.out.println(circuitQa.getQuestion());
+        }
+        // circuitQa qa= list.get(2);
+        // System.out.println("是啥"+qa.getChildid());
+        // System.out.println(qa.getChildid().equals(" "));
+        // System.out.println("".equals(null));
+        // System.out.println(qa.getChildid().equals("\\N"));
     }
 
 }

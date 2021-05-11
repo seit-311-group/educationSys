@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>添加问题答案对</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入Vue-->
+    <script src="https://unpkg.com/vue@next"></script>
+
+
+</head>
+<style type="text/css">
+    #area{
+        margin:0 auto;
+        width: 1300px;
+        height: 640px;
+        border: 1px solid black;
+    }
+
+    #inputarea{
+        display: flex;
+        justify-content: center;
+        margin-top: 2px;
+        width: 1300px;
+        height: 100px;
+        /*border: 1px solid red;*/
+    }
+
+    #searcharea{
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+        width: 1300px;
+        height: 40px;
+        /*border: 1px solid black;*/
+    }
+
+    #searchtable{
+        margin:0 auto;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        width: 1200px;
+        height: 442px;
+        border: 1px solid black;
+        overflow-y: scroll;
+    }
+
+    #submit{
+        height: 34px;
+    }
+
+    #sub-all{
+        margin-right: 49px;
+        float: right;
+    }
+
+
+    .form-control{
+        width: 500px;
+    }
+
+    p{
+        margin-left: 10px;
+        align-self: center;
+    }
+
+</style>
+<body>
+
+<div th:include="navigation :: nav"></div>
+    <div id="area">
+        <div id="inputarea">
+                <p><strong>请输入问题&nbsp;&nbsp;</strong></p>
+                <textarea class="form-control" rows="4"  id="question" placeholder="请输入问题"></textarea>
+                <p><strong>请输入答案&nbsp;&nbsp;</strong></p>
+                <textarea class="form-control" rows="4"  id="answer" placeholder="请输入答案"></textarea>
+        </div>
+
+
+        <div id="searcharea">
+            <form class="navbar-form navbar-left" action="/addQA/add" method="get">
+                <div class="form-group">
+                    <input name="search" type="text" class="form-control" placeholder="请输入问题中包含的关键词"/>
+                </div>
+                <a type="submit" id="submit" class="btn btn-default">在库中搜索含有关键词的问题</a>
+            </form>
+        </div>
+
+        <div id="searchtable">
+            <table style="width: 1000px" class="table table-striped table table-hover">
+                <thead>
+                    <tr>
+                        <td style="width: 10px"><strong>#</strong></td>
+                        <td><strong>题目</strong></td>
+                        <td style="width: 150px"><strong>设为此问题的父节点</strong></td>
+                        <td style="width: 150px"><strong>设为此问题的子节点</strong></td>
+                    </tr>
+                </thead>
+                <tr th:each="question : ${searchedList}">
+                    <td th:text="${questionStat.index + 1}"></td>   <!-- 每输出一行数据，序号+1 -->
+                    <td th:text="${question}"></td>
+                    <td style="text-align: center">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                        </label>
+                    </td>
+                    <td style="text-align: center">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                        </label>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <button style="height: 30px" type="submit" id="sub-all" class="btn btn-default">提交</button>
+    </div>
+    <div id="Vue3">
+        <!--{{message}}-->
+    </div>
+</body>
+
+<script>
+    const HelloVue = {
+        data() {
+            return{
+                message: 'sdsd'
+            }
+        }
+    }
+    Vue.createApp(HelloVue).mount('#Vue3')
+</script>
+</html>

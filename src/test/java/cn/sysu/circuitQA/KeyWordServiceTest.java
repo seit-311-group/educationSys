@@ -1,6 +1,7 @@
 package cn.sysu.circuitQA;
 
 import cn.sysu.circuitQA.pojo.keyWord;
+import cn.sysu.circuitQA.service.CoreProcessService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class KeyWordServiceTest {
     @Autowired
     private cn.sysu.circuitQA.service.KeyWordService keyWordService;
 
+    @Autowired
+    CoreProcessService coreProcessService;
+
     @Test
     public void getIDByKeyWordTest(){
         System.out.println(keyWordService.getIDByKeyWord("过渡过程"));
@@ -23,5 +27,12 @@ public class KeyWordServiceTest {
     public void importKeyWordsTest(){
         List<keyWord> keyWords = keyWordService.importKeyWords();
         System.out.println(keyWords.get(0));
+    }
+
+    @Test
+    public void keyword(){
+        List<keyWord> keyWords = keyWordService.importKeyWords();
+        String s = coreProcessService.extract("什么是戴维南定理");
+        System.out.println(s);
     }
 }

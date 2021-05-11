@@ -14,4 +14,5 @@ mybatis:
   type-aliases-package: cn.sysu.circuitQA.pojo
 server:
   port: 8080
+  max-http-header-size: 1024000   # 请求头太大报错
 

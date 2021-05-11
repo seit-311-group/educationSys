@@ -15,11 +15,11 @@ public class StudentServiceImpl implements StudentService {
     StudentMapperCustom studentMapperCustom;
 
     @Override
-    public Student login(Student student) {
-        Student studentExist = studentMapperCustom.findById(student.getId().longValue());
-        if (studentExist != null) {
-            String studentPassword = studentMapperCustom.findPswById(student.getId().longValue());
-            if (student.getPassword().equals(studentPassword)){
+    public Student login(int id, String password) {
+        Student studentExist = studentMapperCustom.findById((long)id);
+        if (studentExist != null) { //用户存在
+            String studentPassword = studentMapperCustom.findPswById((long)id);
+            if (password.equals(studentPassword)){
                 return studentExist;
             }
         }
@@ -27,22 +27,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student regist(Student student) {
-        if(studentMapperCustom.findById(student.getId().longValue()) == null){
+    public Student regist(int id, String name, String password, String classandgrade) {
+        Student student = new Student();
+        student.setId(id);
+        student.setStudentname(name);
+        student.setPassword(password);
+        student.setClassandgrade(classandgrade);
+        if(studentMapperCustom.findById((long)id) != null){  //用户存在
             return null;
         }
-        Student studentExist = studentMapperCustom.findById(student.getId().longValue());
-        if (student.getId() == null){
-            return null;
-        }else if (student.getStudentname() == null){
-            return null;
-        }else if (student.getPassword() == null){
-            return null;
-        }else if (studentExist != null){
-            return null;
-        } else {
-            studentMapperCustom.insert(student);
-        }
-        return  student;
+        studentMapperCustom.insert(student);
+        return student;
     }
 }

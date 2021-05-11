@@ -21,6 +21,7 @@ message HelloRequest {
 }
 message QueryRequest {
   repeated string sentences = 1;
+//  map<string,int32> map1 = 1;
   string query = 2;
 }
 

@@ -65,6 +65,7 @@
 
         <table tableName="questionspider" domainObjectName="Questionspider"></table>
 
+        <table tableName="keywordtimesall" domainObjectName="Keywordtimesall"></table>
 
     </context>
 </generatorConfiguration>

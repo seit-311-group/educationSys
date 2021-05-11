@@ -3,7 +3,7 @@ package cn.sysu.circuitQA.service;
 import cn.sysu.circuitQA.pojo.Student;
 
 public interface StudentService {
-    Student login(Student student);
+    Student login(int id, String password);
 
-    Student regist(Student student);
+    Student regist(int id, String name, String password, String classandgrade);
 }

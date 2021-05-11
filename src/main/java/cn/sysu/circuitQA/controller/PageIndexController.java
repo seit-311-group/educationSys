@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
@@ -48,7 +49,18 @@ public class PageIndexController {
         return "regist";
     }
 
-    public String index() {return "index";}
+    @RequestMapping("/feedback")
+    public String feedback(){
+        return "feedback";
+    }
 
+    @RequestMapping("/addQA")
+    public String addQA(){
+        return "addQA";
+    }
 
+    @RequestMapping("/answer")
+    public String answer(){
+        return "answer";
+    }
 }

@@ -33,6 +33,9 @@ public class HtmlParseUtil {
         Elements a = elementsByClass.get(0).getElementsByTag("a");
         String answerHref = a.attr("href");
 
+        //百度知道没有就到知乎上查找
+
+
         //跳转到百度知道页面解析
         Document documentAnswer = Jsoup.parse(new URL(answerHref), 30000);
         Element element = documentAnswer.getElementById("wgt-best");

@@ -15,6 +15,14 @@ public class getRecordByDate {
     RecordService recordService;
 
     //实现分页显示表功能
+
+    /**
+     * 搜多的时候分页有bug
+     * @param model
+     * @param pageNumber
+     * @param search
+     * @return
+     */
     @RequestMapping("/record")
     public String record(Model model,
                          @RequestParam(value = "pageNumber", required = false) String pageNumber,

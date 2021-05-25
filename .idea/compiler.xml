@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="circuitQA" target="8" />
+      <module name="circuitQA" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

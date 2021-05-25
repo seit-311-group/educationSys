@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
 public class PageIndexController {
+    public static Long studentIdSave;
 
     @Autowired
     StudentMapperCustom studentMapperCustom;
@@ -22,19 +22,21 @@ public class PageIndexController {
     public String index(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            // equals和==有区别 “==”比较的是两个引用的对象是否相等，而equals()方法比较的是两个对象的实际内容
             if (cookie.getName().equals("studentId")) {
                 long studentId = Integer.parseInt(cookie.getValue());
                 Student student = studentMapperCustom.findById(studentId);
                 if (student != null){
+                    //将id保存下来方便使用
+                    studentIdSave = student.getId();
                     // 写到session中
-                    request.getSession().setAttribute("studentName",student.getStudentname());
+                    request.getSession().setAttribute("studentName", student.getStudentname());
                     request.getSession().setAttribute("userId", student.getId());
                 }
                 break;
             }
         }
-        return "main";}
+        return "main";
+    }
 
     @RequestMapping("/systemQA")
     public String systemQA() {return "index";}

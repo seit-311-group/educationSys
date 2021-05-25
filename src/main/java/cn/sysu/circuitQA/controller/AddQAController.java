@@ -1,13 +1,11 @@
 package cn.sysu.circuitQA.controller;
 
-import cn.sysu.circuitQA.service.AddQAService;
 import cn.sysu.circuitQA.service.serviceImpl.AddQAServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 增加问题答案对页面 准备用Vue写
@@ -19,13 +17,23 @@ public class AddQAController {
     @Autowired
     AddQAServiceImpl addQAService;
 
-    @RequestMapping("/add")
-    public String add(@RequestParam(value = "search", required = false) String search,
-                      Model model){
-        System.out.println(search);
-        addQAService.pagingAndShow(search,model);
-        return "addQA";
+    /**
+     * 搜索关键词
+     * @param searchMap
+     * @return 带有关键词的问题用@隔开
+     */
+    @ResponseBody
+    @RequestMapping("/search")
+    public String search(@RequestBody Map searchMap){
+        String search = searchMap.get("search").toString();
+        return addQAService.pagingAndShow(search);
     }
 
+    @ResponseBody
+    @RequestMapping("/add")
+    public String add(@RequestBody Map addMap){
+        String res = addQAService.addQA(addMap.get("res").toString());
+        return res;
+    }
 
 }

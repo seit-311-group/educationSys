@@ -7,5 +7,9 @@ import java.util.List;
 
 public interface AddQAService {
 
-    List pagingAndShow(String search,Model model);
+    String pagingAndShow(String search);
+
+    String addQA(String addStr);
+
+    void addKeyword(String question, String questionId);
 }

@@ -12,12 +12,14 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.*;
 
+import static cn.sysu.circuitQA.controller.PageIndexController.studentIdSave;
+
 
 @Service
 public class CoreProcessService {
     public static String keywordSave;
 
-    private static Logger logger = Logger.getLogger(CoreProcessService.class);
+    public static Logger logger = Logger.getLogger(CoreProcessService.class);
 
     @Autowired
     private CircuitQAService circuitQAService;
@@ -25,12 +27,14 @@ public class CoreProcessService {
     @Autowired
     private KeyWordService keyWordService;
 
+    @Autowired
+    StudentService studentService;
     // @Autowired
     // private RecordService recordService;
 
     private List<circuitQa> circuitQas;
 
-    private List<keyWord> keyWords;
+    public static List<keyWord> keyWords;
 
     private Map<String, circuitQa> questionMap; //id对应问题对象
 
@@ -139,15 +143,13 @@ public class CoreProcessService {
     public List<circuitQa> extractCandidates(String question) {
         this.circuitQas = circuitQAService.importQuestions();
         System.out.println("数据库中有" + circuitQas.size() + "个问题答案对");
-        keyWords = keyWordService.importKeyWords();
-        System.out.println("数据库中有" + keyWords.size() + "个关键词");
-        this.questionMap = new HashMap<String, circuitQa>();
+        this.questionMap = new HashMap<>();
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);        // id:question
         }
 //        String keyword = ExtractUtil.extract(question);
         String keyword = extract(question);     // 提取关键词
-        if (keyword == "") {
+        if (keyword.equals("")) {
             return null;
         }
         List<circuitQa> candidates = new ArrayList<>();
@@ -175,6 +177,8 @@ public class CoreProcessService {
      * @return 关键词
      */
     public String extract(String question) {
+        this.keyWords = keyWordService.importKeyWords();
+        System.out.println("数据库中有" + keyWords.size() + "个关键词");
         String word = "";
         List<Term> seg = NLPTokenizer.segment(question);        //分词
         try {
@@ -183,6 +187,8 @@ public class CoreProcessService {
                     if (term.word.equals(keyword.getKeyword())) {
                         word = keyword.getKeyword();
                         keywordSave = word;
+                        // 把提取出来的关键词加到学生自己的querykeywords中
+                        studentService.updateQueryKeywords(studentIdSave, keywordSave);
                         logger.info("关键词：" + word);
                         return word;
                     }

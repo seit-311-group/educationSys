@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.circuitQA.mapper.StudentMapper" >
   <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.Student" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="studentName" property="studentname" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="classAndGrade" property="classandgrade" jdbcType="VARCHAR" />
+    <result column="querykeywords" property="querykeywords" jdbcType="VARCHAR" />
+    <result column="answerkeywords" property="answerkeywords" jdbcType="VARCHAR" />
+    <result column="passedquestion" property="passedquestion" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, studentName, password, classAndGrade
+    id, studentName, password, classAndGrade, querykeywords, answerkeywords, passedquestion
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.circuitQA.pojo.StudentExample" >
     select
@@ -82,15 +85,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from student
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from student
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.StudentExample" >
     delete from student
@@ -100,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.Student" >
     insert into student (id, studentName, password, 
-      classAndGrade)
-    values (#{id,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{classandgrade,jdbcType=VARCHAR})
+      classAndGrade, querykeywords, answerkeywords, 
+      passedquestion)
+    values (#{id,jdbcType=BIGINT}, #{studentname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{classandgrade,jdbcType=VARCHAR}, #{querykeywords,jdbcType=VARCHAR}, #{answerkeywords,jdbcType=VARCHAR}, 
+      #{passedquestion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.Student" >
     insert into student
@@ -119,10 +124,19 @@
       <if test="classandgrade != null" >
         classAndGrade,
       </if>
+      <if test="querykeywords != null" >
+        querykeywords,
+      </if>
+      <if test="answerkeywords != null" >
+        answerkeywords,
+      </if>
+      <if test="passedquestion != null" >
+        passedquestion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="studentname != null" >
         #{studentname,jdbcType=VARCHAR},
@@ -132,6 +146,15 @@
       </if>
       <if test="classandgrade != null" >
         #{classandgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="querykeywords != null" >
+        #{querykeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="answerkeywords != null" >
+        #{answerkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="passedquestion != null" >
+        #{passedquestion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,7 +168,7 @@
     update student
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.studentname != null" >
         studentName = #{record.studentname,jdbcType=VARCHAR},
@@ -156,6 +179,15 @@
       <if test="record.classandgrade != null" >
         classAndGrade = #{record.classandgrade,jdbcType=VARCHAR},
       </if>
+      <if test="record.querykeywords != null" >
+        querykeywords = #{record.querykeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answerkeywords != null" >
+        answerkeywords = #{record.answerkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passedquestion != null" >
+        passedquestion = #{record.passedquestion,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -163,10 +195,13 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update student
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       studentName = #{record.studentname,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      classAndGrade = #{record.classandgrade,jdbcType=VARCHAR}
+      classAndGrade = #{record.classandgrade,jdbcType=VARCHAR},
+      querykeywords = #{record.querykeywords,jdbcType=VARCHAR},
+      answerkeywords = #{record.answerkeywords,jdbcType=VARCHAR},
+      passedquestion = #{record.passedquestion,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,14 +218,26 @@
       <if test="classandgrade != null" >
         classAndGrade = #{classandgrade,jdbcType=VARCHAR},
       </if>
+      <if test="querykeywords != null" >
+        querykeywords = #{querykeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="answerkeywords != null" >
+        answerkeywords = #{answerkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="passedquestion != null" >
+        passedquestion = #{passedquestion,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sysu.circuitQA.pojo.Student" >
     update student
     set studentName = #{studentname,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      classAndGrade = #{classandgrade,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      classAndGrade = #{classandgrade,jdbcType=VARCHAR},
+      querykeywords = #{querykeywords,jdbcType=VARCHAR},
+      answerkeywords = #{answerkeywords,jdbcType=VARCHAR},
+      passedquestion = #{passedquestion,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

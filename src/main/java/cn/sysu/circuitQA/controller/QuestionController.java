@@ -1,7 +1,7 @@
 package cn.sysu.circuitQA.controller;
 
-import cn.sysu.circuitQA.mapper.QuestionspiderMapper;
-import cn.sysu.circuitQA.pojo.Questionspider;
+import cn.sysu.circuitQA.mapper.QuestionSpiderMapper;
+import cn.sysu.circuitQA.pojo.QuestionSpider;
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.service.CoreProcessService;
 import cn.sysu.circuitQA.service.KeywordtimesallService;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 import static cn.sysu.circuitQA.service.CoreProcessService.keywordSave;
 
@@ -32,7 +31,7 @@ public class QuestionController {
     HtmlParseUtil htmlParseUtil;
 
     @Autowired
-    QuestionspiderMapper questionspiderMapper;
+    QuestionSpiderMapper questionSpiderMapper;
 
     @Autowired
     KeywordtimesallService keywordtimesallService;
@@ -67,8 +66,8 @@ public class QuestionController {
      */
     @RequestMapping("/questionSpider")
     public String questionSpider(@RequestParam(value = "question") String question) throws IOException {
-        Questionspider questionspider = htmlParseUtil.paraseQuetion(question);
-        spiderAnswer = questionspider.getAnswer();
+        QuestionSpider questionSpider = htmlParseUtil.paraseQuetion(question);
+        spiderAnswer = questionSpider.getAnswer();
         return spiderAnswer;
     }
 
@@ -94,11 +93,25 @@ public class QuestionController {
     @RequestMapping("/feedback")
     public void feedback(@RequestParam(value = "satisfaction") String satisfaction,
                          @RequestParam(value = "question") String question){
-        Questionspider questionspider = new Questionspider();
+        QuestionSpider questionspider = new QuestionSpider();
         questionspider.setAnswer(spiderAnswer);
         questionspider.setQuestion(question);
         questionspider.setSatisfaction(satisfaction);
-        questionspiderMapper.insert(questionspider);
+        questionSpiderMapper.insert(questionspider);
+    }
+
+    @RequestMapping("/feedback2")
+    public String feedback2(@RequestBody QuestionSpider questionspider){
+        questionspider.setQuestion(queryFromStudent);
+        questionspider.setAnswer("无");
+        questionSpiderMapper.insert(questionspider);
+        return "提交成功，谢谢您的意见";
+    }
+
+    @RequestMapping("/loadQuery")
+    public String loadQuery(){
+        System.out.println(queryFromStudent);
+        return queryFromStudent;
     }
 
     // @RequestMapping("/questionList")

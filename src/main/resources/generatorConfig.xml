@@ -55,17 +55,17 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table tableName="circuitqa" domainObjectName="circuitQa"></table>
+        <table tableName="qa_circuit_qa" domainObjectName="circuitQa"></table>
 
-        <table tableName="keyword" domainObjectName="keyWord"></table>
+        <table tableName="qa_keyword" domainObjectName="keyWord"></table>
 
         <table tableName="student" domainObjectName="Student"></table>
 
-        <table tableName="record" domainObjectName="Record"></table>
+        <table tableName="qa_records" domainObjectName="Records"></table>
 
-        <table tableName="questionspider" domainObjectName="Questionspider"></table>
+        <table tableName="qa_question_spider" domainObjectName="QuestionSpider"></table>
 
-        <table tableName="keywordtimesall" domainObjectName="Keywordtimesall"></table>
+        <table tableName="qa_keywords_all" domainObjectName="KeywordsAll"></table>
 
     </context>
 </generatorConfiguration>

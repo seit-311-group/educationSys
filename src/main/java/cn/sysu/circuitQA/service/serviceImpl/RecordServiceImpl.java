@@ -2,7 +2,7 @@ package cn.sysu.circuitQA.service.serviceImpl;
 
 import cn.sysu.circuitQA.mapper.RecordMapperCustom;
 import cn.sysu.circuitQA.mapper.StudentMapperCustom;
-import cn.sysu.circuitQA.pojo.Record;
+import cn.sysu.circuitQA.pojo.Records;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public class RecordServiceImpl implements RecordService {
         // 如果相同的用户问了相同的问题不计入
         List<String> allQuery = recordMapperCustom.getAllQuery();
         if(!allQuery.contains(query)){
-            Record record = new Record();
+            Records record = new Records();
             record.setQuery(query);
             record.setAnswer(answer);
             record.setQuestion(question);
@@ -78,7 +78,7 @@ public class RecordServiceImpl implements RecordService {
     public void pagingAndShow(String search,String pageNumber, Model model) {
         String spPage= pageNumber;
         //设置每页条数
-        int pageSize=15;
+        int pageSize=8;
         //页数
         int pageNo=0;
         if (search == null) search = "";
@@ -107,7 +107,7 @@ public class RecordServiceImpl implements RecordService {
         map.put("pageNo",tempPageNo);
         map.put("pageSize",pageSize);
         map.put("search", search);
-        List<Record> records = recordMapperCustom.pageList(map);
+        List<Records> records = recordMapperCustom.pageList(map);
         //最后把信息放入model转发到页面把信息带过去
         model.addAttribute("records",records);
         model.addAttribute("pageNo",pageNo);

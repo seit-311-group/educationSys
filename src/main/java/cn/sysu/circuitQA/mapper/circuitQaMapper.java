@@ -10,13 +10,21 @@ public interface circuitQaMapper {
 
     int deleteByExample(circuitQaExample example);
 
+    int deleteByPrimaryKey(Integer questionid);
+
     int insert(circuitQa record);
 
     int insertSelective(circuitQa record);
 
     List<circuitQa> selectByExample(circuitQaExample example);
 
+    circuitQa selectByPrimaryKey(Integer questionid);
+
     int updateByExampleSelective(@Param("record") circuitQa record, @Param("example") circuitQaExample example);
 
     int updateByExample(@Param("record") circuitQa record, @Param("example") circuitQaExample example);
+
+    int updateByPrimaryKeySelective(circuitQa record);
+
+    int updateByPrimaryKey(circuitQa record);
 }

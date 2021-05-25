@@ -19,7 +19,7 @@
                     <li th:if="${session.userId == 1}"><a href="/addQA">添加问题答案对</a></li>
                     <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
                     <li th:if="${session.studentName != null}"><a href="#">知识图谱</a></li>
-                    <li th:if="${session.studentName != null}"><a href="/answer">答题系统</a></li>
+                    <li th:if="${session.studentName != null}"><a href="http://localhost:8081/index">答题系统</a></li>
                     <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
                     <li class="dropdown" th:if="${session.studentName != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

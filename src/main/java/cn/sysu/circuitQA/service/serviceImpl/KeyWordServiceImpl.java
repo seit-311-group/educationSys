@@ -33,6 +33,22 @@ public class KeyWordServiceImpl implements KeyWordService {
             e.printStackTrace();
         }
         return null;
-    };
+    }
+
+    /**
+     * 根据关键词更新关键词对应的问题
+     * @param keyword
+     * @param questionId
+     */
+    @Override
+    public void UpdateKeyword(String keyword, String questionId) {
+        keyWordExample keyWordExample = new keyWordExample();
+        cn.sysu.circuitQA.pojo.keyWordExample.Criteria criteria = keyWordExample.createCriteria();
+        criteria.andKeywordEqualTo(keyword);
+        keyWord keyWordObj = new keyWord();
+        keyWordObj.setQuestionids(questionId);
+        keyWordMapper.updateByExampleSelective(keyWordObj, keyWordExample);
+    }
+
     
 }

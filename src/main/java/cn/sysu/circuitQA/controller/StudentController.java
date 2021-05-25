@@ -4,9 +4,6 @@ package cn.sysu.circuitQA.controller;
 import cn.sysu.circuitQA.mapper.StudentMapperCustom;
 import cn.sysu.circuitQA.pojo.Student;
 import cn.sysu.circuitQA.service.StudentService;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +34,7 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping("/loginCallBack")
-    public String loginCallback(@RequestParam(value = "id") int id,
+    public String loginCallback(@RequestParam(value = "id") Long id,
                                 @RequestParam(value = "password") String password){
         Student studentExist = studentService.login(id, password);
         if (studentExist != null) {
@@ -65,7 +62,7 @@ public class StudentController {
      */
     @ResponseBody
     @RequestMapping("/registCallBack")
-    public String registCallback(@RequestParam(value = "id") int id,
+    public String registCallback(@RequestParam(value = "id") Long id,
                                  @RequestParam(value = "name") String name,
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "classandgrade") String classandgrade

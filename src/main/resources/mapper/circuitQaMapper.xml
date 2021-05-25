@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.circuitQA.mapper.circuitQaMapper" >
   <resultMap id="BaseResultMap" type="cn.sysu.circuitQA.pojo.circuitQa" >
-    <result column="questionID" property="questionid" jdbcType="INTEGER" />
+    <id column="questionID" property="questionid" jdbcType="INTEGER" />
     <result column="question" property="question" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
     <result column="childID" property="childid" jdbcType="VARCHAR" />
@@ -75,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from circuitqa
+    from qa_circuit_qa
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,20 +83,30 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from qa_circuit_qa
+    where questionID = #{questionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qa_circuit_qa
+    where questionID = #{questionid,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="cn.sysu.circuitQA.pojo.circuitQaExample" >
-    delete from circuitqa
+    delete from qa_circuit_qa
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
-    insert into circuitqa (questionID, question, answer, 
+    insert into qa_circuit_qa (questionID, question, answer, 
       childID, parentID)
     values (#{questionid,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
       #{childid,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
-    insert into circuitqa
+    insert into qa_circuit_qa
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="questionid != null" >
         questionID,
@@ -133,13 +143,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="cn.sysu.circuitQA.pojo.circuitQaExample" resultType="java.lang.Integer" >
-    select count(*) from circuitqa
+    select count(*) from qa_circuit_qa
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update circuitqa
+    update qa_circuit_qa
     <set >
       <if test="record.questionid != null" >
         questionID = #{record.questionid,jdbcType=INTEGER},
@@ -162,7 +172,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update circuitqa
+    update qa_circuit_qa
     set questionID = #{record.questionid,jdbcType=INTEGER},
       question = #{record.question,jdbcType=VARCHAR},
       answer = #{record.answer,jdbcType=VARCHAR},
@@ -171,5 +181,31 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
+    update qa_circuit_qa
+    <set >
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="childid != null" >
+        childID = #{childid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentID = #{parentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where questionID = #{questionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sysu.circuitQA.pojo.circuitQa" >
+    update qa_circuit_qa
+    set question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      childID = #{childid,jdbcType=VARCHAR},
+      parentID = #{parentid,jdbcType=VARCHAR}
+    where questionID = #{questionid,jdbcType=INTEGER}
   </update>
 </mapper>

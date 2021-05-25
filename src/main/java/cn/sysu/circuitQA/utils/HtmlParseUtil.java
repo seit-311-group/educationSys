@@ -1,6 +1,6 @@
 package cn.sysu.circuitQA.utils;
 
-import cn.sysu.circuitQA.pojo.Questionspider;
+import cn.sysu.circuitQA.pojo.QuestionSpider;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,13 +16,13 @@ import java.util.regex.Pattern;
 public class HtmlParseUtil {
     // Test
     public static void main(String[] args) throws IOException {
-        Questionspider a = paraseQuetion("什么是拉普拉斯变换");
+        QuestionSpider a = paraseQuetion("什么是拉普拉斯变换");
         System.out.println(a.getAnswer());
 
     }
 
-    public static Questionspider paraseQuetion(String question) throws IOException {
-        question = "百度知道电路" + question;
+    public static QuestionSpider paraseQuetion(String question) throws IOException {
+        question = "电路" + question;
         // 从百度知道上面爬取问题 把问题转换为GBK编码
 
         // 获取请求 从百度搜索找到页面上百度知道的URL来跳转
@@ -55,7 +55,7 @@ public class HtmlParseUtil {
         content = m1.replaceAll("");
 
         //返回对象
-        Questionspider questionspider = new Questionspider();
+        QuestionSpider questionspider = new QuestionSpider();
         questionspider.setQuestion(question);
         questionspider.setAnswer(content);
 

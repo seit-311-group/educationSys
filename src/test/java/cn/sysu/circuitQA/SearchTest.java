@@ -20,43 +20,7 @@ public class SearchTest {
 
     @Test
     public void searchTest(){
-        Model model = new Model() {
-            @Override
-            public Model addAttribute(String s, Object o) {
-                return null;
-            }
 
-            @Override
-            public Model addAttribute(Object o) {
-                return null;
-            }
-
-            @Override
-            public Model addAllAttributes(Collection<?> collection) {
-                return null;
-            }
-
-            @Override
-            public Model addAllAttributes(Map<String, ?> map) {
-                return null;
-            }
-
-            @Override
-            public Model mergeAttributes(Map<String, ?> map) {
-                return null;
-            }
-
-            @Override
-            public boolean containsAttribute(String s) {
-                return false;
-            }
-
-            @Override
-            public Map<String, Object> asMap() {
-                return null;
-            }
-        };
-        List list = addQAService.pagingAndShow("电路",model);
-        list.forEach(System.out::println);
+        System.out.println(addQAService.pagingAndShow("电路"));
     }
 }

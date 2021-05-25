@@ -2,16 +2,15 @@ package cn.sysu.circuitQA;
 
 import cn.sysu.circuitQA.pojo.circuitQa;
 import cn.sysu.circuitQA.service.CoreProcessService;
+import cn.sysu.circuitQA.service.StudentService;
 import cn.sysu.circuitQA.utils.MatchUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.w3c.dom.ls.LSInput;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +19,9 @@ import java.util.List;
 public class ProcessServiceTest {
     @Autowired
     private CoreProcessService coreProcessService;
+
+    @Autowired
+    StudentService studentService;
 
     @Autowired
     private cn.sysu.circuitQA.service.CircuitQAService CircuitQAService;
@@ -71,5 +73,12 @@ public class ProcessServiceTest {
     @Test
     public void orderTest() throws IOException, InterruptedException {
         System.out.println(coreProcessService.getAnswerByOrder("0", coreProcessService.subQuery("什么是阶跃响应")));
+    }
+
+    @Test
+    public void test1(){
+        studentService.updateQueryKeywords((long)1, "wiwiid");
+        // String a = "";
+        // System.out.println(a == null);
     }
 }

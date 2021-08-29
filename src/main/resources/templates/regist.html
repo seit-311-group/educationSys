@@ -43,12 +43,12 @@
             if(student_regist.id != ''){
                 //用ajax把student对象传回到后端
                 ajax({
-                    url: '/student/registCallBack?id=' + id + '&name=' + name + '&password=' + password + '&classandgrade' + classandgrade,
+                    url: '/student/registCallBack?id=' + id + '&name=' + name + '&password=' + password + '&classandgrade=' + classandgrade,
                     success:function (res){ // 如果id存在注册失败
                         let succeed = "注册成功";
                         alert(res);
                         if(res == succeed){
-                            window.location.href="http://localhost:8080/";
+                            window.location.href="/";
                         }
                     }
                 });
@@ -70,9 +70,9 @@
 
             // 前端验证用户名
             var studentName = document.getElementById('studentName').value;
-            var reg_studentName = /(^[\u2E80-\u9FFF]{2,5})/;
+            var reg_studentName = /(^[\u2E80-\u9FFF])/;
             if (!reg_studentName.test(studentName)) {
-                alert("用户名必须是2-5位中文");
+                alert("学生姓名必须为中文");
                 return student1;
             }
 
@@ -87,7 +87,7 @@
             // 验证确认密码
             var passwordAgain = document.getElementById('passwordAgain').value;
             if(passwordAgain != password) {
-                alert("两次输入的密码不正确");
+                alert("两次输入的密码不一致");
                 return student1;
             }
             var classAndGrade = document.getElementById('classAndGrade').value;
@@ -153,7 +153,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">中山大学</span>
                 </button>
-                <a class="navbar-brand" href="/">电路问答系统</a>
+                <a class="navbar-brand" href="/">电路知识学习系统</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -225,7 +225,7 @@
 
     <div class="bottom" style="text-align: center">
 			<span class="bottom_text" >
-				电路问答系统.Copyright &copy;2021
+				电路知识学习系统.Copyright &copy;2021
 			</span>
     </div>
 

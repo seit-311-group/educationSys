@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>答题系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入Vue-->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<style type="text/css">
+    * {
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+    }
+
+    #main{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .btn-default{
+        text-align: center;
+        height: 30px;
+        line-height: 0px;
+    }
+    .text{
+        text-align:center;
+        padding:0px 0px;
+        width:100px;
+    }
+    #main_area{
+        height: 590px;
+        position: relative;
+    }
+
+    #nav_tabs{
+        position: absolute;
+        top: -21px;
+        left: 22px;
+    }
+
+    #qa_area{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 21px;
+        left: 22px;
+    }
+
+    #question_area{
+        width: 625px;
+        height: 580px;
+        border: 1px solid black;
+        overflow-y: scroll;
+    }
+
+    #submit_place{
+        position: relative;
+        top: 10px;
+        left: 10px;
+        width: 590px;
+        height: 550px;
+    }
+
+    .nav_a{
+        font-size: 13px;
+    }
+
+    #answer_area{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 865px;
+        height: 580px;
+        border: 1px solid black;
+        overflow-y: scroll;
+
+    }
+    #answer_show{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 700px;
+
+    }
+    #bar_left{
+        display: flex;
+        justify-content: left;
+        width: 625px;
+        height: 40px;
+        position:relative;
+        border: 1px solid black;
+    }
+    
+    #np{
+        position: absolute;
+        right: 0px;
+    }
+
+    #btn_next{
+    }
+
+    #bar_right{
+        width: 865px;
+        height: 40px;
+        border: 1px solid black;
+    }
+
+    #function_area{
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 601px;
+        left: 22px;
+
+    }
+
+    .nav_a{
+        cursor: pointer;
+    }
+</style>
+<style>
+    html,body {
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        border: 0;
+    }
+    input {
+        border-bottom: 1px solid #000;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+    }
+</style>
+<body>
+    <div th:include="navigation :: nav"></div>
+
+    <div id="main">
+        <div id="main_area">
+            <div id="nav_tabs">
+                <ul class="nav nav-tabs">
+                    <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question">
+                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+                        题目描述</a></li>
+                    <!--<li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment">-->
+                    <!--    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>-->
+                    <!--    评论（此功能暂时未开放）</a></li>-->
+                    <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit">
+                        <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+                        提交记录</a></li>
+                </ul>
+            </div>
+            <div id="qa_area">
+                <div id="question_area">
+                    <div id="question_place" :style="{'display': question_place_show}"></div>
+                    <div id="comment_place" :style="{'display': comment_place_show}"></div>
+                    <div id="submit_place" :style="{'display': submit_place_show}">
+                        <table id="submit_table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <td style="width: 337px">做题结果</td>
+                                    <td style="width: 81px">花费时间</td>
+                                    <td style="width: 171px">提交时间</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="record in records">
+                                    <td>
+                                        <ul class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <span :style="{'color': setResultColor(record.result)}" style="font-size: 14px">{{record.result}}</span>
+                                            </a>
+                                            <ul class="dropdown-menu" >
+                                                <strong><li v-html="record.point" style="white-space: pre-wrap; font-size: 14px"></li></strong>
+                                            </ul>
+                                        </ul>
+                                    </td>
+                                    <td>{{record.timespend}}</td>
+                                    <td>{{record.timesubmit}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="answer_area">
+                    <div id="answer_show">
+                    </div>
+                </div>
+
+            </div>
+            <div id="function_area">
+                <div id="bar_left">
+                    <div id="btn_list">
+                        <button class="btn btn-default" type="submit" onclick="window.location.href='/index'">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
+                        </button>
+                    </div>
+                    <div id="np">
+                        <button class="btn btn-default" type="submit" id="btn_previous "
+                                v-on:click="previous_question" :class="{'disabled': pdisabled}">
+                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            上一题</button>
+                        <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <button class="btn btn-default" type="submit" id="btn_next"
+                                v-on:click="next_question" :class="{'disabled' : ndisabled}">
+                            下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="bar_right">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+<script type="text/javascript">
+    // <![CDATA[
+    let url = window.location.href; //获取当前页面的url
+    var n1 = url.length; //地址的总长度
+    var n2 = url.indexOf("="); //取得=号的位置
+    var questionid = decodeURI(url.substr(n2 + 1, n1 - n2 - 1));//截取id为题号
+    let domain = url.split(':')[1].substring(2);
+
+
+    let count = 0;
+    let urlMap = new Map();
+    urlMap.set("1","网孔法");
+    urlMap.set("2","节点法");
+    urlMap.set("3","叠加原理");
+    urlMap.set("4","戴维南");//Temp1
+    urlMap.set("5","戴维南1");//Temp2
+    urlMap.set("6","电容");
+    urlMap.set("7","电感");
+    urlMap.set("8","一阶RC");
+    urlMap.set("9","一阶RL");
+    urlMap.set("10","交流节点法");//Temp3
+    urlMap.set("11","交流网孔法");
+
+    let questionName = urlMap.get(questionid);
+    let subquesIDarr = null;
+    let pointarr = null;
+    let answer = null;
+    let answerID = null;
+    let map = new Map();//选项内容和知识点的kv对
+    let errorOption = new Set();
+    let addpicture = null;//是否需要增加图片
+    let changepicture = null;//是否需要更换图片
+    let errorPoints = ''; // 错误的知识点
+    let subqueIndex = 0;
+    let second = 0;
+    var count1 = null;
+
+    window.onload = function() {
+        ajax({
+            url: "/solution/getDescriptionBYId?id=" + questionid,
+            success: function (res) {
+                load(res);
+            }
+        })
+        ajax({
+            url:"/solution/getSubquesIDsBYId?id=" + questionid,
+            success: function(res) {
+                let subquesID = res;
+                subquesIDarr = subquesID.split(",");
+            }
+        })
+        ajax({
+            url:"/solution/getPointIDsBYId?id=" + questionid,
+            success: function(res) {
+                let pointIDs = res;
+                pointarr = pointIDs.split(",");
+            }
+        })
+        ajax({
+            url:"/solution/getAddPictureByID?id=" + questionid,
+            success: function(res) {
+                if (res.length > 0) {
+                    addpicture = res.split(",");
+                    console.log(res);
+                }
+            }
+        })
+        ajax({
+            url:"/solution/getChangePictureByID?id=" + questionid,
+            success: function(res) {
+                if (res.length > 0) {
+                    changepicture = res.split(",");
+                }
+            }
+        })
+    };
+
+    // 把电路图和题目显示在问题区
+    function load(res) {
+        let newbr = document.createElement('br');   //换行
+        let question = document.createElement('div');
+        let img = document.createElement('img');
+        img.src = questionName + '/picture1.png';
+        img.id = 'img';
+
+        question.id = 'question';
+        question.className = 'question';
+        question.innerHTML = questionid + '.' + res;
+        var question_place = document.getElementById("question_place");
+        question_place.appendChild(question);
+        question_place.appendChild(newbr);
+        question_place.appendChild(img);
+
+        button();
+    }
+    //开始答题按钮并监听
+    function button() {
+        let answer_show = document.getElementById('answer_show');
+        let process = document.createElement('div');
+        let button = document.createElement('button');
+        let strong = document.createElement('strong');
+
+        process.className = 'process';
+        process.id = 'process';
+        button.id = 'sendbtn';
+        button.className = 'btn btn-default';
+        button.role = 'group';
+        button.aria_label = '...';
+
+
+        button.addEventListener("click",f);     // 事件监听器
+        strong.innerHTML = '开始答题';
+        strong.style.font = '14px';
+        button.appendChild(strong);
+
+        process.appendChild(button);
+        answer_show.appendChild(process);
+    }
+
+    // 点击开始答题按钮发生
+    function f(){
+        beginCount();
+        ajax({url:"/solution/getAnalysisBYId?id=" + questionid,
+            success: function(res){
+                analysis(res);
+            }
+        })
+    }
+    function beginCount(){
+         count1 = setInterval(countTime,1000);
+    }
+    function countTime(){
+        second += 1;
+    }
+
+    //得到题目的分析并显示 对电路图进行分析和替换
+    function analysis(res){
+        let process = document.getElementById('process');
+        let newbr = document.createElement('br');
+        let button = document.getElementById('sendbtn');
+        let strong = document.createElement('strong');
+        button.parentNode.replaceChild(newbr,button);   // 答题按钮换位空行
+        process.innerHTML += res;
+
+        let newbutton = document.createElement('button');
+        newbutton.id = 'sendbtn0';
+        newbutton.className = 'btn btn-default';
+        strong.innerHTML = '列方程';
+        newbutton.appendChild(strong);
+        newbutton.addEventListener("click", equation);
+        process.appendChild(newbr);
+        process.appendChild(newbutton);
+
+        let img = document.getElementById('img');
+        let img1 = document.createElement('img');
+        img1.src = questionName + '/picture2.png';
+        img1.id = 'img';
+        img.parentElement.replaceChild(img1, img);
+    }
+
+    //点击列方程发生的事件
+    function equation() {
+        if((count > 0) && !check()){
+            alert("选择错误，请重新选择！");
+        } else{
+            if (addpicture != null && addpicture.length != 0) {
+                if (String(count) == addpicture[0]) {
+                    addpicture.splice(0, 1);    // 从第一个开始删除一个元素 array.splice(index,howmany,item1,.....,itemX) howmany删除元素的个数
+                    addPicture("part" + addpicture[0] + ".png")
+                    addpicture.splice(0, 1);
+                }
+            }
+
+            if (changepicture != null && changepicture.length != 0) {
+                if (String(count) == changepicture[0]) {
+                    changepicture.splice(0, 1);
+                    changePicture("part" + changepicture[0] + ".png")
+                    changepicture.splice(0, 1);
+                }
+            }
+
+            if (count < subquesIDarr.length) {
+                let subquesid = subquesIDarr[count];
+                ajax({
+                    url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
+                    success: function (res) {
+                        subqueIndex++;
+                        res = subqueIndex+'.' + res;
+                        createSubquestion(res);
+                    }
+                });
+                ajax({
+                    url: "/solution/getAnswerBYSubquesId?id=" + subquesid,     // 得到子问题答案对应的答案id
+                    success: function (res) {
+                        answerID = res;
+                    }
+                });
+                ajax({
+                url: "/solution/getOptionIDBYSubquesId?id=" + subquesid,       // 得到子问题的选项id
+                    success: function (res) {
+                        let options = res;
+                        if (res.length == 0) {
+                            return;
+                        }
+                        let optionsArr = options.split(",");
+                        // 把选项遍历出来
+                        for (let i = 0; i < optionsArr.length; i++) {
+                            let content = null;
+                            let optionID = optionsArr[i];
+                            let map1 = new Map();//选项ID和内容的kv对
+                            ajax({
+                                url: "/solution/getContentBYOptionId?id=" + optionID,  // 得到选项的内容
+                                success: function (res) {
+                                    content = res;
+                                    map1.set(optionID, content);
+                                    if (optionID == answerID.toString()) {
+                                        answer = res;
+                                    }
+                                }
+                            });
+                            ajax({
+                                url:"/solution/getPointIDBYOptionID?id=" + optionID,   //得到知识点id
+                                success: function(res) {
+                                    if(res == "") {
+                                        return;
+                                    }
+                                    let pointID = res;
+                                    ajax({
+                                        url: "/solution/getContentBYPointId?id=" + pointID,    // 根据知识点id等到知识点
+                                        success: function (res) {
+                                            map.set(map1.get(optionID), res);   // 存放知识点id对应的知识点
+                                        }
+                                    });
+                                }
+                            })
+                            if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
+                                createPicOption(content, 65 + i);
+                            }
+                            else {
+                                createOption(content, 65 + i);//65是A对应的ASCII码   ABCD选项
+                            }
+                        }
+                    }
+                });
+                newButton("提交");
+            } else {
+                over();
+            }
+        };
+    }
+    function addPicture(pic) {
+        let question = document.getElementById('question');
+        let img = document.createElement('img');
+        let div = document.createElement('div');
+        div.style.textAlign = 'center';
+        img.src = questionName + '/' + pic;
+        img.id = 'img';
+        div.appendChild(img);
+
+        question.appendChild(div);
+    }
+    function changePicture(pic) {
+        let img = document.getElementById('img');
+        let img1 = document.createElement('img');
+        img1.src = questionName + '/' + pic;
+        img1.id = 'img';
+        img.parentElement.replaceChild(img1, img);
+    }
+    function createSubquestion(res){
+        let process = document.getElementById('process');
+        let newbr = document.createElement('br');
+        let button = document.getElementById('sendbtn' + count);
+        count += 1;
+        let newdiv = document.createElement('div');
+        newdiv.id = 'div' + count;
+        button.parentNode.replaceChild(newbr,button);
+        newdiv.innerHTML += res;
+        process.appendChild(newdiv);
+    }
+    function createOption(content, code){
+        let newdiv = document.getElementById('div' + count);
+        let div = document.createElement('div');
+        let input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'option' + count; //选项名，每个小问题的几个选项的选项名相同，方便批改
+        input.value = content;
+
+        div.appendChild(input);
+        div.innerHTML += String.fromCharCode(code) + ". " + content;
+        newdiv.appendChild(div);
+    }
+    function createPicOption(content, code){
+        let newdiv = document.getElementById('div' + count);
+        let div = document.createElement('div');
+        let input = document.createElement('input');
+        let newbr = document.createElement('br');
+
+        input.type = 'radio';
+        input.name = 'option' + count;
+        input.value = content;
+
+        div.appendChild(input);
+        div.innerHTML += String.fromCharCode(code) + ". ";
+        div.appendChild(newbr);
+        let picArr = content.split(",");
+        for (let i of picArr) {
+            let img = document.createElement('img');
+            img.src = questionName + '/' + i;
+            img.id = 'img';
+            div.appendChild(img);
+        }
+        newdiv.appendChild(div);}
+    function newButton(content){
+        let newdiv = document.getElementById('div' + count);
+        let newbutton = document.createElement('button');
+        let newbr = document.createElement('br');
+        let strong = document.createElement('strong');
+
+        newbutton.id = 'sendbtn' + count;
+        newbutton.className = 'btn btn-default';
+        strong.innerHTML = content;
+        newbutton.appendChild(strong);
+        newbutton.addEventListener("click", equation);
+        newdiv.appendChild(newbr);
+        newdiv.appendChild(newbutton);
+        newdiv.scrollIntoView();
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+
+    function check() {
+        let obj = document.getElementsByName('option' + count);
+
+        for(let i = 0; i < obj.length; i++){
+            if(obj[i].checked){
+                if(obj[i].value == answer){
+                    return true;
+                }else{
+                    errorOption.add(obj[i].value);
+                    return false;
+                }
+            }
+        }
+    }
+
+    function over(){
+        clearInterval(count1);
+        highLight();
+        let process = document.getElementById('process');
+        let newbr = document.createElement('br')
+        let newdiv = document.createElement('div' + (count+1));
+        let button = document.getElementById('sendbtn' + count);
+        button.parentNode.replaceChild(newbr,button);
+        ajax({
+            url: "/solution/getAnswerByID?id=" + questionid,
+            success: function (res) {
+                newdiv.innerHTML += res;
+            }
+        });
+        newdiv.appendChild(newbr);
+        newdiv.appendChild(newbr);
+        let conclusion = document.createElement("div");
+        if (errorOption.size == 0) {
+            let text = "恭喜你，你已经完全掌握本题！";
+            conclusion.innerHTML += text;
+            errorPoints = questionid + "@";
+        }
+        else{
+            let text = "你对以下知识点的掌握还不够：" + "\n";
+            let index = 1;
+            conclusion.innerHTML += text;
+            conclusion.appendChild(newbr);
+            errorPoints += questionid + "@";
+            let set = new Set();
+            for (let i of errorOption) {
+                let point = document.createElement("div");
+                if (map.has(i)) {
+                    errorPoints += map.get(i) + '@';
+                    if (!set.has(map.get(i))){
+                        set.add(map.get(i))
+                        point.innerHTML += index + '.'+ map.get(i);
+                        index++;
+                    }
+                } else {
+                    continue;
+                }
+                conclusion.appendChild(point);
+            }
+        }
+        // 将做错的题目对应的知识点返回到后端
+        // ajax不能传特殊字符到后端 所以要先对url进行编码在进行传输
+        errorPoints += second;
+        ajax({
+            url: "/student/saveErrorPoints?points=" + errorPoints,
+        })
+        newdiv.appendChild(conclusion);
+        process.appendChild(newdiv);
+        let newdiv1 = document.createElement('div')
+
+        conclusion.appendChild(newdiv1);
+        newdiv1.scrollIntoView();
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+        let errorOptionString = '';
+        for (let item of errorOption) {
+            errorOptionString += item + '@';
+        }
+
+    }
+
+    // 把错误的选项标红
+    function highLight(){
+        let errorOptionsCount = questionid + '@';
+        let countError = 0;
+        let options = document.getElementsByTagName('input');
+        for(let i = 0; i < options.length; i++){
+            if(errorOption.has(options[i].value)) {
+                options[i].parentElement.style.color = "red";
+                countError++;
+            }
+        }
+        errorOptionsCount += countError;
+        ajax({
+            url: "/answer/passRateUpdate?errorOptions=" + errorOptionsCount,
+        })
+    }
+    function ajax(obj) {
+        let xhr = null;
+        if (window.ActiveXObject) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        } else {
+            xhr = new XMLHttpRequest();
+        }
+
+        //打开与服务器的连接
+        if (obj.method) {
+            xhr.open(obj.method, obj.url, false);
+        } else {
+            xhr.open('get', obj.url, false);
+        }
+        xhr.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Authorization",
+            "APPCODE 3e9dfb924f464e9593a95f9d2bbf4348")
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                //数据接收完毕
+                if (xhr.status == 200) {
+                    //console.log('请求成功',xhr.responseText)
+                    if (obj.success) {
+                        obj.success(xhr.responseText)
+                    }
+
+                } else {
+                    //console.log(xhr.status,'请求出错')
+                    if (obj.failure) {
+                        obj.failure('请求失败')
+                    }
+                }
+            }
+        }
+        if (obj.method == undefined || obj.method.toLowerCase() == 'get') {
+            xhr.send(null);
+        } else {
+            xhr.send(obj.params);
+        }
+    }
+    // ]]>
+</script>
+
+<script>
+    // <![CDATA[
+    const app ={
+        data() {
+            return {
+                now_questions: '',
+                all_questions: '',
+                pdisabled: false,
+                ndisabled: false,
+                question_place_show: '',
+                comment_place_show: 'none',
+                submit_place_show: 'none',
+                question_active: 'active',
+                comment_active: '',
+                submit_active: '',
+                records: {},
+                errorPointsList: '',
+                domain: ''
+            }
+        },
+        mounted: function (){
+            this.load();
+
+        },
+        methods: {
+            async load(){
+                var temp = window.location.href;
+                this.domain = temp.split(':')[1].substring(2);
+                var x1 = temp.length; //地址的总长度
+                var x2 = temp.indexOf("="); //取得=号的位置
+                this.now_questions = temp.substr(x2 + 1, x1 - x2 - 1);//截取id为题号
+                await axios.get('/answer/question',{        //执行完await的方法才会往后执行
+                }).then(response=>{
+                    this.all_questions = response.data;
+                })
+                if(this.now_questions == 1){
+                    this.pdisabled = true;
+                }else if(this.now_questions == this.all_questions){
+                    this.ndisabled = true;
+                }else{
+                    this.pdisabled = false;
+                    this.ndisabled = false;
+                }
+            },
+            previous_question() {
+                if(this.pdisabled == true){
+                    return;
+                }
+                let index =  Number(this.now_questions) - 1;
+                window.location.href = 'http://'+this.domain+':8081/question?id=' + index;
+
+            },
+            next_question() {
+                if(this.ndisabled == true){
+                    return;
+                }
+                let index = Number(this.now_questions) + 1;
+                window.location.href = 'http://'+this.domain+':8081/question?id=' + index;
+
+            },
+            show_question(){
+                    this.question_place_show = '';
+                    this.comment_place_show = 'none';
+                    this.submit_place_show = 'none';
+                    this.question_active = 'active';
+                    this.comment_active = '';
+                    this.submit_active = '';
+            },
+            show_comment() {
+                this.question_place_show = 'none';
+                this.comment_place_show = '';
+                this.submit_place_show = 'none';
+                this.question_active = '';
+                this.comment_active = 'active';
+                this.submit_active = '';
+                var question_place = document.getElementById("question_place");
+
+            },
+            show_submit() {
+                this.question_place_show = 'none';
+                this.comment_place_show = 'none';
+                this.submit_place_show = '';
+                this.question_active = '';
+                this.comment_active = '';
+                this.submit_active = 'active';
+
+                this.loadRecords();
+            },
+            async loadRecords(){
+                let questionRecords = {};
+                await axios.post('answerRecords/showAllRecords',{
+                    questionid: this.now_questions
+                }).then(response=>{
+                    questionRecords = response.data;
+                })
+                var key = 'point';
+                for (var record of questionRecords){
+                    if(record.result == ''|| record.result == ' ' || record.result == null){
+                        record.result = '通过';
+                        record[key] = '无';
+                    }else{
+                        let value = '';
+                        await this.loadpoints(record.result).then(res =>{
+                            value = res;
+                        });
+                        record[key] = value;
+                        record.result = '解答错误（点击查看错误的知识点）';
+                    }
+                    record.timespend = this.calTime(record.timespend);
+
+                }
+                this.records = questionRecords;
+            },
+            setResultColor(result){
+                if(result == '通过'){
+                    return 'green';
+                }else{
+                    return 'red';
+                }
+            },
+            calTime(second){
+                return Math.ceil(second/60) + '分钟';
+            },
+            async loadpoints(result){
+                console.log("方法内");
+                let res = '';
+                await axios.post('answerRecords/getAllPoints',{
+                    pointId: result
+                }).then(response1=>{
+                    console.log("axios中");
+                    res = response1.data;
+                })
+                return res;
+            }
+        }
+    }
+
+    Vue.createApp(app).mount("#main_area")
+    // ]]>
+</script>
+
+</html>

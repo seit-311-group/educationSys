@@ -1,4 +1,7 @@
 # circuitQA
+
+采用技术：java8、js、springboot、vue2、mybatis、
+
 A QA-system about circuit knowledge for students
 20200920 增加了HanLP工具的使用，参照https://github.com/hankcs/HanLP/tree/1.x
 需要：

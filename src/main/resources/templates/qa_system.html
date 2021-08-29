@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>个人信息</title>
+    <!-- 引入bootstrap-->
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+</head>
+<style type="text/css">
+    #main{
+        display: flex;
+        justify-content: center;
+    }
+    /*问答框*/
+    #qaSystem{
+        width: 900px;
+        height: 625px;
+        border-radius: 0px;
+        box-shadow: #242424 0px 2px 10px;
+        background-color: white;
+    }
+    /*左边*/
+    #label_area{
+        position: relative;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 90px;
+        background-color: #006d30;
+    }
+    #label{
+        font-family: "Helvetica Neue";
+        font-size: 25px;
+        color: white;
+    }
+    #function{
+        position: absolute;
+        margin-top: 90px;
+        width: 90px;
+        height: 535px;
+        background-color: black;
+    }
+    /*icon的位置*/
+    #question{
+        position: absolute;
+        margin-top: 450px;
+        margin-left: 33px;
+
+    }
+
+    #upload{
+        position: absolute;
+        margin-top: 30px;
+        margin-left: 33px;
+    }
+
+    /*右边*/
+    #Analyzing{
+        position: absolute;
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 90px;
+        width: 810px;
+        height: 90px;
+        border-bottom: 1px solid #b0b0b9;
+    }
+
+    /*问答区域*/
+    #qa{
+        position: absolute;
+        position: relative;
+        margin-left: 90px;
+        width: 810px;
+        height: 425px;
+        border-bottom: 1px solid #b0b0b9;
+    }
+
+    #answer_area_padding{
+        padding-top: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .time{
+        text-align:center;
+        font-size:10px;
+        line-height:12px;
+        color:#60606f;
+    }
+    .answer_system_area{
+        margin-top: 25px;
+    }
+
+    .answer_user_area{
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 25px;
+    }
+
+    .answer_user{
+        margin-left: auto;
+
+    }
+
+    .avatar_and_answer{
+        display: flex;
+        flex-direction: row;
+        margin-top: 15px;
+    }
+
+    .answer_and_rate{
+        flex-direction: column;
+    }
+
+    .rate{
+        position: relative;
+        margin-left: 20px;
+    }
+
+
+    .words{
+        margin-left: 15px;
+        color: #000;
+        padding: 0px 9px;
+        position: relative;
+        max-width: 350px;
+        line-height: 1.6;
+        margin-left: 20px;
+        border-radius: 10px;
+        background-color: #E5E5E5;
+    }
+
+    .words_user{
+        margin-right: 15px;
+        color: #000;
+        padding: 0px 9px;
+        position: relative;
+        max-width: 350px;
+        line-height: 1.6;
+        margin-left: 20px;
+        border-radius: 10px;
+        background-color: #E5E5E5;
+    }
+
+
+
+    /*滚动条*/
+    .el-scrollbar {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .el-scrollbar__wrap {
+        overflow: scroll;
+        height: 120%;
+    }
+
+
+    #input_area{
+        position: absolute;
+        margin-left: 90px;
+        width: 810px;
+        height: 90px;
+    }
+    .el-autocomplete{
+        position: relative;
+        margin-top: 6px;
+        margin-left: 6px;
+        width: 700px;
+    }
+
+    .el-textarea__inner{
+        background-color: #efefef;
+
+    }
+
+    #search{
+        position: absolute;
+        margin-top: 30px;
+        margin-left: 17px;
+    }
+
+    /* icon的大小   */
+    .icon-size{
+        font-size: 23px;
+    }
+
+    .icon-color{
+        color: white;
+    }
+
+    .click{
+        cursor: pointer;
+    }
+
+    .left_button{
+        background-color: black;
+        color: white;
+        border: 0px;
+    }
+
+
+</style>
+<body style="background-color: #efefef">
+    <div th:include="navigation :: nav"></div>
+    <div id="main">
+        <div id="qaSystem">
+            <!--左边区域-->
+            <div id="left">
+                <div id="label_area">
+                    <span id="label">QA</span>
+                </div>
+                <div id="function">
+                    <div id="upload" class="icon-size icon-color click" >
+                        <i class="el-icon-upload" @click="dialogVisible1 = true"></i>
+                        <el-dialog
+                                title="请上传图片，并描述您遇到的问题~"
+                                :visible.sync="dialogVisible1"
+                                width="50%"
+                                :before-close="handleClose">
+                            <span>
+                                <el-upload
+                                        class="upload-demo"
+                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        :on-preview="handlePreview"
+                                        :on-remove="handleRemove"
+                                        :file-list="fileList"
+                                        list-type="picture">
+                                  <el-button size="small" type="primary" round>点击上传</el-button>
+                                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                </el-upload>
+                                <br/>
+                                <el-input
+                                        type="textarea"
+                                        :rows="4"
+                                        placeholder="请输入您遇到的问题"
+                                        v-model="upload">
+                                </el-input>
+                            </span>
+                            <span slot="footer" class="dialog-footer">
+                                <el-button @click="dialogVisible1 = false" round>取 消</el-button>
+                                <el-button type="primary" @click="dialogVisible1 = false" round>确 定</el-button>
+                            </span>
+                        </el-dialog>
+                        <p style="font-size: 10px; position: relative; margin-left: -12px;margin-top: -5px; "@click="dialogVisible1 = true">上传图片</p>
+                    </div>
+
+                    <div id="question" class="icon-size icon-color click">
+                        <i class="el-icon-question" @click="dialogVisible2 = true"></i>
+                        <el-dialog
+                                title="问答系统介绍"
+                                :visible.sync="dialogVisible2"
+                                width="70%"
+                                :before-close="handleClose">
+                            <span>This is a Q&A system, upload your dataset first, then you can ask question. In order to use this system, you need to understand the following:<br/>
+                                1. This system supports both Chinese and English data sets.<br/>
+                                2. Click the upload button on the right to import the data, the data file name must be in English.<br/>
+                                3. The imported data must be in comma-separated csv format. Click the example button on the right to download the sample data.<br/>
+                                4. When new data is imported, the old data in the library will be overwritten.<br/>
+                                5. The size of the data imported each time must not exceed 10M.</span>
+                            <span slot="footer" class="dialog-footer">
+                        <el-button @click="dialogVisible2 = false" round>取 消</el-button>
+                        <el-button type="primary" @click="dialogVisible2 = false" round>确 定</el-button>
+                            </span>
+                        </el-dialog>
+                    </div>
+                </div>
+            </div>
+
+            <!--右边区域-->
+            <div id="right">
+                <div id="Analyzing">
+                    <span style="position: relative; margin-left: 20px"><strong>{{Analyzing}}</strong></span>
+                </div>
+
+                <!-- 问答区域 -->
+                <div id="qa">
+                    <el-scrollbar id="qa_area">
+                        <div id="answer_area_padding">
+                            <div class="answer_system_area">
+                                <div class="time" >
+                                    {{time}}</div>
+                                <div class="avatar_and_answer">
+                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                    <div class="words">
+                                        <p style="font-size: 15px">
+                                            您好，有什么电路相关的问题可以问我喔！
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="answer_user_area">
+                                <div class="time">
+                                    {{time}}</div>
+                                <div class="answer_user">
+                                    <div class="avatar_and_answer">
+                                        <div class="words_user">
+                                            <p style="font-size: 15px">
+                                                什么是戴维南
+                                            </p>
+                                        </div>
+                                        <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="answer_system_area">
+                                <div class="time" >
+                                    {{time}}</div>
+                                <div class="avatar_and_answer">
+                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                    <div class="words">
+                                        <p style="font-size: 15px">以下为热点问题：<br/>
+                                            <a href="/feedbackTwoSys" style="color: #5c86bc">
+
+                                                基尔霍夫电流定律的内容是？</br>
+                                                RLC串联电路中，R变化时，电流的图像有什么不同？</br>
+                                                什么是三相电路</br>
+                                                节点法和网孔法求解方程的原则是什么？</br>
+                                                一阶电路三要素是什么？</br>
+                                                为什么称RC和RL电路为一阶电路？</br>
+                                                为什么在家用电路中各个元件之间不常串联而选择并联？</br></a>
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="answer_user_area">
+                                    <div class="time">
+                                        {{time}}</div>
+                                    <div class="answer_user">
+                                        <div class="avatar_and_answer">
+                                            <div class="words_user">
+                                                <p style="font-size: 15px">
+                                                    戴维南定理是什么？
+                                                </p>
+                                            </div>
+                                            <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="avatar_and_answer">
+                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                    <div class="answer_and_rate">
+
+                                        <div class="words">
+                                            <p style="font-size: 15px">
+                                            <p>线性两端电路可以由一个电压源和一个串联电阻取代，电压等于端点的开路电压，电阻等于独立源关闭时端点的输入电阻。</p>
+                                            </p>
+
+                                        </div>
+
+
+                                        <div class="rate">
+                                            <p style="color: #d2d2d2; font-size: 14px">请留下你对该问题答案对的满意度嗷！</p>
+                                            <el-rate
+                                                    v-model="rate"
+                                                    show-text>
+                                            </el-rate>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </el-scrollbar>
+                </div>
+
+                <!-- 输入区域 -->
+                <div id="input_area">
+                    <el-autocomplete
+                            rows = 4
+                            type = "textarea"
+                            class="inline-input"
+                            v-model="input"
+                            :fetch-suggestions="querySearchAsync"
+                            placeholder="请输入您的问题"
+                            @select="handleSelect"
+                    >
+                        <template slot-scope="{ item }">
+                            <div class="autocomplete-choose-name" v-html="htmlValue(item.value)"></div>
+                        </template>
+                    </el-autocomplete>
+
+                    <el-button id="search" @click="submit" round>
+                        <div class="icon-size">
+                            <i class="el-icon-search"></i>
+                        </div>
+                    </el-button>
+                </div>
+
+                <div id="hot">
+                    <!--<p style="font-size: 15px">以下为热点问题：<br/>-->
+                    <!--    <a href="/feedbackTwoSys" style="color: #5c86bc">-->
+
+                    <!--        基尔霍夫电流定律的内容是？</br>-->
+                    <!--        RLC串联电路中，R变化时，电流的图像有什么不同？</br>-->
+                    <!--        什么是三相电路</br>-->
+                    <!--        节点法和网孔法求解方程的原则是什么？</br>-->
+                    <!--        一阶电路三要素是什么？</br>-->
+                    <!--        为什么称RC和RL电路为一阶电路？</br>-->
+                    <!--        为什么在家用电路中各个元件之间不常串联而选择并联？</br></a>-->
+                    <!--</p>-->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: '#main',
+        data(){
+            return{
+                questionList: [],
+                Analyzing: '正在分析您的问题...',
+                dialogVisible1: false,
+                dialogVisible2: false,
+                time: '',
+                input: '',
+                upload: '',
+                answer: '',
+                timeout:  null,
+                rate: null
+            }
+        },
+        mounted: function (){
+            this.load();
+            this.questionList = this.loadAll();
+        },
+        computed: {
+
+        },
+        methods:{
+            loadAll() {
+                return [
+                    { "value": "什么是超网孔？", "address": "长宁区新渔路144号" },
+                    { "value": "什么是电路的过渡过程？", "address": "上海市长宁区淞虹路661号" },
+                    { "value": "什么是换路定律？", "address": "上海市普陀区真北路988号创邑金沙谷6号楼113" },
+                    { "value": "RL一阶电路的零输入响应中，电感两端的电压如何变化？", "address": "天山西路438号" },
+                    { "value": "RL一阶电路的零状态响应，电感两端的电压如何变化？", "address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101" },
+                    { "value": "二阶电路中，过渡过程的性质取决于什么因素？", "address": "上海市长宁区金钟路633号" },
+                    { "value": "三相四线制供电体系中，为什么规定中线上不得安装保险丝和开关？", "address": "上海市嘉定区曹安公路曹安路1685号" },
+                    { "value": "什么是电路的有功功率？", "address": "上海市普陀区同普路1435号" },
+                    { "value": "十二泷町", "address": "上海市北翟路1444弄81号B幢-107" },
+                    { "value": "星移浓缩咖啡", "address": "上海市嘉定区新郁路817号" },
+                    { "value": "阿姨奶茶/豪大大", "address": "嘉定区曹安路1611号" },
+                    { "value": "新麦甜四季甜品炸鸡", "address": "嘉定区曹安公路2383弄55号" },
+                    { "value": "Monica摩托主题咖啡店", "address": "嘉定区江桥镇曹安公路2409号1F，2383弄62号1F" },
+                    { "value": "浮生若茶（凌空soho店）", "address": "上海长宁区金钟路968号9号楼地下一层" },
+                    { "value": "NONO JUICE  鲜榨果汁", "address": "上海市长宁区天山西路119号" },
+                    { "value": "CoCo都可(北新泾店）", "address": "上海市长宁区仙霞西路" },
+                    { "value": "快乐柠檬（神州智慧店）", "address": "上海市长宁区天山西路567号1层R117号店铺" },
+                    { "value": "Merci Paul cafe", "address": "上海市普陀区光复西路丹巴路28弄6号楼819" },
+                    { "value": "猫山王（西郊百联店）", "address": "上海市长宁区仙霞西路88号第一层G05-F01-1-306" },
+                    { "value": "枪会山", "address": "上海市普陀区棕榈路" },
+                    { "value": "纵食", "address": "元丰天山花园(东门) 双流路267号" },
+                    { "value": "钱记", "address": "上海市长宁区天山西路" },
+                    { "value": "壹杯加", "address": "上海市长宁区通协路" },
+                    { "value": "唦哇嘀咖", "address": "上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第1-02A单元" },
+                    { "value": "爱茜茜里(西郊百联)", "address": "长宁区仙霞西路88号1305室" },
+                    { "value": "爱茜茜里(近铁广场)", "address": "上海市普陀区真北路818号近铁城市广场北区地下二楼N-B2-O2-C商铺" },
+                    { "value": "鲜果榨汁（金沙江路和美广店）", "address": "普陀区金沙江路2239号金沙和美广场B1-10-6" },
+                    { "value": "开心丽果（缤谷店）", "address": "上海市长宁区威宁路天山路341号" },
+                    { "value": "超级鸡车（丰庄路店）", "address": "上海市嘉定区丰庄路240号" },
+                    { "value": "妙生活果园（北新泾店）", "address": "长宁区新渔路144号" },
+                    { "value": "香宜度麻辣香锅", "address": "长宁区淞虹路148号" },
+                    { "value": "凡仔汉堡（老真北路店）", "address": "上海市普陀区老真北路160号" },
+                    { "value": "港式小铺", "address": "上海市长宁区金钟路968号15楼15-105室" },
+                    { "value": "蜀香源麻辣香锅（剑河路店）", "address": "剑河路443-1" },
+                    { "value": "北京饺子馆", "address": "长宁区北新泾街道天山西路490-1号" },
+                    { "value": "饭典*新简餐（凌空SOHO店）", "address": "上海市长宁区金钟路968号9号楼地下一层9-83室" },
+                    { "value": "焦耳·川式快餐（金钟路店）", "address": "上海市金钟路633号地下一层甲部" },
+                    { "value": "动力鸡车", "address": "长宁区仙霞西路299弄3号101B" },
+                    { "value": "浏阳蒸菜", "address": "天山西路430号" },
+                    { "value": "四海游龙（天山西路店）", "address": "上海市长宁区天山西路" },
+                    { "value": "樱花食堂（凌空店）", "address": "上海市长宁区金钟路968号15楼15-105室" },
+                    { "value": "壹分米客家传统调制米粉(天山店)", "address": "天山西路428号" },
+                    { "value": "福荣祥烧腊（平溪路店）", "address": "上海市长宁区协和路福泉路255弄57-73号" },
+                    { "value": "速记黄焖鸡米饭", "address": "上海市长宁区北新泾街道金钟路180号1层01号摊位" },
+                    { "value": "红辣椒麻辣烫", "address": "上海市长宁区天山西路492号" },
+                    { "value": "(小杨生煎)西郊百联餐厅", "address": "长宁区仙霞西路88号百联2楼" },
+                    { "value": "阳阳麻辣烫", "address": "天山西路389号" },
+                    { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
+                ];
+            },
+            htmlValue: function (val) {
+                let key = this.input;
+                if (key.length > 0) {
+                    return val.replace(
+                        new RegExp(key, "g"),
+                        "<span style='color:red;'>" + key + "</span>"
+                    );
+                }
+                return val;
+            },
+            querySearchAsync(queryString, cb) {
+                var questionList = this.questionList;
+                var results = queryString ? questionList.filter(this.createStateFilter(queryString)) : questionList;
+
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    cb(results);
+                }, 3000 * Math.random());
+            },
+            createStateFilter(queryString) {
+                return (state) => {
+                    return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+                };
+            },
+            handleSelect(item) {
+                console.log(item);
+            },
+
+            load(){
+                this.time = this.getTime();
+            },
+            getTime(){
+                let now= new Date();
+                let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
+                let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
+                let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
+                let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
+                let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
+                let str = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
+                return str;
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {});
+            },
+            submit(){
+                if (this.input.trim() == ''){
+                    this.error();
+                    return;
+                }
+                let query =  this.input;
+                this.input = '';
+                let answer_area_padding = document.getElementById('answer_area_padding');
+                this.createNewAnswerSystem(answer_area_padding);
+
+            },
+            error() {
+                this.$notify.error({
+                    title: '错误',
+                    message: '输入不能为空喔！',
+                });
+                this.input = '';
+            },
+            createNewAnswerSystem(answer_area_padding){
+                let answer_system_area = document.createElement('div');
+                let avatar_and_answer = document.createElement('div');
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+                answer_area_padding.appendChild(time);
+
+
+            }
+
+
+        }
+    })
+
+</script>
+</html>

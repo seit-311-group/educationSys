@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>电路知识问答</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+
+<style type="text/css">
+    * {
+        font-size: 14px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .main {
+        position: relative;
+        margin: 20px auto;
+        border: 1px solid steelblue;
+        width: 1000px;
+        height: 600px;
+    }
+
+    .msgInput {
+        display: block;
+        width: 980px;
+        height: 90px;
+        margin: 10px auto;
+    }
+
+    .sendbtn {
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        right: 10px;
+    }
+    #href {
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 0px;
+        left: 10px;
+        color: white;
+    }
+
+    #returnbtn{
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        left: 10px;
+    }
+
+    .content {
+        list-style: none;
+        width: 980px;
+        height: 450px;
+        margin: 5px auto;
+        border: 1px dotted #d1d3d6;
+        overflow-y: scroll;
+    }
+
+    .msgContent {
+        width: auto;
+        max-width: 600px;
+        height: auto;
+        word-break: break-all;
+        margin: 5px;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .content .left {
+        float: left;
+        text-align: left;
+        background-color: lightgrey;
+    }
+
+    .content .right {
+        float: right;
+        text-align: right;
+        background-color: yellowgreen;
+    }
+</style>
+<style>
+    html,body {
+        font-size: 14px;
+        font-family: "微软雅黑", Helvetica, Tahoma, Arial, sans-serif;
+        color: #000;
+        background-color: #30333F;
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        border: 0;
+    }
+    .cf:before,.cf:after {
+        display: table;
+        content: "";
+    }
+    .cf:after {
+        clear: both;
+    }
+    .cf {
+        *zoom: 1;
+    }
+    canvas{
+        position: fixed;
+        top: 52px;
+    }
+</style>
+<script type="text/javascript">
+    // <![CDATA[
+    window.onload = function() {
+        // 点击或者按enter调用sendMsg
+        url = window.document.URL;
+
+        let questionSpider = '';
+        let questions = '';
+        let question = '';
+        let questionLength = 0;
+        // let answerSpider = '';
+        var questionBegin = true;   // 所有流程进行完之后flag倒下
+        var questionListFlag = true;
+        var subQueryFlag = true;
+        var mismatch = true;
+        document.getElementById('sendbtn').onclick = function() {
+            sendMsg();
+        }
+
+
+        //enter键 发送
+        document.onkeypress = function(event) {
+            let e = event || window.event;
+            let keycode = e.keyCode || e.which;
+            if (keycode == 13) {//按下enter键
+                e.preventDefault();     // 取消事件的默认动作。
+                sendMsg();
+            }
+
+        }
+
+        function sendMsg() {
+            let a_feedback = document.getElementById('main');
+            let input = document.getElementById('msg_input');//查找缓存
+            let ul = document.getElementById('content');
+            let newLi = document.createElement('li');
+            newLi.innerHTML = input.value;
+            newLi.className = 'msgContent right';
+            ul.appendChild(newLi);
+
+            let div = document.createElement('div');
+            div.style = 'clear:both';   //clear:both 指定段落的左侧或右侧不允许浮动的元素
+            ul.appendChild(div);
+
+            // 当所有流程进行完毕才进入
+            if((questionBegin == false) && (input.value == "Y" || input.value == "y" || input.value == "N" || input.value == "n")){
+                if (input.value == "N" || input.value == "n"){
+                    let a = document.createElement('a');
+                    a.innerHTML = '反馈入口';
+                    a.href = '/feedback';
+                    a.id = 'href';
+                    a.target = "_blank";
+                    a.class = "list-group-item";
+                    a_feedback.appendChild(a);
+
+                    let newLi1 = document.createElement('li');
+                    newLi1.innerHTML = "感谢您的反馈,请点击左下角的反馈入口，输入您的对这个问题的看法吧！";
+                    newLi1.className = 'msgContent left';
+                    ul.appendChild(newLi1);
+                    let div1 = document.createElement('div');
+                    div1.style = 'clear:both';
+                    ul.appendChild(div1);
+                    questionBegin = true;
+                }else if (input.value == "Y" || input.value == "y"){
+                    let newLi1 = document.createElement('li');
+                    newLi1.innerHTML = "感谢您的反馈！本次答题到此结束，请输入下一个问题。";
+                    newLi1.className = 'msgContent left';
+                    ul.appendChild(newLi1);
+                    let div1 = document.createElement('div');
+                    div1.style = 'clear:both';
+                    ul.appendChild(div1);
+                    questionBegin = true;
+                    // 把反馈送到后端
+                    ajax({
+                        url: '/qa/feedback?question=' + question,
+                    });
+                }
+                input.value = '';
+                newLi.scrollIntoView();//将元素滚动到可见位置
+                return;
+            }else if (isChinese(input.value) || isEnglish(input.value)) {   //输入包含中文
+                question = input.value;
+                ajax({
+                    url: '/qa/querytop3?question=' + question,
+                    success: function (res) {       // 传入的为String
+                        questions = res;
+                        questionSpider = res;
+                        if (questions!="没有匹配到该问题"){
+                            let output = "您问的问题是否为以下几个？请回复数字来选择您的问题：<br/>";
+                            let array = res.split("@");
+                            questionLength = array.length;
+                            for (var i = 0; i < array.length; i++){
+                                output += i.toString() + "." + array[i] +  "<br/>";
+                            }
+                            output += i.toString() + ".没有我想要的问题<br/>";
+                            let newLi = document.createElement('li');
+                            newLi.innerHTML = output;
+                            newLi.className = 'msgContent left';
+                            ul.appendChild(newLi);
+                            let div = document.createElement('div');
+                            div.style = 'clear:both';
+                            ul.appendChild(div);
+                            input.value = '';
+                            newLi.scrollIntoView();//将元素滚动到可见位置
+                        }
+                    }
+                });
+                // 没有匹配到问题就爬虫解决
+                if(questionSpider == "没有匹配到该答案"){
+                    ajax({
+                        url: '/qa/questionSpider?question=' + question,
+                        success: function (res) {
+                            questionSpider = res;
+                            let newLi = document.createElement('li');
+                            newLi.innerHTML = "没有匹配到该答案,已为您从网上寻找可能的答案如下:<br/>";
+                            newLi.className = 'msgContent left';
+                            ul.appendChild(newLi);
+                            let div = document.createElement('div');
+                            div.style = 'clear:both';
+                            ul.appendChild(div);
+                            input.value = '';
+                            newLi.scrollIntoView();//将元素滚动到可见位置
+
+                            let newLi1 = document.createElement('li');
+                            newLi1.innerHTML = res;
+                            newLi1.className = 'msgContent left';
+                            ul.appendChild(newLi1);
+                            let div1 = document.createElement('div');
+                            div1.style = 'clear:both';
+                            ul.appendChild(div1);
+                            input.value = '';
+                            newLi.scrollIntoView();//将元素滚动到可见位置
+                            questionBegin = false;
+                        }
+                    });
+                }
+                // let Li = document.createElement('li');
+                // let a = document.createElement('a');
+                // a.href = "http://localhost:8081/1";
+                // a.innerHTML = "网孔法例题";
+                // Li.className = 'msgContent left';
+                // Li.appendChild(a);
+                // ul.appendChild(Li);
+                let div = document.createElement('div');
+                div.style = 'clear:both';
+                ul.appendChild(div);
+                newLi.scrollIntoView();//将元素滚动到可见位置
+            } else if(!isNaN(input.value)){ // 输入为数字 两种情况 选择问题 选择子问题
+                if (input.value < questionLength){
+                    ajax({
+                        url: '/qa/getAnswerByOrder?order=' + input.value + '&' + 'questions=' + questions,      //传入字符串用@分隔开 根据order确定要什么问题
+                        success: function (res) {
+                            if (res.length < 1) {
+                                questionBegin = false;
+                                return;
+                            }
+                            let newLi = document.createElement('li');
+                            newLi.innerHTML = res;
+                            newLi.className = 'msgContent left';
+                            ul.appendChild(newLi);
+
+                            let div = document.createElement('div');
+                            div.style = 'clear:both';
+                            ul.appendChild(div);
+                            input.value = '';
+                            newLi.scrollIntoView();
+                            if (res == "输入错误，请重新输入！"){
+                                return;
+                            }
+                            questionBegin = false;
+                            questionListFlag = false;
+                        }
+                    });
+                }else{
+                    ajax({
+                        url: '/qa/feedback?question=' + question,
+                    });
+                    let newLi1 = document.createElement('li');
+                    newLi1.innerHTML = "不好意思哦，没有找到该问题，可以换个问题试试^_^。";
+                    newLi1.className = 'msgContent left';
+                    ul.appendChild(newLi1);
+                    let div1 = document.createElement('div');
+                    div1.style = 'clear:both';
+                    ul.appendChild(div1);
+
+                }
+
+            }
+            if(questionListFlag == false){// 后续提问
+                ajax({
+                    url: '/qa/subQuery?question=' + question,
+                    success: function (res) {
+                        //console.log(res);
+                        if (res.length < 1) {
+                            questionBegin = false;
+                            return;
+                        }
+                        questions = res;
+                        let array = res.split("@");
+                        let output = "";
+                        for (i = 0; i < array.length; i++) {
+                            output += i.toString() + "." + array[i] + "<br/>";
+                        }
+                        let newLi = document.createElement('li');
+                        newLi.innerHTML = '你还可以回复序号来了解以下问题：<br/>' + output;
+                        newLi.className = 'msgContent left';
+                        ul.appendChild(newLi);
+                        let div = document.createElement('div');
+                        div.style = 'clear:both';
+                        ul.appendChild(div);
+                        input.value = '';
+                        newLi.scrollIntoView();//将元素滚动到可见位置
+                        questionListFlag = true;
+                    }
+                });
+            }
+            if(questionBegin == false){
+                let newLi1 = document.createElement('li');
+                newLi1.innerHTML = "请问您对这次问答是否满意？回复y满意，n不满意";
+                newLi1.className = 'msgContent left';
+                ul.appendChild(newLi1);
+                let div1 = document.createElement('div');
+                div1.style = 'clear:both';
+                ul.appendChild(div1);
+                input.value = '';
+                newLi.scrollIntoView();//将元素滚动到可见位置
+            }
+            input.value = '';
+            newLi.scrollIntoView();
+        }
+
+        // 反馈入口点击后删除
+        document.getElementById('href').onclick = function () {
+            let parent = document.getElementById('a_feedback');
+            let child = document.getElementById('href');
+            parent.removeChild(child);
+
+        }
+
+    }
+    //判断是否为中文
+    function isChinese(s){
+        var patrn=/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
+        if(!patrn.exec(s)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    function isEnglish(s){
+        var patrn=/^[a-zA-Z]/;
+        if(!patrn.exec(s)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+    // 清空textarea
+    function ClearTextArea()
+    {
+        document.getElementById("msg_input").value = '';
+    }
+
+    function ajax(obj) {
+        let xhr = null;
+        if (window.ActiveXObject) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        } else {
+            xhr = new XMLHttpRequest();
+        }
+
+        //打开与服务器的连接
+        if (obj.method) {
+            xhr.open(obj.method, obj.url, false);
+        } else {
+            xhr.open('get', obj.url, false);
+        }
+        xhr.setRequestHeader("Content-Type",
+            "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Authorization",
+            "APPCODE 3e9dfb924f464e9593a95f9d2bbf4348")
+
+        xhr.onreadystatechange = function() {
+
+            if (xhr.readyState == 4) {
+                //数据接收完毕
+                if (xhr.status == 200) {
+                    //console.log('请求成功',xhr.responseText)
+                    if (obj.success) {
+                        obj.success(xhr.responseText)
+                    }
+
+                } else {
+                    //console.log(xhr.status,'请求出错')
+                    if (obj.failure) {
+                        obj.failure('请求失败')
+                    }
+                }
+            }
+        }
+        if (obj.method == undefined || obj.method.toLowerCase() == 'get') {
+            xhr.send(null);
+        } else {
+            xhr.send(obj.params);
+
+        }
+    }
+
+    function sleep(numberMillis) {
+        let now = new Date();
+        let exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
+
+    // ]]>
+</script>
+
+<body>
+<div th:include="navigation :: nav"></div>
+<!--<canvas id="canvas" width="1293" height="717"></canvas>-->
+<div id="main" class="main">
+    <ul id="content" class="content">
+        <li class="msgContent left">你好，有什么电路基础课程相关的问题可以问我哦</li>
+        <div style="clear: both"></div>
+    </ul>
+    <textarea id="msg_input" class="msgInput" th:placeholder="请输入您的问题"></textarea>
+    <button id="sendbtn" class="sendbtn">发送</button>
+</div>
+</body>
+
+<script type="text/javascript">
+    window.requestAnimFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+    let can = document.getElementById("canvas");
+    let cxt = can.getContext("2d");
+    can.width = 1920;
+    can.height = 950;
+    cxt.lineWidth = 0.3;
+    //初始链接线条显示位置
+    let mousePosition = {
+        x: 30 * can.width / 100,
+        y: 30 * can.height / 100
+    }
+    //圆形粒子对象参数
+    let dots = {
+        n: 500,//圆形粒子个数
+        distance: 50,//圆形粒子之间的距离
+        d_radius: 100,//粒子距离鼠标点的距离
+        array: []//保存n个圆形粒子对象
+    }
+    //创建随即颜色值
+    function colorValue(min) {
+        return Math.floor(Math.random() * 255 + min);
+    }
+    function createColorStyle(r, g, b) {
+        return "rgba(" + r + "," + g + "," + b + ", 1)";
+    }
+    //混合两个圆形粒子的颜色
+    function mixConnect(c1, r1, c2, r2) {//圆的颜色 半径
+        return (c1 * r1 + c2 * r2) / (r1 + r2);
+    };
+    //生成线条的颜色
+    function lineColor(dot1, dot2) {//获取具体的圆的颜色再计算
+        let color1 = dot1.color,
+            color2 = dot2.color;
+        let r = mixConnect(color1.r, dot1.radius, color2.r, dot2.radius);
+        let g = mixConnect(color1.g, dot1.radius, color2.g, dot2.radius);
+        let b = mixConnect(color1.b, dot1.radius, color2.b, dot2.radius);
+        return createColorStyle(Math.floor(r), Math.floor(g), Math.floor(b));
+    }
+    //生成圆形粒子的颜色对象
+    function Color(min) {
+        min = min || 0;
+        this.r = colorValue(min);
+        this.g = colorValue(min);
+        this.b = colorValue(min);
+        this.style = createColorStyle(this.r, this.g, this.b);
+    }
+    //创建圆形粒子对象
+    function Dot() {
+        //圆形粒子随机圆心坐标点
+        this.x = Math.random() * can.width;
+        this.y = Math.random() * can.height;
+        //x y 方向运动的速度值
+        this.vx = -0.5 + Math.random();
+        this.vy = -0.5 + Math.random();
+
+        this.radius = Math.random() * 5;
+        //this.color = "#ff3333";
+        this.color = new Color();
+    }
+    //绘制出圆形粒子
+    Dot.prototype.draw = function () {
+        cxt.beginPath();
+        cxt.fillStyle = this.color.style;
+        cxt.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        cxt.fill();
+    }
+    //添加圆形粒子
+    function createCircle() {
+        /*<![CDATA[*/  for (let i = 0; i < dots.n; i++) {
+            dots.array.push(new Dot());
+        }/*<![CDATA[*/
+    }
+    //绘制出圆形粒子
+    function drawDots() {
+        for (let i = 0; i < dots.n; i++) {
+            let dot = dots.array[i];
+            dot.draw();
+        }
+    }
+
+    //drawDots();
+    //移动
+    function moveDots() {
+        for (let i = 0; i < dots.n; i++) {
+            let dot = dots.array[i];
+            //当圆形粒子对象碰壁的时候就反弹回来
+            if (dot.y < 0 || dot.y > can.height) {
+                dot.vx = dot.vx;
+                dot.vy = -dot.vy;
+            } else if (dot.x < 0 || dot.x > can.width) {
+                dot.vx = -dot.vx;
+                dot.vy = dot.vy;
+            }
+            //给圆形粒子圆心坐标加上速度值移动圆形粒子
+            dot.x += dot.vx;
+            dot.y += dot.vy;
+        }
+    }
+    //链接粒子对象
+    function connectDots() {
+        for (let i = 0; i < dots.n; i++) {
+            for (let j = 0; j < dots.n; j++) {
+                iDot = dots.array[i];
+                jDot = dots.array[j];
+                /*<![CDATA[*/  if ((iDot.x - jDot.x) < dots.distance && (iDot.y - jDot.y) < dots.distance && (iDot.x - jDot.x) > -dots.distance && (iDot.y - jDot.y) > -dots.distance) {
+                    if ((iDot.x - mousePosition.x) < dots.d_radius && (iDot.y - mousePosition.y) < dots.d_radius && (iDot.x - mousePosition.x) > -dots.d_radius && (iDot.y - mousePosition.y) > -dots.d_radius) {
+                        cxt.beginPath();
+                        //cxt.strokeStyle = "yellow";
+                        cxt.strokeStyle = lineColor(iDot, jDot);
+                        cxt.moveTo(iDot.x, iDot.y);
+                        cxt.lineTo(jDot.x, jDot.y);
+                        cxt.closePath();
+                        cxt.stroke();
+                    }
+
+                }/*]]>*/
+            }
+        }
+    }
+    createCircle();
+    //让圆形粒子不断的移动
+    function animateDots() {
+        cxt.clearRect(0, 0, can.width, can.height);
+        moveDots();
+        connectDots()
+        drawDots();
+        requestAnimFrame(animateDots);
+    }
+    animateDots();
+
+    can.onmousemove = function (ev) {
+        var ev = ev || window.event;
+        mousePosition.x = ev.pageX;
+        mousePosition.y = ev.pageY;
+    }
+    can.onmouseout = function () {
+        mousePosition.x = can.width / 2;
+        mousePosition.y = can.height / 2;
+    }
+</script>
+
+</html>

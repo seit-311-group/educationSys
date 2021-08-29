@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>电路知识问答</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入Vue-->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<style type="text/css">
+    * {
+        font-size: 14px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .main {
+        position: relative;
+        margin: 20px auto;
+        border: 1px solid steelblue;
+        width: 600px;
+        height: 600px;
+    }
+
+    .msgInput {
+        display: block;
+        width: 590px;
+        height: 420px;
+        margin: 10px auto;
+        overflow-y: scroll;
+    }
+
+    .sendbtn {
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        right: 10px;
+    }
+    #herf {
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 0px;
+        left: 10px;
+        color: white;
+    }
+
+    #returnbtn{
+        position: absolute;
+        width: 100px;
+        height: 29px;
+        bottom: 5px;
+        left: 10px;
+    }
+
+    .content {
+        list-style: none;
+        width: 590px;
+        height: 120px;
+        margin: 5px auto;
+        border: 1px dotted #d1d3d6;
+        overflow-y: scroll;
+    }
+
+    .msgContent {
+        width: auto;
+        max-width: 600px;
+        height: auto;
+        word-break: break-all;
+        margin: 5px;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .content .left {
+        float: left;
+        text-align: left;
+        background-color: lightgrey;
+    }
+
+    .content .right {
+        float: right;
+        text-align: right;
+        background-color: yellowgreen;
+    }
+</style>
+<style>
+    html,body {
+        font-size: 14px;
+        font-family: "微软雅黑", Helvetica, Tahoma, Arial, sans-serif;
+        color: #000;
+        background-color: #30333F;
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        border: 0;
+    }
+    .cf:before,.cf:after {
+        display: table;
+        content: "";
+    }
+    .cf:after {
+        clear: both;
+    }
+    .cf {
+        *zoom: 1;
+    }
+    canvas{
+        position: fixed;
+        top: 52px;
+    }
+</style>
+
+
+<body>
+<div id="main">
+    <div th:include="navigation :: nav"></div>
+    <!--<canvas id="canvas" width="1293" height="717"></canvas>-->
+    <div id="area" class="main">
+        <ul id="content" class="content">
+            <li class="msgContent left">你好，请在这里写下你的意见哦</li>
+            <div style="clear: both"></div>
+            <li class="msgContent left" >您的问题是：{{query}}</li>
+            <div style="clear: both"></div>
+        </ul>
+        <textarea id="msg_input" class="msgInput" v-model="satisfaction" th:placeholder="在这里写下你的意见哦"></textarea>
+        <button id="sendbtn" class="sendbtn" v-on:click="submit">提交</button>   <!-- html代码中，不能使用vue的@click，而应该使用v-on:click-->
+    </div>
+</div>
+
+</body>
+<script>
+    // <![CDATA[
+
+    const app = {
+        data(){
+            return {
+                query: '',
+                satisfaction: ''
+            }
+        },
+        // 加载页面时执行方法
+        mounted:function () {
+            // 异步方法返回值为promise对象，接收时需要通过.then(res=>{})接受，值存在res中。
+            this.loadQuery().then(res => {
+                this.query = res;   //把需要绑定的变量，赋值给data里面声明的变量
+                console.log(res);
+            });
+        },
+        methods: {
+            async loadQuery(){
+                let res1 = '';
+                // 因axios返回值是异步操作，获取返回值时，请求操作还未完成，就已经执行了赋值，导致结果位undefined
+                await axios.post('/qa/loadQuery',{
+                }).then(function (res){
+                    res1 = res.data;
+                })
+                return res1;
+            },
+            submit(){
+                axios.post('qa/feedback2',{
+                    satisfaction: this.satisfaction,
+                }).then(function (res){
+                    alert(res.data);
+                    window.close();
+                }).catch(function (error){
+                    alert(error)
+                })
+            }
+        }
+    }
+    Vue.createApp(app).mount('#main')
+    // ]]>
+</script>
+
+</html>

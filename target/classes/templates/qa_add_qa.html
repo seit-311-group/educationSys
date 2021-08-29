@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>添加问题答案对</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入Vue-->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+<style type="text/css">
+    #area{
+        margin:0 auto;
+        width: 1300px;
+        height: 640px;
+        border: 1px solid black;
+    }
+
+    #inputarea{
+        display: flex;
+        justify-content: center;
+        margin-top: 2px;
+        width: 1300px;
+        height: 100px;
+        /*border: 1px solid red;*/
+    }
+
+    #searcharea{
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+        width: 1300px;
+        height: 40px;
+        /*border: 1px solid black;*/
+    }
+
+    #searchtable{
+        margin:0 auto;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        width: 1200px;
+        height: 442px;
+        border: 1px solid black;
+        overflow-y: scroll;
+    }
+
+    #submit{
+        height: 34px;
+    }
+
+    #sub-all{
+        margin-right: 49px;
+        float: right;
+    }
+
+    tr{
+        height: 37px;
+    }
+
+
+    .form-control{
+        width: 500px;
+    }
+
+    p{
+        margin-left: 10px;
+        align-self: center;
+    }
+
+</style>
+<body>
+
+<div th:include="navigation :: nav"></div>
+    <div id="area">
+        <div id="inputarea">
+                <p><strong>请输入问题&nbsp;&nbsp;</strong></p>
+                <textarea class="form-control" rows="4" v-model="questionFromUser" id="question" placeholder="请输入问题"></textarea>
+                <p><strong>请输入答案&nbsp;&nbsp;</strong></p>
+                <textarea class="form-control" rows="4" v-model="answerFromUser" id="answer" placeholder="请输入答案"></textarea>
+        </div>
+
+
+        <div id="searcharea">
+            <div class="form-group">
+                <input name="search" style="width: 220px" type="text" class="form-control" v-model="search" placeholder="请输入问题中包含的关键词"/>
+            </div>
+            <button id="submit"  class="btn btn-default" v-on:click="submit">在库中搜索含有关键词的问题</button>
+        </div>
+
+        <div id="searchtable">
+            <table style="width: 1000px" class="table table-striped table table-hover">
+                <thead>
+                    <tr>
+                        <td style="width: 10px"><strong>#</strong></td>
+                        <td><strong>题目</strong></td>
+                        <td style="width: 150px"><strong>设为此问题的父节点</strong></td>
+                        <td style="width: 150px"><strong>设为此问题的子节点</strong></td>
+                    </tr>
+                </thead>
+                <tr v-for="(question,index) in questionList">       <!-- 第一个是值，第二个是键，第三个是索引 -->
+                    <td v-show="seen">{{index+1}}</td>   <!-- 每输出一行数据，序号+1 -->
+                    <td v-show="seen">{{question}}</td>
+                    <td style="text-align: center">
+                        <label class="radio-inline" >
+                            <input type="radio" v-on:change="retainRecord(question)" v-on:click="controlSingel($event,question)" :name="index" id="fa" value="option1" />
+                        </label>
+                    </td>
+                    <td style="text-align: center">
+                        <label class="radio-inline">
+                            <input type="radio" v-on:change="retainRecord(question)" v-on:click="controlSingel($event,question)" :name="index" id="ch" value="option2" />
+                        </label>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+            <a style="height: 30px" type="submit" id="sub-all" class="btn btn-default" v-on:click="getAll">提交</a>
+        </div>
+
+</body>
+
+<script>
+    // <![CDATA[
+    const app = {
+        data() {
+            return{
+                search: '',
+                questionList: [],
+                seen: false,
+                changed: false,
+                map: {},
+                questionFromUser: '',
+                answerFromUser: ''
+            }
+        },
+        mounted: function() {
+            this.map = new Map();
+        },
+        methods: {
+             submit(){
+                 axios.post('/addQA/search',{
+                    search: this.search
+                    }).then(response =>{
+                        if(response.data == "无搜索结果"){
+                            alert(response.data);
+                        }else{
+                            this.seen = true;
+                            this.questionList = response.data.split("@");
+                        }
+
+                })
+            },
+            // 选中加入map中 没选中删除
+            controlSingel($event,question) {
+                var _this = this;
+                window.setTimeout(() => {
+                    if (!this.changed) {
+                        $event.target.checked = false;
+                        this.map.delete(question);
+                    }
+                    _this.changed = false;
+                }, 0);
+            },
+            retainRecord(question){
+                this.map.set(question,event.target.id);
+                this.changed = true;
+            },
+            getAll() {
+                var question_answer = '';
+                if (this.questionFromUser == this.answerFromUser){
+                    alert('问题和答案不能一样,请重新输入');
+                }else if(this.questionFromUser == ''){
+                    alert('问题不能为空');
+                }else if(this.answerFromUser == ''){
+                    alert('答案不能为空');
+                }else {
+                    this.map.set(this.questionFromUser, 'question');
+                    this.map.set(this.answerFromUser, 'answer');
+                    this.map.forEach(function(value, key) {
+                        question_answer += value + '@' + key + ',';
+                    })
+                    console.log(question_answer);
+                    axios.post('/addQA/add', {
+                        res: question_answer
+                    }).then(response=>{
+                        alert(response.data);
+                        if(response.data == '添加成功'){
+                            window.location = "/addQA";
+                        }
+                    })
+                }
+
+            }
+        }
+    }
+    Vue.createApp(app).mount('#area')
+    // ]]>
+</script>
+</html>

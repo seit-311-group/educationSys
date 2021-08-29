@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sysu.circuitQA.mapper.RecordMapperCustom" >
-    <select id="findAll" resultType="cn.sysu.circuitQA.pojo.Records">select * from record</select>
-    <select id="getAllQuery" resultType="java.lang.String">SELECT query FROM record</select>
+<mapper namespace="cn.sysu.educationSys.mapper.RecordMapperCustom" >
+    <select id="findAll" resultType="cn.sysu.educationSys.pojo.Records">select * from qa_records</select>
+    <select id="getAllQuery" resultType="java.lang.String">SELECT query FROM qa_records</select>
     <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from qa_records where studentId = #{studentId} and (question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
+        or query like concat('%',#{search},'%'))
+    </select>
+    <select id="pageList" resultType="cn.sysu.educationSys.pojo.Records">
+        select * from qa_records where studentId = #{studentId} and (question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
+        or query like concat('%',#{search},'%'))  limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getCountAll" resultType="java.lang.Integer">
         select count(*) from qa_records where question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
         or query like concat('%',#{search},'%')
     </select>
-    <select id="pageList" resultType="cn.sysu.circuitQA.pojo.Records">
+    <select id="pageListAll" resultType="cn.sysu.educationSys.pojo.Records">
         select * from qa_records where question like concat('%',#{search},'%') or answer like concat('%',#{search},'%')
         or query like concat('%',#{search},'%') limit #{pageNo},#{pageSize}
     </select>

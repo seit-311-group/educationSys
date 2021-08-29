@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>个人信息</title>
+    <!-- 引入bootstrap-->
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+</head>
+<style type="text/css">
+
+    #main{
+        display: flex;
+        justify-content: center;
+    }
+
+
+
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 100%;
+    }
+
+      .name-role {
+          font-size: 16px;
+          padding: 5px;
+          text-align:center;
+      }
+    .sender{
+        text-align:center;
+    }
+    .registe-info{
+        text-align: center;
+        padding-top:10px;
+    }
+    .personal-relation {
+        font-size: 16px;
+        padding: 0px 5px 15px;
+        margin-right: 1px;
+        width: 100%
+    }
+
+    .relation-item {
+        padding: 12px;
+
+    }
+    .dialog-footer{
+        padding-top:10px ;
+        padding-left: 10%;
+    }
+
+    .el-col {
+        border-radius: 4px;
+    }
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+    .bg-purple {
+        background: #d3dce6;
+    }
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
+    }
+</style>
+
+<body style="background-color: #efefef">
+    <div th:include="navigation :: nav"></div>
+    <div id="main">
+        <div id="main_area"  style="width: 1200px">
+            <el-main>
+                <el-row :gutter="20" style="margin-top:10px;">
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple">
+                            <el-card class="box-card">
+                                <div slot="header" class="clearfix">
+                                    <span>个人中心</span>
+                                    <el-col :span="12">
+                                        <div class="sub-title">circle</div>
+                                        <div class="demo-basic--circle">
+                                            <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
+                                            <div class="block" v-for="size in sizeList" :key="size">
+                                                <el-avatar :size="size" :src="circleUrl"></el-avatar>
+                                            </div>
+                                        </div>
+                                    </el-col>
+                                </div>
+                                <div class="name-role">
+                                    <span class="sender">Admin - {{dataForm.nickName}}</span>
+                                </div>
+                                <div class="registe-info">
+                                <span class="registe-info">
+                                    注册时间：
+                                <li class="fa fa-clock-o"></li>
+                                    2020/4/10 9:40:33
+                                </span>
+                                </div>
+                                <el-divider></el-divider>
+                                <div class="personal-relation">
+                                    <div class="relation-item">手机号:  <div style="float: right; padding-right:20px;">{{dataForm.phone}}</div></div>
+                                </div>
+                                <div class="personal-relation">
+                                    <div class="relation-item">所属企业:  <div style="float: right; padding-right:20px;">杭州诚聚</div></div>
+                                </div>
+                                <div class="personal-relation">
+                                    <div class="relation-item">首页链接:  <div style="float: right; padding-right:20px;">{{dataForm.homeUrl}}</div></div>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+                    <el-col :span="16">
+                        <div class="grid-content bg-purple">
+                            <el-card class="box-card">
+                                <div slot="header" class="clearfix">
+                                    <span>基本资料</span>
+                                </div>
+                                <div>
+                                    <el-form label-width="80px" v-model="dataFrom" size="small" label-position="right">
+                                        <el-form-item label="用户昵称" prop="nickName">
+                                            <el-input  auto-complete="off" v-model="dataForm.nickName"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="手机号" prop="phone">
+                                            <el-input auto-complete="off" v-model="dataForm.phone"></el-input>
+                                        </el-form-item>
+                                        <el-form-item label="首页链接" prop="homeUrl">
+                                            <el-input  maxlength="18" v-model="dataForm.homeUrl"></el-input>
+                                        </el-form-item>
+                                    </el-form>
+                                    <div slot="footer" class="dialog-footer">
+                                        <el-button size="mini" type="primary">提交</el-button>
+                                        <el-button size="mini" type="warning" >关闭</el-button>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </div>
+                    </el-col>
+
+                </el-row>
+            </el-main>
+        </div>
+    </div>
+</body>
+<script>
+    // <![CDATA[
+    new Vue({
+        el: '#main',
+        data(){
+            return{
+                dataForm:{
+                    nickName: '超级管理员',
+                    phone: '173567777777',
+                    homeUrl: 'http://www.baidu.com'
+                }
+            }
+        }
+    })
+    // ]]>
+</script>
+</html>

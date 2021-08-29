@@ -36,7 +36,7 @@
                 let succeed = "登陆成功";
                 alert(res);
                 if(res == succeed){
-                    window.location.href= "/";
+                    window.location.href="/";
                 }
             }
         });
@@ -92,69 +92,74 @@
 </script>
         <!--bootstrap模板-->
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">中山大学</span>
-                </button>
-                <a class="navbar-brand" href="/">电路问答系统</a>
-            </div>
+    <div id="main">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">中山大学</span>
+                    </button>
+                    <a class="navbar-brand" href="/">电路知识学习系统</a>
+                </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
-                    <li th:if="${session.studentName != null}"><a href="http://localhost:8081/">答题系统</a></li>
-                    <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
-                    <li class="dropdown" th:if="${session.studentName != null}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.studentName}"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">我的主页</a></li>
-                            <li><a href="#">设置中心</a></li>
-                            <li><a href="#">退出登录</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-
-    <div class="banner" >
-        <div id="content" >
-            <div class="login_form" >
-                <div class="login_box">
-                    <div class="tit">
-                        <h1>欢迎登录</h1>
-                    </div>
-                    <div class="form">
-                        <form  method="post">
-                            <div class="input-group">
-                                <span  class="input-group-addon" id="basic-addon1">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>
-                                <input id="id" name="id" type="text" class="form-control" th:placeholder="老师登录请输入学号为1" aria-describedby="basic-addon1"/>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
+                        <li th:if="${session.studentName != null}"><a href="http://localhost:8081/">答题系统</a></li>
+                        <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
+                        <li class="dropdown" th:if="${session.studentName != null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.studentName}"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">我的主页</a></li>
+                                <li><a href="#">设置中心</a></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div id="main_area">
+            <div class="banner" >
+                <div id="content" >
+                    <div class="login_form" >
+                        <div class="login_box">
+                            <div class="tit">
+                                <h1>欢迎登录</h1>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon2">学生密码</span>
-                                <input id="password" name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
+                            <div class="form">
+                                <form>
+                                    <div class="input-group">
+                                        <span  class="input-group-addon" id="basic-addon1">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</span>
+                                        <input id="id" name="id" type="text" class="form-control" th:placeholder="老师登录请输入学号为1" aria-describedby="basic-addon1"/>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon2">学生密码</span>
+                                        <input id="password" name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1"/>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <!--<button   class="btn btn-default" id="sub_btn1">登录</button>-->
+                                        <!--致命错误 button点击后会自动刷新页面-->
+                                        <a class="btn btn-default" id="sub_btn1">登录</a>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button"  onclick="javascript:window.location.href='/student/regist'" value="去注册页面" class="btn btn-default" id="sub_btn2">注册账号</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="btn-group" role="group" aria-label="...">
-                                <!--<button   class="btn btn-default" id="sub_btn1">登录</button>-->
-                                <!--致命错误 button点击后会自动刷新页面-->
-                                <a class="btn btn-default" id="sub_btn1">登录</a>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button"  onclick="javascript:window.location.href='/student/regist'" value="去注册页面" class="btn btn-default" id="sub_btn2">返回注册页面</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
     <div class="bottom" style="text-align: center">
 			<span class="bottom_text">
-				电路问答系统.Copyright &copy;2021
+				电路知识学习系统.Copyright &copy;2021
 			</span>
     </div>
 

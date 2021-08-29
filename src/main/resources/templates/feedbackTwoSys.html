@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>意见建议</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- 引入bootstrap-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+
+</head>
+<style type="text/css">
+    #main {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    #el-main{
+        display: flex;
+        justify-content: center;
+        width: 1300px;
+        height: 500px;
+    }
+
+    #main_area{
+        width: 980px;
+        height: 640px;
+        display: flex;
+        justify-content: center;
+        /*border: 1px solid black;*/
+    }
+
+    #text{
+        font-family: "微软雅黑", Helvetica, Tahoma, Arial, sans-serif;
+        font-size: 16px;
+    }
+
+    .el-main{
+
+        margin-top: 30px;
+        height: 400px;
+        border: 1px solid #bdbdbd;
+        background-color: white;
+    }
+    .el-row{
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+<body style="background-color: #efefef">
+    <div th:include="navigation :: nav"></div>
+    <div id="main">
+        <div id="main_area">
+            <el-main v-loading="loading">
+                <el-row>
+                    <span id="text">
+                    请在下面留下您的意见或者建议喔！
+                    </span>
+                </el-row>
+                <el-row
+                        style="margin-top: 10px"
+                >
+                    <el-input
+                            style="width:500px;"
+                            type="textarea"
+                            :autosize="{ minRows: 10, maxRows: 20}"
+                            placeholder="请输入意见或者建议"
+                            v-model="textarea1">
+                    </el-input>
+                </el-row>
+                <el-row>
+                    <el-button
+                            type="primary"
+                            style="margin-top: 10px"
+                            v-on:click="submit"
+                    >提交</el-button>
+                </el-row>
+
+            </el-main>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    // <![CDATA[
+    new Vue({
+        el: '#main',
+        data() {
+            return {
+                textarea1: '',
+                loading: false
+            }
+        },
+        methods: {
+            async submit() {
+                if (this.textarea1.trim() == ''){
+                    this.error();
+                    return;
+                }
+                this.loading = true;
+                await axios.post('/feedbackTwoSys/submit',{
+                    feedback: this.textarea1
+                })
+                this.loading = false;
+                this.success();
+                this.textarea1 = '';
+            },
+            success() {
+                this.$notify({
+                    title: '成功',
+                    message: '我们已经收到了您的反馈啦！谢谢！',
+                    type: 'success'
+                });
+            },
+            error() {
+                this.$notify.error({
+                    title: '错误',
+                    message: '输入不能为空喔！',
+                });
+                this.textarea1 = '';
+            }
+        }
+    })
+    // ]]>
+</script>
+</html>

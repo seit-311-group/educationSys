@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+</head>
+<body>
+<div id="main">
+    <el-button v-on:click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+    </el-dialog>
+    <answer_system></answer_system>
+</div>
+</body>
+
+<script>
+    Vue.component('answer_system', {
+        template: '<h1>asdasdsdsdsds</h1>'
+    })
+    new Vue({
+        el: '#main',
+        data:{
+            visible: false
+        }
+    })
+
+</script>
+</html>

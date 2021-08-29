@@ -16,11 +16,14 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.userId == 1}"><a href="/addQA">添加问题答案对</a></li>
-                    <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
-                    <li th:if="${session.studentName != null}"><a href="#">知识图谱</a></li>
-                    <li th:if="${session.studentName != null}"><a href="http://localhost:8081/index">答题系统</a></li>
+                    <!--172.18.217.145-->
+                    <li th:if="${session.studentName != null}"><a href="/answer_index"><strong>答题系统</strong></a></li>
+                    <!--<li th:if="${session.studentName != null}"><a href="#">知识图谱</a></li>-->
+                    <li th:if="${session.studentName != null}"><a href="/systemQA"><strong>问答系统</strong></a></li>
                     <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
+                    <li th:if="${session.userId == 1}"><a href="/addQA">添加问题答案对</a></li>
+                    <li th:if="${session.studentName != null}"><a href="/feedbackTwoSys">意见建议</a></li>
+
                     <li class="dropdown" th:if="${session.studentName != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
@@ -30,6 +33,7 @@
                         <ul class="dropdown-menu">
                             <!--<li><a href="#">我的问题</a></li>-->
                             <!--<li><a href="#">设置中心</a></li>-->
+                            <li><a href="/homepage" style="font-size: 14px">个人信息</a></li>
                             <li><a href="/student/logOut">退出登录</a></li>
                         </ul>
                     </li>
@@ -41,6 +45,7 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div>
+
 
 </body>
 

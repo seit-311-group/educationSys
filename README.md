@@ -1,6 +1,6 @@
-# circuitQA
+#### **智能教育系统 包括问答系统和答题系统两部分**
 
-采用技术：java8、js、springboot、vue2、mybatis、
+采用技术：java8、js、springboot、vue2、mybatis、Es、jsoup等、算法正在研究中
 
 A QA-system about circuit knowledge for students
 20200920 增加了HanLP工具的使用，参照https://github.com/hankcs/HanLP/tree/1.x

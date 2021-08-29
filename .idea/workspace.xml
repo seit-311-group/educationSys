@@ -9,299 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2576c9c4-7f89-4ccf-94a4-8147a6a52c81" name="Default Changelist" comment="202104020 addQA feedback debug">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/EducationSys.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/Interceptor/SessionInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/Interceptor/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/FeedBackController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/PageIndexController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/answer/AnswerQuestionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/answer/AnswerRecordsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/answer/QueryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/gRPCclient/KeywordServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/AnswerRecordsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/FeedbackMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/option_tMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/pointMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/questionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/subquestionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/AnswerRecords.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/AnswerRecordsExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/Feedback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/FeedbackExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/option_t.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/option_tExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/pointExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/question.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/questionExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/subquestion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/subquestionExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/AnswerRecordsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/CookieSessionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/FeedBackService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/QuestionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/StudentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/AnswerRecordsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/CookieSessionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/FeedBackServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/QuestionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/StudentServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/AnswerRecordsMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/FeedbackMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/option_tMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/pointMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/questionMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/subquestionMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RC/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RC/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RC/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RC/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RL/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RL/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RL/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/一阶RL/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/交流网孔法/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/交流网孔法/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/交流节点法/part1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/交流节点法/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/交流节点法/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/pic6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/叠加原理/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/part1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/part2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/pic8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/part1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/part2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/pic6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/戴维南1/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/pic8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电容/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/pic8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/电感/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/网孔法/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/网孔法/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/节点法/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/节点法/picture2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/answer_index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/answer_question.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/feedbackTwoSys.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/homepage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/qa_feedback.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/qa_index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/qa_record.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/qa_system.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/CookieSessionServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/CircuitQA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/config/ElasticSearchClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/config/ElasticSearchClientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/AddQAController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/qa/AddQAController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PageIndexController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/PicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/PicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/qa/QaQuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/controller/getRecordByDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/controller/getRecordByDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/gRPCclient/KGClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/gRPCclient/KGClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/gRPCclient/KeywordServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/gRPCclient/matchClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/gRPCclient/matchClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/KeywordsAllMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/KeywordsAllMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/KeywordtimesallMapperCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/KeywordtimesallMapperCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/QuestionSpiderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/QuestionSpiderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/RecordMapperCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/RecordMapperCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/RecordsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/RecordsMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/StudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/StudentMapperCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/StudentMapperCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/circuitQaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/circuitQaMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/mapper/keyWordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/mapper/keyWordMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/KeywordsAll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/KeywordsAll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/KeywordsAllExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/KeywordsAllExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/QuestionSpider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/QuestionSpider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/QuestionSpiderExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/QuestionSpiderExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Records.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/Records.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/RecordsExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/RecordsExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/StudentExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/StudentExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/circuitQa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/circuitQaExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/circuitQaExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/keyWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/pojo/keyWordExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/pojo/keyWordExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/AddQAService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/AddQAService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CircuitQAService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/CircuitQAService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/CoreProcessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/CoreProcessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/KeyWordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/KeyWordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/KeywordtimesallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/KeywordtimesallService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/RecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/StudentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/AddQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/AddQAServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/CircuitQAServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/KeyWordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/KeywordtimesallServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/KeywordtimesallServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/service/serviceImpl/RecordServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/ExtractUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/utils/ExtractUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/HtmlParseUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/utils/HtmlParseUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/KGUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/utils/KGUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/sysu/circuitQA/utils/MatchUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/sysu/educationSys/utils/MatchUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/KeywordsAllMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/KeywordsAllMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/KeywordtimesallMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/KeywordtimesallMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/QuestionSpiderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/QuestionSpiderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RecordsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RecordsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/circuitQaMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/keyWordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/keyWordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/recordMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/recordMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/GC/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addQA.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/qa_add_qa.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/feedback.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recordStudent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/regist.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/regist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/AddQATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/AddQATest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/CircuitQAServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/CircuitQAServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/DatabaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ExtractTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/ExtractTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/KeyWordServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/KeyWordServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/ProcessServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/ProcessServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/SearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/SearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/grpcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/grpcTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/sysu/circuitQA/hanlpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/sysu/educationSys/hanlpTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/CircuitQA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/AddQAController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/PageIndexController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/PicController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/QuestionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/StudentController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/controller/getRecordByDate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/gRPCclient/KGClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/gRPCclient/KeywordServer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/gRPCclient/matchClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/KeywordsAllMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/KeywordtimesallMapperCustom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/QuestionspiderMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/RecordMapperCustom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/RecordsMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/StudentMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/StudentMapperCustom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/circuitQaMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/mapper/keyWordMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/KeywordsAll.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/KeywordsAllExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/KeywordsAllExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/KeywordsAllExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/KeywordsAllExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/Questionspider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/QuestionspiderExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/QuestionspiderExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/QuestionspiderExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/QuestionspiderExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/Records.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordsExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordsExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordsExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/RecordsExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/StudentExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/StudentExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/StudentExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/StudentExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/circuitQaExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/keyWord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/keyWordExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/keyWordExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/keyWordExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/pojo/keyWordExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/AddQAService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/CircuitQAService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/CoreProcessService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/KeyWordService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/KeywordtimesallService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/RecordService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/StudentService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/AddQAServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/CircuitQAServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/KeyWordServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/KeywordtimesallServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/RecordServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/service/serviceImpl/StudentServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/utils/ExtractUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/utils/HtmlParseUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/utils/KGUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/sysu/circuitQA/utils/MatchUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/KeywordsAllMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/KeywordsAllMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/KeywordtimesallMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/KeywordtimesallMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/QuestionspiderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/QuestionspiderMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/RecordsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/RecordsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StudentMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/StudentMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/circuitQaMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/keyWordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/keyWordMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/recordMapperCustom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/recordMapperCustom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/GC/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/addQA.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/feedback.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/recordStudent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/regist.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/regist.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/AddQATest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/CircuitQAServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/DatabaseTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/ExtractTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/KeyWordServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/ProcessServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/SearchTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/grpcTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/cn/sysu/circuitQA/hanlpTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -433,13 +142,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -811,6 +522,7 @@
       <workItem from="1629722812408" duration="105000" />
       <workItem from="1629722930139" duration="5000" />
       <workItem from="1630222884632" duration="1410000" />
+      <workItem from="1630226023071" duration="333000" />
     </task>
     <task id="LOCAL-00001" summary="20200826">
       <created>1598429152647</created>

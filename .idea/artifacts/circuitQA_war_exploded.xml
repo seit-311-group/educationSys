@@ -52,6 +52,9 @@
           <element id="library" level="project" name="Maven: ognl:ognl:3.0.8" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.21.0-GA" />
           <element id="library" level="project" name="Maven: org.unbescape:unbescape:1.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: net.sourceforge.nekohtml:nekohtml:1.9.22" />
+          <element id="library" level="project" name="Maven: xerces:xercesImpl:2.11.0" />
+          <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.4.01" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.14.RELEASE" />
           <element id="library" level="project" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1" />
           <element id="library" level="project" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-autoconfigure:1.1.1" />

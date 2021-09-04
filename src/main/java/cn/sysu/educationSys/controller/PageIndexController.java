@@ -41,7 +41,7 @@ public class PageIndexController {
     public String systemQA() {
 
         // cookieSessionService.addSession();
-        return "qa_index";}
+        return "qa_system";}
 
     @RequestMapping("/student/login")
     public String login() {

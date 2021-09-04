@@ -51,6 +51,11 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
+		<!--thymeleaf 语法过于严格，比较死板，尤其是对html5的支持不是很好。如果项目选型中选定了thymeleaf，那可以考虑去掉她的严格验证会好些。-->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

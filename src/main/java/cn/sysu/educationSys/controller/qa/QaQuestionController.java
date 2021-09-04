@@ -3,6 +3,7 @@ package cn.sysu.educationSys.controller.qa;
 import cn.sysu.educationSys.mapper.QuestionSpiderMapper;
 import cn.sysu.educationSys.pojo.QuestionSpider;
 import cn.sysu.educationSys.pojo.circuitQa;
+import cn.sysu.educationSys.service.CircuitQAService;
 import cn.sysu.educationSys.service.CoreProcessService;
 import cn.sysu.educationSys.service.KeywordtimesallService;
 import cn.sysu.educationSys.service.RecordService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import static cn.sysu.educationSys.service.CoreProcessService.keywordSave;
 
@@ -35,6 +37,9 @@ public class QaQuestionController {
 
     @Autowired
     KeywordtimesallService keywordtimesallService;
+
+    @Autowired
+    CircuitQAService circuitQAService;
 
 
     /**
@@ -110,6 +115,11 @@ public class QaQuestionController {
     public String loadQuery(){
         System.out.println(queryFromStudent);
         return queryFromStudent;
+    }
+
+    @GetMapping("/loadAllQuestions")
+    public List<String> loadAllQuestions(){
+        return circuitQAService.findAllQuestions();
     }
 
     // @RequestMapping("/questionList")

@@ -6,6 +6,7 @@ import cn.sysu.educationSys.service.CircuitQAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,16 @@ public class CircuitQAServiceImpl implements CircuitQAService {
     public List<circuitQa> importQuestions() {
         circuitQaExample circuitQaExample = new circuitQaExample();
         return circuitQaMapper.selectByExample(circuitQaExample);
+    }
+
+    @Override
+    public List<String> findAllQuestions() {
+        List<circuitQa> circuitQas = importQuestions();
+        List<String> list = new ArrayList<>();
+        for (circuitQa circuitQa : circuitQas) {
+            list.add(circuitQa.getQuestion());
+        }
+        return list;
     }
 
     /**

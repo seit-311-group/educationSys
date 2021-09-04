@@ -12,22 +12,36 @@
 </head>
 <body>
 <div id="main">
-    <el-button v-on:click="visible = true">Button</el-button>
-    <el-dialog :visible.sync="visible" title="Hello world">
-        <p>Try Element</p>
-    </el-dialog>
-    <answer_system></answer_system>
+
 </div>
 </body>
 
 <script>
-    Vue.component('answer_system', {
-        template: '<h1>asdasdsdsdsds</h1>'
-    })
     new Vue({
         el: '#main',
-        data:{
-            visible: false
+        data(){
+            return{
+                questionList: [],
+                Analyzing: '正在分析您的问题...',
+                dialogVisible1: false,
+                dialogVisible2: false,
+                time: '',
+                input: '',
+                upload: '',
+                answer: '',
+                timeout:  null,
+                rate: null
+            }
+        },
+        mounted: function (){
+            this.loadAll();
+        },
+        methods: {
+            async loadAll() {
+                await axios.get('localhost:8080/qa/loadAllQuestions',).then(response =>{
+                    console.log(response.data);
+                })
+            }
         }
     })
 

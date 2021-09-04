@@ -8,6 +8,8 @@ import java.util.Map;
 public interface CircuitQAService {
     List<circuitQa> importQuestions();
 
+    List<String> findAllQuestions();
+
     Map findIdByQuestion(String question, List<circuitQa> circuitQaList);
 
     void updateQuestion(int id, String childrenID, String parentId);

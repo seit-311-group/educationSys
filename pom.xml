@@ -38,11 +38,11 @@
 			</exclusions>
 		</dependency>
 
-		<!--Spring Boot提供了一个开发者工具，可以监控classpath路径上的文件。只要源码或配置文件发生修改，Spring Boot应用可以自动重启。在开发阶段，这个功能比较有用。-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
+		<!--&lt;!&ndash;Spring Boot提供了一个开发者工具，可以监控classpath路径上的文件。只要源码或配置文件发生修改，Spring Boot应用可以自动重启。在开发阶段，这个功能比较有用。&ndash;&gt;-->
+		<!--<dependency>-->
+		<!--	<groupId>org.springframework.boot</groupId>-->
+		<!--	<artifactId>spring-boot-devtools</artifactId>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>mysql</groupId>

@@ -461,85 +461,84 @@
                     return response.data;
                 })
             },
-            // htmlValue: function (val) {
-            //     let key = this.input;
-            //     if (key.length > 0) {
-            //         return val.replace(
-            //             new RegExp(key, "g"),
-            //             "<span style='color:red;'>" + key + "</span>"
-            //         );
-            //     }
-            //     return val;
-            // },
-            // querySearchAsync(queryString, cb) {
-            //     var questionList = this.questionList;
-            //     var results = queryString ? questionList.filter(this.createStateFilter(queryString)) : questionList;
-            //
-            //     clearTimeout(this.timeout);
-            //     this.timeout = setTimeout(() => {
-            //         cb(results);
-            //     }, 3000 * Math.random());
-            // },
-            // createStateFilter(queryString) {
-            //     return (state) => {
-            //         return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-            //     };
-            // },
-            // handleSelect(item) {
-            //     console.log(item);
-            // },
-            //
+            htmlValue: function (val) {
+                let key = this.input;
+                if (key.length > 0) {
+                    return val.replace(
+                        new RegExp(key, "g"),
+                        "<span style='color:red;'>" + key + "</span>"
+                    );
+                }
+                return val;
+            },
+            querySearchAsync(queryString, cb) {
+                var questionList = this.questionList;
+                var results = queryString ? questionList.filter(this.createStateFilter(queryString)) : questionList;
+
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    cb(results);
+                }, 3000 * Math.random());
+            },
+            createStateFilter(queryString) {
+                return (state) => {
+                    return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+                };
+            },
+            handleSelect(item) {
+                console.log(item);
+            },
+
             load(){
                 this.time = this.getTime();
             },
-            // getTime(){
-            //     let now= new Date();
-            //     let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
-            //     let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
-            //     let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
-            //     let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
-            //     let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
-            //     let str = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
-            //     return str;
-            // },
-            // handleClose(done) {
-            //     this.$confirm('确认关闭？')
-            //         .then(_ => {
-            //             done();
-            //         })
-            //         .catch(_ => {});
-            // },
-            // submit(){
-            //     if (this.input.trim() == ''){
-            //         this.error();
-            //         return;
-            //     }
-            //     let query =  this.input;
-            //     this.input = '';
-            //     let answer_area_padding = document.getElementById('answer_area_padding');
-            //     this.createNewAnswerSystem(answer_area_padding);
-            //
-            // },
-            // error() {
-            //     this.$notify.error({
-            //         title: '错误',
-            //         message: '输入不能为空喔！',
-            //     });
-            //     this.input = '';
-            // },
-            // createNewAnswerSystem(answer_area_padding){
-            //     let answer_system_area = document.createElement('div');
-            //     let avatar_and_answer = document.createElement('div');
-            //     let time = document.createElement('div');
-            //     time.className = 'time';
-            //     time.innerHTML = this.getTime();
-            //     answer_area_padding.appendChild(time);
-            //
+            getTime(){
+                let now= new Date();
+                let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
+                let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
+                let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
+                let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
+                let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
+                let str = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
+                return str;
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        done();
+                    })
+                    .catch(_ => {});
+            },
+            submit(){
+                if (this.input.trim() == ''){
+                    this.error();
+                    return;
+                }
+                let query =  this.input;
+                this.input = '';
+                let answer_area_padding = document.getElementById('answer_area_padding');
+                this.createNewAnswerSystem(answer_area_padding);
+
+            },
+            error() {
+                this.$notify.error({
+                    title: '错误',
+                    message: '输入不能为空喔！',
+                });
+                this.input = '';
+            },
+            createNewAnswerSystem(answer_area_padding){
+                let answer_system_area = document.createElement('div');
+                let avatar_and_answer = document.createElement('div');
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+                answer_area_padding.appendChild(time);
 
             }
 
 
-        // }
+        }
     })
 
 </script>

@@ -38,6 +38,6 @@ public class getRecordByDate {
                          ){
 
         recordService.pagingAndShow(search, pageNumber, model);
-        return "qa_record";
+        return "qa/qa_record";
     }
 }

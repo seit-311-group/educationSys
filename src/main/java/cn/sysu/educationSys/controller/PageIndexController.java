@@ -41,7 +41,7 @@ public class PageIndexController {
     public String systemQA() {
 
         // cookieSessionService.addSession();
-        return "qa_system";}
+        return "qa/qa_system";}
 
     @RequestMapping("/student/login")
     public String login() {
@@ -56,23 +56,18 @@ public class PageIndexController {
     @RequestMapping("/feedback")
     public String feedback(){
         // studentIdSave = cookieSessionService.addSession();
-        return "qa_feedback";
+        return "qa/qa_feedback";
     }
 
     @RequestMapping("/addQA")
     public String addQA(){
         // cookieSessionService.addSession();
-        return "qa_add_qa";
+        return "qa/qa_add_qa";
     }
 
     @RequestMapping("/feedbackTwoSys")
     public String feedbackTwoSys(){
         return "feedbackTwoSys";
-    }
-
-    @RequestMapping("/test")
-    public String test(){
-        return "test";
     }
 
     @RequestMapping("/homepage")
@@ -90,12 +85,12 @@ public class PageIndexController {
         // // test 正式使用时注解掉
 
         cookieSessionService.addSession();
-        return "answer_index";
+        return "answer/answer_index";
     }
 
     @RequestMapping("/question")
     public String question(){
-        return "answer_question";
+        return "answer/answer_question";
     }
 
     @ResponseBody

@@ -41,7 +41,7 @@
         align-items: center;
         width: 90px;
         height: 90px;
-        background-color: #006d30;
+        background-color: #005825;
     }
     #label{
         font-family: "Helvetica Neue";
@@ -135,6 +135,14 @@
     .rate{
         position: relative;
         margin-left: 20px;
+    }
+
+    .word{
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
     }
 
 
@@ -292,7 +300,6 @@
                 <div id="Analyzing">
                     <span style="position: relative; margin-left: 20px"><strong>{{Analyzing}}</strong></span>
                 </div>
-
                 <!-- 问答区域 -->
                 <div id="qa">
                     <el-scrollbar id="qa_area">
@@ -303,90 +310,32 @@
                                 <div class="avatar_and_answer">
                                     <el-avatar :size="58" :src="circleUrl"></el-avatar>
                                     <div class="words">
-                                        <p style="font-size: 15px">
+                                        <p class="word" style="font-size: 15px">
                                             您好，有什么电路相关的问题可以问我喔！
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="answer_user_area">
-                                <div class="time">
-                                    {{time}}</div>
-                                <div class="answer_user">
-                                    <div class="avatar_and_answer">
-                                        <div class="words_user">
-                                            <p style="font-size: 15px">
-                                                什么是戴维南
-                                            </p>
-                                        </div>
-                                        <el-avatar :size="58" :src="circleUrl"></el-avatar>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="answer_system_area">
-                                <div class="time" >
-                                    {{time}}</div>
-                                <div class="avatar_and_answer">
-                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
-                                    <div class="words">
-                                        <p style="font-size: 15px">以下为热点问题：<br/>
-                                            <a href="/feedbackTwoSys" style="color: #5c86bc">
-
-                                                基尔霍夫电流定律的内容是？</br>
-                                                RLC串联电路中，R变化时，电流的图像有什么不同？</br>
-                                                什么是三相电路</br>
-                                                节点法和网孔法求解方程的原则是什么？</br>
-                                                一阶电路三要素是什么？</br>
-                                                为什么称RC和RL电路为一阶电路？</br>
-                                                为什么在家用电路中各个元件之间不常串联而选择并联？</br></a>
-                                        </p>
-
-                                    </div>
 
 
-                                </div>
-                                <div class="answer_user_area">
-                                    <div class="time">
-                                        {{time}}</div>
-                                    <div class="answer_user">
-                                        <div class="avatar_and_answer">
-                                            <div class="words_user">
-                                                <p style="font-size: 15px">
-                                                    戴维南定理是什么？
-                                                </p>
-                                            </div>
-                                            <el-avatar :size="58" :src="circleUrl"></el-avatar>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="avatar_and_answer">
-                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
-                                    <div class="answer_and_rate">
-
-                                        <div class="words">
-                                            <p style="font-size: 15px">
-                                            <p>线性两端电路可以由一个电压源和一个串联电阻取代，电压等于端点的开路电压，电阻等于独立源关闭时端点的输入电阻。</p>
-                                            </p>
-
-                                        </div>
+                            <!--            <div class="rate">-->
+                            <!--                <p style="color: #d2d2d2; font-size: 14px">请留下你对该问题答案对的满意度嗷！</p>-->
+                            <!--                <el-rate-->
+                            <!--                        v-model="rate"-->
+                            <!--                        show-text>-->
+                            <!--                </el-rate>-->
+                            <!--            </div>-->
+                            <!--        </div>-->
 
 
-                                        <div class="rate">
-                                            <p style="color: #d2d2d2; font-size: 14px">请留下你对该问题答案对的满意度嗷！</p>
-                                            <el-rate
-                                                    v-model="rate"
-                                                    show-text>
-                                            </el-rate>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
+                            <!--    </div>-->
+                            <!--</div>-->
                         </div>
                     </el-scrollbar>
                 </div>
 
+                <!-- 先把基础的功能做出来再说 这些后面再加上去-->
+                <!--:fetch-suggestions="querySearch"-->
                 <!-- 输入区域 -->
                 <div id="input_area">
                     <el-autocomplete
@@ -394,16 +343,19 @@
                             type = "textarea"
                             class="inline-input"
                             v-model="input"
-                            :fetch-suggestions="querySearchAsync"
+
                             placeholder="请输入您的问题"
+                            :trigger-on-focus="false"
                             @select="handleSelect"
+                            @keydown.enter.native="pressEnter"
                     >
-                        <template slot-scope="{ item }">
+                        <template slot-scope="{item}">
                             <div class="autocomplete-choose-name" v-html="htmlValue(item.value)"></div>
                         </template>
                     </el-autocomplete>
 
-                    <el-button id="search" @click="submit" round>
+
+                    <el-button id="search" @click="sendMsg" round>
                         <div class="icon-size">
                             <i class="el-icon-search"></i>
                         </div>
@@ -435,8 +387,8 @@
         el: '#main',
         data(){
             return{
-                questionList: [],
-                Analyzing: '正在分析您的问题...',
+                questionList: {},
+                Analyzing: '电路问答系统',
                 dialogVisible1: false,
                 dialogVisible2: false,
                 time: '',
@@ -447,47 +399,50 @@
                 rate: null
             }
         },
-        mounted: function (){
+        mounted: async function (){
             this.load();
-            this.loadAll();
+
         },
         computed: {
 
         },
         methods:{
-            async loadAll() {
-                await axios.get('/qa/loadAllQuestions',).then(response =>{
-                    console.log(response.data);
-                    return response.data;
-                })
-            },
-            htmlValue: function (val) {
-                let key = this.input;
-                if (key.length > 0) {
-                    return val.replace(
-                        new RegExp(key, "g"),
-                        "<span style='color:red;'>" + key + "</span>"
-                    );
-                }
-                return val;
-            },
-            querySearchAsync(queryString, cb) {
-                var questionList = this.questionList;
-                var results = queryString ? questionList.filter(this.createStateFilter(queryString)) : questionList;
-
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(() => {
-                    cb(results);
-                }, 3000 * Math.random());
-            },
-            createStateFilter(queryString) {
-                return (state) => {
-                    return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-                };
-            },
+            /* 输入框的函数 */
+            // querySearch(queryString, cb) {
+            //     var questionList = this.questionList;
+            //     var results = queryString ? questionList.filter(this.createFilter(queryString)) : questionList;
+            //     // 调用 callback 返回建议列表的数据
+            //     cb(results);
+            // },
+            // createFilter(queryString) {
+            //     return (restaurant) => {
+            //         return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+            //     };
+            // },
+            // async loadAllQuestions() {
+            //     await axios.get('/qa/loadAllQuestions',).then(response =>{
+            //         this.questionList = typeof response.data;
+            //         console.log(typeof response.data);
+            //     }).catch(function (error){
+            //         console.log(error);
+            //     })
+            // },
+            // // 搜索的高亮
+            // htmlValue: function (val) {
+            //     let key = this.input;
+            //     if (key.length > 0) {
+            //         return val.replace(
+            //             new RegExp(key, "g"),
+            //             "<span style='color:red;'>" + key + "</span>"
+            //         );
+            //     }
+            //     return val;
+            // },
+            //
             handleSelect(item) {
                 console.log(item);
             },
+            /* 输入框的函数 */
 
             load(){
                 this.time = this.getTime();
@@ -509,7 +464,7 @@
                     })
                     .catch(_ => {});
             },
-            submit(){
+            async sendMsg(){
                 if (this.input.trim() == ''){
                     this.error();
                     return;
@@ -517,8 +472,99 @@
                 let query =  this.input;
                 this.input = '';
                 let answer_area_padding = document.getElementById('answer_area_padding');
-                this.createNewAnswerSystem(answer_area_padding);
+                this.createNewUserSystem(answer_area_padding, query);
 
+                let answer = '';
+                await axios.get('/qa/querytop3?question=' + query).then(response=>{
+                    answer = response.data;
+                    console.log(answer);
+                }).catch(function (error){
+                    console.log(error);
+                })
+
+                this.createNewSystem(answer_area_padding, answer);
+            },
+            // 用户的对话框
+            createNewUserSystem(answer_area_padding, query){
+
+                let answer_user_area = document.createElement('div');
+                answer_user_area.className = 'answer_user_area';
+
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+
+                let answer_user = document.createElement('div');
+                answer_user.className = 'answer_user';
+                let avatar_and_answer = document.createElement('div');
+                avatar_and_answer.className = 'avatar_and_answer';
+                let words_user = document.createElement('div');
+                words_user.className = 'words_user';
+                let text_user = document.createElement('p');
+                text_user.className = 'word';
+                text_user.style.fontSize = '15px';
+                text_user.innerHTML = query;
+
+                let el_avatar = document.createElement('span');
+                el_avatar.className = 'el-avatar el-avatar--circle';
+                el_avatar.style.height = '58px';
+                el_avatar.style.width = '58px';
+                el_avatar.style.lineHeight = '58px';
+
+                words_user.appendChild(text_user)
+                avatar_and_answer.appendChild(words_user);
+                avatar_and_answer.appendChild(el_avatar)
+                answer_user.appendChild(avatar_and_answer);
+                answer_user_area.appendChild(time);
+                answer_user_area.appendChild(answer_user);
+                answer_area_padding.appendChild(answer_user_area);
+            },
+            // 系统的对话框
+            createNewSystem(answer_area_padding, string){
+                let answer_system_area = document.createElement('div');
+                answer_system_area.className = 'answer_system_area';
+
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+
+                let avatar_and_answer = document.createElement('div');
+                avatar_and_answer.className = 'avatar_and_answer';
+
+                let words = document.createElement('div');
+                words.className = 'words';
+                let text_user = document.createElement('p');
+
+                //处理string
+                let split = string.split("@");
+                for (let i = 0; i < split.length ;i++) {
+                    let a = document.createElement('a');
+                    a.innerHTML = i + 1 + split[i];
+                    console.log(i + 1 + split[i]);
+                    text_user.appendChild(a);
+                }
+
+                text_user.style.fontSize = '15px';
+                text_user.innerHTML = string;
+                text_user.className = 'word';
+
+
+
+
+                let el_avatar = document.createElement('span');
+                el_avatar.className = 'el-avatar el-avatar--circle';
+                el_avatar.style.height = '58px';
+                el_avatar.style.width = '58px';
+                el_avatar.style.lineHeight = '58px';
+
+                words.appendChild(text_user);
+                avatar_and_answer.appendChild(el_avatar);
+                avatar_and_answer.appendChild(words);
+
+                answer_system_area.appendChild(time);
+                answer_system_area.appendChild(avatar_and_answer);
+
+                answer_area_padding.appendChild(answer_system_area);
             },
             error() {
                 this.$notify.error({
@@ -527,14 +573,9 @@
                 });
                 this.input = '';
             },
-            createNewAnswerSystem(answer_area_padding){
-                let answer_system_area = document.createElement('div');
-                let avatar_and_answer = document.createElement('div');
-                let time = document.createElement('div');
-                time.className = 'time';
-                time.innerHTML = this.getTime();
-                answer_area_padding.appendChild(time);
-
+            pressEnter(event){
+                event.preventDefault();
+                this.sendMsg();
             }
 
 

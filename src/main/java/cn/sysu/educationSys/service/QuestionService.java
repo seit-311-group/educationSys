@@ -27,4 +27,6 @@ public interface QuestionService {
     void passRateUpdate(String errorOptionsCount);
 
     int countAllOption(String questionId, question question);
+
+    String findAnswerByQuestion(String question);
 }

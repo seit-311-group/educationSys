@@ -64,6 +64,14 @@ public class QaQuestionController {
     }
 
     /**
+     * 对应于每一个a标签 用来找到这个问题的答案
+     */
+    @GetMapping("/findAnswerByQuestion")
+    public String findAnswer(@RequestParam(value = "question") String question){
+        return
+    }
+
+    /**
      * 问题爬虫 存在bug 百度知道网站爬不了
      * @param question
      * @return

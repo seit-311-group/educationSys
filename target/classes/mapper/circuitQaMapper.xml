@@ -208,4 +208,7 @@
       parentID = #{parentid,jdbcType=VARCHAR}
     where questionID = #{questionid,jdbcType=INTEGER}
   </update>
+  <select id="findAnswerByQuestion" parameterType="string" resultType="java.lang.String">
+    SELECT answer FROM qa_circuit_qa WHERE question = #{question}
+  </select>
 </mapper>

@@ -27,4 +27,6 @@ public interface circuitQaMapper {
     int updateByPrimaryKeySelective(circuitQa record);
 
     int updateByPrimaryKey(circuitQa record);
+
+    String findAnswerByQuestion(String question);
 }

@@ -68,7 +68,7 @@ public class QaQuestionController {
      */
     @GetMapping("/findAnswerByQuestion")
     public String findAnswer(@RequestParam(value = "question") String question){
-        return
+        return circuitQAService.findAnswerByQuestion(question);
     }
 
     /**

@@ -16,5 +16,7 @@ public interface CircuitQAService {
 
     circuitQa findQuestionById(String Id);
 
+    String findAnswerByQuestion(String question);
+
 }
 

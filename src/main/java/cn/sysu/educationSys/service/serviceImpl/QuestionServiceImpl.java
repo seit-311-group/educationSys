@@ -134,10 +134,4 @@ public class QuestionServiceImpl implements QuestionService {
 
         return count-countSubquesitons;
     }
-
-    @Override
-    public String findAnswerByQuestion(String question) {
-
-        return ;
-    }
 }

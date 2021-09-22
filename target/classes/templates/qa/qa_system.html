@@ -539,8 +539,8 @@
                 let split = string.split("@");
                 for (let i = 0; i < split.length ;i++) {
                     let a = document.createElement('a');
-                    a.innerHTML = i + 1 + split[i];
-                    console.log(i + 1 + split[i]);
+                    a.innerHTML = split[i];
+                    a.href =
                     text_user.appendChild(a);
                 }
 

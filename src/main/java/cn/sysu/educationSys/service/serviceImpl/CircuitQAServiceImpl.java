@@ -73,5 +73,10 @@ public class CircuitQAServiceImpl implements CircuitQAService {
         }
         return circuitQa;
     }
+
+    @Override
+    public String findAnswerByQuestion(String question) {
+        return circuitQaMapper.findAnswerByQuestion(question);
+    }
 }
 

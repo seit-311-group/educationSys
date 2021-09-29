@@ -8,11 +8,14 @@ import cn.sysu.educationSys.service.CoreProcessService;
 import cn.sysu.educationSys.service.KeywordtimesallService;
 import cn.sysu.educationSys.service.RecordService;
 import cn.sysu.educationSys.utils.HtmlParseUtil;
+import cn.sysu.educationSys.utils.StaticVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static cn.sysu.educationSys.service.CoreProcessService.keywordSave;
 
@@ -80,7 +83,7 @@ public class QaQuestionController {
     @RequestMapping("/subQuery")
     public String subQuery(@RequestParam(value = "question") String question) throws Exception {
         String questions = coreProcess.subQuery(question);
-        if (questions.equals("")) {return "";}
+        if (questions.equals("")) {return StaticVariables.NO_SUBQUESTIONs;}
         return questions;
     }
 
@@ -119,9 +122,12 @@ public class QaQuestionController {
     }
 
     @GetMapping("/loadAllQuestions")
-    public List<String> loadAllQuestions(){
-        return circuitQAService.findAllQuestions();
+    public Map<String, List<String>> loadAllQuestions(){
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("question", circuitQAService.findAllQuestions());
+        return map;
     }
+
 
     /**
      * 对应于每一个a标签 用来找到这个问题的答案

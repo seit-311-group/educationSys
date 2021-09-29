@@ -58,6 +58,11 @@
         justify-content: center;
     }
 
+    .inputDeep input.el-input__inner:focus {
+        border-color: #2b542c;
+    }
+
+
 </style>
 <body style="background-color: #efefef">
     <div th:include="navigation :: nav"></div>
@@ -73,6 +78,7 @@
                         style="margin-top: 10px"
                 >
                     <el-input
+                            class="inputDeep"
                             style="width:500px;"
                             type="textarea"
                             :autosize="{ minRows: 10, maxRows: 20}"

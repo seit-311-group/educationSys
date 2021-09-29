@@ -5,18 +5,22 @@
 <head>
     <title>答题系统</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- 引入bootstrap-->
     <link rel="stylesheet" href="/css/main.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
-    <!--引入Vue-->
-    <script src="https://unpkg.com/vue@next"></script>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
 </head>
 <style type="text/css">
     * {
-        font-size: 16px;
         padding: 0;
         margin: 0;
     }
@@ -127,8 +131,7 @@
     }
 </style>
 <style>
-    html,body {
-        font-size: 14px;
+    body {
         color: #000;
         margin: 0;
         padding: 0;
@@ -142,11 +145,17 @@
         border-left: 0px;
         border-right: 0px;
     }
-</style>
-<body>
-    <div th:include="navigation :: nav"></div>
+    /* 利用穿透，设置input边框 */
+    .inputDeep input.el-input__inner:focus {
+        border-color: #2b542c;
+    }
 
-    <div id="main">
+</style>
+
+
+<body >
+    <div th:include="navigation :: nav"></div>
+    <div id="main" style="font-size: 16px">
         <div id="main_area">
             <div id="nav_tabs">
                 <ul class="nav nav-tabs">
@@ -226,6 +235,11 @@
             </div>
 
         </div>
+
+        <el-input class="inputDeep" v-model="functionInput" placeholder="请输入内容"></el-input>
+
+
+
     </div>
 
 
@@ -371,25 +385,40 @@
     function analysis(res){
         let process = document.getElementById('process');
         let newbr = document.createElement('br');
+        let newbr1 = document.createElement('br');
         let button = document.getElementById('sendbtn');
         let strong = document.createElement('strong');
+        let strong1 = document.createElement('strong');
         button.parentNode.replaceChild(newbr,button);   // 答题按钮换位空行
         process.innerHTML += res;
+
+        process.appendChild(newbr1);
 
         let newbutton = document.createElement('button');
         newbutton.id = 'sendbtn0';
         newbutton.className = 'btn btn-default';
-        strong.innerHTML = '列方程';
+        strong.innerHTML = '选方程';
         newbutton.appendChild(strong);
         newbutton.addEventListener("click", equation);
-        process.appendChild(newbr);
         process.appendChild(newbutton);
+
+        let newbutton1 = document.createElement('button');
+        newbutton1.id = 'sendbtn1';
+        newbutton1.className = 'btn btn-default';
+        strong1.innerHTML = '列方程';
+        newbutton1.appendChild(strong1);
+        newbutton1.addEventListener("click", formulation);
+        process.appendChild(newbutton1);
 
         let img = document.getElementById('img');
         let img1 = document.createElement('img');
         img1.src = questionName + '/picture2.png';
         img1.id = 'img';
         img.parentElement.replaceChild(img1, img);
+    }
+
+    function formulation(){
+
     }
 
     //点击列方程发生的事件
@@ -703,7 +732,8 @@
 
 <script>
     // <![CDATA[
-    const app ={
+    new Vue({
+        el: '#main',
         data() {
             return {
                 now_questions: '',
@@ -718,7 +748,8 @@
                 submit_active: '',
                 records: {},
                 errorPointsList: '',
-                domain: ''
+                domain: '',
+                functionInput: ''
             }
         },
         mounted: function (){
@@ -750,7 +781,7 @@
                     return;
                 }
                 let index =  Number(this.now_questions) - 1;
-                window.location.href = 'http://'+this.domain+':8081/question?id=' + index;
+                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
 
             },
             next_question() {
@@ -758,7 +789,7 @@
                     return;
                 }
                 let index = Number(this.now_questions) + 1;
-                window.location.href = 'http://'+this.domain+':8081/question?id=' + index;
+                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
 
             },
             show_question(){
@@ -836,9 +867,8 @@
                 return res;
             }
         }
-    }
+    })
 
-    Vue.createApp(app).mount("#main_area")
     // ]]>
 </script>
 

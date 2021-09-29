@@ -63,13 +63,6 @@ public class QaQuestionController {
         return coreProcess.subQuestion(query);
     }
 
-    /**
-     * 对应于每一个a标签 用来找到这个问题的答案
-     */
-    @GetMapping("/findAnswerByQuestion")
-    public String findAnswer(@RequestParam(value = "question") String question){
-        return circuitQAService.findAnswerByQuestion(question);
-    }
 
     /**
      * 问题爬虫 存在bug 百度知道网站爬不了
@@ -128,6 +121,14 @@ public class QaQuestionController {
     @GetMapping("/loadAllQuestions")
     public List<String> loadAllQuestions(){
         return circuitQAService.findAllQuestions();
+    }
+
+    /**
+     * 对应于每一个a标签 用来找到这个问题的答案
+     */
+    @GetMapping("/findAnswerByQuestion")
+    public String findAnswer(@RequestParam(value = "question") String question){
+        return circuitQAService.findAnswerByQuestion(question);
     }
 
     // @RequestMapping("/questionList")

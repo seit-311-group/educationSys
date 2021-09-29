@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
-    <title>个人信息</title>
+    <title>问答系统</title>
     <!-- 引入bootstrap-->
     <link rel="stylesheet" href="/css/main.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
@@ -227,6 +227,15 @@
         border: 0px;
     }
 
+    /* 利用穿透，设置input边框 */
+    .inputDeep input.el-input__inner:focus {
+        border-color: #2b542c;
+    }
+
+    .inputDeep input.el-textarea__inner:focus {
+        border-color: #2b542c;
+    }
+
 
 </style>
 <body style="background-color: #efefef">
@@ -259,6 +268,7 @@
                                 </el-upload>
                                 <br/>
                                 <el-input
+                                        class="inputDeep"
                                         type="textarea"
                                         :rows="4"
                                         placeholder="请输入您遇到的问题"
@@ -302,13 +312,13 @@
                 </div>
                 <!-- 问答区域 -->
                 <div id="qa">
-                    <el-scrollbar id="qa_area">
+                    <el-scrollbar ref="myScrollbar" id="qa_area">
                         <div id="answer_area_padding">
                             <div class="answer_system_area">
                                 <div class="time" >
                                     {{time}}</div>
                                 <div class="avatar_and_answer">
-                                    <el-avatar :size="58" :src="circleUrl"></el-avatar>
+                                    <el-avatar :size="58" :src="'sysAvatar.png'"></el-avatar>
                                     <div class="words">
                                         <p class="word" style="font-size: 15px">
                                             您好，有什么电路相关的问题可以问我喔！
@@ -316,8 +326,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <!--            <div class="rate">-->
                             <!--                <p style="color: #d2d2d2; font-size: 14px">请留下你对该问题答案对的满意度嗷！</p>-->
                             <!--                <el-rate-->
@@ -383,6 +391,10 @@
 </body>
 
 <script>
+    var NO_QUESTION = "没有找到该问题";
+
+
+
     new Vue({
         el: '#main',
         data(){
@@ -396,12 +408,16 @@
                 upload: '',
                 answer: '',
                 timeout:  null,
-                rate: null
+                rate: null,
+
             }
         },
-        mounted: async function (){
+        mounted: function (){
             this.load();
 
+        },
+        updated: function() {
+            this.scrollDown()
         },
         computed: {
 
@@ -476,13 +492,14 @@
 
                 let answer = '';
                 await axios.get('/qa/querytop3?question=' + query).then(response=>{
-                    answer = response.data;
-                    console.log(answer);
+                    queryTop3 = response.data;
                 }).catch(function (error){
                     console.log(error);
                 })
 
-                this.createNewSystem(answer_area_padding, answer);
+
+                    this.createNewQuestionSystem(answer_area_padding, queryTop3);
+
             },
             // 用户的对话框
             createNewUserSystem(answer_area_padding, query){
@@ -518,9 +535,10 @@
                 answer_user_area.appendChild(time);
                 answer_user_area.appendChild(answer_user);
                 answer_area_padding.appendChild(answer_user_area);
+                this.scrollDown();
             },
-            // 系统的对话框
-            createNewSystem(answer_area_padding, string){
+            // 系统对话框
+            createSystem(answer_area_padding, questions){
                 let answer_system_area = document.createElement('div');
                 answer_system_area.className = 'answer_system_area';
 
@@ -535,20 +553,62 @@
                 words.className = 'words';
                 let text_user = document.createElement('p');
 
-                //处理string
-                let split = string.split("@");
-                for (let i = 0; i < split.length ;i++) {
-                    let a = document.createElement('a');
-                    a.innerHTML = split[i];
-                    a.href =
-                    text_user.appendChild(a);
-                }
-
                 text_user.style.fontSize = '15px';
-                text_user.innerHTML = string;
                 text_user.className = 'word';
 
+                let el_avatar = document.createElement('span');
+                el_avatar.className = 'el-avatar el-avatar--circle';
+                el_avatar.style.height = '58px';
+                el_avatar.style.width = '58px';
+                el_avatar.style.lineHeight = '58px';
 
+                let img = document.createElement('img');
+                img.src = 'sysAvatar.png';
+                img.style.objectFit = 'cover';
+
+                el_avatar.appendChild(img);
+
+                words.appendChild(text_user);
+                avatar_and_answer.appendChild(el_avatar);
+                avatar_and_answer.appendChild(words);
+
+                answer_system_area.appendChild(time);
+                answer_system_area.appendChild(avatar_and_answer);
+
+                answer_area_padding.appendChild(answer_system_area);
+            },
+            // 系统显示问题的对话框
+            createNewQuestionSystem(answer_area_padding, questions){
+                let answer_system_area = document.createElement('div');
+                answer_system_area.className = 'answer_system_area';
+
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+
+                let avatar_and_answer = document.createElement('div');
+                avatar_and_answer.className = 'avatar_and_answer';
+
+                let words = document.createElement('div');
+                words.className = 'words';
+                let text_user = document.createElement('p');
+
+                //处理questions
+                if(questions == NO_QUESTION){
+                    text_user.innerHTML = "不好意思，没有相关问题~";
+                }else{
+                    text_user.innerHTML = "已为您找到如下问题：";
+                    text_user.appendChild(document.createElement('br'));
+                    let question = questions.split("@");
+                    for (let i = 0; i < question.length ;i++) {
+                        this.createATag(answer_area_padding, text_user, question[i]);
+                        text_user.appendChild(document.createElement('br'));
+                    }
+                }
+
+
+                text_user.style.fontSize = '15px';
+                text_user.className = 'word';
 
 
                 let el_avatar = document.createElement('span');
@@ -556,6 +616,212 @@
                 el_avatar.style.height = '58px';
                 el_avatar.style.width = '58px';
                 el_avatar.style.lineHeight = '58px';
+
+                let img = document.createElement('img');
+                img.src = 'sysAvatar.png';
+                img.style.objectFit = 'cover';
+
+                el_avatar.appendChild(img);
+
+                words.appendChild(text_user);
+                avatar_and_answer.appendChild(el_avatar);
+                avatar_and_answer.appendChild(words);
+
+                answer_system_area.appendChild(time);
+                answer_system_area.appendChild(avatar_and_answer);
+
+                answer_area_padding.appendChild(answer_system_area);
+                this.scrollDown();
+            },
+
+            // 系统显示子问题的对话框
+            createNewSubQuestionSystem(answer_area_padding, answer){
+                let answer_system_area = document.createElement('div');
+                answer_system_area.className = 'answer_system_area';
+
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+
+                let avatar_and_answer = document.createElement('div');
+                avatar_and_answer.className = 'avatar_and_answer';
+
+                let words = document.createElement('div');
+                words.className = 'words';
+                let text_user = document.createElement('p');
+
+                text_user.style.fontSize = '15px';
+                text_user.className = 'word';
+
+                let el_avatar = document.createElement('span');
+                el_avatar.className = 'el-avatar el-avatar--circle';
+                el_avatar.style.height = '58px';
+                el_avatar.style.width = '58px';
+                el_avatar.style.lineHeight = '58px';
+
+                let img = document.createElement('img');
+                img.src = 'sysAvatar.png';
+                img.style.objectFit = 'cover';
+
+                el_avatar.appendChild(img);
+
+                words.appendChild(text_user);
+                avatar_and_answer.appendChild(el_avatar);
+                avatar_and_answer.appendChild(words);
+
+                answer_system_area.appendChild(time);
+                answer_system_area.appendChild(avatar_and_answer);
+
+                answer_area_padding.appendChild(answer_system_area);
+            },
+
+            // 创建一个a标签并监听 如果点击了就调用系统对话框 把内容输入
+            createATag(answer_area_padding, text_user, question){
+
+                let a = document.createElement('a');
+                a.className = 'click';
+                a.innerHTML = question;
+                var myRef = this.$refs['myScrollbar'];
+                a.addEventListener('click', this.clickAEvent(answer_area_padding, question, myRef));
+                text_user.appendChild(a);
+            },
+
+            /**
+             * 点击a标签的事件 系统显示答案和评分的对话框
+             * @returns {Promise<void>}
+             */
+            clickAEvent(answer_area_padding, question, myRef){
+                return function (){
+                    let answer_user_area = document.createElement('div');
+                    answer_user_area.className = 'answer_user_area';
+
+                    let time = document.createElement('div');
+                    time.className = 'time';
+                    let now= new Date();
+                    let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
+                    let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
+                    let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
+                    let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
+                    let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
+                    let str = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
+                    time.innerHTML = str;
+
+                    let answer_user = document.createElement('div');
+                    answer_user.className = 'answer_user';
+                    let avatar_and_answer = document.createElement('div');
+                    avatar_and_answer.className = 'avatar_and_answer';
+                    let words_user = document.createElement('div');
+                    words_user.className = 'words_user';
+                    let text_user = document.createElement('p');
+                    text_user.className = 'word';
+                    text_user.style.fontSize = '15px';
+                    text_user.innerHTML = question;
+
+                    let el_avatar = document.createElement('span');
+                    el_avatar.className = 'el-avatar el-avatar--circle';
+                    el_avatar.style.height = '58px';
+                    el_avatar.style.width = '58px';
+                    el_avatar.style.lineHeight = '58px';
+
+                    words_user.appendChild(text_user)
+                    avatar_and_answer.appendChild(words_user);
+                    avatar_and_answer.appendChild(el_avatar)
+                    answer_user.appendChild(avatar_and_answer);
+                    answer_user_area.appendChild(time);
+                    answer_user_area.appendChild(answer_user);
+                    answer_area_padding.appendChild(answer_user_area);
+
+                    axios.get('http://localhost:8080/qa/findAnswerByQuestion?question=' + question).then(response=>
+                    {
+                        let answer_system_area = document.createElement('div');
+                        answer_system_area.className = 'answer_system_area';
+
+                        let time = document.createElement('div');
+                        time.className = 'time';
+                        let now= new Date();
+                        let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
+                        let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
+                        let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
+                        let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
+                        let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
+                        let str = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
+                        time.innerHTML = str;
+
+                        let avatar_and_answer = document.createElement('div');
+                        avatar_and_answer.className = 'avatar_and_answer';
+
+                        let words = document.createElement('div');
+                        words.className = 'words';
+                        let text_user = document.createElement('p');
+
+
+                        text_user.style.fontSize = '15px';
+                        text_user.className = 'word';
+                        text_user.innerHTML = response.data;
+
+                        let el_avatar = document.createElement('span');
+                        el_avatar.className = 'el-avatar el-avatar--circle';
+                        el_avatar.style.height = '58px';
+                        el_avatar.style.width = '58px';
+                        el_avatar.style.lineHeight = '58px';
+
+                        let img = document.createElement('img');
+                        img.src = 'sysAvatar.png';
+                        img.style.objectFit = 'cover';
+
+                        el_avatar.appendChild(img);
+
+                        words.appendChild(text_user);
+                        avatar_and_answer.appendChild(el_avatar);
+                        avatar_and_answer.appendChild(words);
+
+                        answer_system_area.appendChild(time);
+                        answer_system_area.appendChild(avatar_and_answer);
+
+                        answer_area_padding.appendChild(answer_system_area);
+
+                        answer_area_padding.scrollIntoView();
+                        myRef.wrap.scrollTop = myRef.wrap.scrollHeight
+                    })
+                }
+            },
+
+            /**
+             * 系统显示答案和评分的对话框
+             * @param answer_area_padding
+             * @param answer
+             */
+            createNewAnswerAndRateSystem(answer_area_padding, answer){
+                let answer_system_area = document.createElement('div');
+                answer_system_area.className = 'answer_system_area';
+
+                let time = document.createElement('div');
+                time.className = 'time';
+                time.innerHTML = this.getTime();
+
+                let avatar_and_answer = document.createElement('div');
+                avatar_and_answer.className = 'avatar_and_answer';
+
+                let words = document.createElement('div');
+                words.className = 'words';
+                let text_user = document.createElement('p');
+
+
+                text_user.style.fontSize = '15px';
+                text_user.className = 'word';
+                text_user.innerHTML = answer;
+
+                let el_avatar = document.createElement('span');
+                el_avatar.className = 'el-avatar el-avatar--circle';
+                el_avatar.style.height = '58px';
+                el_avatar.style.width = '58px';
+                el_avatar.style.lineHeight = '58px';
+
+                let img = document.createElement('img');
+                img.src = 'sysAvatar.png';
+                img.style.objectFit = 'cover';
+
+                el_avatar.appendChild(img);
 
                 words.appendChild(text_user);
                 avatar_and_answer.appendChild(el_avatar);
@@ -576,6 +842,10 @@
             pressEnter(event){
                 event.preventDefault();
                 this.sendMsg();
+            },
+            // 滚动条置底
+            scrollDown() {
+                this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
             }
 
 

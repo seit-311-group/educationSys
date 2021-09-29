@@ -3,6 +3,7 @@ package cn.sysu.educationSys.service;
 import cn.sysu.educationSys.pojo.circuitQa;
 import cn.sysu.educationSys.pojo.keyWord;
 import cn.sysu.educationSys.utils.MatchUtil;
+import cn.sysu.educationSys.utils.StaticVariables;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.NLPTokenizer;
 import org.apache.log4j.Logger;
@@ -256,7 +257,7 @@ public class CoreProcessService {
         List<circuitQa> list = analysisTop3(query);
         String questionList = "";
         if (list.get(0).getQuestion() == "没有匹配到该问题"){
-            return "没有匹配到该答案";
+            return StaticVariables.QUESTION_MISMATCHED;
         }
         for (circuitQa circuitQa1:list){
             questionList = questionList + "@" + circuitQa1.getQuestion();

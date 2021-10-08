@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.KeywordsAll;
-import cn.sysu.educationSys.pojo.KeywordsAllExample;
+import cn.sysu.educationSys.pojo.qa.KeywordsAll;
+import cn.sysu.educationSys.pojo.qa.KeywordsAllExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

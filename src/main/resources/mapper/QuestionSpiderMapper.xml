@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.educationSys.mapper.QuestionSpiderMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.QuestionSpider" >
+  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.qa.QuestionSpider" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="question" property="question" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, question, answer, satisfaction
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.QuestionSpiderExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpiderExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from qa_question_feedback
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.QuestionSpiderExample" >
+  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpiderExample" >
     delete from qa_question_feedback
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.QuestionSpider" >
+  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpider" >
     insert into qa_question_feedback (id, question, answer, 
       satisfaction)
     values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
       #{satisfaction,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.QuestionSpider" >
+  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpider" >
     insert into qa_question_feedback
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.QuestionSpiderExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpiderExample" resultType="java.lang.Integer" >
     select count(*) from qa_question_feedback
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.sysu.educationSys.pojo.QuestionSpider" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpider" >
     update qa_question_feedback
     <set >
       <if test="question != null" >
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.sysu.educationSys.pojo.QuestionSpider" >
+  <update id="updateByPrimaryKey" parameterType="cn.sysu.educationSys.pojo.qa.QuestionSpider" >
     update qa_question_feedback
     set question = #{question,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},

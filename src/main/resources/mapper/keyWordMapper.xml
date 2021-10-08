@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.educationSys.mapper.keyWordMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.keyWord" >
+  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.qa.keyWord" >
     <result column="keyword" property="keyword" jdbcType="VARCHAR" />
     <result column="questionIDs" property="questionids" jdbcType="VARCHAR" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     keyword, questionIDs
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.keyWordExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.qa.keyWordExample" >
     select
     <if test="distinct" >
       distinct
@@ -80,17 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.keyWordExample" >
+  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.qa.keyWordExample" >
     delete from qa_keyword
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.keyWord" >
+  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.qa.keyWord" >
     insert into qa_keyword (keyword, questionIDs)
     values (#{keyword,jdbcType=VARCHAR}, #{questionids,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.keyWord" >
+  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.qa.keyWord" >
     insert into qa_keyword
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="keyword != null" >
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.keyWordExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.qa.keyWordExample" resultType="java.lang.Integer" >
     select count(*) from qa_keyword
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

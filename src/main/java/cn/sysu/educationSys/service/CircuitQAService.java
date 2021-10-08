@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
 
 import java.util.List;
 import java.util.Map;

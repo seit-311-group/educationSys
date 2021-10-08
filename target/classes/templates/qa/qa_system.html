@@ -241,12 +241,22 @@
         border-color: #2b542c;
     }
 
+    /*解决el-upload总是多一个选择文件*/
+    input[type="file"] {
+        display: none
+    }
+
+    .el-button el-button--default el-button--small{
+
+    }
+
 
 </style>
 <body style="background-color: #efefef">
     <div th:include="navigation :: nav"></div>
     <div id="main">
         <div id="qaSystem">
+
             <!--左边区域-->
             <div id="left">
                 <div id="label_area">
@@ -261,15 +271,24 @@
                                 width="50%"
                                 :before-close="handleClose">
                             <span>
+
                                 <el-upload
+                                        name="picture"
+                                        :limit="3"
                                         class="upload-demo"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
-                                        :on-preview="handlePreview"
+                                        action="#"
+                                        multiple
+
+                                        :on-exceed="handleOnExceed"
+                                        :auto-upload="false"
+                                        :on-change="onUploadChange"
                                         :on-remove="handleRemove"
+                                        :on-success="handleSuccess"
+                                        :on-error="handleError"
                                         :file-list="fileList"
                                         list-type="picture">
-                                  <el-button size="small" type="primary" round>点击上传</el-button>
-                                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                                  <el-button size="small" type="primary">点击上传</el-button>
+                                  <div slot="tip" class="el-upload__tip">一次只能3个上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
                                 <br/>
                                 <el-input
@@ -277,12 +296,12 @@
                                         type="textarea"
                                         :rows="4"
                                         placeholder="请输入您遇到的问题"
-                                        v-model="upload">
+                                        v-model="description">
                                 </el-input>
                             </span>
                             <span slot="footer" class="dialog-footer">
-                                <el-button @click="dialogVisible1 = false" round>取 消</el-button>
-                                <el-button type="primary" @click="dialogVisible1 = false" round>确 定</el-button>
+                                <el-button @click="dialogVisible1 = false">取 消</el-button>
+                                <el-button type="primary" @click="submitPic($event)">提 交</el-button>
                             </span>
                         </el-dialog>
                         <p style="font-size: 10px; position: relative; margin-left: -12px;margin-top: -5px; "@click="dialogVisible1 = true">上传图片</p>
@@ -302,8 +321,8 @@
                                 4. When new data is imported, the old data in the library will be overwritten.<br/>
                                 5. The size of the data imported each time must not exceed 10M.</span>
                             <span slot="footer" class="dialog-footer">
-                        <el-button @click="dialogVisible2 = false" round>取 消</el-button>
-                        <el-button type="primary" @click="dialogVisible2 = false" round>确 定</el-button>
+                        <el-button @click="dialogVisible2 = false">取 消</el-button>
+                        <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
                             </span>
                         </el-dialog>
                     </div>
@@ -393,6 +412,7 @@
 <script>
     var NO_QUESTION = "没有找到该问题";
     var NO_SUBQUESTIONS = "没有相关子问题";
+    var STUDENT_ID_COOKIE = "studentId";
 
     new Vue({
         el: '#main',
@@ -404,10 +424,14 @@
                 dialogVisible2: false,
                 time: '',
                 input: '',
-                upload: '',
+                description: '',
                 answer: '',
                 timeout:  null,
                 rate: null,
+
+                imageAction : '',
+                //附件内容
+                fileList:[],
 
             }
         },
@@ -479,14 +503,18 @@
                 return str;
             },
             handleClose(done) {
-                this.$confirm('确认关闭？')
-                    .then(_ => {
-                        done();
-                    })
-                    .catch(_ => {});
+                // 不要确认关闭 多此一举
+                // this.$confirm('确认关闭？')
+                //     .then(_ => {
+                    done();
+                    // })
+                    // .catch(_ => {});
             },
+
+            /**
+             * 核心函数
+             * */
             async sendMsg(){
-                this.Analyzing = "分析中...";
                 if (this.input.trim() == ''){
                     this.error();
                     return;
@@ -542,46 +570,7 @@
                 answer_area_padding.appendChild(answer_user_area);
                 this.scrollDown();
             },
-            // 系统对话框
-            createSystem(answer_area_padding, questions){
-                let answer_system_area = document.createElement('div');
-                answer_system_area.className = 'answer_system_area';
 
-                let time = document.createElement('div');
-                time.className = 'time';
-                time.innerHTML = this.getTime();
-
-                let avatar_and_answer = document.createElement('div');
-                avatar_and_answer.className = 'avatar_and_answer';
-
-                let words = document.createElement('div');
-                words.className = 'words';
-                let text_user = document.createElement('p');
-
-                text_user.style.fontSize = '15px';
-                text_user.className = 'word';
-
-                let el_avatar = document.createElement('span');
-                el_avatar.className = 'el-avatar el-avatar--circle';
-                el_avatar.style.height = '58px';
-                el_avatar.style.width = '58px';
-                el_avatar.style.lineHeight = '58px';
-
-                let img = document.createElement('img');
-                img.src = 'sysAvatar.png';
-                img.style.objectFit = 'cover';
-
-                el_avatar.appendChild(img);
-
-                words.appendChild(text_user);
-                avatar_and_answer.appendChild(el_avatar);
-                avatar_and_answer.appendChild(words);
-
-                answer_system_area.appendChild(time);
-                answer_system_area.appendChild(avatar_and_answer);
-
-                answer_area_padding.appendChild(answer_system_area);
-            },
             // 系统显示问题的对话框
             createNewQuestionSystem(answer_area_padding, questions){
                 let answer_system_area = document.createElement('div');
@@ -637,47 +626,6 @@
 
                 answer_area_padding.appendChild(answer_system_area);
                 this.scrollDown();
-            },
-
-            // 系统显示子问题的对话框
-            createNewSubQuestionSystem(answer_area_padding, answer){
-                let answer_system_area = document.createElement('div');
-                answer_system_area.className = 'answer_system_area';
-
-                let time = document.createElement('div');
-                time.className = 'time';
-                time.innerHTML = this.getTime();
-
-                let avatar_and_answer = document.createElement('div');
-                avatar_and_answer.className = 'avatar_and_answer';
-
-                let words = document.createElement('div');
-                words.className = 'words';
-                let text_user = document.createElement('p');
-
-                text_user.style.fontSize = '15px';
-                text_user.className = 'word';
-
-                let el_avatar = document.createElement('span');
-                el_avatar.className = 'el-avatar el-avatar--circle';
-                el_avatar.style.height = '58px';
-                el_avatar.style.width = '58px';
-                el_avatar.style.lineHeight = '58px';
-
-                let img = document.createElement('img');
-                img.src = 'sysAvatar.png';
-                img.style.objectFit = 'cover';
-
-                el_avatar.appendChild(img);
-
-                words.appendChild(text_user);
-                avatar_and_answer.appendChild(el_avatar);
-                avatar_and_answer.appendChild(words);
-
-                answer_system_area.appendChild(time);
-                answer_system_area.appendChild(avatar_and_answer);
-
-                answer_area_padding.appendChild(answer_system_area);
             },
 
             // 创建一个a标签并监听 如果点击了就调用系统对话框 把内容输入
@@ -1004,6 +952,80 @@
             // 滚动条置底
             scrollDown() {
                 this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
+            },
+            handleRemove(file, fileList) {
+                console.log(file);
+                console.log(file.raw);
+                console.log("删除");
+
+                this.removeFile(file.uid);
+            },
+            handleSuccess(res, file, fileList){
+                console.log("成功");
+                console.log(res);
+                console.log(file);
+                console.log(fileList);
+            },
+            handleError(err, file, fileList){
+                console.log(err);
+                console.log(file);
+                console.log(fileList);
+            },
+            uploadOnePic(){
+
+            },
+            submitPic(event){
+                // 成功就关闭页面
+                let picList = new FormData();
+                for(let i = 0; i < this.fileList.length; i++){
+                    picList.append('picture', this.fileList[i].raw);
+                }
+                picList.append('studentId', this.getCookie(STUDENT_ID_COOKIE));
+                picList.append('description', this.description);
+
+                axios.post('qa/upload',picList);
+                this.dialogVisible1 = false;
+                this.fileList = [];
+                this.description = ""
+            },
+            // 通过cookie的名字找到cookie的值
+            getCookie(cname){
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++)
+                {
+                    var c = ca[i].trim();
+                    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                }
+                return "";
+            },
+            // 当上传的文件改变时 调用
+            onUploadChange(file) {
+                const isIMAGE = (file.raw.type === 'image/jpeg' || file.raw.type === 'image/png');
+                const isLt1M = file.size / 1024 / 1024 < 1;
+                const uid = file.uid;
+
+                this.fileList.push(file);
+                if (!isIMAGE) {
+                    this.$message.error('只能上传jpg/png图片!');
+                    this.removeFile(uid);
+                } else if (!isLt1M) {
+                    this.$message.error('上传文件大小不能超过 1MB!');
+                    this.removeFile(uid);
+                }
+            },
+            // 找到uid删除图片
+            removeFile(uid){
+                for(var i = 0; i < this.fileList.length; i++){
+                    if(uid == this.fileList[i].uid){
+                        this.fileList.splice(i,1);
+                    }
+                }
+            },
+            // 文件数量超过limit调用函数
+            handleOnExceed(files, fileList){
+                console.log(this.fileList)
+                this.$message.error('上传的图片不能超过三张！');
             }
 
 

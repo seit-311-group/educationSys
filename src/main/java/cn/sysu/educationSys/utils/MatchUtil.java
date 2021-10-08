@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.utils;
 
 import cn.sysu.educationSys.gRPCclient.matchClient;
-import cn.sysu.educationSys.pojo.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
 import io.grpc.ManagedChannel;

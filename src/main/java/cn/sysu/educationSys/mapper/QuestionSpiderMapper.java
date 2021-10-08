@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.QuestionSpider;
-import cn.sysu.educationSys.pojo.QuestionSpiderExample;
+import cn.sysu.educationSys.pojo.qa.QuestionSpider;
+import cn.sysu.educationSys.pojo.qa.QuestionSpiderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

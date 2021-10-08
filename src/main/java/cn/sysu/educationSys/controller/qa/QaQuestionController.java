@@ -1,16 +1,14 @@
 package cn.sysu.educationSys.controller.qa;
 
 import cn.sysu.educationSys.mapper.QuestionSpiderMapper;
-import cn.sysu.educationSys.pojo.QuestionSpider;
-import cn.sysu.educationSys.pojo.circuitQa;
-import cn.sysu.educationSys.service.CircuitQAService;
-import cn.sysu.educationSys.service.CoreProcessService;
-import cn.sysu.educationSys.service.KeywordtimesallService;
-import cn.sysu.educationSys.service.RecordService;
+import cn.sysu.educationSys.pojo.qa.QuestionSpider;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
+import cn.sysu.educationSys.service.*;
 import cn.sysu.educationSys.utils.HtmlParseUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -43,6 +41,9 @@ public class QaQuestionController {
 
     @Autowired
     CircuitQAService circuitQAService;
+
+    @Autowired
+    QuestionService questionService;
 
 
     /**
@@ -137,48 +138,17 @@ public class QaQuestionController {
         return circuitQAService.findAnswerByQuestion(question);
     }
 
-    // @RequestMapping("/questionList")
-    // public void questionList(@RequestParam(value = "query") String query){
-    //
-    // }
+    /**
+     * 上传图片功能
+     * @param picture
+     * @param studentId 学生的id
+     * @return
+     */
+    @PostMapping("/upload")
+    public void upload(@RequestParam("picture") MultipartFile[] picture, String studentId, String description) {
 
-    // @RequestMapping("/addMessage")
-    // public void addMessage(@RequestParam(value = "message") String message) throws Exception {
-    //     Date now = new Date();
-    //     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-    //     String nowDate = format.format(now);
-    //     MessageService.addMessage(message, nowDate);
-    // }
-    //
-    // @RequestMapping("/getRecordByDate")
-    // public String getRecordByDate(@RequestParam(value = "fromdate") String date) throws Exception {
-    //     Date now = new Date();
-    //     SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-    //     String nowDate = format.format(now);
-    //     if (date.length() != 8 || Integer.parseInt(date) > Integer.parseInt(nowDate)){
-    //         return "请输入正确的日期";
-    //     }
-    //     return RecordService.findRecord(date);
-    // }
-
-//    @RequestMapping("/upload")
-//    public String uploadFile(MultipartFile mFile) throws IOException {
-//        String fileName = mFile.getOriginalFilename();
-//        fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + fileName;
-//        String path = "C:\\fileUpload\\" + fileName;
-//        File dest = new File(path);
-//
-//        if (!dest.getParentFile().exists()) {
-//            dest.getParentFile().mkdir();
-//        }
-//        try {
-//
-//            mFile.transferTo(dest); //保存文件
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "留言";
-//    }
+        questionService.upLoadPic(picture, studentId, description);
+    }
 
 
 }

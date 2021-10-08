@@ -1,6 +1,6 @@
 package cn.sysu.educationSys;
 
-import cn.sysu.educationSys.pojo.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.service.AddQAService;
 import cn.sysu.educationSys.service.CircuitQAService;
 import cn.sysu.educationSys.service.CoreProcessService;

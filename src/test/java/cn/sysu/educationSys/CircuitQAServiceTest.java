@@ -1,6 +1,6 @@
 package cn.sysu.educationSys;
 
-import cn.sysu.educationSys.pojo.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

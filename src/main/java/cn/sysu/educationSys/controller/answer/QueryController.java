@@ -1,9 +1,9 @@
 package cn.sysu.educationSys.controller.answer;
 
-import cn.sysu.educationSys.pojo.option_t;
-import cn.sysu.educationSys.pojo.point;
-import cn.sysu.educationSys.pojo.question;
-import cn.sysu.educationSys.pojo.subquestion;
+import cn.sysu.educationSys.pojo.answer.option_t;
+import cn.sysu.educationSys.pojo.answer.point;
+import cn.sysu.educationSys.pojo.qa.question;
+import cn.sysu.educationSys.pojo.answer.subquestion;
 import cn.sysu.educationSys.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

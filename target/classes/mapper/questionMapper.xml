@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.educationSys.mapper.questionMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.question" >
+  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.qa.question" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="pointID" property="pointid" jdbcType="VARCHAR" />
@@ -75,7 +75,7 @@
     id, description, pointID, subquesID, answer, analysis, addPicture, changePicture, 
     passrate, keyword
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.questionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.qa.questionExample" >
     select
     <if test="distinct" >
       distinct
@@ -89,13 +89,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.questionExample" >
+  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.qa.questionExample" >
     delete from answer_question
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.question" >
+  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.qa.question" >
     insert into answer_question (id, description, pointID, 
       subquesID, answer, analysis, 
       addPicture, changePicture, passrate, 
@@ -105,7 +105,7 @@
       #{addpicture,jdbcType=VARCHAR}, #{changepicture,jdbcType=VARCHAR}, #{passrate,jdbcType=DOUBLE}, 
       #{keyword,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.question" >
+  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.qa.question" >
     insert into answer_question
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -172,7 +172,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.questionExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.qa.questionExample" resultType="java.lang.Integer" >
     select count(*) from answer_question
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

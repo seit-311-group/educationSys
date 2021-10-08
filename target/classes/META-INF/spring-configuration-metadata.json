@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "cn.sysu.educationSys.config.ConfigProperties",
+      "name": "pic",
+      "type": "cn.sysu.educationSys.config.ConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "cn.sysu.educationSys.config.ConfigProperties",
+      "name": "pic.path",
+      "type": "java.lang.String"
+    }
+  ]
+}

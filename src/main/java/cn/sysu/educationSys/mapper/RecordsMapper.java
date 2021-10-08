@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.Records;
-import cn.sysu.educationSys.pojo.RecordsExample;
+import cn.sysu.educationSys.pojo.answer.Records;
+import cn.sysu.educationSys.pojo.answer.RecordsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

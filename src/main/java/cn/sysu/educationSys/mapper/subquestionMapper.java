@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.subquestion;
-import cn.sysu.educationSys.pojo.subquestionExample;
+import cn.sysu.educationSys.pojo.answer.subquestion;
+import cn.sysu.educationSys.pojo.answer.subquestionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,8 +1,8 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.KeywordtimesallMapperCustom;
-import cn.sysu.educationSys.pojo.KeywordsAll;
-import cn.sysu.educationSys.pojo.KeywordsAllExample;
+import cn.sysu.educationSys.pojo.qa.KeywordsAll;
+import cn.sysu.educationSys.pojo.qa.KeywordsAllExample;
 import cn.sysu.educationSys.service.KeywordtimesallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

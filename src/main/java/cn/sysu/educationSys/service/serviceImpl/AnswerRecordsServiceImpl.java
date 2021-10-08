@@ -1,8 +1,8 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.AnswerRecordsMapper;
-import cn.sysu.educationSys.pojo.AnswerRecords;
-import cn.sysu.educationSys.pojo.AnswerRecordsExample;
+import cn.sysu.educationSys.pojo.answer.AnswerRecords;
+import cn.sysu.educationSys.pojo.answer.AnswerRecordsExample;
 import cn.sysu.educationSys.service.AnswerRecordsService;
 import cn.sysu.educationSys.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

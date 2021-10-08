@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.Records;
+import cn.sysu.educationSys.pojo.answer.Records;
 
 import java.util.List;
 import java.util.Map;

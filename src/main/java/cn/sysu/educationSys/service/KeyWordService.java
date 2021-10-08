@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.keyWord;
+import cn.sysu.educationSys.pojo.qa.keyWord;
 
 import java.util.List;
 

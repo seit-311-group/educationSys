@@ -1,9 +1,10 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.option_t;
-import cn.sysu.educationSys.pojo.point;
-import cn.sysu.educationSys.pojo.question;
-import cn.sysu.educationSys.pojo.subquestion;
+import cn.sysu.educationSys.pojo.answer.option_t;
+import cn.sysu.educationSys.pojo.answer.point;
+import cn.sysu.educationSys.pojo.qa.question;
+import cn.sysu.educationSys.pojo.answer.subquestion;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface QuestionService {
     void passRateUpdate(String errorOptionsCount);
 
     int countAllOption(String questionId, question question);
+
+    void upLoadPic(MultipartFile[] picture, String studentId, String description);
 }

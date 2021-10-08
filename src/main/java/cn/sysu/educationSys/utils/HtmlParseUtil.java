@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.utils;
 
-import cn.sysu.educationSys.pojo.QuestionSpider;
+import cn.sysu.educationSys.pojo.qa.QuestionSpider;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

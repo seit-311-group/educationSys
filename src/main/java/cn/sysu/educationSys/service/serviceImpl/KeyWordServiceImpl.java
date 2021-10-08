@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
-import cn.sysu.educationSys.pojo.keyWord;
-import cn.sysu.educationSys.pojo.keyWordExample;
+import cn.sysu.educationSys.pojo.qa.keyWord;
+import cn.sysu.educationSys.pojo.qa.keyWordExample;
 import cn.sysu.educationSys.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class KeyWordServiceImpl implements KeyWordService {
     @Override
     public void UpdateKeyword(String keyword, String questionId) {
         keyWordExample keyWordExample = new keyWordExample();
-        cn.sysu.educationSys.pojo.keyWordExample.Criteria criteria = keyWordExample.createCriteria();
+        cn.sysu.educationSys.pojo.qa.keyWordExample.Criteria criteria = keyWordExample.createCriteria();
         criteria.andKeywordEqualTo(keyword);
         keyWord keyWordObj = new keyWord();
         keyWordObj.setQuestionids(questionId);

@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.controller.answer;
 
-import cn.sysu.educationSys.pojo.AnswerRecords;
+import cn.sysu.educationSys.pojo.answer.AnswerRecords;
 import cn.sysu.educationSys.service.AnswerRecordsService;
 import cn.sysu.educationSys.service.CookieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.RecordMapperCustom;
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
-import cn.sysu.educationSys.pojo.Records;
+import cn.sysu.educationSys.pojo.answer.Records;
 import cn.sysu.educationSys.pojo.Student;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.RecordService;

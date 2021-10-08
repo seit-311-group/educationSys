@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.AnswerRecords;
+import cn.sysu.educationSys.pojo.answer.AnswerRecords;
 
 import java.util.List;
 

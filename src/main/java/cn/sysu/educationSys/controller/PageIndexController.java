@@ -2,7 +2,7 @@ package cn.sysu.educationSys.controller;
 
 
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
-import cn.sysu.educationSys.pojo.question;
+import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

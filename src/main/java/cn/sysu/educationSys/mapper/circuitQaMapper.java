@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.mapper;
 
-import cn.sysu.educationSys.pojo.circuitQa;
-import cn.sysu.educationSys.pojo.circuitQaExample;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQaExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
-import cn.sysu.educationSys.pojo.circuitQa;
-import cn.sysu.educationSys.pojo.circuitQaExample;
+import cn.sysu.educationSys.pojo.qa.circuitQa;
+import cn.sysu.educationSys.pojo.qa.circuitQaExample;
 import cn.sysu.educationSys.service.CircuitQAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

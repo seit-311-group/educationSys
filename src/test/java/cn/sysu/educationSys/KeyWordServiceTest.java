@@ -1,6 +1,6 @@
 package cn.sysu.educationSys;
 
-import cn.sysu.educationSys.pojo.keyWord;
+import cn.sysu.educationSys.pojo.qa.keyWord;
 import cn.sysu.educationSys.service.CoreProcessService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -2,7 +2,7 @@ package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.StudentMapper;
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
-import cn.sysu.educationSys.pojo.AnswerRecords;
+import cn.sysu.educationSys.pojo.answer.AnswerRecords;
 import cn.sysu.educationSys.pojo.Student;
 import cn.sysu.educationSys.pojo.StudentExample;
 import cn.sysu.educationSys.service.AnswerRecordsService;

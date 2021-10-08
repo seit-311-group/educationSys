@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.sysu.educationSys.mapper.subquestionMapper" >
-  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.subquestion" >
+  <resultMap id="BaseResultMap" type="cn.sysu.educationSys.pojo.answer.subquestion" >
     <result column="id" property="id" jdbcType="INTEGER" />
     <result column="optionID" property="optionid" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, optionID, content, answer
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.subquestionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.sysu.educationSys.pojo.answer.subquestionExample" >
     select
     <if test="distinct" >
       distinct
@@ -82,19 +82,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.subquestionExample" >
+  <delete id="deleteByExample" parameterType="cn.sysu.educationSys.pojo.answer.subquestionExample" >
     delete from answer_subquestion
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.subquestion" >
+  <insert id="insert" parameterType="cn.sysu.educationSys.pojo.answer.subquestion" >
     insert into answer_subquestion (id, optionID, content, 
       answer)
     values (#{id,jdbcType=INTEGER}, #{optionid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{answer,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.subquestion" >
+  <insert id="insertSelective" parameterType="cn.sysu.educationSys.pojo.answer.subquestion" >
     insert into answer_subquestion
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -125,7 +125,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.subquestionExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="cn.sysu.educationSys.pojo.answer.subquestionExample" resultType="java.lang.Integer" >
     select count(*) from answer_subquestion
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

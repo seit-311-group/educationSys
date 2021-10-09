@@ -28,7 +28,7 @@ public class PageIndexController {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "qa/qa_system";
     }
 
     @ResponseBody
@@ -45,7 +45,7 @@ public class PageIndexController {
 
     @RequestMapping("/student/login")
     public String login() {
-        return "login";
+        return "login_sign_up";
     }
 
     @RequestMapping("/student/regist")

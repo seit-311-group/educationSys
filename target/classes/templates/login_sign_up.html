@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>问答系统</title>
+    <!-- 引入bootstrap-->
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <!--引入vue2和elementui vue3目前不支持-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
+</head>
+<style type="text/css">
+    #main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+        background-color: #005825;
+    }
+
+    #content{
+        border-radius: 0px;
+        box-shadow: #242424 0px 2px 10px;
+        height: 460px;
+        width: 450px;
+        background-color: white;
+    }
+
+    #login-wrap{
+        margin: 30px;
+    }
+
+    .el-tabs__nav-scroll{
+        width:50%;
+        margin:0 auto
+    }
+    .el-tabs__item {
+        font-size:22px !important;
+    }
+
+
+</style>
+<body style="background-color: #efefef">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">中山大学</span>
+                </button>
+                <a class="navbar-brand" href="/">电路知识学习系统</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li th:if="${session.studentName != null}"><a href="/systemQA">问答系统</a></li>
+                    <li th:if="${session.studentName != null}"><a href="http://localhost:8080/">答题系统</a></li>
+                    <li th:if="${session.studentName != null}"><a href="/record">问答历史</a></li>
+                    <li class="dropdown" th:if="${session.studentName != null}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.studentName}"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">我的主页</a></li>
+                            <li><a href="#">设置中心</a></li>
+                            <li><a href="#">退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div id="main">
+        <div id="content">
+            <div id="login-wrap">
+                <el-form class="login-container">
+                    <el-tabs v-model="activeName" @tab-click="handleClick" :stretch="true">
+                        <el-tab-pane label="登录" name="first">
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" style="margin-top: 10px">
+                                <el-form-item prop="idLogin">
+                                    <el-input type="text" placeholder="请输入学号" required="required" v-model="ruleForm.idLogin" prefix-icon="el-icon-user-solid"></el-input>
+                                </el-form-item>
+
+                                <el-form-item prop="passLogin">
+                                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.passLogin" prefix-icon="el-icon-lock"></el-input>
+                                </el-form-item>
+
+                                <el-form-item class="btn-form" style="text-align:center">
+                                    <el-button type="primary" @click="submitLogin('ruleForm')">登录</el-button>
+                                </el-form-item>
+                                <el-form-item class="btn-form" style="text-align:center; margin-top: -10px">
+                                    <el-button type="primary" @click="submitForm('ruleForm')">忘记密码</el-button>
+                                    <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+                                </el-form-item>
+                            </el-form>
+                        </el-tab-pane>
+                        <el-tab-pane label="注册" name="second">
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" style="margin-top: 10px">
+                                <el-form-item prop="id">
+                                    <el-input type="text" placeholder="学号" required="required" v-model="ruleForm.id" prefix-icon="el-icon-user-solid"></el-input>
+                                </el-form-item>
+                                <el-form-item prop="name">
+                                    <el-input class="phone-input" placeholder="姓名" v-model="ruleForm.name" prefix-icon="el-icon-user"></el-input>
+                                </el-form-item>
+                                <el-form-item prop="pass">
+                                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.pass" prefix-icon="el-icon-lock"></el-input>
+                                </el-form-item>
+                                <el-form-item prop="checkPass">
+                                    <el-input type="password" placeholder="请再次输入密码" v-model="ruleForm.checkPass" prefix-icon="el-icon-lock"></el-input>
+                                </el-form-item>
+                                <el-form-item prop="classAndGrade">
+                                    <el-input class="phone-input" placeholder="年级和班级" v-model="ruleForm.classAndGrade" prefix-icon="el-icon-school
+"></el-input>
+                                </el-form-item>
+                                <el-form-item class="btn-form" style="text-align:center">
+                                    <el-button type="primary" @click="submitSignUp('ruleForm')">注册</el-button>
+                                    <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+                                </el-form-item>
+                            </el-form>
+                        </el-tab-pane>
+                    </el-tabs>
+
+                </el-form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+<script>
+    var LOGIN_SUCCESS = "登陆成功";
+    var SIGNUP_SUCCESS = "注册成功";
+    var USER_NOT_EXIST = "用户不存在"
+    new Vue({
+        el: '#main',
+        data(){
+            var validateIdLogin = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('学号不能为空'));
+                } else {
+                    //1-20位 正整数 正则表达式
+                    const reg = /^[1-9]\d{0,19}$/;
+                    if ((reg.test(value))) {
+                        callback();
+                    } else {
+                        callback(new Error('请输入正确的学号'));
+                    }
+                }
+            }
+            var validatePassLogin = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'))
+                } else {
+                    callback()
+                }
+            }
+            var validateId = async (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入学号'))
+                } else {
+                    const reg = /^[1-9]\d{0,19}$/;
+                    if ((reg.test(value))) {
+                        await axios.post('/student/checkUserExist?id=' + this.ruleForm.id,
+                        ).then(res=>{
+                            if (res.data === USER_NOT_EXIST) {
+                                callback()
+                            } else {
+                                return callback(new Error('该学号已经被注册'))
+                            }
+                        })
+
+                    } else {
+                        callback(new Error('请输入正确的学号'));
+                    }
+
+                }
+            }
+            var validateName = async (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('姓名不能为空'))
+                }
+            }
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'))
+                } else {
+                    if (this.ruleForm.checkPass !== '') {
+                        this.$refs.ruleForm.validateField('checkPass')
+                    }
+                    callback()
+                }
+            }
+            var validateCheckPass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请再次输入密码'))
+                } else if (value !== this.ruleForm.pass) {
+                    callback(new Error('两次输入密码不一致!'))
+                } else {
+                    callback()
+                }
+            }
+
+            return {
+                activeName: 'first',
+
+                ruleForm: {
+                    idLogin: '',
+                    passLogin: '',
+                    id: '',
+                    name: '',
+                    pass: '',
+                    checkPass: '',
+                    classAndGrade: ''
+                },
+                rules: {
+                    idLogin: [{ required: true, validator: validateIdLogin, trigger: 'blur' }],
+                    passLogin: [{ required: true, validator: validatePassLogin, trigger: 'blur' }],
+                    id: [{ required: true, validator: validateId, trigger: 'blur' }],
+                    name: [{ required: true, validator: validateName, trigger: 'blur' }],
+                    pass: [{ required: true, validator: validatePass, trigger: 'blur' },
+                        {
+                        min: 6,
+                        message: '长度在不少于6个字符',
+                        trigger: 'blur'}
+                        ],
+                    checkPass: [{ required: true, validator: validateCheckPass, trigger: 'blur' },
+                        {
+                            min: 6,
+                            message: '长度在不少于6个字符',
+                            trigger: 'blur'
+                        }]
+                },
+            }
+        },
+        mounted: function (){
+
+
+        },
+        methods:{
+            submitLogin(){
+                if(this.ruleForm.idLogin == ''){
+                    this.$message.error('请先输入学号！');
+                    return;
+                }else if(this.ruleForm.passLogin == ''){
+                    this.$message.error('请先输入密码！');
+                    return;
+                }
+                axios.post('/student/loginCallBack?id=' + this.ruleForm.idLogin + '&password=' + this.ruleForm.passLogin).then(res=>{
+                    if(res.data == LOGIN_SUCCESS){
+                        this.$message({
+                            message: res.data,
+                            type: 'success'
+                        });
+                        window.location.href="/";
+                    }else{
+                        this.$message.error('登陆失败！');
+                    }
+                }).catch(function (error){
+
+                })
+
+            },
+            submitSignUp(){
+                if(this.ruleForm.id == ''){
+                    this.$message.error('请先输入学号！');
+                    return;
+                }else if(this.ruleForm.name == ''){
+                    this.$message.error('请先输入姓名！');
+                    return;
+                }else if(this.ruleForm.pass == ''){
+                    this.$message.error('请先输入密码！');
+                    return;
+                }else if(this.ruleForm.checkPass == ''){
+                    this.$message.error('请再次输入密码！');
+                    return;
+                }else if(this.ruleForm.checkPass != this.ruleForm.pass){
+                    this.$message.error('两次输入密码不一致！');
+                    return;
+                }
+                axios.post('/student/registCallBack?id=' + this.ruleForm.id + '&name=' + this.ruleForm.name +
+                    '&password=' + this.ruleForm.pass + '&classandgrade=' + this.ruleForm.classAndGrade).then(res=>{
+                    if(res.data == SIGNUP_SUCCESS){
+                        this.$message({
+                            message: res.data,
+                            type: 'success'
+                        });
+                        window.location.href="/";
+                    }else{
+                        this.$message.error('用户存在，注册失败，请重新注册！');
+                    }
+                }).catch(function (error){
+
+                })
+            },
+            handleClick(tab, event) {
+                console.log(tab, event);
+            },
+
+        },
+    })
+</script>
+
+</html>

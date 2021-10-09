@@ -264,7 +264,7 @@
                 </div>
                 <div id="function">
                     <div id="upload" class="icon-size icon-color click" >
-                        <i class="el-icon-upload" @click="dialogVisible1 = true"></i>
+                        <i class="el-icon-upload" @click="uploadPicLoginOrNot"></i>
                         <el-dialog
                                 title="请上传图片，并描述您遇到的问题~"
                                 :visible.sync="dialogVisible1"
@@ -304,7 +304,7 @@
                                 <el-button type="primary" @click="submitPic($event)">提 交</el-button>
                             </span>
                         </el-dialog>
-                        <p style="font-size: 10px; position: relative; margin-left: -12px;margin-top: -5px; "@click="dialogVisible1 = true">上传图片</p>
+                        <p style="font-size: 10px; position: relative; margin-left: -12px;margin-top: -5px; "@click="uploadPicLoginOrNot">上传图片</p>
                     </div>
 
                     <div id="question" class="icon-size icon-color click">
@@ -375,6 +375,8 @@
                             :trigger-on-focus="false"
                             @select="handleSelect"
                             @keydown.enter.native="pressEnter"
+                            @click.native="questionInput"
+                            :disabled="inputDisabled"
                     >
                         <template slot-scope="{item}">
                             <div class="autocomplete-choose-name" v-html="htmlValue(item.value)"></div>
@@ -424,6 +426,8 @@
                 Analyzing: '电路问答系统',
                 dialogVisible1: false,
                 dialogVisible2: false,
+                inputDisabled: true,
+                descriptionDisable: false,
                 time: '',
                 input: '',
                 description: '',
@@ -440,7 +444,8 @@
         mounted: function (){
             this.load();
             this.loadAllQuestions();
-
+            this.loginOrNot();
+            axios.post('getUrl',{url : window.document.URL});
         },
         updated: function() {
             this.scrollDown()
@@ -1048,6 +1053,31 @@
             handleOnExceed(files, fileList){
                 console.log(this.fileList)
                 this.$message.error('上传的图片不能超过三张！');
+            },
+            questionInput(){
+                if(this.getCookie('studentId') == ''){
+                    this.$message({
+                        message: '您还没有登录请先点击右上角登录或者注册哦！',
+                        type: 'warning'
+                    });
+                }
+            },
+            loginOrNot(){
+                if(this.getCookie('studentId') == ''){
+                    this.inputDisabled = true;
+                }else{
+                    this.inputDisabled = false;
+                }
+            },
+            uploadPicLoginOrNot(){
+                if(this.getCookie('studentId') == ''){
+                    this.$message({
+                        message: '您还没有登录请先点击右上角登录或者注册哦！',
+                        type: 'warning'
+                    });
+                }else{
+                    this.dialogVisible1 = true;
+                }
             }
 
 

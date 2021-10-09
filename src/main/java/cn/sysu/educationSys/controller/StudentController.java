@@ -113,6 +113,17 @@ public class StudentController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("/checkUserExist")
+    public String checkUserExist(@RequestParam(value = "id") Long id){
+        if(studentMapperCustom.findById(id) == null){
+            return "用户不存在";
+        }else{
+            return "用户存在";
+        }
+    }
+
+
 
 
 }

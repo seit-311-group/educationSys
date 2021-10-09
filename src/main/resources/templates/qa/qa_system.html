@@ -413,6 +413,8 @@
     var NO_QUESTION = "没有找到该问题";
     var NO_SUBQUESTIONS = "没有相关子问题";
     var STUDENT_ID_COOKIE = "studentId";
+    var UPLOAD_SUCCESS = "上传成功";
+    var UPLOAD_FALSE = "上传失败";
 
     new Vue({
         el: '#main',
@@ -976,17 +978,37 @@
             },
             submitPic(event){
                 // 成功就关闭页面
-                let picList = new FormData();
-                for(let i = 0; i < this.fileList.length; i++){
-                    picList.append('picture', this.fileList[i].raw);
-                }
-                picList.append('studentId', this.getCookie(STUDENT_ID_COOKIE));
-                picList.append('description', this.description);
+                if(this.fileList.length == 0 && this.description.trim() == ''){
+                    this.$message({
+                        message: '图片和描述都为空嗷！',
+                        type: 'warning'
+                    });
+                }else{
+                    let picList = new FormData();
+                    for(let i = 0; i < this.fileList.length; i++){
+                        picList.append('picture', this.fileList[i].raw);
+                    }
+                    picList.append('studentId', this.getCookie(STUDENT_ID_COOKIE));
+                    picList.append('description', this.description);
 
-                axios.post('qa/upload',picList);
-                this.dialogVisible1 = false;
-                this.fileList = [];
-                this.description = ""
+                    axios.post('qa/upload',picList).then(res =>{
+                        if(res.data == UPLOAD_SUCCESS){
+                            this.$message({
+                                message: '我们已经收到你的问题啦！',
+                                type: 'success'
+                            });
+                        }else{
+                            this.$message.error('上传失败！');
+                        }
+                    }).catch(function (error){
+                        this.$message.error('上传失败！');
+                    });
+
+                    this.dialogVisible1 = false;
+                    this.fileList = [];
+                    this.description = ""
+                }
+
             },
             // 通过cookie的名字找到cookie的值
             getCookie(cname){

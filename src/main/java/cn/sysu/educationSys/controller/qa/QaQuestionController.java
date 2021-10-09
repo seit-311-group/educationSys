@@ -145,9 +145,8 @@ public class QaQuestionController {
      * @return
      */
     @PostMapping("/upload")
-    public void upload(@RequestParam("picture") MultipartFile[] picture, String studentId, String description) {
-
-        questionService.upLoadPic(picture, studentId, description);
+    public String upload(@RequestParam("picture") MultipartFile[] picture, Long studentId, String description) {
+        return questionService.upLoadPic(picture, studentId, description);
     }
 
 

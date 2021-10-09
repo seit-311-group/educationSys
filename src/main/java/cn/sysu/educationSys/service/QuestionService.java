@@ -29,5 +29,5 @@ public interface QuestionService {
 
     int countAllOption(String questionId, question question);
 
-    void upLoadPic(MultipartFile[] picture, String studentId, String description);
+    String upLoadPic(MultipartFile[] picture, Long studentId, String description);
 }

@@ -1,7 +1,7 @@
-package cn.sysu.educationSys.mapper;
+package cn.sysu.educationSys.mapper.student;
 
-import cn.sysu.educationSys.pojo.Student;
-import cn.sysu.educationSys.pojo.StudentExample;
+import cn.sysu.educationSys.pojo.student.Student;
+import cn.sysu.educationSys.pojo.student.StudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

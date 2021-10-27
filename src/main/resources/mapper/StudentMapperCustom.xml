@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.sysu.educationSys.mapper.StudentMapperCustom" >
-    <select id="findById" resultType="cn.sysu.educationSys.pojo.Student">select * from student where id = #{id}</select>
+<mapper namespace="cn.sysu.educationSys.mapper.student.StudentMapperCustom" >
+    <select id="findById" resultType="cn.sysu.educationSys.pojo.student.Student">select * from student where id = #{id}</select>
     <select id="findPswById" resultType="java.lang.String">select password from student where id = #{id}</select>
+    <insert id="insertLoginRecord" parameterType="java.lang.Long">INSERT INTO student_log_in(studentId, loginTime) VALUES (#{id}, NOW());</insert>
 </mapper>

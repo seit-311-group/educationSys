@@ -312,14 +312,14 @@
                         <el-dialog
                                 title="问答系统介绍"
                                 :visible.sync="dialogVisible2"
-                                width="70%"
+                                width="55%"
                                 :before-close="handleClose">
-                            <span>This is a Q&A system, upload your dataset first, then you can ask question. In order to use this system, you need to understand the following:<br/>
-                                1. This system supports both Chinese and English data sets.<br/>
-                                2. Click the upload button on the right to import the data, the data file name must be in English.<br/>
-                                3. The imported data must be in comma-separated csv format. Click the example button on the right to download the sample data.<br/>
-                                4. When new data is imported, the old data in the library will be overwritten.<br/>
-                                5. The size of the data imported each time must not exceed 10M.</span>
+                            <span>这是一个电路知识的问答系统，你可以问一些你在学习电路基础课程中遇到的一些问题，现在主要有以下功能：<br/>
+                                1. 你可以在问答框中输入问题，系统会<strong>自动匹配</strong>你的问题，通过点击来选择你要的问题。<br/>
+                                2. 如果没有你的问题，我们后台会有记录，并且会尽快完善！<br/>
+                                3. 支持<strong>联想子问题</strong>功能.<br/>
+                                4. 你还可以点击右上角<strong>上传图片</strong>上传一个图片来描述你的问题，我们收到问题后，会将答案发回给你哦~<br/>
+                                系统还有很多功能没有上线呢！谢谢大家的配合，我们会根据大家的意见或者建议尽快完善系统！</span>
                             <span slot="footer" class="dialog-footer">
                         <el-button @click="dialogVisible2 = false">取 消</el-button>
                         <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
@@ -597,6 +597,8 @@
                 //处理questions
                 if(questions == NO_QUESTION){
                     text_user.innerHTML = "不好意思，没有相关问题~";
+                }else if(questions.substring(0, 6) == "直接返回答案"){
+                    text_user.innerHTML = questions.substring(6);
                 }else{
                     text_user.innerHTML = "已为您找到如下问题：";
                     text_user.appendChild(document.createElement('br'));
@@ -693,7 +695,7 @@
                     answer_area_padding.appendChild(answer_user_area);
 
                     // 调用API寻找答案
-                    axios.get('http://localhost:8080/qa/findAnswerByQuestion?question=' + question).then(response=>
+                    axios.get('/qa/findAnswerByQuestion?question=' + question).then(response=>
                     {
                         let answer_system_area = document.createElement('div');
                         answer_system_area.className = 'answer_system_area';
@@ -748,7 +750,7 @@
                     })
 
                     // 显示子问题
-                    axios.get('http://localhost:8080/qa/subQuery?question=' + question).then(response=>
+                    axios.get('/qa/subQuery?question=' + question).then(response=>
                     {
                         if(response.data != NO_SUBQUESTIONS){
                             let answer_system_area = document.createElement('div');
@@ -814,7 +816,7 @@
                                     answer_user_area.appendChild(answer_user);
                                     answer_area_padding.appendChild(answer_user_area);
 
-                                    axios.get('http://localhost:8080/qa/findAnswerByQuestion?question=' + subQuestions[i]).then(response=>
+                                    axios.get('/qa/findAnswerByQuestion?question=' + subQuestions[i]).then(response=>
                                     {
                                         let answer_system_area = document.createElement('div');
                                         answer_system_area.className = 'answer_system_area';

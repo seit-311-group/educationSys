@@ -2,7 +2,7 @@ package cn.sysu.educationSys.controller;
 
 
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
-import cn.sysu.educationSys.pojo.Student;
+import cn.sysu.educationSys.pojo.student.Student;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class StudentController {
     HttpServletRequest request;
 
     /**
-     * 登录
+     * 登录 加入redis！！
      * @param id
      * @param password
      * @return
@@ -47,6 +47,7 @@ public class StudentController {
             // 登陆成功，在页面上添加一个cookie
             String studentId = studentExist.getId().toString();
             cookieSessionService.addCookie("studentId", studentId);
+            studentMapperCustom.insertLoginRecord(id); // 登录进去之后有一条记录  之后学redis的时候可以先缓存到redis中
             return "登陆成功";
         }else {
             // 登陆失败，重新登录
@@ -74,6 +75,8 @@ public class StudentController {
             // 注册成功，在页面上添加一个cookie
             String studentId = studentExist.getId().toString();
             cookieSessionService.addCookie("studentId", studentId);
+            studentMapperCustom.insertLoginRecord(id); // 登录进去之后有一条记录
+            studentMapperCustom.insertRegisterRecord(id); // 注册进去之后有一条记录
             return "注册成功";
         }else {
             // 注册失败，重新注册

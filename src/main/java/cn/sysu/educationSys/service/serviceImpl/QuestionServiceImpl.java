@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
-    final static Logger logger = Logger.getLogger(QuestionServiceImpl.class);
+    private final static Logger logger = Logger.getLogger(QuestionServiceImpl.class);
     @Autowired
     private cn.sysu.educationSys.mapper.questionMapper questionMapper;
     @Autowired

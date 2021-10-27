@@ -69,8 +69,8 @@ public class MatchUtil {
      * @param query
      * @return list
      */
-    public static List<circuitQa> matchTop3(List<circuitQa> candidates, String query){
-        List<circuitQa> questionList = new ArrayList<>();
+    public static Map<circuitQa, Float> matchTop5(List<circuitQa> candidates, String query){
+        Map<circuitQa, Float> res = new LinkedHashMap<>();
         Map<circuitQa, Float> map = new HashMap<>();        //TreeMap的key不能为对象
         for (circuitQa candidate: candidates){
             float similarity = levenshtein(query,candidate.getQuestion());
@@ -85,19 +85,16 @@ public class MatchUtil {
                         toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                                 LinkedHashMap::new));
 
-        if(map.size() >= 3){
-            int num = 3;
-            for (circuitQa circuitQa1 : sortedMap.keySet()){
-                questionList.add(circuitQa1);
-                num--;
-                if (num == 0) break;
+        if(map.size() >= StaticVariables.FIND_MANY_QUESTION){
+            int num = StaticVariables.FIND_MANY_QUESTION;
+            for (Map.Entry<circuitQa, Float> circuitQaFloatEntry : sortedMap.entrySet()) {
+                if (num-- == 0) break;
+                res.put(circuitQaFloatEntry.getKey(), circuitQaFloatEntry.getValue());
             }
         }else {
-            for (circuitQa circuitQa1: sortedMap.keySet()){
-                questionList.add(circuitQa1);
-            }
+            return map;
         }
-        return questionList;
+        return res;
     }
 
     private static float levenshtein(String str1, String str2) {

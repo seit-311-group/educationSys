@@ -3,6 +3,7 @@ package cn.sysu.educationSys.service.serviceImpl;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.pojo.qa.circuitQaExample;
 import cn.sysu.educationSys.service.CircuitQAService;
+import cn.sysu.educationSys.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class CircuitQAServiceImpl implements CircuitQAService {
     @Autowired
     private cn.sysu.educationSys.mapper.circuitQaMapper circuitQaMapper;
 
+    @Autowired
+    private RecordService recordService;
     //@Scheduled(cron="0 0 2 * * ?") 定时运行一次
     @Override
     public List<circuitQa> importQuestions() {
@@ -76,7 +79,10 @@ public class CircuitQAServiceImpl implements CircuitQAService {
 
     @Override
     public String findAnswerByQuestion(String question) {
-        return circuitQaMapper.findAnswerByQuestion(question);
+        String answerByQuestion = circuitQaMapper.findAnswerByQuestion(question);
+        recordService.wordsSave(question, question, answerByQuestion);
+
+        return answerByQuestion;
     }
 }
 

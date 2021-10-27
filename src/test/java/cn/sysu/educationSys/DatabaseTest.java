@@ -2,6 +2,8 @@ package cn.sysu.educationSys;
 
 
 import cn.sysu.educationSys.mapper.*;
+import cn.sysu.educationSys.mapper.StudentMapperCustom;
+import cn.sysu.educationSys.pojo.student.QuestionRecord;
 import cn.sysu.educationSys.service.KeywordtimesallService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +29,9 @@ public class DatabaseTest {
     @Autowired
     StudentMapperCustom studentMapperCustom;
 
+    @Autowired
+    QuestionRecordMapper questionRecordMapper;
+
     @Test
     public void getQuestions() {
         // List<String> allQuestion = recordMapperCustom.getAllQuery();
@@ -41,6 +46,11 @@ public class DatabaseTest {
         //     System.out.println(s);
         // }
         System.out.println(studentMapperCustom.findById((long)11));
+    }
+
+    @Test
+    public void test1(){
+        questionRecordMapper.insertRecord("123123", 11L);
     }
 
 }

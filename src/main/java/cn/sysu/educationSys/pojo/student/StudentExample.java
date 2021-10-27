@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.pojo;
+package cn.sysu.educationSys.pojo.student;
 
 import java.util.ArrayList;
 import java.util.List;

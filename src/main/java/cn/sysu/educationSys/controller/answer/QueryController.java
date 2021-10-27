@@ -5,6 +5,7 @@ import cn.sysu.educationSys.pojo.answer.point;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.pojo.answer.subquestion;
 import cn.sysu.educationSys.service.QuestionService;
+import cn.sysu.educationSys.utils.FunctionSimUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,9 @@ public class QueryController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private FunctionSimUtil functionSimUtil;
 
     @RequestMapping("/getDescriptionBYId")
     public String getDescriptionBYId(@RequestParam(value = "id") String id) throws Exception {
@@ -122,6 +126,7 @@ public class QueryController {
         }
         return option_t.getContent();
     }
+
     @RequestMapping("/getPointIDBYOptionID")
     public String getPointIDBYOptionID(@RequestParam(value = "id") String id) throws Exception {
         List<option_t> option_ts = questionService.getOptionsByID(id);
@@ -143,7 +148,12 @@ public class QueryController {
         return point.getContent();
     }
 
-
-
+    /**
+     * 找到公式匹配功能
+     */
+    @RequestMapping("/functionSim")
+    public double functionSim(@RequestParam(value = "questionId") String questionId, @RequestParam(value = "subQuestionId") String subQuestionId, String function){
+        return functionSimUtil.calSimilarity("", function);
+    }
 
 }

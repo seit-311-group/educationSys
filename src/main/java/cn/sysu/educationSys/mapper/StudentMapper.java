@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.mapper.student;
+package cn.sysu.educationSys.mapper;
 
 import cn.sysu.educationSys.pojo.student.Student;
 import cn.sysu.educationSys.pojo.student.StudentExample;

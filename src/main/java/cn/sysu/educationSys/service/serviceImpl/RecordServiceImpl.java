@@ -1,9 +1,11 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
+import cn.sysu.educationSys.mapper.QuestionRecordMapper;
 import cn.sysu.educationSys.mapper.RecordMapperCustom;
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
 import cn.sysu.educationSys.pojo.answer.Records;
-import cn.sysu.educationSys.pojo.Student;
+import cn.sysu.educationSys.pojo.student.QuestionRecord;
+import cn.sysu.educationSys.pojo.student.Student;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import java.util.logging.Logger;
 
 
 @Service
 public class RecordServiceImpl implements RecordService {
+
+    private static Logger logger = Logger.getLogger(String.valueOf(RecordServiceImpl.class));
 
     @Autowired
     RecordMapperCustom recordMapperCustom;
@@ -33,6 +37,9 @@ public class RecordServiceImpl implements RecordService {
     @Autowired
     HttpServletRequest request;
 
+    @Autowired
+    QuestionRecordMapper questionRecordMapper;
+
     @Override
     public void wordsSave(String query,String question, String answer) {
         Date date = new Date();//获得系统当前时间.
@@ -44,7 +51,7 @@ public class RecordServiceImpl implements RecordService {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("studentId")) {
-                long studentId = Integer.parseInt(cookie.getValue());
+                long studentId = Long.parseLong(cookie.getValue());
                 student = studentMapperCustom.findById(studentId);
             }
         }
@@ -58,9 +65,7 @@ public class RecordServiceImpl implements RecordService {
         record.setStudentid(student.getId());
 
         recordMapperCustom.insert(record);
-        System.out.println("问题保存成功");
-
-
+        logger.info("问题问答记录成功");
     }
 
     // 分页和显示
@@ -130,6 +135,20 @@ public class RecordServiceImpl implements RecordService {
         model.addAttribute("totalCount",totalCount);
         model.addAttribute("maxPage",maxPage);
         model.addAttribute("search", search);
+    }
+
+    @Override
+    public void questionSave(String question) {
+        // 获取cookie 得到学生登录状态
+        Student student = new Student();
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("studentId")) {
+                long studentId = Long.parseLong(cookie.getValue());
+                student = studentMapperCustom.findById(studentId);
+            }
+        }
+        questionRecordMapper.insertRecord(question, student.getId());
     }
 
 }

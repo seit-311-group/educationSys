@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.pojo;
+package cn.sysu.educationSys.pojo.student;
 
 public class Student {
     private Long id;

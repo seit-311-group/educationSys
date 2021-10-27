@@ -15,12 +15,13 @@ import java.util.*;
 
 @Service
 public class CoreProcessService {
-    public static String keywordSave;
-
-    public static Logger logger = Logger.getLogger(CoreProcessService.class);
+    private static Logger logger = Logger.getLogger(CoreProcessService.class);
 
     @Autowired
     private CircuitQAService circuitQAService;
+
+    @Autowired
+    private KeywordtimesallService keywordtimesallService;
 
     @Autowired
     private KeyWordService keyWordService;
@@ -32,6 +33,9 @@ public class CoreProcessService {
 
     @Autowired
     CookieSessionService cookieSessionService;
+
+    @Autowired
+    RecordService recordService;
 
     private List<circuitQa> circuitQas;
 
@@ -61,6 +65,7 @@ public class CoreProcessService {
             logger.error("没有相关问题");
         }
         if (candidates == null) {
+            recordService.wordsSave(query, "没有找到该问题", "没有找到该问题");
             logger.info("没有候选问题集！");
             circuitQa targetNull = new circuitQa();
             targetNull.setQuestion("没有匹配到该问题");
@@ -93,7 +98,7 @@ public class CoreProcessService {
      * @return
      * @throws IOException
      */
-    public List<circuitQa> analysisTop3(String query) throws IOException {
+    public Map<circuitQa, Float> analysisTop5(String query) throws IOException {
         logger.info("原始问句：" + query);
 
         List<circuitQa> candidates = null;
@@ -104,26 +109,27 @@ public class CoreProcessService {
             logger.error("没有相关问题");
         }
         if (candidates == null) {
+            recordService.wordsSave(query, "没有找到该问题", "没有找到该问题");
             logger.info("没有候选问题集！");
             List<circuitQa> targetNull = new ArrayList<>();
             circuitQa target = new circuitQa();
             target.setQuestion("没有匹配到该问题");
             target.setAnswer("没有匹配到该答案");
             targetNull.add(target);
-            return targetNull;
+            return null;
         }
         logger.info("候选问题集：");
         for (int i = 0; i < candidates.size(); i++) {
             logger.info(i + " " + candidates.get(i).getQuestion());  // 打印候选问题集
         }
-        List<circuitQa> target = new ArrayList<>();
+        Map<circuitQa, Float> target = new LinkedHashMap<>();
         try {
 //            target = MatchUtil.matchByRPC(candidates, query);
-            target = MatchUtil.matchTop3(candidates,query); // 找到最佳的三个问题
+            target = MatchUtil.matchTop5(candidates,query); // 找到最佳的五个问题
             int index = 1;
-            for (circuitQa circuitQa1:target){
-                logger.info("匹配结果：" + index++ + circuitQa1.getQuestion());
-                targerList.add(circuitQa1.getQuestion());
+            for (Map.Entry<circuitQa, Float> circuitQaFloatEntry : target.entrySet()){
+                logger.info("匹配结果：" + index++ + circuitQaFloatEntry.getKey().getQuestion());
+                targerList.add(circuitQaFloatEntry.getKey().getQuestion());
             }
 
         } catch (Exception e) {
@@ -188,9 +194,10 @@ public class CoreProcessService {
                 for (keyWord keyword : keyWords) {
                     if (term.word.equals(keyword.getKeyword())) {
                         word = keyword.getKeyword();
-                        keywordSave = word;
                         // 把提取出来的关键词加到学生自己的querykeywords中
-                        studentService.updateQueryKeywords(cookieSessionService.findStudentByCookie().getId(), keywordSave);
+                        studentService.updateQueryKeywords(cookieSessionService.findStudentByCookie().getId(), word);
+                        keywordtimesallService.keywordInsertOrUpdate(word);                  // 保存关键词和次数到表中
+
                         logger.info("关键词：" + word);
                         return word;
                     }
@@ -254,45 +261,30 @@ public class CoreProcessService {
      * @return
      */
     public String subQuestion(String query) throws IOException {
-        List<circuitQa> list = analysisTop3(query);
+        Map<circuitQa, Float> circuitQaFloatMap = analysisTop5(query);  // 返回排序好的map
         String questionList = "";
-        if (list.get(0).getQuestion() == "没有匹配到该问题"){
+        if (circuitQaFloatMap == null){
             return StaticVariables.QUESTION_MISMATCHED;
+        }else{
+            // 判断相似度最高的问题达到直接返回答案的阈值
+            for (Map.Entry<circuitQa, Float> circuitQaFloatEntry : circuitQaFloatMap.entrySet()) {
+                if(circuitQaFloatEntry.getValue() >= StaticVariables.SIMILARITY_MATCHING_THRESHOLD){
+                    recordService.wordsSave(query, circuitQaFloatEntry.getKey().getQuestion(), circuitQaFloatEntry.getKey().getAnswer());
+                    return StaticVariables.DIRECT_ANSWER + circuitQaFloatEntry.getKey().getAnswer();
+                }else if(circuitQaFloatEntry.getValue() < StaticVariables.MISMATCHED_THRESHOLD){
+                    recordService.wordsSave(query, "没有找到该问题", "没有找到该问题");
+                    return StaticVariables.QUESTION_MISMATCHED;
+                }
+                break;
+            }
         }
-        for (circuitQa circuitQa1:list){
-            questionList = questionList + "@" + circuitQa1.getQuestion();
+
+        for (Map.Entry<circuitQa, Float> circuitQaFloatEntry : circuitQaFloatMap.entrySet()) {
+            questionList = questionList + "@" + circuitQaFloatEntry.getKey().getQuestion();
         }
+
         return questionList.substring(1);
     }
 
 
-    /**
-     *  通过问题和序号找到答案
-     * @param order
-     * @param questions
-     * @return
-     */
-    public circuitQa getAnswerByOrder(String order, String questions) {
-        circuitQa target = new circuitQa();
-        if (questions == null || questions.length() == 0) {
-            return target;
-        }
-        try {
-            circuitQas = circuitQAService.importQuestions();
-            String[] qas = questions.split("@");
-            String target1 = qas[Integer.parseInt(order)];
-            logger.info("后续提问：" + target);
-            for (circuitQa qa : circuitQas) {
-                if (qa.getQuestion().equals(target1)) {
-                    target.setAnswer(qa.getAnswer());
-                    target.setQuestion(qa.getQuestion());
-                    break;
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            target.setAnswer("输入错误，请重新输入！");
-            return target;
-        }
-        return target;
-    }
 }

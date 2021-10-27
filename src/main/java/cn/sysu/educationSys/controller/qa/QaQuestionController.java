@@ -1,8 +1,10 @@
 package cn.sysu.educationSys.controller.qa;
 
+import cn.sysu.educationSys.mapper.QuestionRecordMapper;
 import cn.sysu.educationSys.mapper.QuestionSpiderMapper;
 import cn.sysu.educationSys.pojo.qa.QuestionSpider;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
+import cn.sysu.educationSys.pojo.student.QuestionRecord;
 import cn.sysu.educationSys.service.*;
 import cn.sysu.educationSys.utils.HtmlParseUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
@@ -11,12 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static cn.sysu.educationSys.service.CoreProcessService.keywordSave;
-
+import java.util.*;
 
 @RestController
 @RequestMapping("/qa")
@@ -45,6 +43,9 @@ public class QaQuestionController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    QuestionRecordMapper questionRecordMapper;
+
 
     /**
      * 提取问题关键词保存、问题保存、匹配问题
@@ -56,7 +57,6 @@ public class QaQuestionController {
     public circuitQa query(@RequestParam(value = "question") String query) throws Exception {
         circuitQa target =  coreProcess.analysis(query);     //返回最佳问题
         recordService.wordsSave(query, target.getQuestion(), target.getAnswer());     // 保存query和question、answer对
-        keywordtimesallService.keywordInsertOrUpdate(keywordSave);                  // 保存关键词和次数到表中
         return target;
         // return target.getAnswer();
     }
@@ -64,6 +64,7 @@ public class QaQuestionController {
     @RequestMapping("/querytop3")
     public String querytop3(@RequestParam(value = "question") String query) throws Exception {
         queryFromStudent = query;
+        recordService.questionSave(query);
         return coreProcess.subQuestion(query);
     }
 
@@ -88,14 +89,6 @@ public class QaQuestionController {
         return questions;
     }
 
-    @RequestMapping("/getAnswerByOrder")
-    public String getAnswerByOrder(@RequestParam(value = "order") String order, @RequestParam(value = "questions") String questions ) throws Exception {
-        circuitQa target =  coreProcess.getAnswerByOrder(order, questions);
-        recordService.wordsSave(queryFromStudent, target.getQuestion(), target.getAnswer());   // 保存query和question、answer对
-        keywordtimesallService.keywordInsertOrUpdate(keywordSave);                              // 保存关键词和次数到表中 有bug在选择子问题时候
-        return target.getAnswer();
-    }
-
     /**
      * bug 点完按钮 满意度反馈
      */
@@ -116,11 +109,6 @@ public class QaQuestionController {
         return "提交成功，谢谢您的意见";
     }
 
-    @RequestMapping("/loadQuery")
-    public String loadQuery(){
-        System.out.println(queryFromStudent);
-        return queryFromStudent;
-    }
 
     @GetMapping("/loadAllQuestions")
     public Map<String, List<String>> loadAllQuestions(){

@@ -1,13 +1,18 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.Student;
+import cn.sysu.educationSys.pojo.student.Student;
 
 import java.util.List;
 
 public interface StudentService {
     Student login(Long id, String password);
 
+    void loginRecord(Long id);
+
     Student regist(Long id, String name, String password, String classandgrade);
+
+    void registerRecord(Long id);
+
 
     void updateQueryKeywords(Long studentId, String queryKeywords);
 

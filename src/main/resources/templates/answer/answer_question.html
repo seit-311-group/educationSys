@@ -264,6 +264,8 @@
     urlMap.set("9","一阶RL");
     urlMap.set("10","交流节点法");//Temp3
     urlMap.set("11","交流网孔法");
+    urlMap.set("12","电源变换");
+
 
     let questionName = urlMap.get(questionid);
     let subquesIDarr = null;
@@ -278,6 +280,8 @@
     let subqueIndex = 0;
     let second = 0;
     var count1 = null;
+
+
 
     window.onload = function() {
         ajax({
@@ -398,13 +402,13 @@
         newbutton.addEventListener("click", equation);
         process.appendChild(newbutton);
 
-        let newbutton1 = document.createElement('button');
-        newbutton1.id = 'sendbtn1';
-        newbutton1.className = 'btn btn-default';
-        strong1.innerHTML = '列方程';
-        newbutton1.appendChild(strong1);
-        newbutton1.addEventListener("click", formulation);
-        process.appendChild(newbutton1);
+        // let newbutton1 = document.createElement('button');
+        // newbutton1.id = 'sendbtn1';
+        // newbutton1.className = 'btn btn-default';
+        // strong1.innerHTML = '列方程';
+        // newbutton1.appendChild(strong1);
+        // newbutton1.addEventListener("click", formulation);
+        // process.appendChild(newbutton1);
 
         let img = document.getElementById('img');
         let img1 = document.createElement('img');
@@ -413,11 +417,11 @@
         img.parentElement.replaceChild(img1, img);
     }
 
-    function formulation(){
+    // //点击列方程发生的事件
+    // function formulation(){
+    //
+    // }
 
-    }
-
-    //点击列方程发生的事件
     function equation() {
         if((count > 0) && !check()){
             alert("选择错误，请重新选择！");
@@ -505,7 +509,7 @@
             } else {
                 over();
             }
-        };
+        }
     }
     function addPicture(pic) {
         let question = document.getElementById('question');

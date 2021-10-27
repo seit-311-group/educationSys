@@ -3,8 +3,8 @@ package cn.sysu.educationSys.service.serviceImpl;
 import cn.sysu.educationSys.mapper.StudentMapper;
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
 import cn.sysu.educationSys.pojo.answer.AnswerRecords;
-import cn.sysu.educationSys.pojo.Student;
-import cn.sysu.educationSys.pojo.StudentExample;
+import cn.sysu.educationSys.pojo.student.Student;
+import cn.sysu.educationSys.pojo.student.StudentExample;
 import cn.sysu.educationSys.service.AnswerRecordsService;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.QuestionService;
@@ -49,6 +49,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void loginRecord(Long id) {
+
+    }
+
+    @Override
     public Student regist(Long id, String name, String password, String classandgrade) {
         Student student = new Student();
         student.setId(id);
@@ -62,6 +67,10 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
+    @Override
+    public void registerRecord(Long id) {
+
+    }
 
 
     @Override

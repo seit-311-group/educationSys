@@ -1,6 +1,6 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.Student;
+import cn.sysu.educationSys.pojo.student.Student;
 
 public interface CookieSessionService {
     void addSession();

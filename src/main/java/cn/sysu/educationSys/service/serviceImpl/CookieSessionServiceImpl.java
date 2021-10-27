@@ -1,7 +1,7 @@
 package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
-import cn.sysu.educationSys.pojo.Student;
+import cn.sysu.educationSys.pojo.student.Student;
 import cn.sysu.educationSys.service.CookieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class CookieSessionServiceImpl implements CookieSessionService {
         }
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("studentId")) {
-                long studentId = Integer.parseInt(cookie.getValue());
+                long studentId = Long.parseLong(cookie.getValue());
                 Student student = studentMapperCustom.findById(studentId);
                 if (student != null){
                     // 写到session中
@@ -95,7 +95,7 @@ public class CookieSessionServiceImpl implements CookieSessionService {
         Student student = new Student();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("studentId")) {
-                long studentId = Integer.parseInt(cookie.getValue());
+                long studentId = Long.parseLong(cookie.getValue());
                 student= studentMapperCustom.findById(studentId);
                 break;
             }

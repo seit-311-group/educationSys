@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -38,8 +39,14 @@ public class ProcessServiceTest {
 
     @Test
     public void analysis1Test() throws IOException {
-        List<circuitQa> list = coreProcessService.analysisTop3("什么是戴维南定理");
-        list.forEach(System.out::println);
+        Map<circuitQa, Float> circuitQaFloatMap = coreProcessService.analysisTop5("什么是戴维南定理");
+        // list.forEach(System.out::println);
+        System.out.println(circuitQaFloatMap);
+    }
+
+    @Test
+    public void subQuestionTest() throws IOException {
+        System.out.println(coreProcessService.subQuestion("213123"));
     }
 
     @Test
@@ -57,23 +64,15 @@ public class ProcessServiceTest {
         candidate.add(circuitQa2);
         candidate.add(circuitQa3);
         candidate.add(circuitQa4);
-        List<circuitQa> list = MatchUtil.matchTop3(candidate, "什么是戴维南定理");
-        for (circuitQa circuit: list){
-            System.out.println(circuit.getQuestion());
-        }
+        Map<circuitQa, Float> 什么是戴维南定理 = MatchUtil.matchTop5(candidate, "什么是戴维南定理");
+        // for (circuitQa circuit: list){
+        //     System.out.println(circuit.getQuestion());
+        // }
     }
 
     @Test
     public void subQueryTest() throws IOException, InterruptedException {
         System.out.println(coreProcessService.subQuery("电导和电阻表示元件的什么特性？"));}
-    @Test
-    public void getTest() {
-        System.out.println(coreProcessService.getAnswerByOrder("2", "RL一阶电路的阶跃响应（t=0时接入电源），流过电感的电流如何变化？.二阶电路在单位阶跃响应中曲线变化情况是怎样的？.处理RC电路、RL电路阶跃响应的关键"));
-    }
-    @Test
-    public void orderTest() throws IOException, InterruptedException {
-        System.out.println(coreProcessService.getAnswerByOrder("0", coreProcessService.subQuery("什么是阶跃响应")));
-    }
 
     @Test
     public void test1(){

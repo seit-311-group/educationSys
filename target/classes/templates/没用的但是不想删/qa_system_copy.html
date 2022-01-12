@@ -358,6 +358,37 @@
                             <!--            show-text>-->
                             <!--    </el-rate>-->
                             <!--</div>-->
+                            <div class="answer_user_area"><div class="time">2021-11-29 15:48:58</div><div class="answer_user"><div class="avatar_and_answer"><div class="words_user"><p class="word" style="font-size: 15px;">什么是戴维南
+                            </p></div><span class="el-avatar el-avatar--circle" style="height: 58px; width: 58px; line-height: 58px;"></span></div></div></div>
+
+                            <div class="answer_system_area">
+                                <div class="time" >
+                                    {{time}}</div>
+                                <div class="avatar_and_answer">
+                                    <el-avatar :size="58" :src="'sysAvatar.png'"></el-avatar>
+                                    <div class="words">
+                                        <p class="word" style="font-size: 15px">
+                                            线性两端电路可以由一个电压源和一个串联电阻取代，电压等于端点的开路电压，电阻等于独立源关闭时端点的输入电阻。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="answer_system_area">
+                                <div class="time" >
+                                    {{time}}</div>
+                                <div class="avatar_and_answer">
+                                    <el-avatar :size="58" :src="'sysAvatar.png'"></el-avatar>
+                                    <div class="words">
+                                        <p class="word" style="font-size: 15px">
+                                        <p style="font-size: 15px">已为您找到相关题目，快来试试吧！<br/>
+                                            <a href="/feedbackTwoSys" style="color: #5c86bc">
+                                                求解图中电路的戴维南等效电路。</br>
+                                                求下图所示电路在端口a-b处的戴维南等效电路。</br></a>
+                                        </p>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </el-scrollbar>
                 </div>
@@ -426,7 +457,7 @@
                 Analyzing: '电路问答系统',
                 dialogVisible1: false,
                 dialogVisible2: false,
-                inputDisabled: true,
+                inputDisabled: false,
                 descriptionDisable: false,
                 time: '',
                 input: '',
@@ -531,19 +562,22 @@
                 let answer_area_padding = document.getElementById('answer_area_padding');
                 this.createNewUserSystem(answer_area_padding, query);
 
-                let queryTop3 = '';
+                let answer = '';
                 await axios.get('/qa/querytop3?question=' + query).then(response=>{
                     queryTop3 = response.data;
                 }).catch(function (error){
                     console.log(error);
                 })
-                this.createNewQuestionSystem(answer_area_padding, queryTop3);
-            },
 
+
+                this.createNewQuestionSystem(answer_area_padding, queryTop3);
+
+            },
             // 用户的对话框
             createNewUserSystem(answer_area_padding, query){
                 let answer_user_area = document.createElement('div');
                 answer_user_area.className = 'answer_user_area';
+
 
                 let time = document.createElement('div');
                 time.className = 'time';
@@ -578,67 +612,6 @@
 
             // 系统显示问题的对话框
             createNewQuestionSystem(answer_area_padding, questions){
-                let answer_system_area = document.createElement('div');
-                answer_system_area.className = 'answer_system_area';
-
-                let time = document.createElement('div');
-                time.className = 'time';
-                time.innerHTML = this.getTime();
-
-                let avatar_and_answer = document.createElement('div');
-                avatar_and_answer.className = 'avatar_and_answer';
-
-                let words = document.createElement('div');
-                words.className = 'words';
-                let text_user = document.createElement('p');
-
-                // 暂时在处理中
-                // questions = "testing@"
-                //处理questions
-                if(questions == NO_QUESTION){
-                    text_user.innerHTML = "不好意思，没有相关问题~";
-                }else if(questions.substring(0, 6) == "直接返回答案"){
-                    text_user.innerHTML = questions.substring(6);
-                }else{
-                    text_user.innerHTML = "已为您找到如下问题：";
-                    text_user.appendChild(document.createElement('br'));
-                    let question = questions.split("@");
-                    for (let i = 0; i < question.length ;i++) {
-                        this.createATag(answer_area_padding, text_user, question[i]);
-                        text_user.appendChild(document.createElement('br'));
-                    }
-                }
-
-
-                text_user.style.fontSize = '15px';
-                text_user.className = 'word';
-
-
-                let el_avatar = document.createElement('span');
-                el_avatar.className = 'el-avatar el-avatar--circle';
-                el_avatar.style.height = '58px';
-                el_avatar.style.width = '58px';
-                el_avatar.style.lineHeight = '58px';
-
-                let img = document.createElement('img');
-                img.src = 'sysAvatar.png';
-                img.style.objectFit = 'cover';
-
-                el_avatar.appendChild(img);
-
-                words.appendChild(text_user);
-                avatar_and_answer.appendChild(el_avatar);
-                avatar_and_answer.appendChild(words);
-
-                answer_system_area.appendChild(time);
-                answer_system_area.appendChild(avatar_and_answer);
-
-                answer_area_padding.appendChild(answer_system_area);
-                this.scrollDown();
-            },
-
-            // 显示相关问题的对话框 找到三题
-            createNewAnswerSystem(answer_area_padding, questions){
                 let answer_system_area = document.createElement('div');
                 answer_system_area.className = 'answer_system_area';
 
@@ -836,7 +809,6 @@
                                 a.className = 'click';
                                 a.innerHTML = subQuestions[i];
                                 a.addEventListener('click', function (){
-                                    // 显示子问题点击的问题
                                     let answer_user_area = document.createElement('div');
                                     answer_user_area.className = 'answer_user_area';
 
@@ -929,8 +901,6 @@
                                         myRef.wrap.scrollTop = myRef.wrap.scrollHeight;
 
                                     })
-
-                                    // 找到子问题对应的子问题
                                 });
                                 text_user.appendChild(a);
                                 text_user.appendChild(document.createElement('br'));
@@ -963,6 +933,7 @@
                     })
                 }
             },
+
             /**
              * 系统显示答案和评分的对话框
              * @param answer_area_padding
@@ -1119,16 +1090,16 @@
                 this.$message.error('上传的图片不能超过三张！');
             },
             questionInput(){
-                if(this.getCookie('studentId') == ''){
-                    this.$message({
-                        message: '您还没有登录请先点击右上角登录或者注册哦！',
-                        type: 'warning'
-                    });
-                }
+                // if(this.getCookie('studentId') == ''){
+                //     this.$message({
+                //         message: '您还没有登录请先点击右上角登录或者注册哦！',
+                //         type: 'warning'
+                //     });
+                // }
             },
             loginOrNot(){
                 if(this.getCookie('studentId') == ''){
-                    this.inputDisabled = true;
+                    this.inputDisabled = false;
                 }else{
                     this.inputDisabled = false;
                 }

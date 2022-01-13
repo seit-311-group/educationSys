@@ -169,7 +169,7 @@ public class QuestionServiceImpl implements QuestionService {
         }else {
             logger.info("您已进入图片上传服务,用户一共要上传" + picture.length + "张图片");
             //获取文件在服务器的储存位置
-            String path = configProperties.getPath();
+            String path = configProperties.getPic();
             logger.info("文件的保存路径：" + path);
 
             for (int i = 0; i < picture.length; i++) {

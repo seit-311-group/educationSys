@@ -3,14 +3,19 @@
   "groups": [
     {
       "sourceType": "cn.sysu.educationSys.config.ConfigProperties",
-      "name": "pic",
+      "name": "path",
       "type": "cn.sysu.educationSys.config.ConfigProperties"
     }
   ],
   "properties": [
     {
       "sourceType": "cn.sysu.educationSys.config.ConfigProperties",
-      "name": "pic.path",
+      "name": "path.algorithm-sever-ip-and-port",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "cn.sysu.educationSys.config.ConfigProperties",
+      "name": "path.pic",
       "type": "java.lang.String"
     }
   ]

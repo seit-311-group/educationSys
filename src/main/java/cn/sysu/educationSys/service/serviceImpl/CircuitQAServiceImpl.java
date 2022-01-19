@@ -4,6 +4,9 @@ import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.pojo.qa.circuitQaExample;
 import cn.sysu.educationSys.service.CircuitQAService;
 import cn.sysu.educationSys.service.RecordService;
+import cn.sysu.educationSys.utils.HttpUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,11 @@ public class CircuitQAServiceImpl implements CircuitQAService {
 
     @Autowired
     private RecordService recordService;
+
+    @Autowired
+    HttpUtil httpUtil;
+
+
     //@Scheduled(cron="0 0 2 * * ?") 定时运行一次
     @Override
     public List<circuitQa> importQuestions() {
@@ -83,6 +91,34 @@ public class CircuitQAServiceImpl implements CircuitQAService {
         recordService.wordsSave(question, question, answerByQuestion);
 
         return answerByQuestion;
+    }
+
+    /**
+     * 首先找到这个小题对应的方程 然后调用httpUtil来计算相似度
+     * @param function
+     * @return
+     */
+    @Override
+    public String calFunctionSimilarity(String function) {
+        String function1 = function;
+        String function2 = "a + b + c";
+        // 调用公式匹配Api
+        HashMap<String, String> params = new HashMap<>();
+        params.put("function1", function1);
+        params.put("function2", function2);
+        String paramString = JSON.toJSONString(params);
+        JSONObject res = JSON.parseObject(httpUtil.post("http://172.18.219.212:5000/functionMatch", paramString));
+        double similarity = Double.parseDouble(res.get("similarity").toString());
+        String fun1Simplify = String.valueOf(res.get("function1"));
+        String fun2Simplify = (String) res.get("function2");
+        System.out.println(Math.round(similarity * 100) + "%");
+        if (similarity == 1){
+
+        }else{
+
+        }
+
+        return fun1Simplify;
     }
 }
 

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.concurrent.*;
 
+/**
+ * 这个暂时没用了
+ */
 @Component
 public class FunctionSimUtil {
     private static Logger logger = Logger.getLogger(FunctionSimUtil.class);

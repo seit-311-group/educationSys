@@ -21,4 +21,9 @@ public class CircuitQAServiceImplTest extends TestCase {
         System.out.println(circuitQAService.findAnswerByQuestion("什么是电路的过渡过程？"));
     }
 
+    @Test
+    public void test1(){
+        circuitQAService.calFunctionSimilarity("a+b+c+1=0");
+    }
+
 }

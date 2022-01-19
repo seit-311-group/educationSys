@@ -1,6 +1,7 @@
 package cn.sysu.educationSys.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class HttpClientTest {
         params.put("function2", function2);
         String paramString = JSON.toJSONString(params);
         String res = httpUtil.post("http://172.18.219.212:5000/functionMatch", paramString);
+        JSONObject jsonObject = JSON.parseObject(res);
+        System.out.println(jsonObject.get("similarity"));
         System.out.println(res);
     }
 

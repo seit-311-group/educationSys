@@ -80,8 +80,6 @@ public class HttpUtil {
             httpPost.setHeader("Accept", "application/json");
             httpPost.setEntity(new StringEntity(jsonString, Charset.forName("UTF-8")));
             response = httpClient.execute(httpPost);
-            int statusCode = response.getStatusLine().getStatusCode();
-            System.out.println(statusCode);
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             StringBuffer sb = new StringBuffer("");
             String line = "";

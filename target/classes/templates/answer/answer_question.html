@@ -28,6 +28,25 @@
     #main{
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         background-color: white;
+        margin:0 auto;
+        background-color: white;
+        border-radius: 0px;
+        box-shadow: #242424 0px 2px 5px;
+        position: relative;
+        height: 676px;
+        width: 1544px;
+        font-size: 16px;
+    }
+
+    #left_area{
+        height: 676px;
+        width: 80px;
+
+    }
+
+    #right_area{
+        height: 676px;
+        width: 1464px;
     }
 
     .btn-default{
@@ -42,94 +61,172 @@
     }
     #main_area{
         height: 590px;
+        margin-top: 20px;
         position: relative;
+        display: flex;
+
     }
 
     #nav_tabs{
         position: absolute;
-        top: -21px;
-        left: 22px;
+        top: 0px;
+        left: 81px;
     }
 
     #qa_area{
         display: flex;
         justify-content: center;
         position: absolute;
-        top: 21px;
-        left: 22px;
+        top: 42px;
+        left: 81px;
     }
 
     #question_area{
-        width: 625px;
+        width: 665px;
         height: 580px;
-        border: 1px solid black;
-        overflow-y: scroll;
+        border: 1px solid #dddddd;
     }
 
     #submit_place{
+        display: flex;
+        justify-content: center;
         position: relative;
-        top: 10px;
-        left: 10px;
-        width: 590px;
+        top: 15px;
+        left: 15px;
+        width: 634px;
         height: 550px;
+    }
+
+    #comment_place{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: 15px;
+        left: 15px;
+        width: 634px;
+        height: 550px;
+    }
+
+    #submit_table{
+        font-size: 15px;
+        border-radius: 0px;
+        box-shadow: #d7d3d3 0px 2px 10px;
     }
 
     .nav_a{
         font-size: 13px;
     }
 
+
     #answer_area{
         display: flex;
         justify-content: center;
+        flex-direction: column;
         position: relative;
-        width: 865px;
+        left: 10px;
+        width: 776px;
         height: 580px;
-        border: 1px solid black;
-        overflow-y: scroll;
-
+        border: 1px solid #dddddd;
     }
-    #answer_show{
-        display: flex;
-        justify-content: center;
-        position: relative;
-        width: 700px;
 
+    #answer_place_show{
+        width: 776px;
+        height: 580px;
+    }
+
+    /* 控制窗   */
+    #control_show{
+        border-top: 1px solid #dddddd;
+        height: 150px;
+        width: 776px;
+    }
+
+    #answer_show{
+        width: 776px;
+    }
+
+    .el-scrollbar__wrap {
+        overflow-x: hidden;
     }
     #bar_left{
         display: flex;
         justify-content: left;
-        width: 625px;
+        margin-top: 4px;
+        width: 690px;
         height: 40px;
         position:relative;
-        border: 1px solid black;
+        margin-left: 65px;
     }
-    
+
     #np{
         position: absolute;
-        right: 0px;
+        right: 30px;
     }
 
     #btn_next{
-    }
-
-    #bar_right{
-        width: 865px;
-        height: 40px;
-        border: 1px solid black;
     }
 
     #function_area{
         display: flex;
         justify-content: center;
         position: absolute;
-        top: 601px;
+        top: 631px;
         left: 22px;
 
+    }
+
+    #bar_right{
+        display: flex;
+        margin-left: -20px;
+        width: 865px;
+        height: 40px;
+        /*border: 1px solid black;*/
+    }
+
+    #how_to_use{
+        margin-top: 250px;
+        margin-left: 30px;
+    }
+
+    /* icon的大小   */
+    .icon-size{
+        font-size: 23px;
+    }
+
+    .icon-color{
+        color: white;
+    }
+
+    .click{
+        cursor: pointer;
     }
 
     .nav_a{
         cursor: pointer;
     }
+
+    #label_area{
+        width: 81px;
+        height: 81px;
+        background-color: #005825;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #label{
+        font-family: "Helvetica Neue";
+        font-size: 25px;
+        color: white;
+    }
+
+    #label_bar{
+        position: absolute;
+        width: 81px;
+        height: 596px;
+        background-color: black;
+    }
+
+
 </style>
 <style>
     body {
@@ -151,89 +248,144 @@
         border-color: #2b542c;
     }
 
+
+
+
 </style>
 
 
-<body >
+<body style="background-color: #efefef">
     <div th:include="navigation :: nav"></div>
-    <div id="main" style="font-size: 16px">
+    <div id="main">
         <div id="main_area">
-            <div id="nav_tabs">
-                <ul class="nav nav-tabs">
-                    <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question">
-                        <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-                        题目描述</a></li>
-                    <!--<li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment">-->
-                    <!--    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>-->
-                    <!--    评论（此功能暂时未开放）</a></li>-->
-                    <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit">
-                        <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
-                        提交记录</a></li>
-                </ul>
+            <div id="left_area">
+                <div id="label_area"><span id="label">AN</span></div>
+                <div id="label_bar">
+                    <div id="how_to_use" class="icon-size icon-color click">
+                        <i class="el-icon-question" @click="dialogVisible = true"></i>
+                        <el-dialog
+                                title="答题系统介绍"
+                                :visible.sync="dialogVisible"
+                                width="55%"
+                                :before-close="handleClose">
+                            <span>这是一个电路知识的问答系统，你可以问一些你在学习电路基础课程中遇到的一些问题，现在主要有以下功能：<br/>
+                                1. 你可以在问答框中输入问题，系统会<strong>自动匹配</strong>你的问题，通过点击来选择你要的问题。<br/>
+                                2. 如果没有你的问题，我们后台会有记录，并且会尽快完善！<br/>
+                                3. 支持<strong>联想子问题</strong>功能.<br/>
+                                4. 你还可以点击右上角<strong>上传图片</strong>上传一个图片来描述你的问题，我们收到问题后，会将答案发回给你哦~<br/>
+                                系统还有很多功能没有上线呢！谢谢大家的配合，我们会根据大家的意见或者建议尽快完善系统！</span>
+                            <span slot="footer" class="dialog-footer">
+                        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                            </span>
+                        </el-dialog>
+                    </div>
+
+                </div>
+
             </div>
-            <div id="qa_area">
-                <div id="question_area">
-                    <div id="question_place" :style="{'display': question_place_show}"></div>
-                    <div id="comment_place" :style="{'display': comment_place_show}"></div>
-                    <div id="submit_place" :style="{'display': submit_place_show}">
-                        <table id="submit_table" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <td style="width: 337px">做题结果</td>
-                                    <td style="width: 81px">花费时间</td>
-                                    <td style="width: 171px">提交时间</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="record in records">
-                                    <td>
-                                        <ul class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                               aria-expanded="false">
-                                                <span :style="{'color': setResultColor(record.result)}" style="font-size: 14px">{{record.result}}</span>
-                                            </a>
-                                            <ul class="dropdown-menu" >
-                                                <strong><li v-html="record.point" style="white-space: pre-wrap; font-size: 14px"></li></strong>
+            <div id="right_area">
+                <div id="head">
+                    <div id="nav_tabs">
+                        <ul class="nav nav-tabs">
+                            <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question" style="font-size: 15px; color: black">
+                                <span class="glyphicon glyphicon-tasks" aria-hidden="true" ></span>
+                                题目描述</a></li>
+                            <li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment" style="font-size: 15px; color: black">
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                评论</a></li>
+                            <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit" style="font-size: 15px; color: black">
+                                <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+                                提交记录</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="qa_area">
+                    <div id="question_area">
+                        <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
+                            <div id="question_place" :style="{'display': question_place_show}"></div>
+                            <div id="comment_place" :style="{'display': comment_place_show}">
+                                <el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>
+
+                            </div>
+                            <div id="submit_place" :style="{'display': submit_place_show}">
+                                <el-empty description="您还没任何提交记录" :style="{'display': submitRecordEmpty}"></el-empty>
+                                <table id="submit_table"  align="center" style="text-align: center" class="table table-striped table-bordered" :style="{'display': submitRecord}">
+                                    <thead>
+                                    <tr>
+                                        <td style="width: 350px">做题结果</td>
+                                        <td style="width: 100px" >花费时间</td>
+                                        <td style="width: 181px">提交时间</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="record in records">
+                                        <td>
+                                            <ul class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                                   aria-expanded="false" >
+                                                    <span :style="{'color': setResultColor(record.result)}" style="font-size: 15px">{{record.result}}</span>
+                                                </a>
+                                                <ul class="dropdown-menu" >
+                                                    <strong><li v-html="record.point" style="white-space: pre-wrap; font-size: 15px"></li></strong>
+                                                </ul>
                                             </ul>
-                                        </ul>
-                                    </td>
-                                    <td>{{record.timespend}}</td>
-                                    <td>{{record.timesubmit}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="answer_area">
-                    <div id="answer_show">
-                    </div>
-                </div>
+                                        </td>
+                                        <td>{{record.timespend}}</td>
+                                        <td>{{record.timesubmit}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </el-scrollbar>
 
-            </div>
-            <div id="function_area">
-                <div id="bar_left">
-                    <div id="btn_list">
-                        <button class="btn btn-default" type="submit" onclick="window.location.href='/answer_index'">
-                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                            <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
-                        </button>
                     </div>
-                    <div id="np">
-                        <button class="btn btn-default" type="submit" id="btn_previous "
-                                v-on:click="previous_question" :class="{'disabled': pdisabled}">
-                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                            上一题</button>
-                        <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <button class="btn btn-default" type="submit" id="btn_next"
-                                v-on:click="next_question" :class="{'disabled' : ndisabled}">
-                            下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                        </button>
+
+                    <div id="answer_area">
+                        <div id="answer_place_show">
+                            <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%" >
+                                <div id="answer_show">
+                                </div>
+                            </el-scrollbar>
+                        </div>
+                        <div id="control_show" :style="{'display': icon_up_show}">
+
+                        </div>
+
                     </div>
-                </div>
-                <div id="bar_right">
 
                 </div>
+                <div id="function_area">
+                    <div id="bar_left">
+                        <div id="btn_list">
+                            <button class="btn btn-default" type="submit" onclick="window.location.href='/answer_index'">
+                                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                                <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
+                            </button>
+                        </div>
+                        <div id="np">
+                            <button class="btn btn-default" type="submit" id="btn_previous "
+                                    v-on:click="previous_question" :class="{'disabled': pdisabled}">
+                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                上一题</button>
+                            <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <button class="btn btn-default" type="submit" id="btn_next"
+                                    v-on:click="next_question" :class="{'disabled' : ndisabled}">
+                                下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="bar_right">
+                        <el-button type="text" style="font-size: 15px; color: black; margin: auto; margin-left: 20px;"
+                                   @click="iconChange" v-model="control_active"
+                        >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp答题记录&nbsp&nbsp
+                            <div class="el-icon-arrow-down" :style="{'display': icon_down_show}"></div>
+                            <div class="el-icon-arrow-up" :style="{'display': icon_up_show}"></div>
+                        </el-button>
+                    </div>
+                </div>
             </div>
+
+
         </div>
 
     </div>
@@ -339,7 +491,10 @@
         question_place.appendChild(newbr);
         question_place.appendChild(img);
 
+        // 首先开始答题的按钮要居中
         button();
+
+
     }
     //开始答题按钮并监听
     function button() {
@@ -354,19 +509,31 @@
         button.className = 'btn btn-default';
         button.role = 'group';
         button.aria_label = '...';
+        button.style.height = '60px'
 
 
         button.addEventListener("click",f);     // 事件监听器
         strong.innerHTML = '开始答题';
-        strong.style.font = '14px';
+        strong.style.fontSize = '25px';
         button.appendChild(strong);
 
         process.appendChild(button);
+
+        process.style.marginTop='250px';
+        process.style.marginLeft='340px';
+
         answer_show.appendChild(process);
     }
 
     // 点击开始答题按钮发生
     function f(){
+        // 把整个process回到原位
+        let process = document.getElementById('process');
+        process.style.marginTop='20px';
+        process.style.marginLeft='60px';
+        process.style.marginRight='10px';
+        process.style.marginRight='20px';
+
         beginCount();
         ajax({url:"/solution/getAnalysisBYId?id=" + questionid,
             success: function(res){
@@ -398,6 +565,7 @@
         newbutton.id = 'sendbtn0';
         newbutton.className = 'btn btn-default';
         strong.innerHTML = '选方程';
+        strong.style.fontSize = '16px';
         newbutton.appendChild(strong);
         newbutton.addEventListener("click", equation);
         process.appendChild(newbutton);
@@ -573,12 +741,13 @@
             div.appendChild(img);
         }
         newdiv.appendChild(div);}
+
     function newButton(content){
         let newdiv = document.getElementById('div' + count);
         let newbutton = document.createElement('button');
         let newbr = document.createElement('br');
         let strong = document.createElement('strong');
-
+        strong.style.fontSize='16px'
         newbutton.id = 'sendbtn' + count;
         newbutton.className = 'btn btn-default';
         strong.innerHTML = content;
@@ -744,12 +913,19 @@
                 comment_place_show: 'none',
                 submit_place_show: 'none',
                 question_active: 'active',
+                control_active: false,
+                icon_down_show: 'inline',
+                icon_up_show: 'none',
                 comment_active: '',
                 submit_active: '',
                 records: {},
                 errorPointsList: '',
                 domain: '',
-                functionInput: ''
+                functionInput: '',
+                dialogVisible: false, // 如何使用按钮
+                submitRecord: 'none',
+                submitRecordEmpty: 'none',
+                commentEmpty: 'inline',   // 评论是否为空
             }
         },
         mounted: function (){
@@ -775,6 +951,7 @@
                     this.pdisabled = false;
                     this.ndisabled = false;
                 }
+
             },
             previous_question() {
                 if(this.pdisabled == true){
@@ -844,6 +1021,11 @@
 
                 }
                 this.records = questionRecords;
+                if (this.records.length == 0){
+                    this.submitRecordEmpty = 'inline';
+                }else{
+                    this.submitRecord = 'inline';
+                }
             },
             setResultColor(result){
                 if(result == '通过'){
@@ -865,7 +1047,26 @@
                     res = response1.data;
                 })
                 return res;
-            }
+            },
+            iconChange(){
+                if (this.control_active == false){
+                    this.icon_down_show = 'none';
+                    this.icon_up_show = 'inline';
+                    this.control_active = true;
+                    var answer_place_show = document.getElementById('answer_place_show');
+                    answer_place_show.style.height = '430px'
+                }else{
+                    this.icon_down_show = 'inline';
+                    this.icon_up_show = 'none';
+                    this.control_active = false;
+                    var answer_place_show = document.getElementById('answer_place_show');
+                    answer_place_show.style.height = '580px'
+                }
+                // this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
+            },
+            handleClose(done) {     // 如何使用的弹窗
+                done();
+            },
         }
     })
 

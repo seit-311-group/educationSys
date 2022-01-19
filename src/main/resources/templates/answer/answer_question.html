@@ -94,7 +94,6 @@
         top: 15px;
         left: 15px;
         width: 634px;
-        height: 550px;
     }
 
     #comment_place{
@@ -104,7 +103,6 @@
         top: 15px;
         left: 15px;
         width: 634px;
-        height: 550px;
     }
 
     #submit_table{
@@ -124,7 +122,7 @@
         flex-direction: column;
         position: relative;
         left: 10px;
-        width: 776px;
+        width: 775px;
         height: 580px;
         border: 1px solid #dddddd;
     }
@@ -134,12 +132,21 @@
         height: 580px;
     }
 
-    /* 控制窗   */
+    /* 答题记录窗   */
     #control_show{
         border-top: 1px solid #dddddd;
         height: 150px;
         width: 776px;
     }
+
+    #control_area{
+        margin: 20px;
+    }
+
+    #finish{
+        margin-left: 245px;
+    }
+
 
     #answer_show{
         width: 776px;
@@ -160,7 +167,7 @@
 
     #np{
         position: absolute;
-        right: 30px;
+        right: 31px;
     }
 
     #btn_next{
@@ -184,7 +191,8 @@
     }
 
     #how_to_use{
-        margin-top: 553px;
+        position: absolute;
+        margin-top: 470px;
         margin-left: 30px;
     }
 
@@ -224,6 +232,10 @@
         width: 81px;
         height: 596px;
         background-color: black;
+    }
+
+    #question_empty .el-empty__image{
+        display: none;
     }
 
 
@@ -304,8 +316,75 @@
                         <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
                             <div id="question_place" :style="{'display': question_place_show}"></div>
                             <div id="comment_place" :style="{'display': comment_place_show}">
-                                <el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>
+                                <!--<el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>-->
+                                <div id="comment">
+                                    <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
+                                        <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
+                                        <div class="reply-info" >
+                                            <div
+                                                    tabindex="0"
+                                                    contenteditable="true"
+                                                    id="replyInput"
+                                                    spellcheck="false"
+                                                    placeholder="输入评论..."
+                                                    class="reply-input"
+                                                    @focus="showReplyBtn"
+                                                    @input="onDivInput($event)"
+                                            >
+                                            </div>
+                                        </div>
+                                        <div class="reply-btn-box" v-show="btnShow">
+                                            <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
+                                        </div>
+                                    </div>
+                                    <div v-for="(item,i) in comments" :key="i" class="author-title reply-father">
+                                        <el-avatar class="header-img" :size="40" :src="item.headImg"></el-avatar>
+                                        <div class="author-info">
+                                            <span class="author-name">{{item.name}}</span>
+                                            <span class="author-time">{{item.time}}</span>
+                                        </div>
+                                        <div class="icon-btn">
+                                            <span @click="showReplyInput(i,item.name,item.id)"><i class="iconfont el-icon-s-comment"></i>{{item.commentNum}}</span>
+                                            <i class="iconfont el-icon-caret-top"></i>{{item.like}}
+                                        </div>
+                                        <div class="talk-box">
+                                            <p>
+                                                <span class="reply">{{item.comment}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="reply-box">
+                                            <div v-for="(reply,j) in item.reply" :key="j" class="author-title">
+                                                <el-avatar class="header-img" :size="40" :src="reply.fromHeadImg"></el-avatar>
+                                                <div class="author-info">
+                                                    <span class="author-name">{{reply.from}}</span>
+                                                    <span class="author-time">{{reply.time}}</span>
+                                                </div>
+                                                <div class="icon-btn">
+                                                    <span @click="showReplyInput(i,reply.from,reply.id)"><i class="iconfont el-icon-s-comment"></i>{{reply.commentNum}}</span>
+                                                    <i class="iconfont el-icon-caret-top"></i>{{reply.like}}
+                                                </div>
+                                                <div class="talk-box">
+                                                    <p>
+                                                        <span>回复 {{reply.to}}:</span>
+                                                        <span class="reply">{{reply.comment}}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="reply-box">
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div  v-show="_inputShow(i)" class="my-reply my-comment-reply">
+                                            <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
+                                            <div class="reply-info" >
+                                                <div tabindex="0" contenteditable="true" spellcheck="false" placeholder="输入评论..."   @input="onDivInput($event)"  class="reply-input reply-comment-input"></div>
+                                            </div>
+                                            <div class=" reply-btn-box">
+                                                <el-button class="reply-btn" size="medium" @click="sendCommentReply(i,j)" type="primary">发表评论</el-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="submit_place" :style="{'display': submit_place_show}">
                                 <el-empty description="您还没任何提交记录" :style="{'display': submitRecordEmpty}"></el-empty>
@@ -348,7 +427,17 @@
                             </el-scrollbar>
                         </div>
                         <div id="control_show" :style="{'display': icon_up_show}">
+                            <div id="control_area">
+                                <div id="question_empty" :style="{'display': question_empty}">
+                                    <el-empty description="该题还没任何答题记录,请先作答"></el-empty>
+                                </div>
+                                <div id="finish" :style="{'display': question_finish}">
+                                    <span style="font-size: 18px; color: #2b542c; font-weight: bold;">恭喜你，你已经完全掌握本题！</span>
+                                </div>
+                                <div id="error" :style="{'display': question_error}">
 
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -381,6 +470,9 @@
                             <div class="el-icon-arrow-down" :style="{'display': icon_down_show}"></div>
                             <div class="el-icon-arrow-up" :style="{'display': icon_up_show}"></div>
                         </el-button>
+                        <el-button type="primary" round style="margin-right: 87px"
+                            @click="do_it_again"
+                        >再做一遍</el-button>
                     </div>
                 </div>
             </div>
@@ -392,10 +484,242 @@
 
 
 
-</body>
 
+</body>
+<script>
+    // <![CDATA[
+    var vm = new Vue({
+        el: '#main',
+        data() {
+            return {
+                now_questions: '',
+                all_questions: '',
+                pdisabled: false,
+                ndisabled: false,
+                question_place_show: '',
+                comment_place_show: 'none',
+                submit_place_show: 'none',
+                question_active: 'active',
+                icon_down_show: 'inline',
+                icon_up_show: 'none',
+                comment_active: '',
+                submit_active: '',
+                records: {},
+                errorPointsList: '',
+                domain: '',
+                functionInput: '',
+                dialogVisible: false, // 如何使用按钮
+                submitRecord: 'none',   // 提交是否为空
+                submitRecordEmpty: 'none',
+                commentEmpty: 'inline',   // 评论是否为空
+
+                // 答题记录
+                control_active: false,
+                question_time: 0,
+                all_pass: true,
+                error_point: [],
+                question_empty: 'inline',
+                question_finish: 'none',
+                question_error: 'none',
+
+            }
+        },
+        mounted: function (){
+            this.load();
+
+        },
+        methods: {
+            async load(){
+                var temp = window.location.href;
+                this.domain = temp.split(':')[1].substring(2);
+                var x1 = temp.length; //地址的总长度
+                var x2 = temp.indexOf("="); //取得=号的位置
+                this.now_questions = temp.substr(x2 + 1, x1 - x2 - 1);//截取id为题号
+                await axios.get('/answer/question',{        //执行完await的方法才会往后执行
+                }).then(response=>{
+                    this.all_questions = response.data;
+                })
+                if(this.now_questions == 1){
+                    this.pdisabled = true;
+                }else if(this.now_questions == this.all_questions){
+                    this.ndisabled = true;
+                }else{
+                    this.pdisabled = false;
+                    this.ndisabled = false;
+                }
+
+            },
+            previous_question() {
+                if(this.pdisabled == true){
+                    return;
+                }
+                let index =  Number(this.now_questions) - 1;
+                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
+
+            },
+            next_question() {
+                if(this.ndisabled == true){
+                    return;
+                }
+                let index = Number(this.now_questions) + 1;
+                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
+
+            },
+            show_question(){
+                this.question_place_show = '';
+                this.comment_place_show = 'none';
+                this.submit_place_show = 'none';
+                this.question_active = 'active';
+                this.comment_active = '';
+                this.submit_active = '';
+            },
+            show_comment() {
+                this.question_place_show = 'none';
+                this.comment_place_show = '';
+                this.submit_place_show = 'none';
+                this.question_active = '';
+                this.comment_active = 'active';
+                this.submit_active = '';
+                var question_place = document.getElementById("question_place");
+
+            },
+            show_submit() {
+                this.question_place_show = 'none';
+                this.comment_place_show = 'none';
+                this.submit_place_show = '';
+                this.question_active = '';
+                this.comment_active = '';
+                this.submit_active = 'active';
+
+                this.loadRecords();
+            },
+            async loadRecords(){
+                let questionRecords = {};
+                await axios.post('answerRecords/showAllRecords',{
+                    questionid: this.now_questions
+                }).then(response=>{
+                    questionRecords = response.data;
+                })
+                var key = 'point';
+                for (var record of questionRecords){
+                    if(record.result == ''|| record.result == ' ' || record.result == null){
+                        record.result = '通过';
+                        record[key] = '无';
+                    }else{
+                        let value = '';
+                        await this.loadpoints(record.result).then(res =>{
+                            value = res;
+                        });
+                        record[key] = value;
+                        record.result = '解答错误（点击查看错误的知识点）';
+                    }
+                    record.timespend = this.calTime(record.timespend);
+
+                }
+                this.records = questionRecords;
+                if (this.records.length == 0){
+                    this.submitRecordEmpty = 'inline';
+                }else{
+                    this.submitRecord = 'inline';
+                }
+            },
+            setResultColor(result){
+                if(result == '通过'){
+                    return 'green';
+                }else{
+                    return 'red';
+                }
+            },
+            calTime(second){
+                return Math.ceil(second/60) + '分钟';
+            },
+            async loadpoints(result){
+                console.log("方法内");
+                let res = '';
+                await axios.post('answerRecords/getAllPoints',{
+                    pointId: result
+                }).then(response1=>{
+                    console.log("axios中");
+                    res = response1.data;
+                })
+                return res;
+            },
+            iconChange(){
+                if (this.control_active == false){
+                    this.icon_down_show = 'none';
+                    this.icon_up_show = 'inline';
+                    this.control_active = true;
+                    var answer_place_show = document.getElementById('answer_place_show');
+                    answer_place_show.style.height = '430px'
+                }else{
+                    this.icon_down_show = 'inline';
+                    this.icon_up_show = 'none';
+                    this.control_active = false;
+                    var answer_place_show = document.getElementById('answer_place_show');
+                    answer_place_show.style.height = '580px'
+                }
+                // this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
+            },
+            // 滚动条置底
+            scrollDown() {
+                this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
+            },
+            handleClose(done) {     // 如何使用的弹窗
+                done();
+            },
+            // 做完题目答题记录弹出
+            finishQuestion(){
+                this.icon_down_show = 'none';
+                this.icon_up_show = 'inline';
+                this.control_active = true;
+                var answer_place_show = document.getElementById('answer_place_show');
+                answer_place_show.style.height = '430px';
+                if (this.all_pass == true){
+                    this.question_empty = 'none';
+                    this.question_finish = 'inline';
+                    this.question_error = 'none';
+
+                }else{
+                    this.question_empty = 'none';
+                    this.question_finish = 'none';
+                    this.question_error = 'inline';
+
+                    let index = 1;
+                    let conclusion = document.createElement('div');
+                    conclusion.style.marginLeft = '245px';
+                    let error = document.getElementById('error');
+                    let newbr = document.createElement('br');   //换行
+                    let text = document.createElement('span');
+                    text.innerHTML += "你对以下知识点的掌握还不够：" + "\n"
+                    text.style.fontWeight = 'bold';
+                    text.style.color = 'red';
+
+                    conclusion.appendChild(text);
+
+                    conclusion.appendChild(newbr);
+                    for (let i = 0; i < this.error_point.length; i++){
+                        let point = document.createElement("div");
+                        point.innerHTML += index + '.' + this.error_point[i];
+                        index++;
+                        conclusion.appendChild(point);
+                    }
+                    error.appendChild(conclusion);
+
+                }
+            },
+            do_it_again(){
+                document.location.reload();
+
+            }
+
+        }
+    })
+
+    // ]]>
+</script>
 <script type="text/javascript">
     // <![CDATA[
+
     let url = window.location.href; //获取当前页面的url
     var n1 = url.length; //地址的总长度
     var n2 = url.indexOf("="); //取得=号的位置
@@ -795,8 +1119,8 @@
             let text = "恭喜你，你已经完全掌握本题！";
             conclusion.innerHTML += text;
             errorPoints = questionid + "@";
-        }
-        else{
+        } else{
+            vm.all_pass = false;
             let text = "你对以下知识点的掌握还不够：" + "\n";
             let index = 1;
             conclusion.innerHTML += text;
@@ -811,6 +1135,7 @@
                         set.add(map.get(i))
                         point.innerHTML += index + '.'+ map.get(i);
                         index++;
+                        vm.error_point.push(map.get(i));
                     }
                 } else {
                     continue;
@@ -821,10 +1146,16 @@
         // 将做错的题目对应的知识点返回到后端
         // ajax不能传特殊字符到后端 所以要先对url进行编码在进行传输
         errorPoints += second;
+        vm.question_time = second;
         ajax({
             url: "/student/saveErrorPoints?points=" + errorPoints,
         })
-        newdiv.appendChild(conclusion);
+        // newdiv.appendChild(conclusion);
+
+        // 调用vue实例的方法
+        vm.finishQuestion();
+        vm.scrollDown();
+
         process.appendChild(newdiv);
         let newdiv1 = document.createElement('div')
 
@@ -896,181 +1227,9 @@
             xhr.send(obj.params);
         }
     }
-    // ]]>
-</script>
-
-<script>
-    // <![CDATA[
-    new Vue({
-        el: '#main',
-        data() {
-            return {
-                now_questions: '',
-                all_questions: '',
-                pdisabled: false,
-                ndisabled: false,
-                question_place_show: '',
-                comment_place_show: 'none',
-                submit_place_show: 'none',
-                question_active: 'active',
-                control_active: false,
-                icon_down_show: 'inline',
-                icon_up_show: 'none',
-                comment_active: '',
-                submit_active: '',
-                records: {},
-                errorPointsList: '',
-                domain: '',
-                functionInput: '',
-                dialogVisible: false, // 如何使用按钮
-                submitRecord: 'none',
-                submitRecordEmpty: 'none',
-                commentEmpty: 'inline',   // 评论是否为空
-            }
-        },
-        mounted: function (){
-            this.load();
-
-        },
-        methods: {
-            async load(){
-                var temp = window.location.href;
-                this.domain = temp.split(':')[1].substring(2);
-                var x1 = temp.length; //地址的总长度
-                var x2 = temp.indexOf("="); //取得=号的位置
-                this.now_questions = temp.substr(x2 + 1, x1 - x2 - 1);//截取id为题号
-                await axios.get('/answer/question',{        //执行完await的方法才会往后执行
-                }).then(response=>{
-                    this.all_questions = response.data;
-                })
-                if(this.now_questions == 1){
-                    this.pdisabled = true;
-                }else if(this.now_questions == this.all_questions){
-                    this.ndisabled = true;
-                }else{
-                    this.pdisabled = false;
-                    this.ndisabled = false;
-                }
-
-            },
-            previous_question() {
-                if(this.pdisabled == true){
-                    return;
-                }
-                let index =  Number(this.now_questions) - 1;
-                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
-
-            },
-            next_question() {
-                if(this.ndisabled == true){
-                    return;
-                }
-                let index = Number(this.now_questions) + 1;
-                window.location.href = 'http://'+this.domain+':8080/question?id=' + index;
-
-            },
-            show_question(){
-                    this.question_place_show = '';
-                    this.comment_place_show = 'none';
-                    this.submit_place_show = 'none';
-                    this.question_active = 'active';
-                    this.comment_active = '';
-                    this.submit_active = '';
-            },
-            show_comment() {
-                this.question_place_show = 'none';
-                this.comment_place_show = '';
-                this.submit_place_show = 'none';
-                this.question_active = '';
-                this.comment_active = 'active';
-                this.submit_active = '';
-                var question_place = document.getElementById("question_place");
-
-            },
-            show_submit() {
-                this.question_place_show = 'none';
-                this.comment_place_show = 'none';
-                this.submit_place_show = '';
-                this.question_active = '';
-                this.comment_active = '';
-                this.submit_active = 'active';
-
-                this.loadRecords();
-            },
-            async loadRecords(){
-                let questionRecords = {};
-                await axios.post('answerRecords/showAllRecords',{
-                    questionid: this.now_questions
-                }).then(response=>{
-                    questionRecords = response.data;
-                })
-                var key = 'point';
-                for (var record of questionRecords){
-                    if(record.result == ''|| record.result == ' ' || record.result == null){
-                        record.result = '通过';
-                        record[key] = '无';
-                    }else{
-                        let value = '';
-                        await this.loadpoints(record.result).then(res =>{
-                            value = res;
-                        });
-                        record[key] = value;
-                        record.result = '解答错误（点击查看错误的知识点）';
-                    }
-                    record.timespend = this.calTime(record.timespend);
-
-                }
-                this.records = questionRecords;
-                if (this.records.length == 0){
-                    this.submitRecordEmpty = 'inline';
-                }else{
-                    this.submitRecord = 'inline';
-                }
-            },
-            setResultColor(result){
-                if(result == '通过'){
-                    return 'green';
-                }else{
-                    return 'red';
-                }
-            },
-            calTime(second){
-                return Math.ceil(second/60) + '分钟';
-            },
-            async loadpoints(result){
-                console.log("方法内");
-                let res = '';
-                await axios.post('answerRecords/getAllPoints',{
-                    pointId: result
-                }).then(response1=>{
-                    console.log("axios中");
-                    res = response1.data;
-                })
-                return res;
-            },
-            iconChange(){
-                if (this.control_active == false){
-                    this.icon_down_show = 'none';
-                    this.icon_up_show = 'inline';
-                    this.control_active = true;
-                    var answer_place_show = document.getElementById('answer_place_show');
-                    answer_place_show.style.height = '430px'
-                }else{
-                    this.icon_down_show = 'inline';
-                    this.icon_up_show = 'none';
-                    this.control_active = false;
-                    var answer_place_show = document.getElementById('answer_place_show');
-                    answer_place_show.style.height = '580px'
-                }
-                // this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
-            },
-            handleClose(done) {     // 如何使用的弹窗
-                done();
-            },
-        }
-    })
 
     // ]]>
 </script>
+
 
 </html>

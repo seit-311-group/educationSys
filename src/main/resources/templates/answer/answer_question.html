@@ -70,7 +70,7 @@
     #nav_tabs{
         position: absolute;
         top: 0px;
-        left: 81px;
+        left: 93px;
     }
 
     #qa_area{
@@ -145,6 +145,24 @@
 
     #finish{
         margin-left: 245px;
+    }
+
+    #question_result{
+        margin-top: -30px;
+    }
+
+    .el-result__icon svg {
+        width: 54px;
+        height: 54px;
+    }
+
+    #error{
+        height: 150px;
+    }
+
+    /*表格的颜色*/
+    .el-table .warning-row {
+        background: oldlace;
     }
 
 
@@ -238,6 +256,10 @@
         display: none;
     }
 
+    .el-table__body-wrapper .is-scrolling-none{
+        height: 60px;
+    }
+
 
 </style>
 <style>
@@ -259,10 +281,6 @@
     .inputDeep input.el-input__inner:focus {
         border-color: #2b542c;
     }
-
-
-
-
 </style>
 
 
@@ -280,7 +298,7 @@
                                 :visible.sync="dialogVisible"
                                 width="55%"
                                 :before-close="handleClose">
-                            <span>这是一个电路知识的问答系统，你可以问一些你在学习电路基础课程中遇到的一些问题，现在主要有以下功能：<br/>
+                            <span>这是一个电路计算题的做题系统，你可以选择你想要做的题目，现在主要有以下功能：<br/>
                                 1. 你可以在问答框中输入问题，系统会<strong>自动匹配</strong>你的问题，通过点击来选择你要的问题。<br/>
                                 2. 如果没有你的问题，我们后台会有记录，并且会尽快完善！<br/>
                                 3. 支持<strong>联想子问题</strong>功能.<br/>
@@ -302,9 +320,9 @@
                             <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question" style="font-size: 15px; color: black">
                                 <span class="glyphicon glyphicon-tasks" aria-hidden="true" ></span>
                                 题目描述</a></li>
-                            <li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment" style="font-size: 15px; color: black">
-                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                评论</a></li>
+                            <!--<li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment" style="font-size: 15px; color: black">-->
+                            <!--    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>-->
+                            <!--    评论</a></li>-->
                             <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit" style="font-size: 15px; color: black">
                                 <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
                                 提交记录</a></li>
@@ -316,75 +334,8 @@
                         <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
                             <div id="question_place" :style="{'display': question_place_show}"></div>
                             <div id="comment_place" :style="{'display': comment_place_show}">
-                                <!--<el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>-->
-                                <div id="comment">
-                                    <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
-                                        <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
-                                        <div class="reply-info" >
-                                            <div
-                                                    tabindex="0"
-                                                    contenteditable="true"
-                                                    id="replyInput"
-                                                    spellcheck="false"
-                                                    placeholder="输入评论..."
-                                                    class="reply-input"
-                                                    @focus="showReplyBtn"
-                                                    @input="onDivInput($event)"
-                                            >
-                                            </div>
-                                        </div>
-                                        <div class="reply-btn-box" v-show="btnShow">
-                                            <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
-                                        </div>
-                                    </div>
-                                    <div v-for="(item,i) in comments" :key="i" class="author-title reply-father">
-                                        <el-avatar class="header-img" :size="40" :src="item.headImg"></el-avatar>
-                                        <div class="author-info">
-                                            <span class="author-name">{{item.name}}</span>
-                                            <span class="author-time">{{item.time}}</span>
-                                        </div>
-                                        <div class="icon-btn">
-                                            <span @click="showReplyInput(i,item.name,item.id)"><i class="iconfont el-icon-s-comment"></i>{{item.commentNum}}</span>
-                                            <i class="iconfont el-icon-caret-top"></i>{{item.like}}
-                                        </div>
-                                        <div class="talk-box">
-                                            <p>
-                                                <span class="reply">{{item.comment}}</span>
-                                            </p>
-                                        </div>
-                                        <div class="reply-box">
-                                            <div v-for="(reply,j) in item.reply" :key="j" class="author-title">
-                                                <el-avatar class="header-img" :size="40" :src="reply.fromHeadImg"></el-avatar>
-                                                <div class="author-info">
-                                                    <span class="author-name">{{reply.from}}</span>
-                                                    <span class="author-time">{{reply.time}}</span>
-                                                </div>
-                                                <div class="icon-btn">
-                                                    <span @click="showReplyInput(i,reply.from,reply.id)"><i class="iconfont el-icon-s-comment"></i>{{reply.commentNum}}</span>
-                                                    <i class="iconfont el-icon-caret-top"></i>{{reply.like}}
-                                                </div>
-                                                <div class="talk-box">
-                                                    <p>
-                                                        <span>回复 {{reply.to}}:</span>
-                                                        <span class="reply">{{reply.comment}}</span>
-                                                    </p>
-                                                </div>
-                                                <div class="reply-box">
+                                <el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div  v-show="_inputShow(i)" class="my-reply my-comment-reply">
-                                            <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
-                                            <div class="reply-info" >
-                                                <div tabindex="0" contenteditable="true" spellcheck="false" placeholder="输入评论..."   @input="onDivInput($event)"  class="reply-input reply-comment-input"></div>
-                                            </div>
-                                            <div class=" reply-btn-box">
-                                                <el-button class="reply-btn" size="medium" @click="sendCommentReply(i,j)" type="primary">发表评论</el-button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div id="submit_place" :style="{'display': submit_place_show}">
                                 <el-empty description="您还没任何提交记录" :style="{'display': submitRecordEmpty}"></el-empty>
@@ -426,6 +377,7 @@
                                 </div>
                             </el-scrollbar>
                         </div>
+
                         <div id="control_show" :style="{'display': icon_up_show}">
                             <div id="control_area">
                                 <div id="question_empty" :style="{'display': question_empty}">
@@ -433,10 +385,28 @@
                                 </div>
                                 <div id="finish" :style="{'display': question_finish}">
                                     <span style="font-size: 18px; color: #2b542c; font-weight: bold;">恭喜你，你已经完全掌握本题！</span>
+                                    <div id="question_result">
+                                        <el-result icon="success"></el-result>
+                                    </div>
                                 </div>
                                 <div id="error" :style="{'display': question_error}">
-
+                                    <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
+                                        <el-table
+                                                height="150px"
+                                                :data="tableData"
+                                                style="width: 715px; font-size: 15px; margin-left: 40px; margin-top: -15px;"
+                                                :cell-style="{'text-align':'center'}"
+                                                :row-class-name="tableRowClassName">
+                                            <el-table-column
+                                                    prop="error_points"
+                                                    label="你对以下知识点的掌握还不够："
+                                                    width="650px"
+                                                    align='center'>
+                                            </el-table-column>
+                                        </el-table>
+                                    </el-scrollbar>
                                 </div>
+
                             </div>
                         </div>
 
@@ -517,10 +487,11 @@
                 control_active: false,
                 question_time: 0,
                 all_pass: true,
-                error_point: [],
-                question_empty: 'inline',
+                question_empty: 'none',
                 question_finish: 'none',
-                question_error: 'none',
+                question_error: 'inline',
+                // 错误知识点的表格
+                tableData: []
 
             }
         },
@@ -634,12 +605,10 @@
                 return Math.ceil(second/60) + '分钟';
             },
             async loadpoints(result){
-                console.log("方法内");
                 let res = '';
                 await axios.post('answerRecords/getAllPoints',{
                     pointId: result
                 }).then(response1=>{
-                    console.log("axios中");
                     res = response1.data;
                 })
                 return res;
@@ -683,33 +652,22 @@
                     this.question_empty = 'none';
                     this.question_finish = 'none';
                     this.question_error = 'inline';
-
-                    let index = 1;
-                    let conclusion = document.createElement('div');
-                    conclusion.style.marginLeft = '245px';
-                    let error = document.getElementById('error');
-                    let newbr = document.createElement('br');   //换行
-                    let text = document.createElement('span');
-                    text.innerHTML += "你对以下知识点的掌握还不够：" + "\n"
-                    text.style.fontWeight = 'bold';
-                    text.style.color = 'red';
-
-                    conclusion.appendChild(text);
-
-                    conclusion.appendChild(newbr);
-                    for (let i = 0; i < this.error_point.length; i++){
-                        let point = document.createElement("div");
-                        point.innerHTML += index + '.' + this.error_point[i];
-                        index++;
-                        conclusion.appendChild(point);
-                    }
-                    error.appendChild(conclusion);
-
                 }
             },
             do_it_again(){
                 document.location.reload();
 
+            },
+            // 该小问做错
+            doItWrong() {
+                this.$notify.error({
+                    title: '错误',
+                    message: '选择错误，请重新选择！',
+                    offset: 100
+                });
+            },
+            tableRowClassName(){
+                return 'warning-row';
             }
 
         }
@@ -809,7 +767,7 @@
 
         question.id = 'question';
         question.className = 'question';
-        question.innerHTML = questionid + '.' + res;
+        question.innerHTML = '&nbsp&nbsp'+ questionid + '.' + res;
         var question_place = document.getElementById("question_place");
         question_place.appendChild(question);
         question_place.appendChild(newbr);
@@ -916,7 +874,8 @@
 
     function equation() {
         if((count > 0) && !check()){
-            alert("选择错误，请重新选择！");
+            // alert("选择错误，请重新选择！");
+            vm.doItWrong();
         } else{
             if (addpicture != null && addpicture.length != 0) {
                 if (String(count) == addpicture[0]) {
@@ -997,6 +956,7 @@
                         }
                     }
                 });
+                // 通过这个按钮来做一个循环
                 newButton("提交");
             } else {
                 over();
@@ -1134,8 +1094,9 @@
                     if (!set.has(map.get(i))){
                         set.add(map.get(i))
                         point.innerHTML += index + '.'+ map.get(i);
+                        // 调用vue的实例
+                        vm.tableData.push({'error_points': index + '.'+ map.get(i)});
                         index++;
-                        vm.error_point.push(map.get(i));
                     }
                 } else {
                     continue;
@@ -1155,6 +1116,7 @@
         // 调用vue实例的方法
         vm.finishQuestion();
         vm.scrollDown();
+        vm.show_submit();
 
         process.appendChild(newdiv);
         let newdiv1 = document.createElement('div')

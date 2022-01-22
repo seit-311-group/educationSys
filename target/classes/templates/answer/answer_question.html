@@ -122,7 +122,7 @@
         flex-direction: column;
         position: relative;
         left: 10px;
-        width: 775px;
+        width: 776px;
         height: 580px;
         border: 1px solid #dddddd;
     }
@@ -285,172 +285,172 @@
 
 
 <body style="background-color: #efefef">
-    <div th:include="navigation :: nav"></div>
-    <div id="main">
-        <div id="main_area">
-            <div id="left_area">
-                <div id="label_area"><span id="label">AN</span></div>
-                <div id="label_bar">
-                    <div id="how_to_use" class="icon-size icon-color click">
-                        <i class="el-icon-question" @click="dialogVisible = true"></i>
-                        <el-dialog
-                                title="答题系统介绍"
-                                :visible.sync="dialogVisible"
-                                width="55%"
-                                :before-close="handleClose">
+<div th:include="navigation :: nav"></div>
+<div id="main">
+    <div id="main_area">
+        <div id="left_area">
+            <div id="label_area"><span id="label">AN</span></div>
+            <div id="label_bar">
+                <div id="how_to_use" class="icon-size icon-color click">
+                    <i class="el-icon-question" @click="dialogVisible = true"></i>
+                    <el-dialog
+                            title="答题系统介绍"
+                            :visible.sync="dialogVisible"
+                            width="55%"
+                            :before-close="handleClose">
                             <span>这是一个电路计算题的做题系统，你可以选择你想要做的题目，现在主要有以下功能：<br/>
                                 1. 你可以在问答框中输入问题，系统会<strong>自动匹配</strong>你的问题，通过点击来选择你要的问题。<br/>
                                 2. 如果没有你的问题，我们后台会有记录，并且会尽快完善！<br/>
                                 3. 支持<strong>联想子问题</strong>功能.<br/>
                                 4. 你还可以点击右上角<strong>上传图片</strong>上传一个图片来描述你的问题，我们收到问题后，会将答案发回给你哦~<br/>
                                 系统还有很多功能没有上线呢！谢谢大家的配合，我们会根据大家的意见或者建议尽快完善系统！</span>
-                            <span slot="footer" class="dialog-footer">
+                        <span slot="footer" class="dialog-footer">
                         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
                             </span>
-                        </el-dialog>
-                    </div>
-
+                    </el-dialog>
                 </div>
 
             </div>
-            <div id="right_area">
-                <div id="head">
-                    <div id="nav_tabs">
-                        <ul class="nav nav-tabs">
-                            <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question" style="font-size: 15px; color: black">
-                                <span class="glyphicon glyphicon-tasks" aria-hidden="true" ></span>
-                                题目描述</a></li>
-                            <!--<li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment" style="font-size: 15px; color: black">-->
-                            <!--    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>-->
-                            <!--    评论</a></li>-->
-                            <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit" style="font-size: 15px; color: black">
-                                <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
-                                提交记录</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="qa_area">
-                    <div id="question_area">
-                        <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
-                            <div id="question_place" :style="{'display': question_place_show}"></div>
-                            <div id="comment_place" :style="{'display': comment_place_show}">
-                                <el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>
-
-                            </div>
-                            <div id="submit_place" :style="{'display': submit_place_show}">
-                                <el-empty description="您还没任何提交记录" :style="{'display': submitRecordEmpty}"></el-empty>
-                                <table id="submit_table"  align="center" style="text-align: center" class="table table-striped table-bordered" :style="{'display': submitRecord}">
-                                    <thead>
-                                    <tr>
-                                        <td style="width: 350px">做题结果</td>
-                                        <td style="width: 100px" >花费时间</td>
-                                        <td style="width: 181px">提交时间</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="record in records">
-                                        <td>
-                                            <ul class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                                   aria-expanded="false" >
-                                                    <span :style="{'color': setResultColor(record.result)}" style="font-size: 15px">{{record.result}}</span>
-                                                </a>
-                                                <ul class="dropdown-menu" >
-                                                    <strong><li v-html="record.point" style="white-space: pre-wrap; font-size: 15px"></li></strong>
-                                                </ul>
-                                            </ul>
-                                        </td>
-                                        <td>{{record.timespend}}</td>
-                                        <td>{{record.timesubmit}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </el-scrollbar>
-
-                    </div>
-
-                    <div id="answer_area">
-                        <div id="answer_place_show">
-                            <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%" >
-                                <div id="answer_show">
-                                </div>
-                            </el-scrollbar>
-                        </div>
-
-                        <div id="control_show" :style="{'display': icon_up_show}">
-                            <div id="control_area">
-                                <div id="question_empty" :style="{'display': question_empty}">
-                                    <el-empty description="该题还没任何答题记录,请先作答"></el-empty>
-                                </div>
-                                <div id="finish" :style="{'display': question_finish}">
-                                    <span style="font-size: 18px; color: #2b542c; font-weight: bold;">恭喜你，你已经完全掌握本题！</span>
-                                    <div id="question_result">
-                                        <el-result icon="success"></el-result>
-                                    </div>
-                                </div>
-                                <div id="error" :style="{'display': question_error}">
-                                    <el-scrollbar ref="myScrollbar" style="height:100%; width: 100%">
-                                        <el-table
-                                                height="150px"
-                                                :data="tableData"
-                                                style="width: 715px; font-size: 15px; margin-left: 40px; margin-top: -15px;"
-                                                :cell-style="{'text-align':'center'}"
-                                                :row-class-name="tableRowClassName">
-                                            <el-table-column
-                                                    prop="error_points"
-                                                    label="你对以下知识点的掌握还不够："
-                                                    width="650px"
-                                                    align='center'>
-                                            </el-table-column>
-                                        </el-table>
-                                    </el-scrollbar>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div id="function_area">
-                    <div id="bar_left">
-                        <div id="btn_list">
-                            <button class="btn btn-default" type="submit" onclick="window.location.href='/answer_index'">
-                                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                                <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
-                            </button>
-                        </div>
-                        <div id="np">
-                            <button class="btn btn-default" type="submit" id="btn_previous "
-                                    v-on:click="previous_question" :class="{'disabled': pdisabled}">
-                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                上一题</button>
-                            <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            <button class="btn btn-default" type="submit" id="btn_next"
-                                    v-on:click="next_question" :class="{'disabled' : ndisabled}">
-                                下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="bar_right">
-                        <el-button type="text" style="font-size: 15px; color: black; margin: auto; margin-left: 20px;"
-                                   @click="iconChange" v-model="control_active"
-                        >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp答题记录&nbsp&nbsp
-                            <div class="el-icon-arrow-down" :style="{'display': icon_down_show}"></div>
-                            <div class="el-icon-arrow-up" :style="{'display': icon_up_show}"></div>
-                        </el-button>
-                        <el-button type="primary" round style="margin-right: 87px"
-                            @click="do_it_again"
-                        >再做一遍</el-button>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
+        <div id="right_area">
+            <div id="head">
+                <div id="nav_tabs">
+                    <ul class="nav nav-tabs">
+                        <li  role="presentation" :class="question_active"><a class="nav_a" id="question_bar" v-on:click="show_question" style="font-size: 15px; color: black">
+                            <span class="glyphicon glyphicon-tasks" aria-hidden="true" ></span>
+                            题目描述</a></li>
+                        <!--<li role="presentation" :class="comment_active"><a class="nav_a" id="comment_bar" v-on:click="show_comment" style="font-size: 15px; color: black">-->
+                        <!--    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>-->
+                        <!--    评论</a></li>-->
+                        <li role="presentation" :class="submit_active"><a class="nav_a" id="submit_bar" v-on:click="show_submit" style="font-size: 15px; color: black">
+                            <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+                            提交记录</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="qa_area">
+                <div id="question_area">
+                    <el-scrollbar ref="questionScrollbar" style="height:100%; width: 100%">
+                        <div id="question_place" :style="{'display': question_place_show}"></div>
+                        <div id="comment_place" :style="{'display': comment_place_show}">
+                            <el-empty description="该题还没任何评论" :style="{'display': commentEmpty}"></el-empty>
+
+                        </div>
+                        <div id="submit_place" :style="{'display': submit_place_show}">
+                            <el-empty description="您还没任何提交记录" :style="{'display': submitRecordEmpty}"></el-empty>
+                            <table id="submit_table"  align="center" style="text-align: center" class="table table-striped table-bordered" :style="{'display': submitRecord}">
+                                <thead>
+                                <tr>
+                                    <td style="width: 350px">做题结果</td>
+                                    <td style="width: 100px" >花费时间</td>
+                                    <td style="width: 181px">提交时间</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="record in records">
+                                    <td>
+                                        <ul class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                               aria-expanded="false" >
+                                                <span :style="{'color': setResultColor(record.result)}" style="font-size: 15px">{{record.result}}</span>
+                                            </a>
+                                            <ul class="dropdown-menu" >
+                                                <strong><li v-html="record.point" style="white-space: pre-wrap; font-size: 15px"></li></strong>
+                                            </ul>
+                                        </ul>
+                                    </td>
+                                    <td>{{record.timespend}}</td>
+                                    <td>{{record.timesubmit}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </el-scrollbar>
+
+                </div>
+
+                <div id="answer_area">
+                    <div id="answer_place_show">
+                        <el-scrollbar ref="answerScrollbar" style="height:100%; width: 100%" >
+                            <div id="answer_show">
+                            </div>
+                        </el-scrollbar>
+                    </div>
+
+                    <div id="control_show" :style="{'display': icon_up_show}">
+                        <div id="control_area">
+                            <div id="question_empty" :style="{'display': question_empty}">
+                                <el-empty description="该题还没任何答题记录,请先作答"></el-empty>
+                            </div>
+                            <div id="finish" :style="{'display': question_finish}">
+                                <span style="font-size: 18px; color: #2b542c; font-weight: bold;">恭喜你，你已经完全掌握本题！</span>
+                                <div id="question_result">
+                                    <el-result icon="success"></el-result>
+                                </div>
+                            </div>
+                            <div id="error" :style="{'display': question_error}">
+                                <el-scrollbar ref="errorScrollbar" style="height:100%; width: 100%">
+                                    <el-table
+                                            height="150px"
+                                            :data="tableData"
+                                            style="width: 715px; font-size: 15px; margin-left: 40px; margin-top: -15px;"
+                                            :cell-style="{'text-align':'center'}"
+                                            :row-class-name="tableRowClassName">
+                                        <el-table-column
+                                                prop="error_points"
+                                                label="你对以下知识点的掌握还不够："
+                                                width="650px"
+                                                align='center'>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-scrollbar>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="function_area">
+                <div id="bar_left">
+                    <div id="btn_list">
+                        <button class="btn btn-default" type="submit" onclick="window.location.href='/answer_index'">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
+                        </button>
+                    </div>
+                    <div id="np">
+                        <button class="btn btn-default" type="submit" id="btn_previous "
+                                v-on:click="previous_question" :class="{'disabled': pdisabled}">
+                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            上一题</button>
+                        <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <button class="btn btn-default" type="submit" id="btn_next"
+                                v-on:click="next_question" :class="{'disabled' : ndisabled}">
+                            下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <div id="bar_right">
+                    <el-button type="text" style="font-size: 15px; color: black; margin: auto; margin-left: 20px;"
+                               @click="iconChange" v-model="control_active"
+                    >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp答题记录&nbsp&nbsp
+                        <div class="el-icon-arrow-down" :style="{'display': icon_down_show}"></div>
+                        <div class="el-icon-arrow-up" :style="{'display': icon_up_show}"></div>
+                    </el-button>
+                    <el-button type="primary" round style="margin-right: 87px"
+                               @click="do_it_again"
+                    >再做一遍</el-button>
+                </div>
+            </div>
+        </div>
+
 
     </div>
+
+</div>
 
 
 
@@ -491,13 +491,12 @@
                 question_finish: 'none',
                 question_error: 'inline',
                 // 错误知识点的表格
-                tableData: [{'error_points': 'AdasdadsAdasdadsAdasdadsAdasdadsAdasdadsAdasdadsAdasdadsAdasdads'}, {'error_points': 'asd'}, {'error_points': 'asd'}, {'error_points': 'asd'}]
+                tableData: []
 
             }
         },
         mounted: function (){
             this.load();
-
         },
         methods: {
             async load(){
@@ -630,8 +629,8 @@
                 // this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
             },
             // 滚动条置底
-            scrollDown() {
-                this.$refs['myScrollbar'].wrap.scrollTop = this.$refs['myScrollbar'].wrap.scrollHeight
+            scrollDown(ref) {
+                this.$refs[ref].wrap.scrollTop = this.$refs[ref].wrap.scrollHeight
             },
             handleClose(done) {     // 如何使用的弹窗
                 done();
@@ -663,6 +662,23 @@
                 this.$notify.error({
                     title: '错误',
                     message: '选择错误，请重新选择！',
+                    offset: 100
+                });
+            },
+            // 公式列错
+            listItWrong() {
+                this.$notify.error({
+                    title: '错误',
+                    message: '你的方程列错了哦，可以选择重新列，或者查看答案！',
+                    offset: 100
+                });
+            },
+            // 公式列对了
+            listItRight() {
+                this.$notify({
+                    title: '成功',
+                    message: '恭喜你，你的方程已经列对了哦！',
+                    type: 'success',
                     offset: 100
                 });
             },
@@ -719,27 +735,27 @@
 
     window.onload = function() {
         ajax({
-            url: "/solution/getDescriptionBYId?id=" + questionid,
+            url: "/solution/getDescriptionBYId?id=" + questionid,       // 得到题目的描述
             success: function (res) {
                 load(res);
             }
         })
         ajax({
-            url:"/solution/getSubquesIDsBYId?id=" + questionid,
+            url:"/solution/getSubquesIDsBYId?id=" + questionid,         // 得到子问题的ID
             success: function(res) {
                 let subquesID = res;
                 subquesIDarr = subquesID.split(",");
             }
         })
         ajax({
-            url:"/solution/getPointIDsBYId?id=" + questionid,
+            url:"/solution/getPointIDsBYId?id=" + questionid,           //得到知识点的ID
             success: function(res) {
                 let pointIDs = res;
                 pointarr = pointIDs.split(",");
             }
         })
         ajax({
-            url:"/solution/getAddPictureByID?id=" + questionid,
+            url:"/solution/getAddPictureByID?id=" + questionid,         // 是否需要增加图片
             success: function(res) {
                 if (res.length > 0) {
                     addpicture = res.split(",");
@@ -748,7 +764,7 @@
             }
         })
         ajax({
-            url:"/solution/getChangePictureByID?id=" + questionid,
+            url:"/solution/getChangePictureByID?id=" + questionid,      // 是否要切换题目的图片
             success: function(res) {
                 if (res.length > 0) {
                     changepicture = res.split(",");
@@ -816,49 +832,43 @@
         process.style.marginRight='10px';
         process.style.marginRight='20px';
 
-        beginCount();
-        ajax({url:"/solution/getAnalysisBYId?id=" + questionid,
+        beginCount();       // 开始计时
+        ajax({url:"/solution/getAnalysisBYId?id=" + questionid,     // 得到题目的分析
             success: function(res){
-                analysis(res);
+                chooseOrList(res);
             }
         })
     }
     function beginCount(){
-         count1 = setInterval(countTime,1000);
+        count1 = setInterval(countTime,1000);
     }
     function countTime(){
         second += 1;
     }
 
     //得到题目的分析并显示 对电路图进行分析和替换
-    function analysis(res){
+    function analysis(res, list){
         let process = document.getElementById('process');
         let newbr = document.createElement('br');
         let newbr1 = document.createElement('br');
-        let button = document.getElementById('sendbtn');
-        let strong = document.createElement('strong');
-        let strong1 = document.createElement('strong');
+        let button = document.getElementById('div_choose');
         button.parentNode.replaceChild(newbr,button);   // 答题按钮换位空行
         process.innerHTML += res;
-
         process.appendChild(newbr1);
 
+        // 新的按钮
         let newbutton = document.createElement('button');
         newbutton.id = 'sendbtn0';
-        newbutton.className = 'btn btn-default';
-        strong.innerHTML = '选方程';
-        strong.style.fontSize = '16px';
-        newbutton.appendChild(strong);
-        newbutton.addEventListener("click", equation);
+        newbutton.type = 'button'
+        newbutton.className = 'el-button el-button--primary'
+        var span = document.createElement('span');
+        span.innerHTML = "继续";
+        newbutton.appendChild(span);
+        newbutton.style.fontSize = '16px';
+        newbutton.addEventListener("click", function () {
+            equation(false, list);
+        });
         process.appendChild(newbutton);
-
-        // let newbutton1 = document.createElement('button');
-        // newbutton1.id = 'sendbtn1';
-        // newbutton1.className = 'btn btn-default';
-        // strong1.innerHTML = '列方程';
-        // newbutton1.appendChild(strong1);
-        // newbutton1.addEventListener("click", formulation);
-        // process.appendChild(newbutton1);
 
         let img = document.getElementById('img');
         let img1 = document.createElement('img');
@@ -867,17 +877,15 @@
         img.parentElement.replaceChild(img1, img);
     }
 
-    // //点击列方程发生的事件
-    // function formulation(){
-    //
-    // }
 
-    function equation() {
-        if((count > 0) && !check()){
+    // isList：代表学生是否在列方程 list表示学生最开始的时候选择的是列方程还是做选择
+    function equation(isList, list) {
+        // count = 0：说明是第一题 不弹出错误提示； check：做错返回false 才进入if；
+        if((count > 0) && !check() && !isList){
             // alert("选择错误，请重新选择！");
             vm.doItWrong();
         } else{
-            if (addpicture != null && addpicture.length != 0) {
+            if (addpicture != null && addpicture.length != 0) {  //增加图片
                 if (String(count) == addpicture[0]) {
                     addpicture.splice(0, 1);    // 从第一个开始删除一个元素 array.splice(index,howmany,item1,.....,itemX) howmany删除元素的个数
                     addPicture("part" + addpicture[0] + ".png")
@@ -885,7 +893,7 @@
                 }
             }
 
-            if (changepicture != null && changepicture.length != 0) {
+            if (changepicture != null && changepicture.length != 0) {   // 改变图片
                 if (String(count) == changepicture[0]) {
                     changepicture.splice(0, 1);
                     changePicture("part" + changepicture[0] + ".png")
@@ -895,74 +903,221 @@
 
             if (count < subquesIDarr.length) {
                 let subquesid = subquesIDarr[count];
-                ajax({
-                    url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
-                    success: function (res) {
-                        subqueIndex++;
-                        res = subqueIndex+'.' + res;
-                        createSubquestion(res);
-                    }
-                });
-                ajax({
-                    url: "/solution/getAnswerBYSubquesId?id=" + subquesid,     // 得到子问题答案对应的答案id
-                    success: function (res) {
-                        answerID = res;
-                    }
-                });
-                ajax({
-                url: "/solution/getOptionIDBYSubquesId?id=" + subquesid,       // 得到子问题的选项id
-                    success: function (res) {
-                        let options = res;
-                        if (res.length == 0) {
-                            return;
-                        }
-                        let optionsArr = options.split(",");
-                        // 把选项遍历出来
-                        for (let i = 0; i < optionsArr.length; i++) {
-                            let content = null;
-                            let optionID = optionsArr[i];
-                            let map1 = new Map();//选项ID和内容的kv对
-                            ajax({
-                                url: "/solution/getContentBYOptionId?id=" + optionID,  // 得到选项的内容
-                                success: function (res) {
-                                    content = res;
-                                    map1.set(optionID, content);
-                                    if (optionID == answerID.toString()) {
-                                        answer = res;
-                                    }
-                                }
-                            });
-                            ajax({
-                                url:"/solution/getPointIDBYOptionID?id=" + optionID,   //得到知识点id
-                                success: function(res) {
-                                    if(res == "") {
-                                        return;
-                                    }
-                                    let pointID = res;
-                                    ajax({
-                                        url: "/solution/getContentBYPointId?id=" + pointID,    // 根据知识点id等到知识点
-                                        success: function (res) {
-                                            map.set(map1.get(optionID), res);   // 存放知识点id对应的知识点
-                                        }
-                                    });
-                                }
-                            })
-                            if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
-                                createPicOption(content, 65 + i);
+                // 判断这个题目能不能列方程 ajax根据subquestion的字段listEquation来判断
+                var listEquation = true;
+                if (list && listEquation){
+                    // 如果可以列方程 先把题目显示出来
+                    ajax({
+                        url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
+                        success: function (res) {
+                            subqueIndex++;
+                            res = subqueIndex+'.' + res;
+                            if (isList){    //如果上一题在列方程 就把上一题的disable掉 然后再创建子问题
+                                disableInputAndCreate(res);
+                            }else{
+                                createSubquestion(res);
                             }
-                            else {
-                                createOption(content, 65 + i);//65是A对应的ASCII码   ABCD选项
-                            }
+                            createListArea();
                         }
-                    }
-                });
-                // 通过这个按钮来做一个循环
-                newButton("提交");
+                    });
+                }else{
+                    chooseTheEquationFull(subquesid);
+                    // 通过这个按钮来做一个循环
+                    newButtonChoose("提交");
+                }
             } else {
-                over();
+                over(list);
             }
         }
     }
+
+    function chooseOrList(res){
+        let button = document.getElementById('sendbtn');
+        let div = document.createElement('div');
+        div.id = 'div_choose';
+        div.style.display = 'flex';
+        div.style.width = '453px';
+
+        let div1 = document.createElement('div');
+        div1.innerHTML = '你想做';
+        div1.style.fontSize = '16px';
+        div1.style.margin = 'auto';
+
+
+        // 选择题按钮
+        var button_choose = document.createElement('button');
+        button_choose.id = 'button_choose' + count; // 给列方程的按钮一个id 后面把这个按钮删了
+        button_choose.type = 'button'
+        button_choose.className = 'el-button el-button--primary'
+        var span_choose = document.createElement('span');
+        span_choose.innerHTML = "选择题";
+        button_choose.appendChild(span_choose);
+        button_choose.style.fontSize = '16px';
+        button_choose.addEventListener('click', function () {
+            analysis(res, false);
+        })
+        let div2 = document.createElement('div');
+        div2.innerHTML = '还是';
+        div2.style.fontSize = '16px';
+        div2.style.margin = 'auto';
+
+        // 选择题按钮
+        var button_list = document.createElement('button');
+        button_list.id = 'button_list' + count; // 给列方程的按钮一个id 后面把这个按钮删了
+        button_list.type = 'button'
+        button_list.className = 'el-button el-button--primary'
+        var span_list = document.createElement('span');
+        span_list.innerHTML = "列方程";
+        button_list.appendChild(span_list);
+        button_list.style.fontSize = '16px';
+        button_list.addEventListener('click', function () {
+            analysis(res, true);
+        })
+        let div3 = document.createElement('div');
+        div3.innerHTML = '（请点击选择）';
+        div3.style.fontSize = '16px';
+        div3.style.margin = 'auto';
+
+        div.appendChild(div1);
+        div.appendChild(button_choose);
+        div.appendChild(div2);
+        div.appendChild(button_list);
+        div.appendChild(div3);
+
+        button.parentNode.replaceChild(div,button);   // 开始答题按钮换选择按钮
+
+        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+
+    // 如果不可以列方程直接全部出现做选择题
+    function chooseTheEquationFull(subquesid){
+        ajax({
+            url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
+            success: function (res) {
+                subqueIndex++;
+                res = subqueIndex+'.' + res;
+                createSubquestion(res);
+            }
+        });
+        ajax({
+            url: "/solution/getAnswerBYSubquesId?id=" + subquesid,     // 得到子问题答案对应的答案id
+            success: function (res) {
+                answerID = res;
+            }
+        });
+        ajax({
+            url: "/solution/getOptionIDBYSubquesId?id=" + subquesid,       // 得到子问题的选项id
+            success: function (res) {
+                let options = res;
+                if (res.length == 0) {
+                    return;
+                }
+                let optionsArr = options.split(",");
+                // 把选项遍历出来
+                for (let i = 0; i < optionsArr.length; i++) {
+                    let content = null;
+                    let optionID = optionsArr[i];
+                    let map1 = new Map();//选项ID和内容的kv对
+                    ajax({
+                        url: "/solution/getContentBYOptionId?id=" + optionID,  // 得到选项的内容
+                        success: function (res) {
+                            content = res;
+                            map1.set(optionID, content);
+                            if (optionID == answerID.toString()) {
+                                answer = res;
+                            }
+                        }
+                    });
+                    ajax({
+                        url:"/solution/getPointIDBYOptionID?id=" + optionID,   //得到知识点id
+                        success: function(res) {
+                            if(res == "") {
+                                return;
+                            }
+                            let pointID = res;
+                            ajax({
+                                url: "/solution/getContentBYPointId?id=" + pointID,    // 根据知识点id等到知识点
+                                success: function (res) {
+                                    map.set(map1.get(optionID), res);   // 存放知识点id对应的知识点
+                                }
+                            });
+                        }
+                    })
+                    if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
+                        createPicOption(content, 65 + i);
+                    }
+                    else {
+                        createOption(content, 65 + i);//65是A对应的ASCII码   ABCD选项
+                    }
+                }
+            }
+        });
+    }
+    // 如果可以列方程 学生选择了做选择则直接出现选择题
+    function chooseTheEquation(subquesid){
+        ajax({
+            url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
+            success: function (res) {
+                subqueIndex++;
+                res = subqueIndex+'.' + res;
+                createSubquestion(res);
+            }
+        });
+        ajax({
+            url: "/solution/getAnswerBYSubquesId?id=" + subquesid,     // 得到子问题答案对应的答案id
+            success: function (res) {
+                answerID = res;
+            }
+        });
+        ajax({
+            url: "/solution/getOptionIDBYSubquesId?id=" + subquesid,       // 得到子问题的选项id
+            success: function (res) {
+                let options = res;
+                if (res.length == 0) {
+                    return;
+                }
+                let optionsArr = options.split(",");
+                // 把选项遍历出来
+                for (let i = 0; i < optionsArr.length; i++) {
+                    let content = null;
+                    let optionID = optionsArr[i];
+                    let map1 = new Map();//选项ID和内容的kv对
+                    ajax({
+                        url: "/solution/getContentBYOptionId?id=" + optionID,  // 得到选项的内容
+                        success: function (res) {
+                            content = res;
+                            map1.set(optionID, content);
+                            if (optionID == answerID.toString()) {
+                                answer = res;
+                            }
+                        }
+                    });
+                    ajax({
+                        url:"/solution/getPointIDBYOptionID?id=" + optionID,   //得到知识点id
+                        success: function(res) {
+                            if(res == "") {
+                                return;
+                            }
+                            let pointID = res;
+                            ajax({
+                                url: "/solution/getContentBYPointId?id=" + pointID,    // 根据知识点id等到知识点
+                                success: function (res) {
+                                    map.set(map1.get(optionID), res);   // 存放知识点id对应的知识点
+                                }
+                            });
+                        }
+                    })
+                    if ((content.substr(content.length-4, 4) == ".png") || (content.substr(content.length-4, 4) == ".jpg")) {
+                        createPicOption(content, 65 + i);
+                    }
+                    else {
+                        createOption(content, 65 + i);//65是A对应的ASCII码   ABCD选项
+                    }
+                }
+            }
+        });
+    }
+
     function addPicture(pic) {
         let question = document.getElementById('question');
         let img = document.createElement('img');
@@ -990,6 +1145,30 @@
         newdiv.id = 'div' + count;
         button.parentNode.replaceChild(newbr,button);
         newdiv.innerHTML += res;
+        process.appendChild(newdiv);
+    }
+    // 把input区disable掉 然后提交按钮删了 创建子问题
+    function disableInputAndCreate(res){
+        let div = document.getElementById('div_input' + count);
+        div.className = 'el-input is-disabled';
+        let input = document.getElementById('input' + count);
+        input.disabled = 'disabled';
+        let list_button = document.getElementById('list_button' + count);
+        let list_area = document.getElementById('list_area' + count);
+        list_area.removeChild(list_button);
+
+        if(document.getElementById('check_button' + count) != null){
+            list_area.removeChild(document.getElementById('check_button' + count));
+        }
+
+        //然后把子问题创建出来
+        let process = document.getElementById('process');
+        let newbr = document.createElement('br');
+        count += 1;
+        let newdiv = document.createElement('div');
+        newdiv.id = 'div' + count;
+        newdiv.innerHTML += res;
+        process.appendChild(newbr);
         process.appendChild(newdiv);
     }
     function createOption(content, code){
@@ -1026,29 +1205,119 @@
         }
         newdiv.appendChild(div);}
 
-    function newButton(content){
+    function newButtonChoose(content){
         let newdiv = document.getElementById('div' + count);
         let newbutton = document.createElement('button');
         let newbr = document.createElement('br');
-        let strong = document.createElement('strong');
-        strong.style.fontSize='16px'
+        newbutton.type = 'button'
+        newbutton.className = 'el-button el-button--primary'
+        var span = document.createElement('span');
+        span.innerHTML = content;
+        newbutton.appendChild(span);
+        newbutton.style.fontSize = '16px';
         newbutton.id = 'sendbtn' + count;
-        newbutton.className = 'btn btn-default';
-        strong.innerHTML = content;
-        newbutton.appendChild(strong);
-        newbutton.addEventListener("click", equation);
-        newdiv.appendChild(newbr);
+        newbutton.addEventListener("click", function (){
+            equation(false, false);
+        });
         newdiv.appendChild(newbutton);
+        vm.scrollDown('answerScrollbar')
+    }
+
+    // 整个列方程的区域 count 表示是哪题
+    function createListArea(){
+        // 用ajax获得正确的方程为 function1
+        var function1 = 'i1*R1+u1=0'
+
+        // 找到第几个div框
+        let newdiv = document.getElementById('div' + count);
+        let newbr = document.createElement('br');
+
+        var list_area =  document.createElement('div');
+        // list_area.style.height = '300px';
+        // list_area.style.border = '1px solid black';
+        list_area.id = 'list_area' + count;
+        list_area.style.width = '500px';
+
+        // 输入框
+        var div = document.createElement('div');
+        div.id = 'div_input' + count;       // 给输入div一个id 调整他的className
+        div.className = 'el-input';
+        div.style.width = '350px'
+        var input = document.createElement('input');
+        input.className = 'el-input__inner';
+        input.id = 'input' + count;     // 给输入框一个id 后面disable掉
+        input.type = 'text';
+        input.placeholder = '请输入公式';
+        input.style.fontSize = '16px';
+        div.appendChild(input);
+        // 提交按钮
+        var button = document.createElement('button');
+        button.id = 'list_button' + count; // 给列方程的按钮一个id 后面把这个按钮删了
+        button.type = 'button'
+        button.className = 'el-button el-button--primary'
+        var span = document.createElement('span');
+        span.innerHTML = "提交";
+        button.appendChild(span);
+        button.style.marginLeft = '30px';
+        button.style.fontSize = '16px';
+        button.addEventListener('click', function () {
+            listSubmit(function1, count);
+        })
+
+        list_area.appendChild(div);
+        list_area.appendChild(button);
+
+        newdiv.appendChild(newbr);
+        newdiv.appendChild(list_area);
         newdiv.scrollIntoView();
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
     }
+    var similarity = 2
 
+    function listSubmit(function1, count) {
+        var input = document.getElementById('input' + count);
+        var function2 = input.value;
+        // ajax 调用后端接口 判断相似度1
+        if(similarity == 1){
+            input.style.color = '#2b542c';
+            vm.listItRight();
+            equation(true, true);
+        }else{
+            input.style.color = 'red';
+            similarity = 1;
+            vm.listItWrong();
+            let list_area = document.getElementById('list_area' + count);
+            // 查看答案按钮
+            if(document.getElementById('check_button' + count) == null){
+                var button = document.createElement('button');
+                button.id = 'check_button' + count; // 给列方程的按钮一个id 后面把这个按钮删了
+                button.type = 'button'
+                button.className = 'el-button el-button--primary'
+                var span = document.createElement('span');
+                span.innerHTML = "查看答案";
+                button.appendChild(span);
+                button.style.margin = 'auto';
+                button.style.fontSize = '16px';
+                button.addEventListener('click', function () {
+                    //查看答案 通过ajax到后端查找答案这一题的答案
+                    var answer = '答案test'
+                    input.value = answer;
+                    input.style.color = 'red';
+                    equation(true, true);
+                })
+                list_area.appendChild(button);
+            }
+
+        }
+    }
+
+    // 检查是否做对！
     function check() {
         let obj = document.getElementsByName('option' + count);
 
         for(let i = 0; i < obj.length; i++){
             if(obj[i].checked){
-                if(obj[i].value == answer){
+                if(obj[i].value == answer){     // answer为答案的编号
                     return true;
                 }else{
                     errorOption.add(obj[i].value);
@@ -1058,77 +1327,92 @@
         }
     }
 
-    function over(){
+    function over(list){
         clearInterval(count1);
-        highLight();
-        let process = document.getElementById('process');
-        let newbr = document.createElement('br')
-        let newdiv = document.createElement('div' + (count+1));
-        let button = document.getElementById('sendbtn' + count);
-        button.parentNode.replaceChild(newbr,button);
-        ajax({
-            url: "/solution/getAnswerByID?id=" + questionid,
-            success: function (res) {
-                newdiv.innerHTML += res;
-            }
-        });
-        newdiv.appendChild(newbr);
-        newdiv.appendChild(newbr);
-        let conclusion = document.createElement("div");
-        if (errorOption.size == 0) {
-            let text = "恭喜你，你已经完全掌握本题！";
-            conclusion.innerHTML += text;
-            errorPoints = questionid + "@";
-        } else{
-            vm.all_pass = false;
-            let text = "你对以下知识点的掌握还不够：" + "\n";
-            let index = 1;
-            conclusion.innerHTML += text;
-            conclusion.appendChild(newbr);
-            errorPoints += questionid + "@";
-            let set = new Set();
-            for (let i of errorOption) {
-                let point = document.createElement("div");
-                if (map.has(i)) {
-                    errorPoints += map.get(i) + '@';
-                    if (!set.has(map.get(i))){
-                        set.add(map.get(i))
-                        point.innerHTML += index + '.'+ map.get(i);
-                        // 调用vue的实例
-                        vm.tableData.push({'error_points': index + '.'+ map.get(i)});
-                        index++;
-                    }
-                } else {
-                    continue;
+        if(list){
+            var answer = '';
+            ajax({
+                url: "/solution/getAnswerByID?id=" + questionid,
+                success: function (res) {
+                    answer = res;
                 }
-                conclusion.appendChild(point);
+            });
+
+            let div = document.getElementById('div_input' + count);
+            div.className = 'el-input is-disabled';
+            let input = document.getElementById('input' + count);
+            input.disabled = 'disabled';
+            let list_button = document.getElementById('list_button' + count);
+            let list_area = document.getElementById('list_area' + count);
+            list_area.removeChild(list_button);
+
+            let process = document.getElementById('process');
+            let newbr = document.createElement('br')
+            let newdiv = document.createElement('div' + (count+1));
+            newdiv.innerHTML += answer;
+            process.appendChild(newbr);
+            process.appendChild(newdiv);
+
+            if(document.getElementById('check_button' + count) != null){
+                list_area.removeChild(document.getElementById('check_button' + count));
             }
+            // 把知识点搞进去就可以了
+            for (let i = 0; i < 2; i++){
+
+            }
+            vm.finishQuestion();
+            vm.scrollDown('answerScrollbar');
+            vm.show_submit();
+        }else{
+            highLight();
+            let process = document.getElementById('process');
+            let newbr = document.createElement('br')
+            let newdiv = document.createElement('div' + (count+1));
+            let button = document.getElementById('sendbtn' + count);
+            button.parentNode.replaceChild(newbr,button);
+
+            ajax({
+                url: "/solution/getAnswerByID?id=" + questionid,
+                success: function (res) {
+                    newdiv.innerHTML += res;
+                }
+            });
+
+            if (errorOption.size == 0) {
+                errorPoints = questionid + "@";
+            } else{
+                vm.all_pass = false;
+                let index = 1;
+                errorPoints += questionid + "@";
+                let set = new Set();
+                for (let i of errorOption) {
+                    if (map.has(i)) {
+                        errorPoints += map.get(i) + '@';
+                        if (!set.has(map.get(i))){
+                            set.add(map.get(i))
+                            // 调用vue的实例
+                            vm.tableData.push({'error_points': index + '.'+ map.get(i)});
+                            index++;
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            // 将做错的题目对应的知识点返回到后端
+            // ajax不能传特殊字符到后端 所以要先对url进行编码在进行传输
+            errorPoints += second;
+            vm.question_time = second;
+            ajax({
+                url: "/student/saveErrorPoints?points=" + errorPoints,
+            })
+            // newdiv.appendChild(conclusion);
+            process.appendChild(newdiv);
+            // 调用vue实例的方法
+            vm.finishQuestion();
+            vm.scrollDown('answerScrollbar');
+            vm.show_submit();
         }
-        // 将做错的题目对应的知识点返回到后端
-        // ajax不能传特殊字符到后端 所以要先对url进行编码在进行传输
-        errorPoints += second;
-        vm.question_time = second;
-        ajax({
-            url: "/student/saveErrorPoints?points=" + errorPoints,
-        })
-        // newdiv.appendChild(conclusion);
-
-        // 调用vue实例的方法
-        vm.finishQuestion();
-        vm.scrollDown();
-        vm.show_submit();
-
-        process.appendChild(newdiv);
-        let newdiv1 = document.createElement('div')
-
-        conclusion.appendChild(newdiv1);
-        newdiv1.scrollIntoView();
-        document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
-        let errorOptionString = '';
-        for (let item of errorOption) {
-            errorOptionString += item + '@';
-        }
-
     }
 
     // 把错误的选项标红

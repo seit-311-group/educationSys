@@ -1,5 +1,6 @@
 package cn.sysu.educationSys.utils;
 
+import cn.sysu.educationSys.config.ConfigProperties;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
@@ -16,15 +17,18 @@ public class HttpClientTest {
     @Autowired
     HttpUtil httpUtil;
 
+    @Autowired
+    ConfigProperties configProperties;
+
     @Test
-    public void postTest(){
+    public void postTest() throws Exception {
         String function1 = "a-a++c+b+a-1=1";
         String function2 = "a+b=0";
         HashMap<String, String> params = new HashMap<>();
         params.put("function1", function1);
         params.put("function2", function2);
         String paramString = JSON.toJSONString(params);
-        String res = httpUtil.post("http://172.18.219.212:5000/functionMatch", paramString);
+        String res = httpUtil.post("http://" + configProperties.getAlgorithmSeverIpAndPort() + "/functionMatch", paramString);
         JSONObject jsonObject = JSON.parseObject(res);
         System.out.println(jsonObject.get("similarity"));
         System.out.println(res);

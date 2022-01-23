@@ -19,4 +19,14 @@ public class QuestionServiceImplTest {
     public void testValue(){
         // questionService.testConfigurationProperties();
     }
+
+    @Test
+    public void isListEquationTest(){
+        System.out.println(questionService.isListEquation("14"));
+    }
+
+    @Test
+    public void findRightFunctionTest(){
+        System.out.println(questionService.findRightFunction("15"));
+    }
 }

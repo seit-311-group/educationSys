@@ -8,7 +8,12 @@ import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.pojo.qa.questionExample;
 import cn.sysu.educationSys.service.AnswerRecordsService;
 import cn.sysu.educationSys.service.QuestionService;
+import cn.sysu.educationSys.utils.HttpUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,25 +23,31 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
     private final static Logger logger = Logger.getLogger(QuestionServiceImpl.class);
     @Autowired
     private cn.sysu.educationSys.mapper.questionMapper questionMapper;
+
     @Autowired
     private cn.sysu.educationSys.mapper.pointMapper pointMapper;
+
     @Autowired
     private cn.sysu.educationSys.mapper.subquestionMapper subquestionMapper;
+
     @Autowired
     private cn.sysu.educationSys.mapper.option_tMapper option_tMapper;
+
     @Autowired
     AnswerRecordsService answerRecordsService;
+
     @Autowired
     ConfigProperties configProperties;
+
+    @Autowired
+    HttpUtil httpUtil;
 
     @Autowired
     UploadPicMapper uploadPicMapper;
@@ -213,6 +224,49 @@ public class QuestionServiceImpl implements QuestionService {
 
         }
         return StaticVariables.UPLOAD_SUCCESS;
+    }
+
+    @Override
+    public boolean isListEquation(String subQuestionId) {
+        subquestion subQuestionById = subquestionMapper.getSubQuestionById(subQuestionId);
+        return subQuestionById.isListEquation();
+    }
+
+    @Override
+    public String findRightFunction(String subQuestionId) {
+        subquestion subQuestionById = subquestionMapper.getSubQuestionById(subQuestionId);
+        option_t option_t = getOptionsByID(String.valueOf(subQuestionById.getAnswer())).get(0);
+        return option_t.getContent();
+    }
+
+    @Override
+    public String matchFunction(FunctionMatch functionMatch) throws JsonProcessingException {
+        logger.info("调用公式匹配功能");
+        JSONObject jsonObject = null;
+        Map<String, String> map = new HashMap<>();
+        try {
+            String function1 = functionMatch.getFunction1();
+            String function2 = functionMatch.getFunction2();
+            HashMap<String, String> params = new HashMap<>();
+            params.put("function1", function1);
+            params.put("function2", function2);
+            String paramString = JSON.toJSONString(params);
+            String url = "http://" + configProperties.getAlgorithmSeverIpAndPort() + "/functionMatch";
+            String res = httpUtil.post(url, paramString);
+            jsonObject = JSON.parseObject(res);
+
+            // 封装结果
+            map.put("function1", String.valueOf(jsonObject.get("function1")));
+            map.put("function2", String.valueOf(jsonObject.get("function2")));
+            map.put("similarity", String.valueOf(jsonObject.get("similarity")));
+            logger.info("结果：" + jsonObject);
+        }catch (Exception e){
+            logger.error("公式匹配出错" + e);
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(map);
+
+        return json;
     }
 
 }

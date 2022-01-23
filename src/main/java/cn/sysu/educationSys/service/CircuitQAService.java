@@ -18,7 +18,7 @@ public interface CircuitQAService {
 
     String findAnswerByQuestion(String question);
 
-    String calFunctionSimilarity(String function);
+    String calFunctionSimilarity(String function) throws Exception;
 
 }
 

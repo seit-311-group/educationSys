@@ -19,4 +19,6 @@ public interface subquestionMapper {
     int updateByExampleSelective(@Param("record") subquestion record, @Param("example") subquestionExample example);
 
     int updateByExample(@Param("record") subquestion record, @Param("example") subquestionExample example);
+
+    subquestion getSubQuestionById(String id);
 }

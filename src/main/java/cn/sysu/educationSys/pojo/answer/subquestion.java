@@ -9,6 +9,16 @@ public class subquestion {
 
     private Integer answer;
 
+    private boolean listEquation;
+
+    public boolean isListEquation() {
+        return listEquation;
+    }
+
+    public void setListEquation(boolean listEquation) {
+        this.listEquation = listEquation;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -22,7 +22,7 @@ public class CircuitQAServiceImplTest extends TestCase {
     }
 
     @Test
-    public void test1(){
+    public void test1() throws Exception {
         circuitQAService.calFunctionSimilarity("a+b+c+1=0");
     }
 

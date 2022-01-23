@@ -1,17 +1,19 @@
 package cn.sysu.educationSys.controller.answer;
 
+import cn.sysu.educationSys.pojo.answer.FunctionMatch;
 import cn.sysu.educationSys.pojo.answer.option_t;
 import cn.sysu.educationSys.pojo.answer.point;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.pojo.answer.subquestion;
 import cn.sysu.educationSys.service.QuestionService;
 import cn.sysu.educationSys.utils.FunctionSimUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/solution")
@@ -154,6 +156,26 @@ public class QueryController {
     @RequestMapping("/functionSim")
     public double functionSim(@RequestParam(value = "questionId") String questionId, @RequestParam(value = "subQuestionId") String subQuestionId, String function){
         return functionSimUtil.calSimilarity("", function);
+    }
+
+    @RequestMapping("/isListEquation")
+    public boolean isListEquation(@RequestParam(value = "subQuestionId") String subQuestionId){
+        return questionService.isListEquation(subQuestionId);
+    }
+
+    @RequestMapping("/findRightFunction")
+    public String findRightFunction(@RequestParam(value = "subQuestionId") String subQuestionId){
+        return questionService.findRightFunction(subQuestionId);
+    }
+
+    /**
+     * 接收json返回一个json
+     * @param functionMatch
+     * @return
+     */
+    @RequestMapping("/matchFunction")
+    public String matchFunction(@RequestBody FunctionMatch functionMatch) throws JsonProcessingException {
+        return questionService.matchFunction(functionMatch);
     }
 
 }

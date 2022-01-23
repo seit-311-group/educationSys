@@ -99,7 +99,7 @@ public class CircuitQAServiceImpl implements CircuitQAService {
      * @return
      */
     @Override
-    public String calFunctionSimilarity(String function) {
+    public String calFunctionSimilarity(String function) throws Exception {
         String function1 = function;
         String function2 = "a + b + c";
         // 调用公式匹配Api

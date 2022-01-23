@@ -657,33 +657,35 @@
                 document.location.reload();
 
             },
-            // 该小问做错
-            doItWrong() {
+            // 弹出错误
+            wrong(message) {
                 this.$notify.error({
                     title: '错误',
-                    message: '选择错误，请重新选择！',
+                    message: message,
                     offset: 100
                 });
             },
-            // 公式列错
-            listItWrong() {
-                this.$notify.error({
-                    title: '错误',
-                    message: '你的方程列错了哦，可以选择重新列，或者查看答案！',
-                    offset: 100
-                });
-            },
-            // 公式列对了
-            listItRight() {
+            // 弹出成功
+            right(message) {
                 this.$notify({
                     title: '成功',
-                    message: '恭喜你，你的方程已经列对了哦！',
+                    message: message,
                     type: 'success',
                     offset: 100
                 });
             },
             tableRowClassName(){
                 return 'warning-row';
+            },
+            async matchFunction(function1, function2){
+                var res;
+                await axios.post('/solution/matchFunction',{
+                    function1: function1,
+                    function2: function2,
+                }).then(response=>{
+                    res = response.data;
+                })
+                return res;
             }
 
         }
@@ -883,7 +885,7 @@
         // count = 0：说明是第一题 不弹出错误提示； check：做错返回false 才进入if；
         if((count > 0) && !check() && !isList){
             // alert("选择错误，请重新选择！");
-            vm.doItWrong();
+            vm.wrong('选择错误，请重新选择！');
         } else{
             if (addpicture != null && addpicture.length != 0) {  //增加图片
                 if (String(count) == addpicture[0]) {
@@ -905,7 +907,15 @@
                 let subquesid = subquesIDarr[count];
                 // 判断这个题目能不能列方程 ajax根据subquestion的字段listEquation来判断
                 var listEquation = true;
-                if (list && listEquation){
+                ajax({
+                    url: "/solution/isListEquation?subQuestionId=" + subquesid,
+                    async:false,
+                    success:function (res){
+                        listEquation = res;
+                        // 巨坑无比 ajax返回的变量时string 而不是boolean
+                    }
+                })
+                if (list && (listEquation == 'true')){
                     // 如果可以列方程 先把题目显示出来
                     ajax({
                         url: "/solution/getContentBYSubquesId?id=" + subquesid,    // 得到子问题的题目 然后显示出来 count+1
@@ -917,13 +927,13 @@
                             }else{
                                 createSubquestion(res);
                             }
-                            createListArea();
+                            createListArea(subquesid);
                         }
                     });
                 }else{
                     chooseTheEquationFull(subquesid);
                     // 通过这个按钮来做一个循环
-                    newButtonChoose("提交");
+                    newButtonChoose("提交", list);
                 }
             } else {
                 over(list);
@@ -961,7 +971,7 @@
         div2.style.fontSize = '16px';
         div2.style.margin = 'auto';
 
-        // 选择题按钮
+        // 列方程按钮
         var button_list = document.createElement('button');
         button_list.id = 'button_list' + count; // 给列方程的按钮一个id 后面把这个按钮删了
         button_list.type = 'button'
@@ -1205,7 +1215,7 @@
         }
         newdiv.appendChild(div);}
 
-    function newButtonChoose(content){
+    function newButtonChoose(content, list){
         let newdiv = document.getElementById('div' + count);
         let newbutton = document.createElement('button');
         let newbr = document.createElement('br');
@@ -1217,16 +1227,22 @@
         newbutton.style.fontSize = '16px';
         newbutton.id = 'sendbtn' + count;
         newbutton.addEventListener("click", function (){
-            equation(false, false);
+            equation(false, list);
         });
         newdiv.appendChild(newbutton);
-        vm.scrollDown('answerScrollbar')
+        vm.scrollDown('answerScrollbar');
     }
 
     // 整个列方程的区域 count 表示是哪题
-    function createListArea(){
+    function createListArea(subquesid){
         // 用ajax获得正确的方程为 function1
-        var function1 = 'i1*R1+u1=0'
+        var function1 = ''
+        ajax({
+            url: "/solution/findRightFunction?subQuestionId=" + subquesid,
+            success: function (res) {
+                function1 = res;
+            }
+        })
 
         // 找到第几个div框
         let newdiv = document.getElementById('div' + count);
@@ -1272,20 +1288,30 @@
         newdiv.scrollIntoView();
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
     }
-    var similarity = 2
 
-    function listSubmit(function1, count) {
+    // 不用async 在调用axios方法默认是异步的 所以必须要在调用axios方法的函数上再加上async和await
+    async function listSubmit(function1, count) {
         var input = document.getElementById('input' + count);
         var function2 = input.value;
+        if (function2.trim() == ''){
+            vm.wrong("公式输入不能为空！");
+            return;
+        }
+        var similarity = 0;
+        // 看这里！！！！前端接收Json 前端发送Json 后端接收Json 后端发送Json！！！！！后端可以用list封装对象 vip这样做的
+        await vm.matchFunction(function1, function2).then(res=>{
+            similarity = res.similarity;
+        });
+
         // ajax 调用后端接口 判断相似度1
         if(similarity == 1){
             input.style.color = '#2b542c';
-            vm.listItRight();
+            vm.right('恭喜你，你的方程已经列对了哦！');
             equation(true, true);
         }else{
             input.style.color = 'red';
             similarity = 1;
-            vm.listItWrong();
+            vm.wrong('你的方程列错了哦，可以选择重新列，或者查看答案！');
             let list_area = document.getElementById('list_area' + count);
             // 查看答案按钮
             if(document.getElementById('check_button' + count) == null){
@@ -1299,13 +1325,14 @@
                 button.style.margin = 'auto';
                 button.style.fontSize = '16px';
                 button.addEventListener('click', function () {
-                    //查看答案 通过ajax到后端 查找这一题的答案
-                    var answer = '答案test'
+                    //查看答案 function1为正确答案
+                    var answer = function1
                     input.value = answer;
                     input.style.color = 'red';
                     equation(true, true);
                 })
                 list_area.appendChild(button);
+                vm.scrollDown('answerScrollbar')
             }
 
         }

@@ -183,12 +183,22 @@
         margin-left: 65px;
     }
 
+    #back_button{
+        margin-top: -5px;
+    }
+
     #np{
+        display: flex;
         position: absolute;
         right: 31px;
     }
 
+    #btn_previous{
+        margin-top: -5px;
+    }
+
     #btn_next{
+        margin-top: -5px;
     }
 
     #function_area{
@@ -406,7 +416,6 @@
                                     </el-table>
                                 </el-scrollbar>
                             </div>
-
                         </div>
                     </div>
 
@@ -416,21 +425,21 @@
             <div id="function_area">
                 <div id="bar_left">
                     <div id="btn_list">
-                        <button class="btn btn-default" type="submit" onclick="window.location.href='/answer_index'">
-                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                            <span style="font-size: 14px;font-family: Helvetica Neue">&nbsp;返回题目列表</span>
-                        </button>
+                        <div id="back_button">
+                            <el-button type="info" onclick="window.location.href='/answer_index'" icon="el-icon-menu" plain>返回题目列表</el-button>
+                        </div>
+
+
                     </div>
                     <div id="np">
-                        <button class="btn btn-default" type="submit" id="btn_previous "
-                                v-on:click="previous_question" :class="{'disabled': pdisabled}">
-                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                            上一题</button>
-                        <span style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <button class="btn btn-default" type="submit" id="btn_next"
-                                v-on:click="next_question" :class="{'disabled' : ndisabled}">
-                            下一题<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                        </button>
+                        <div id="btn_previous">
+                            <el-button type="info" icon="el-icon-back" v-on:click="previous_question" :class="{'disabled': pdisabled}" plain>上一题</el-button>
+                        </div>
+                        <span style="font-size: 14px; margin-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <div id="btn_next">
+                            <el-button type="info" icon="el-icon-right" v-on:click="next_question" :class="{'disabled' : ndisabled}" plain>下一题</el-button>
+                        </div>
+
                     </div>
                 </div>
                 <div id="bar_right">
@@ -440,7 +449,7 @@
                         <div class="el-icon-arrow-down" :style="{'display': icon_down_show}"></div>
                         <div class="el-icon-arrow-up" :style="{'display': icon_up_show}"></div>
                     </el-button>
-                    <el-button type="primary" round style="margin-right: 87px"
+                    <el-button type="primary" style="margin-right: 87px"
                                @click="do_it_again"
                     >再做一遍</el-button>
                 </div>

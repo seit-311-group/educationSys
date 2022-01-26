@@ -6,6 +6,7 @@ import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.UploadPic;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.pojo.qa.questionExample;
+import cn.sysu.educationSys.service.AnswerFunctionRecordsService;
 import cn.sysu.educationSys.service.AnswerRecordsService;
 import cn.sysu.educationSys.service.QuestionService;
 import cn.sysu.educationSys.utils.HttpUtil;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -51,6 +53,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     UploadPicMapper uploadPicMapper;
+
+    @Autowired
+    AnswerFunctionRecordsService answerFunctionRecordsService;
 
     @Override
     public List<question> getQuestionsByID(String ID) {
@@ -240,13 +245,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public String matchFunction(FunctionMatch functionMatch) throws JsonProcessingException {
+    public String matchFunction(AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException {
         logger.info("调用公式匹配功能");
         JSONObject jsonObject = null;
         Map<String, String> map = new HashMap<>();
         try {
-            String function1 = functionMatch.getFunction1();
-            String function2 = functionMatch.getFunction2();
+            String function1 = answerFunctionRecords.getFunction1();
+            String function2 = answerFunctionRecords.getFunction2();
             HashMap<String, String> params = new HashMap<>();
             params.put("function1", function1);
             params.put("function2", function2);
@@ -254,11 +259,21 @@ public class QuestionServiceImpl implements QuestionService {
             String url = "http://" + configProperties.getAlgorithmSeverIpAndPort() + "/functionMatch";
             String res = httpUtil.post(url, paramString);
             jsonObject = JSON.parseObject(res);
+            // 问答结果存到数据库
+            logger.info("保存记录到数据库中");
+            String function1Simplify = jsonObject.get("function1") + "=0";
+            String function2Simplify = jsonObject.get("function2") + "=0";
+            String similarity = String.valueOf(jsonObject.get("similarity"));
+            AnswerFunctionRecords records = new AnswerFunctionRecords(function1, function1Simplify, function2,
+                    function2Simplify, Double.parseDouble(similarity), 1, new Timestamp(new Date().getTime()),
+                    answerFunctionRecords.getQuestionId(), answerFunctionRecords.getSubQuestionId());
+            answerFunctionRecordsService.insertAnswerFunctionRecords(records);
+            logger.info("保存记录结束");
 
             // 封装结果
-            map.put("function1", String.valueOf(jsonObject.get("function1")));
-            map.put("function2", String.valueOf(jsonObject.get("function2")));
-            map.put("similarity", String.valueOf(jsonObject.get("similarity")));
+            map.put("function1Simplify", function1Simplify);
+            map.put("function2Simplify", function2Simplify);
+            map.put("similarity", similarity);
             logger.info("结果：" + jsonObject);
         }catch (Exception e){
             logger.error("公式匹配出错" + e);

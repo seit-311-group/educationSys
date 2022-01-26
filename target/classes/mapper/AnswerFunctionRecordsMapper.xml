@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sysu.educationSys.mapper.AnswerFunctionRecordsMapper" >
+    <insert id="insertAnswerFunctionRecords" parameterType="cn.sysu.educationSys.pojo.answer.AnswerFunctionRecords">INSERT INTO answer_function_records(function1, function2, function1Simplify, function2Simplify, similarity, studentId, TIME, questionId, subQuestionId)
+        VALUES(#{function1}, #{function2}, #{function1Simplify}, #{function2Simplify}, #{similarity}, #{studentId}, Now(), #{questionId}, #{subQuestionId});
+    </insert>
+</mapper>

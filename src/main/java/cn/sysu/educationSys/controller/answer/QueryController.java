@@ -1,10 +1,7 @@
 package cn.sysu.educationSys.controller.answer;
 
-import cn.sysu.educationSys.pojo.answer.FunctionMatch;
-import cn.sysu.educationSys.pojo.answer.option_t;
-import cn.sysu.educationSys.pojo.answer.point;
+import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.question;
-import cn.sysu.educationSys.pojo.answer.subquestion;
 import cn.sysu.educationSys.service.QuestionService;
 import cn.sysu.educationSys.utils.FunctionSimUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -170,12 +167,13 @@ public class QueryController {
 
     /**
      * 接收json返回一个json
-     * @param functionMatch
+     * @param answerFunctionRecords
      * @return
      */
     @RequestMapping("/matchFunction")
-    public String matchFunction(@RequestBody FunctionMatch functionMatch) throws JsonProcessingException {
-        return questionService.matchFunction(functionMatch);
+    public String matchFunction(@RequestBody AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException {
+        System.out.println(answerFunctionRecords);
+        return questionService.matchFunction(answerFunctionRecords);
     }
 
 }

@@ -686,11 +686,13 @@
             tableRowClassName(){
                 return 'warning-row';
             },
-            async matchFunction(function1, function2){
+            async matchFunction(function1, function2, questionId, subQuestionId){
                 var res;
                 await axios.post('/solution/matchFunction',{
                     function1: function1,
                     function2: function2,
+                    questionId: questionId,
+                    subQuestionId: subQuestionId,
                 }).then(response=>{
                     res = response.data;
                 })
@@ -1243,11 +1245,11 @@
     }
 
     // 整个列方程的区域 count 表示是哪题
-    function createListArea(subquesid){
+    function createListArea(subQuestionId){
         // 用ajax获得正确的方程为 function1
         var function1 = ''
         ajax({
-            url: "/solution/findRightFunction?subQuestionId=" + subquesid,
+            url: "/solution/findRightFunction?subQuestionId=" + subQuestionId,
             success: function (res) {
                 function1 = res;
             }
@@ -1286,7 +1288,7 @@
         button.style.marginLeft = '30px';
         button.style.fontSize = '16px';
         button.addEventListener('click', function () {
-            listSubmit(function1, count);
+            listSubmit(function1, subQuestionId, count);
         })
 
         list_area.appendChild(div);
@@ -1299,7 +1301,7 @@
     }
 
     // 不用async 在调用axios方法默认是异步的 所以必须要在调用axios方法的函数上再加上async和await
-    async function listSubmit(function1, count) {
+    async function listSubmit(function1, subQuestionId, count) {
         var input = document.getElementById('input' + count);
         var function2 = input.value;
         if (function2.trim() == ''){
@@ -1308,7 +1310,7 @@
         }
         var similarity = 0;
         // 看这里！！！！前端接收Json 前端发送Json 后端接收Json 后端发送Json！！！！！后端可以用list封装对象 vip这样做的
-        await vm.matchFunction(function1, function2).then(res=>{
+        await vm.matchFunction(function1, function2, questionid, subQuestionId).then(res=>{
             similarity = res.similarity;
         });
 

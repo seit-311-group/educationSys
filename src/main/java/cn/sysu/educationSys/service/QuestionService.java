@@ -1,10 +1,7 @@
 package cn.sysu.educationSys.service;
 
-import cn.sysu.educationSys.pojo.answer.FunctionMatch;
-import cn.sysu.educationSys.pojo.answer.option_t;
-import cn.sysu.educationSys.pojo.answer.point;
+import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.question;
-import cn.sysu.educationSys.pojo.answer.subquestion;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,5 +39,5 @@ public interface QuestionService {
 
     String findRightFunction(String subQuestionId);
 
-    String matchFunction(FunctionMatch functionMatch) throws JsonProcessingException;
+    String matchFunction(AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException;
 }

@@ -426,18 +426,18 @@
                 <div id="bar_left">
                     <div id="btn_list">
                         <div id="back_button">
-                            <el-button type="info" onclick="window.location.href='/answer_index'" icon="el-icon-menu">返回题目列表</el-button>
+                            <el-button type="info" onclick="window.location.href='/answer_index'" icon="el-icon-menu" plain>返回题目列表</el-button>
                         </div>
 
 
                     </div>
                     <div id="np">
                         <div id="btn_previous">
-                            <el-button type="info" icon="el-icon-back" v-on:click="previous_question" :class="{'disabled': pdisabled}">上一题</el-button>
+                            <el-button type="info" icon="el-icon-back" v-on:click="previous_question" :class="{'disabled': pdisabled}" plain>上一题</el-button>
                         </div>
                         <span style="font-size: 14px; margin-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <div id="btn_next">
-                            <el-button type="info" icon="el-icon-right" v-on:click="next_question" :class="{'disabled' : ndisabled}">下一题</el-button>
+                            <el-button type="info" icon="el-icon-right" v-on:click="next_question" :class="{'disabled' : ndisabled}" plain>下一题</el-button>
                         </div>
 
                     </div>

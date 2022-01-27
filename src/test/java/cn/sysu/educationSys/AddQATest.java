@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
 
-import static cn.sysu.educationSys.service.serviceImpl.AddQAServiceImpl.circuitQaList;
+import static cn.sysu.educationSys.service.AddQAServiceImpl.circuitQaList;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

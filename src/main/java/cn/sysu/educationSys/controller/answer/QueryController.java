@@ -2,6 +2,7 @@ package cn.sysu.educationSys.controller.answer;
 
 import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.question;
+import cn.sysu.educationSys.service.AnswerFunctionRecordsService;
 import cn.sysu.educationSys.service.QuestionService;
 import cn.sysu.educationSys.utils.FunctionSimUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -21,6 +22,9 @@ public class QueryController {
 
     @Autowired
     private FunctionSimUtil functionSimUtil;
+
+    @Autowired
+    private AnswerFunctionRecordsService answerFunctionRecordsService;
 
     @RequestMapping("/getDescriptionBYId")
     public String getDescriptionBYId(@RequestParam(value = "id") String id) throws Exception {
@@ -174,6 +178,11 @@ public class QueryController {
     public String matchFunction(@RequestBody AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException {
         System.out.println(answerFunctionRecords);
         return questionService.matchFunction(answerFunctionRecords);
+    }
+
+    @RequestMapping("/matchFunctionFeedback")
+    public void matchFunctionFeedBack(@RequestBody AnswerFunctionFeedback answerFunctionFeedback){
+        answerFunctionRecordsService.insertAnswerFunctionFeedback(answerFunctionFeedback);
     }
 
 }

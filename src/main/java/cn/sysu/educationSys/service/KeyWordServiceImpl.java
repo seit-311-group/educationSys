@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.service.serviceImpl;
+package cn.sysu.educationSys.service;
 
 import cn.sysu.educationSys.pojo.qa.keyWord;
 import cn.sysu.educationSys.pojo.qa.keyWordExample;

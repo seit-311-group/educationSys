@@ -1,13 +1,10 @@
-package cn.sysu.educationSys.service.serviceImpl;
+package cn.sysu.educationSys.service;
 
 import cn.sysu.educationSys.mapper.QuestionRecordMapper;
 import cn.sysu.educationSys.mapper.RecordMapperCustom;
 import cn.sysu.educationSys.mapper.StudentMapperCustom;
 import cn.sysu.educationSys.pojo.answer.Records;
-import cn.sysu.educationSys.pojo.student.QuestionRecord;
 import cn.sysu.educationSys.pojo.student.Student;
-import cn.sysu.educationSys.service.CookieSessionService;
-import cn.sysu.educationSys.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;

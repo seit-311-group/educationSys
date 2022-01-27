@@ -697,6 +697,19 @@
                     res = response.data;
                 })
                 return res;
+            },
+            // 这个不用同步
+            functionFeedBack(questionId, subQuestionId, latestFunction){
+                axios.post('solution/matchFunctionFeedback', {
+                    questionId: questionId,
+                    subQuestionId: subQuestionId,
+                    latestFunction: latestFunction,
+                }).then(response=>{
+                    this.$message({
+                        message: '我们已经收到你对于这个题目的反馈啦！',
+                        type: 'success'
+                    });
+                })
             }
 
         }
@@ -731,6 +744,7 @@
 
 
     let questionName = urlMap.get(questionid);
+
     let subquesIDarr = null;
     let pointarr = null;
     let answer = null;
@@ -743,6 +757,7 @@
     let subqueIndex = 0;
     let second = 0;
     var count1 = null;
+    let currentFunctionMap = new Map(); // 子问题：最后一个此列的方程
 
 
 
@@ -895,7 +910,6 @@
     function equation(isList, list) {
         // count = 0：说明是第一题 不弹出错误提示； check：做错返回false 才进入if；
         if((count > 0) && !check() && !isList){
-            // alert("选择错误，请重新选择！");
             vm.wrong('选择错误，请重新选择！');
         } else{
             if (addpicture != null && addpicture.length != 0) {  //增加图片
@@ -926,6 +940,7 @@
                         // 巨坑无比 ajax返回的变量时string 而不是boolean
                     }
                 })
+                // 这题可以列方程并且学生选择了列方程
                 if (list && (listEquation == 'true')){
                     // 如果可以列方程 先把题目显示出来
                     ajax({
@@ -934,7 +949,8 @@
                             subqueIndex++;
                             res = subqueIndex+'.' + res;
                             if (isList){    //如果上一题在列方程 就把上一题的disable掉 然后再创建子问题
-                                disableInputAndCreate(res);
+                                // subQuestionId传入是为了记录学生对于上一题的反馈
+                                disableInputAndCreate(res, subquesid - 1);
                             }else{
                                 createSubquestion(res);
                             }
@@ -1168,8 +1184,8 @@
         newdiv.innerHTML += res;
         process.appendChild(newdiv);
     }
-    // 把input区disable掉 然后提交按钮删了 创建子问题
-    function disableInputAndCreate(res){
+    // 把input区disable掉 然后提交按钮删了 变成反馈按钮 创建子问题
+    function disableInputAndCreate(res, subQuestionId){
         let div = document.getElementById('div_input' + count);
         div.className = 'el-input is-disabled';
         let input = document.getElementById('input' + count);
@@ -1181,6 +1197,36 @@
         if(document.getElementById('check_button' + count) != null){
             list_area.removeChild(document.getElementById('check_button' + count));
         }
+
+        // 学生反馈的按钮
+        var feedBack_button = document.createElement('button');
+        feedBack_button.id = 'feedBack_button' + subQuestionId; // 用子问题的id来给反馈按钮分配ID
+        feedBack_button.type = 'button';
+        feedBack_button.className = 'el-button el-button--warning is-plain';
+        var span = document.createElement('span');
+        span.innerHTML = "点击反馈";
+        feedBack_button.appendChild(span);
+        feedBack_button.style.marginLeft = '10px';
+        feedBack_button.style.fontSize = '16px';
+        feedBack_button.addEventListener('click', function () {
+            //反馈按钮 直接调用ajax
+            var reg=/^[0-9]+.?[0-9]*$/;
+            let feedBackButtonId = this.id;
+            let subQuestionId2 = '';
+            for (let i  = 0; i < feedBackButtonId.length; i++){
+                if (reg.test(feedBackButtonId[i])){
+                    subQuestionId2 += feedBackButtonId[i];
+                }
+            }
+            let latestFunction = currentFunctionMap.get(subQuestionId2);
+
+            // 调用axios
+            vm.functionFeedBack(questionid, subQuestionId2, latestFunction);
+            let feedBackButton = document.getElementById(feedBackButtonId);
+            feedBackButton.className = 'el-button el-button--warning is-disabled';
+            feedBackButton.disabled = 'disabled';
+        })
+        list_area.appendChild(feedBack_button)
 
         //然后把子问题创建出来
         let process = document.getElementById('process');
@@ -1263,7 +1309,7 @@
         // list_area.style.height = '300px';
         // list_area.style.border = '1px solid black';
         list_area.id = 'list_area' + count;
-        list_area.style.width = '500px';
+        list_area.style.width = '560px';
 
         // 输入框
         var div = document.createElement('div');
@@ -1285,9 +1331,14 @@
         var span = document.createElement('span');
         span.innerHTML = "提交";
         button.appendChild(span);
-        button.style.marginLeft = '30px';
+        button.style.marginLeft = '10px';
         button.style.fontSize = '16px';
         button.addEventListener('click', function () {
+            // 记录下学生每个子问题列下的最后一个方程
+            currentFunctionMap.set(subQuestionId, document.getElementById("input" + count).value)
+            // currentFunctionMap.forEach(function(value, key) {
+            //     console.log(key, value);
+            // })
             listSubmit(function1, subQuestionId, count);
         })
 
@@ -1326,23 +1377,25 @@
             let list_area = document.getElementById('list_area' + count);
             // 查看答案按钮
             if(document.getElementById('check_button' + count) == null){
-                var button = document.createElement('button');
-                button.id = 'check_button' + count; // 给列方程的按钮一个id 后面把这个按钮删了
-                button.type = 'button'
-                button.className = 'el-button el-button--primary'
+                // 查看答案的按钮
+                var check_button = document.createElement('button');
+                check_button.id = 'check_button' + count; // 给列方程的按钮一个id 后面把这个按钮删了
+                check_button.type = 'button'
+                check_button.className = 'el-button el-button--primary'
                 var span = document.createElement('span');
                 span.innerHTML = "查看答案";
-                button.appendChild(span);
-                button.style.margin = 'auto';
-                button.style.fontSize = '16px';
-                button.addEventListener('click', function () {
+                check_button.appendChild(span);
+                check_button.style.marginLeft = '10px';
+                check_button.style.fontSize = '16px';
+                check_button.addEventListener('click', function () {
                     //查看答案 function1为正确答案
                     var answer = function1
                     input.value = answer;
                     input.style.color = 'red';
                     equation(true, true);
                 })
-                list_area.appendChild(button);
+
+                list_area.appendChild(check_button);
                 vm.scrollDown('answerScrollbar')
             }
 

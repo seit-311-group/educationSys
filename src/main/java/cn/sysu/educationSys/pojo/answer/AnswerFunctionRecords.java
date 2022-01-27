@@ -14,13 +14,13 @@ public class AnswerFunctionRecords {
 
     private double similarity;
 
-    private long studentId;
+    protected long studentId;
 
-    private Timestamp time;
+    protected Timestamp time;
 
-    private int questionId;
+    protected int questionId;
 
-    private int subQuestionId;
+    protected int subQuestionId;
 
     public AnswerFunctionRecords() {
     }

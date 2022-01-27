@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.service.serviceImpl;
+package cn.sysu.educationSys.service;
 
 import cn.sysu.educationSys.config.ConfigProperties;
 import cn.sysu.educationSys.mapper.UploadPicMapper;
@@ -6,9 +6,6 @@ import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.UploadPic;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.pojo.qa.questionExample;
-import cn.sysu.educationSys.service.AnswerFunctionRecordsService;
-import cn.sysu.educationSys.service.AnswerRecordsService;
-import cn.sysu.educationSys.service.QuestionService;
 import cn.sysu.educationSys.utils.HttpUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
 import com.alibaba.fastjson.JSON;
@@ -20,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -56,6 +52,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     AnswerFunctionRecordsService answerFunctionRecordsService;
+
+    @Autowired
+    CookieSessionService cookieSessionService;
 
     @Override
     public List<question> getQuestionsByID(String ID) {
@@ -265,7 +264,7 @@ public class QuestionServiceImpl implements QuestionService {
             String function2Simplify = jsonObject.get("function2") + "=0";
             String similarity = String.valueOf(jsonObject.get("similarity"));
             AnswerFunctionRecords records = new AnswerFunctionRecords(function1, function1Simplify, function2,
-                    function2Simplify, Double.parseDouble(similarity), 1, new Timestamp(new Date().getTime()),
+                    function2Simplify, Double.parseDouble(similarity), cookieSessionService.findStudentByCookie().getId(), new Timestamp(new Date().getTime()),
                     answerFunctionRecords.getQuestionId(), answerFunctionRecords.getSubQuestionId());
             answerFunctionRecordsService.insertAnswerFunctionRecords(records);
             logger.info("保存记录结束");

@@ -1,6 +1,7 @@
 package cn.sysu.educationSys.service;
 
 
+import cn.sysu.educationSys.service.serviceImpl.QuestionServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package cn.sysu.educationSys.utils;
 
-import cn.sysu.educationSys.service.CoreProcessService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 

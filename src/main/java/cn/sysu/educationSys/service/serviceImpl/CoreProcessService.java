@@ -1,7 +1,8 @@
-package cn.sysu.educationSys.service;
+package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.pojo.qa.keyWord;
+import cn.sysu.educationSys.service.*;
 import cn.sysu.educationSys.utils.MatchUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
 import com.hankcs.hanlp.seg.common.Term;

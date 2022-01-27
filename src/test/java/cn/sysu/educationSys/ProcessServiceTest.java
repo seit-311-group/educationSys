@@ -1,7 +1,7 @@
 package cn.sysu.educationSys;
 
 import cn.sysu.educationSys.pojo.qa.circuitQa;
-import cn.sysu.educationSys.service.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
 import cn.sysu.educationSys.service.StudentService;
 import cn.sysu.educationSys.utils.MatchUtil;
 import org.junit.Test;

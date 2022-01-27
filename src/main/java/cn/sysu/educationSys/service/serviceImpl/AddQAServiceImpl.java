@@ -1,18 +1,17 @@
-package cn.sysu.educationSys.service;
+package cn.sysu.educationSys.service.serviceImpl;
 
 
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.pojo.qa.keyWord;
 import cn.sysu.educationSys.service.AddQAService;
 import cn.sysu.educationSys.service.CircuitQAService;
-import cn.sysu.educationSys.service.CoreProcessService;
 import cn.sysu.educationSys.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static cn.sysu.educationSys.service.CoreProcessService.keyWords;
+import static cn.sysu.educationSys.service.serviceImpl.CoreProcessService.keyWords;
 
 
 @Service

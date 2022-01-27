@@ -3,7 +3,7 @@ package cn.sysu.educationSys;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.service.AddQAService;
 import cn.sysu.educationSys.service.CircuitQAService;
-import cn.sysu.educationSys.service.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
 import cn.sysu.educationSys.service.KeyWordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
 
-import static cn.sysu.educationSys.service.AddQAServiceImpl.circuitQaList;
+import static cn.sysu.educationSys.service.serviceImpl.AddQAServiceImpl.circuitQaList;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

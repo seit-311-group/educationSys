@@ -1,4 +1,4 @@
-package cn.sysu.educationSys.service;
+package cn.sysu.educationSys.service.serviceImpl;
 
 import cn.sysu.educationSys.mapper.KeywordtimesallMapperCustom;
 import cn.sysu.educationSys.pojo.qa.KeywordsAll;

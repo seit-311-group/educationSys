@@ -437,7 +437,7 @@
                         </div>
                         <span style="font-size: 14px; margin-top: 6px;">&nbsp;&nbsp;&nbsp;&nbsp;{{now_questions}}/{{all_questions}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <div id="btn_next">
-                            <el-button type="info" icon="el-icon-right" v-on:click="next_question" :class="{'disabled' : ndisabled}" plain>下一题</el-button>
+                            <el-button type="info" v-on:click="next_question" :class="{'disabled' : ndisabled}" plain>下一题&nbsp;&nbsp;<i class="el-icon-right"></i></el-button>
                         </div>
 
                     </div>
@@ -745,7 +745,7 @@
 
     let questionName = urlMap.get(questionid);
 
-    let subquesIDarr = null;
+    let subquesIDarr = null;        //子问题Id的数组
     let pointarr = null;
     let answer = null;
     let answerID = null;
@@ -756,12 +756,22 @@
     let errorPoints = ''; // 错误的知识点
     let subqueIndex = 0;
     let second = 0;
-    var count1 = null;
+    let count1 = null;
     let currentFunctionMap = new Map(); // 子问题：最后一个此列的方程
+    let errorSubQuestionSet = new Set();    // 哪个子问题列方程列错了
+
+    let subQuestionAndPointsMap = null;    // 子问题对应知识点的map
 
 
 
     window.onload = function() {
+        ajax({
+            url: "/solution/getSubQuestionAndPointsMap?id=" + questionid,       // 得到子问题对应的知识点
+            success: function (res) {
+                // ajax传回来要用JSON解析才能得到对象 不然是String
+                subQuestionAndPointsMap = JSON.parse(res);
+            }
+        })
         ajax({
             url: "/solution/getDescriptionBYId?id=" + questionid,       // 得到题目的描述
             success: function (res) {
@@ -787,7 +797,6 @@
             success: function(res) {
                 if (res.length > 0) {
                     addpicture = res.split(",");
-                    console.log(res);
                 }
             }
         })
@@ -1199,34 +1208,7 @@
         }
 
         // 学生反馈的按钮
-        var feedBack_button = document.createElement('button');
-        feedBack_button.id = 'feedBack_button' + subQuestionId; // 用子问题的id来给反馈按钮分配ID
-        feedBack_button.type = 'button';
-        feedBack_button.className = 'el-button el-button--warning is-plain';
-        var span = document.createElement('span');
-        span.innerHTML = "点击反馈";
-        feedBack_button.appendChild(span);
-        feedBack_button.style.marginLeft = '10px';
-        feedBack_button.style.fontSize = '16px';
-        feedBack_button.addEventListener('click', function () {
-            //反馈按钮 直接调用ajax
-            var reg=/^[0-9]+.?[0-9]*$/;
-            let feedBackButtonId = this.id;
-            let subQuestionId2 = '';
-            for (let i  = 0; i < feedBackButtonId.length; i++){
-                if (reg.test(feedBackButtonId[i])){
-                    subQuestionId2 += feedBackButtonId[i];
-                }
-            }
-            let latestFunction = currentFunctionMap.get(subQuestionId2);
-
-            // 调用axios
-            vm.functionFeedBack(questionid, subQuestionId2, latestFunction);
-            let feedBackButton = document.getElementById(feedBackButtonId);
-            feedBackButton.className = 'el-button el-button--warning is-disabled';
-            feedBackButton.disabled = 'disabled';
-        })
-        list_area.appendChild(feedBack_button)
+        createFeedbackButton(list_area, subQuestionId);
 
         //然后把子问题创建出来
         let process = document.getElementById('process');
@@ -1336,9 +1318,7 @@
         button.addEventListener('click', function () {
             // 记录下学生每个子问题列下的最后一个方程
             currentFunctionMap.set(subQuestionId, document.getElementById("input" + count).value)
-            // currentFunctionMap.forEach(function(value, key) {
-            //     console.log(key, value);
-            // })
+
             listSubmit(function1, subQuestionId, count);
         })
 
@@ -1349,6 +1329,38 @@
         newdiv.appendChild(list_area);
         newdiv.scrollIntoView();
         document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+    }
+
+    // 创建学生反馈的按钮
+    function createFeedbackButton(list_area, subQuestionId){
+        let feedBack_button = document.createElement('button');
+        feedBack_button.id = 'feedBack_button' + subQuestionId; // 用子问题的id来给反馈按钮分配ID
+        feedBack_button.type = 'button';
+        feedBack_button.className = 'el-button el-button--warning is-plain';
+        let span = document.createElement('span');
+        span.innerHTML = "点击反馈";
+        feedBack_button.appendChild(span);
+        feedBack_button.style.marginLeft = '10px';
+        feedBack_button.style.fontSize = '16px';
+        feedBack_button.addEventListener('click', function () {
+            //反馈按钮 直接调用ajax
+            var reg=/^[0-9]+.?[0-9]*$/;
+            let feedBackButtonId = this.id;
+            let subQuestionId2 = '';
+            for (let i  = 0; i < feedBackButtonId.length; i++){
+                if (reg.test(feedBackButtonId[i])){
+                    subQuestionId2 += feedBackButtonId[i];
+                }
+            }
+            let latestFunction = currentFunctionMap.get(subQuestionId2);
+
+            // 调用axios
+            vm.functionFeedBack(questionid, subQuestionId2, latestFunction);
+            let feedBackButton = document.getElementById(feedBackButtonId);
+            feedBackButton.className = 'el-button el-button--warning is-disabled';
+            feedBackButton.disabled = 'disabled';
+        })
+        list_area.appendChild(feedBack_button)
     }
 
     // 不用async 在调用axios方法默认是异步的 所以必须要在调用axios方法的函数上再加上async和await
@@ -1371,8 +1383,10 @@
             vm.right('恭喜你，你的方程已经列对了哦！');
             equation(true, true);
         }else{
+            // 把错误的子问题放到Set中
+            errorSubQuestionSet.add(subQuestionId);
+
             input.style.color = 'red';
-            similarity = 1;
             vm.wrong('你的方程列错了哦，可以选择重新列，或者查看答案！');
             let list_area = document.getElementById('list_area' + count);
             // 查看答案按钮
@@ -1421,7 +1435,34 @@
     function over(list){
         clearInterval(count1);
         if(list){
-            var answer = '';
+            // 把错误知识点传到后端
+            errorPoints = questionid + "@";
+            if (errorSubQuestionSet.size != 0) {
+                vm.all_pass = false;
+                let index = 1;
+                let set = new Set();
+                for(let item of errorSubQuestionSet) {
+                    let pointSet = subQuestionAndPointsMap[item];
+                    for (key in pointSet){
+                        let point = pointSet[key];
+                        if(!set.has(point)) {
+                            set.add(point);
+                            errorPoints += point + "@";
+                            vm.tableData.push({'error_points': index + '.' + point});
+                            index++;
+                        }
+                    }
+
+                }
+            }
+
+            errorPoints += second;
+            vm.question_time = second;
+            ajax({
+                url: "/student/saveErrorPoints?points=" + errorPoints,
+            })
+
+            let answer = '';
             ajax({
                 url: "/solution/getAnswerByID?id=" + questionid,
                 success: function (res) {
@@ -1437,6 +1478,9 @@
             let list_area = document.getElementById('list_area' + count);
             list_area.removeChild(list_button);
 
+            // 创建学生反馈的按钮
+            createFeedbackButton(list_area, count);
+
             let process = document.getElementById('process');
             let newbr = document.createElement('br')
             let newdiv = document.createElement('div' + (count+1));
@@ -1447,10 +1491,9 @@
             if(document.getElementById('check_button' + count) != null){
                 list_area.removeChild(document.getElementById('check_button' + count));
             }
-            // 把知识点搞进去就可以了
-            for (let i = 0; i < 2; i++){
 
-            }
+
+
             vm.finishQuestion();
             vm.scrollDown('answerScrollbar');
             vm.show_submit();
@@ -1468,13 +1511,11 @@
                     newdiv.innerHTML += res;
                 }
             });
+            errorPoints += questionid + "@";
 
-            if (errorOption.size == 0) {
-                errorPoints = questionid + "@";
-            } else{
+            if (errorOption.size != 0) {
                 vm.all_pass = false;
                 let index = 1;
-                errorPoints += questionid + "@";
                 let set = new Set();
                 for (let i of errorOption) {
                     if (map.has(i)) {
@@ -1485,8 +1526,6 @@
                             vm.tableData.push({'error_points': index + '.'+ map.get(i)});
                             index++;
                         }
-                    } else {
-                        continue;
                     }
                 }
             }
@@ -1504,6 +1543,7 @@
             vm.scrollDown('answerScrollbar');
             vm.show_submit();
         }
+
     }
 
     // 把错误的选项标红

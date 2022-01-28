@@ -40,4 +40,6 @@ public interface QuestionService {
     String findRightFunction(String subQuestionId);
 
     String matchFunction(AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException;
+
+    String findPointsById(int id) throws JsonProcessingException;
 }

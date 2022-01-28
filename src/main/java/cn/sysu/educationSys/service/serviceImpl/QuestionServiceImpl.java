@@ -287,4 +287,44 @@ public class QuestionServiceImpl implements QuestionService {
         return json;
     }
 
+    /**
+     * 通过题目的序号找到子问题对应的所有知识点
+     * @param id
+     * @return
+     */
+    @Override
+    public String findPointsById(int id) throws JsonProcessingException {
+        JSONObject jsonObject = null;
+        Map<String, Set<String>> map = new HashMap<>();
+        String[] subQuestionIds = questionMapper.findSubQuestionIdByQuestionId(id).split(",");
+        for (String subQuestionId : subQuestionIds){
+            String[] optionIds = questionMapper.findOptionIdBySubQuestionId(Integer.parseInt(subQuestionId)).split(",");
+            for (String optionId : optionIds) {
+                if (optionId != null && !optionId.equals("")){
+                    String pointIdByOptionId = questionMapper.findPointIdByOptionId(Integer.parseInt(optionId));
+                    if (pointIdByOptionId != null && !pointIdByOptionId.equals("")){
+                        String[] pointIds = pointIdByOptionId.split(",");
+                        for (String pointId : pointIds) {
+                            if (pointId != null && !pointId.equals("")){
+                                String point = questionMapper.findPointByPointId(Integer.parseInt(pointId));
+                                if (!map.containsKey(subQuestionId)){
+                                    Set<String> pointsSet = new HashSet<>();
+                                    pointsSet.add(point);
+                                    map.put(subQuestionId, pointsSet);
+                                }else{
+                                    Set<String> set = map.get(subQuestionId);   // 一个子问题中可能含有多个知识点
+                                    set.add(point);
+                                    map.put(subQuestionId, set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(map);
+        return json;
+    }
+
 }

@@ -185,4 +185,10 @@ public class QueryController {
         answerFunctionRecordsService.insertAnswerFunctionFeedback(answerFunctionFeedback);
     }
 
+
+    @RequestMapping("/getSubQuestionAndPointsMap")
+    public String getSubQuestionAndPointsMap(@RequestParam(value = "id") int id) throws JsonProcessingException {
+        return questionService.findPointsById(id);
+    }
+
 }

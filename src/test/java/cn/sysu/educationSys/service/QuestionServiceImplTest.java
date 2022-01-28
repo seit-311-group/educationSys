@@ -2,6 +2,7 @@ package cn.sysu.educationSys.service;
 
 
 import cn.sysu.educationSys.service.serviceImpl.QuestionServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class QuestionServiceImplTest {
     @Test
     public void findRightFunctionTest(){
         System.out.println(questionService.findRightFunction("15"));
+    }
+
+    @Test
+    public void findPointsByIdTest() throws JsonProcessingException {
+        questionService.findPointsById(1);
     }
 }

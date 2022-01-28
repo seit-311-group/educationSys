@@ -19,4 +19,12 @@ public interface questionMapper {
     int updateByExampleSelective(@Param("record") question record, @Param("example") questionExample example);
 
     int updateByExample(@Param("record") question record, @Param("example") questionExample example);
+
+    String findSubQuestionIdByQuestionId(int id);
+
+    String findOptionIdBySubQuestionId(int id);
+
+    String findPointIdByOptionId(int id);
+
+    String findPointByPointId(int id);
 }

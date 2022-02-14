@@ -12,7 +12,7 @@
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <!--引入vue2和elementui vue3目前不支持-->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- import JavaScript -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
@@ -309,11 +309,13 @@
                             width="55%"
                             :before-close="handleClose">
                             <span>这是一个电路计算题的做题系统，你可以选择你想要做的题目，现在主要有以下功能：<br/>
-                                1. 你可以在问答框中输入问题，系统会<strong>自动匹配</strong>你的问题，通过点击来选择你要的问题。<br/>
-                                2. 如果没有你的问题，我们后台会有记录，并且会尽快完善！<br/>
-                                3. 支持<strong>联想子问题</strong>功能.<br/>
-                                4. 你还可以点击右上角<strong>上传图片</strong>上传一个图片来描述你的问题，我们收到问题后，会将答案发回给你哦~<br/>
-                                系统还有很多功能没有上线呢！谢谢大家的配合，我们会根据大家的意见或者建议尽快完善系统！</span>
+                                1. 你可以选择这一题要做<strong>选择题</strong>还是自己<strong>列方程</strong>你的问题。<br/>
+                                2. 如果你选择自己列方程，系统会自动订正您列的方程是否正确。<br/>
+                                3. 做完后会系统会显示你哪些知识点掌握的不好。<br/>
+                                <strong>注意！</strong>在使用列方程功能的时候要列写最原始的方程，按照电路图中的符号来列写公式，并且把公式全部移到等号的左边。<br/>
+                                如果你觉得这题有问题可以<strong>点击反馈按钮</strong>来反馈。<br/>
+                                系统还有很多功能没有上线呢！谢谢大家的配合，我们会根据大家的意见或者建议尽快完善系统！
+                            </span>
                         <span slot="footer" class="dialog-footer">
                         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
                             </span>

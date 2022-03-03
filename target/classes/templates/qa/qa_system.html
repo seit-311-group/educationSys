@@ -433,6 +433,8 @@
                 answer: '',
                 timeout:  null,
                 rate: null,
+                anIDs: '',
+                anList: null,
 
                 imageAction : '',
                 //附件内容
@@ -444,6 +446,7 @@
             this.load();
             this.loadAllQuestions();
             this.loginOrNot();
+            this.loadAllAn();
             axios.post('getUrl',{url : window.document.URL});
         },
         updated: function() {
@@ -498,6 +501,12 @@
             load(){
                 this.time = this.getTime();
             },
+            loadAllAn(){
+                axios.post('/load', {
+                }).then(res => {
+                    this.anList = res.data;
+                })
+            },
             getTime(){
                 let now= new Date();
                 let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
@@ -530,13 +539,13 @@
                 let answer_area_padding = document.getElementById('answer_area_padding');
                 this.createNewUserSystem(answer_area_padding, query);
 
-                let queryTop3 = '';
-                await axios.get('/qa/querytop3?question=' + query).then(response=>{
-                    queryTop3 = response.data;
+                let queryTop5 = '';
+                await axios.get('/qa/querytop5?question=' + query).then(response=>{
+                    queryTop5 = response.data;
                 }).catch(function (error){
                     console.log(error);
                 })
-                this.createNewQuestionSystem(answer_area_padding, queryTop3);
+                this.createNewQuestionSystem(answer_area_padding, queryTop5, query);
             },
 
             // 用户的对话框
@@ -575,8 +584,19 @@
                 this.scrollDown();
             },
 
+            // 通过问的问题找到关键词对应的题目
+            async findAnByQuestion(query){
+                let an = ""
+                await axios.get('/qa/findAnByQuestion?question=' + query).then(response=>{
+                    an = response.data;
+                }).catch(function (error){
+                    console.log(error);
+                })
+                this.anIDs = an.anIDs;
+            },
+
             // 系统显示问题的对话框
-            createNewQuestionSystem(answer_area_padding, questions){
+            async createNewQuestionSystem(answer_area_padding, questions, query){
                 let answer_system_area = document.createElement('div');
                 answer_system_area.className = 'answer_system_area';
 
@@ -590,14 +610,35 @@
                 let words = document.createElement('div');
                 words.className = 'words';
                 let text_user = document.createElement('p');
+                let url = document.createElement('a');  // 失配了返回一个url
 
-                // 暂时在处理中
-                // questions = "testing@"
                 //处理questions
                 if(questions == NO_QUESTION){
+                    // 这里要返回一个url
                     text_user.innerHTML = "不好意思，没有相关问题~";
+                    url.innerHTML += "点击这里查看别的答案嗷！";
+                    url.href = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=" + query;
+                    url.target = "_blank"
                 }else if(questions.substring(0, 6) == "直接返回答案"){
                     text_user.innerHTML = questions.substring(6);
+                    await this.findAnByQuestion(query)
+                    if (this.anIDs.length != 0){
+                        let anID = this.anIDs.split(",")
+                        text_user.appendChild(document.createElement('br'));
+                        let tryAn = document.createElement('p');
+                        tryAn.innerHTML += "不多说啦！来试试下面的题目吧！能加深理解哦！"
+                        tryAn.style.color = 'red';
+                        tryAn.style.fontSize = '15px';
+                        text_user.appendChild(tryAn);
+                        for (let id = 0; id < anID.length; id++){
+                            let an_url = document.createElement('a');
+                            an_url.innerHTML = this.anList[anID[id] - 1].description;
+                            an_url.href = "/question?id=" + anID[id];
+                            an_url.target = "_blank";
+                            text_user.appendChild(an_url)
+                            text_user.appendChild(document.createElement('br'));
+                        }
+                    }
                 }else{
                     text_user.innerHTML = "已为您找到如下问题：";
                     text_user.appendChild(document.createElement('br'));
@@ -611,7 +652,8 @@
 
                 text_user.style.fontSize = '15px';
                 text_user.className = 'word';
-
+                url.style.fontSize = '15px';
+                url.className = 'word';
 
                 let el_avatar = document.createElement('span');
                 el_avatar.className = 'el-avatar el-avatar--circle';
@@ -626,6 +668,7 @@
                 el_avatar.appendChild(img);
 
                 words.appendChild(text_user);
+                words.appendChild(url)
                 avatar_and_answer.appendChild(el_avatar);
                 avatar_and_answer.appendChild(words);
 

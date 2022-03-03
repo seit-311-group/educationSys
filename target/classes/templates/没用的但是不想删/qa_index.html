@@ -198,7 +198,7 @@
             }else if (isChinese(input.value) || isEnglish(input.value)) {   //输入包含中文
                 question = input.value;
                 ajax({
-                    url: '/qa/querytop3?question=' + question,
+                    url: '/qa/querytop5?question=' + question,
                     success: function (res) {       // 传入的为String
                         questions = res;
                         questionSpider = res;

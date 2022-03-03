@@ -158,6 +158,7 @@
                 }).then(res => {
                     var arr = res.data;
                     var len = arr.length;
+                    // this.totalQuestions = 35;
                     this.totalQuestions = len;
                     for (var i = 0; i < len; i++) {
                         let len = arr[i].description.length;

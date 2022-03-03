@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static cn.sysu.educationSys.service.serviceImpl.CoreProcessService.keyWords;
+import static cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.keyWords;
 
 
 @Service
@@ -25,7 +25,7 @@ public class AddQAServiceImpl implements AddQAService {
     cn.sysu.educationSys.mapper.circuitQaMapper circuitQaMapper;
 
     @Autowired
-    CoreProcessService coreProcessService;
+    CoreProcessServiceImpl coreProcessServiceImpl;
 
     @Autowired
     KeyWordService keyWordService;
@@ -63,13 +63,16 @@ public class AddQAServiceImpl implements AddQAService {
     public String addQA(String addStr) {
         circuitQaList = circuitQAService.importQuestions();
         circuitQa addCircuitQa = new circuitQa();
-        String[] strings = addStr.split(",");       // 以逗号分隔每个指令
+        String[] strings = addStr.split(",");       // 以逗号分隔每个指令 添加的问题或者答案中逗号必须用中文的 不然报错
         String childrenId = "";
         String fatherId = "";
         String question = "";
         String answer = "";
         for (String string : strings) {     // 遍历每个指令
             String[] instructs = string.split("@");
+            for (String instruct : instructs) {
+                System.out.println(instruct);
+            }
             String instruct = instructs[0];
             String instruct1 = instructs[1];
             if(instruct.equals("fa")){
@@ -131,7 +134,8 @@ public class AddQAServiceImpl implements AddQAService {
 
     @Override
     public void addKeyword(String question,String questionID) {
-        String keyword = coreProcessService.extract(question);
+        // String keyword = coreProcessServiceImpl.extract(question);
+        String keyword = "";
         keyWord keyWordObj = new keyWord();
         for (keyWord key : keyWords) {
             if(key.getKeyword().equals(keyword)){

@@ -121,18 +121,17 @@
                                     </el-col>
                                 </div>
                                 <div class="name-role">
-                                    <span class="sender">Admin - {{dataForm.nickName}}</span>
+                                    <span class="sender">{{dataForm.studentId}} - {{dataForm.studentName}}</span>
                                 </div>
                                 <div class="registe-info">
                                 <span class="registe-info">
                                     注册时间：
-                                <li class="fa fa-clock-o"></li>
-                                    2020/4/10 9:40:33
+                                    <p>{{dataForm.time}}</p>
                                 </span>
                                 </div>
                                 <el-divider></el-divider>
                                 <div class="personal-relation">
-                                    <div class="relation-item">手机号:  <div style="float: right; padding-right:20px;">{{dataForm.phone}}</div></div>
+                                    <div class="relation-item">年级班级:  <div style="float: right; padding-right:20px;">{{dataForm.phone}}</div></div>
                                 </div>
                                 <div class="personal-relation">
                                     <div class="relation-item">所属企业:  <div style="float: right; padding-right:20px;">杭州诚聚</div></div>
@@ -151,14 +150,14 @@
                                 </div>
                                 <div>
                                     <el-form label-width="80px" v-model="dataFrom" size="small" label-position="right">
-                                        <el-form-item label="用户昵称" prop="nickName">
-                                            <el-input  auto-complete="off" v-model="dataForm.nickName"></el-input>
+                                        <el-form-item label="学生姓名" prop="studentName">
+                                            <el-input  auto-complete="off" v-model="dataForm.studentName"></el-input>
                                         </el-form-item>
-                                        <el-form-item label="手机号" prop="phone">
-                                            <el-input auto-complete="off" v-model="dataForm.phone"></el-input>
+                                        <el-form-item label="年级班级" prop="classAndGrade">
+                                            <el-input auto-complete="off" v-model="dataForm.classAndGrade"></el-input>
                                         </el-form-item>
-                                        <el-form-item label="首页链接" prop="homeUrl">
-                                            <el-input  maxlength="18" v-model="dataForm.homeUrl"></el-input>
+                                        <el-form-item label="修改密码" prop="homeUrl">
+                                            <el-input  maxlength="18" v-model="dataForm.password"></el-input>
                                         </el-form-item>
                                     </el-form>
                                     <div slot="footer" class="dialog-footer">
@@ -182,11 +181,25 @@
         data(){
             return{
                 dataForm:{
-                    nickName: '超级管理员',
-                    phone: '173567777777',
-                    homeUrl: 'http://www.baidu.com'
+                    studentId: '20215965',
+                    studentName: '我的名字',
+                    classAndGrade: '大一',
+                    password: '173567777777',
+                    homeUrl: 'http://www.baidu.com',
+                    time: '',
+
+
                 }
             }
+        },
+        mounted: function(){
+            let now= new Date();
+            let _month = ( 10 > (now.getMonth()+1) ) ? '0' + (now.getMonth()+1) : now.getMonth()+1;
+            let _day = ( 10 > now.getDate() ) ? '0' + now.getDate() : now.getDate();
+            let _hour = ( 10 > now.getHours() ) ? '0' + now.getHours() : now.getHours();
+            let _minute = ( 10 > now.getMinutes() ) ? '0' + now.getMinutes() : now.getMinutes();
+            let _second = ( 10 > now.getSeconds() ) ? '0' + now.getSeconds() : now.getSeconds();
+            this.dataForm.time = now.getFullYear() + '-' + _month + '-' + _day + ' ' + _hour + ':' + _minute + ':' + _second;
         }
     })
     // ]]>

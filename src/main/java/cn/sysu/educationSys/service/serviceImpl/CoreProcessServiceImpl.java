@@ -3,6 +3,7 @@ package cn.sysu.educationSys.service.serviceImpl;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.pojo.qa.keyWord;
 import cn.sysu.educationSys.service.*;
+import cn.sysu.educationSys.utils.ExtractUtil;
 import cn.sysu.educationSys.utils.MatchUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
 import com.hankcs.hanlp.seg.common.Term;
@@ -15,8 +16,8 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class CoreProcessService {
-    private static Logger logger = Logger.getLogger(CoreProcessService.class);
+public class CoreProcessServiceImpl implements CoreProcessService{
+    private static Logger logger = Logger.getLogger(CoreProcessServiceImpl.class);
 
     @Autowired
     private CircuitQAService circuitQAService;
@@ -31,6 +32,9 @@ public class CoreProcessService {
     StudentService studentService;
     // @Autowired
     // private RecordService recordService;
+
+    @Autowired
+    ExtractUtil extractUtil;
 
     @Autowired
     CookieSessionService cookieSessionService;
@@ -148,31 +152,32 @@ public class CoreProcessService {
      * @param question
      * @return
      */
-    public List<circuitQa> extractCandidates(String question) {
+    public List<circuitQa> extractCandidates(String question) throws IOException {
         this.circuitQas = circuitQAService.importQuestions();
         System.out.println("数据库中有" + circuitQas.size() + "个问题答案对");
         this.questionMap = new HashMap<>();
         for (circuitQa ques : circuitQas) {
             questionMap.put(String.valueOf(ques.getQuestionid()), ques);        // id:question
         }
-//        String keyword = ExtractUtil.extract(question);
-        String keyword = extract(question);     // 提取关键词
-        if (keyword.equals("")) {
+
+        List<String> keyWordList = extract(question);// 提取关键词list
+        if (keyWordList.size() == 0) {
             return null;
         }
         List<circuitQa> candidates = new ArrayList<>();
-        for (keyWord word : keyWords) {     // 遍历所有关键词
-            if (keyword.equals(word.getKeyword())){     // equals中写对象
-                String ids = word.getQuestionids();   // 找到问题的id
-                String[] IDs = ids.split(",");
-                for (String ID : IDs) {
-                    if (questionMap.containsKey(ID)) {
-                        candidates.add(questionMap.get(ID));
-                    } else {
-                        logger.error("问题表里没有这个ID："+ID+",属于关键词"+keyword);
+        for (String keyword : keyWordList){
+            for (keyWord word : keyWords) {     // 遍历所有关键词
+                if (keyword.equals(word.getKeyword())){     // equals中写对象
+                    String ids = word.getQuestionids();   // 找到问题的id
+                    String[] IDs = ids.split(",");
+                    for (String ID : IDs) {
+                        if (questionMap.containsKey(ID)) {
+                            candidates.add(questionMap.get(ID));
+                        } else {
+                            logger.error("问题表里没有这个ID："+ID+",属于关键词"+"keyword");
+                        }
                     }
                 }
-                break;
             }
         }
         return candidates;
@@ -180,27 +185,28 @@ public class CoreProcessService {
 
 
     /**
-     * 提取关键词
+     * 去停用词+提取关键词
      * @param question
-     * @return 关键词
+     * @return 关键词list
      */
-    public String extract(String question) {
+    public List<String> extract(String question) throws IOException {
         this.keyWords = keyWordService.importKeyWords();
         System.out.println("数据库中有" + keyWords.size() + "个关键词");
-        String word = "";
+        NLPTokenizer.ANALYZER.enableCustomDictionary(true);
+        question = extractUtil.removalOfStopWords(question);    // 去停用词 去除空格
         List<Term> seg = NLPTokenizer.segment(question);        //分词
-        System.out.println(seg);
+
+        List<String> keyWordList = new ArrayList<>();
         try {
             for (Term term : seg) {
                 for (keyWord keyword : keyWords) {
                     if (term.word.equals(keyword.getKeyword())) {
-                        word = keyword.getKeyword();
+                        String word = keyword.getKeyword();
                         // 把提取出来的关键词加到学生自己的querykeywords中
                         studentService.updateQueryKeywords(cookieSessionService.findStudentByCookie().getId(), word);
                         keywordtimesallService.keywordInsertOrUpdate(word);                  // 保存关键词和次数到表中
-
+                        keyWordList.add(word);
                         logger.info("关键词：" + word);
-                        return word;
                     }
                 }
             }
@@ -208,7 +214,7 @@ public class CoreProcessService {
             e.printStackTrace();
         }
 
-        return word;
+        return keyWordList;
     }
 
 

@@ -5,6 +5,16 @@ public class keyWord {
 
     private String questionids;
 
+    private String anIDs;
+
+    public String getAnIDs() {
+        return anIDs;
+    }
+
+    public void setAnIDs(String anIDs) {
+        this.anIDs = anIDs;
+    }
+
     public String getKeyword() {
         return keyword;
     }

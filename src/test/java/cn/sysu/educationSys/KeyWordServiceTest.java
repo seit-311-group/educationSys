@@ -1,7 +1,7 @@
 package cn.sysu.educationSys;
 
 import cn.sysu.educationSys.pojo.qa.keyWord;
-import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class KeyWordServiceTest {
     private cn.sysu.educationSys.service.KeyWordService keyWordService;
 
     @Autowired
-    CoreProcessService coreProcessService;
+    CoreProcessServiceImpl coreProcessServiceImpl;
 
     @Test
     public void getIDByKeyWordTest(){
@@ -32,7 +32,7 @@ public class KeyWordServiceTest {
     @Test
     public void keyword(){
         List<keyWord> keyWords = keyWordService.importKeyWords();
-        String s = coreProcessService.extract("什么是戴维南定理");
-        System.out.println(s);
+        // String s = coreProcessServiceImpl.extract("什么是戴维南定理");
+        // System.out.println(s);
     }
 }

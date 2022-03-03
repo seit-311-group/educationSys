@@ -3,7 +3,7 @@ package cn.sysu.educationSys;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.service.AddQAService;
 import cn.sysu.educationSys.service.CircuitQAService;
-import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl;
 import cn.sysu.educationSys.service.KeyWordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ public class AddQATest {
     CircuitQAService circuitQAService;
 
     @Autowired
-    CoreProcessService coreProcessService;
+    CoreProcessServiceImpl coreProcessServiceImpl;
 
     @Autowired
     KeyWordService keyWordService;

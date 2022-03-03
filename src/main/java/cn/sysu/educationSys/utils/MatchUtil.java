@@ -92,7 +92,7 @@ public class MatchUtil {
                 res.put(circuitQaFloatEntry.getKey(), circuitQaFloatEntry.getValue());
             }
         }else {
-            return map;
+            return sortedMap;
         }
         return res;
     }

@@ -5,7 +5,7 @@ import cn.sysu.educationSys.mapper.QuestionSpiderMapper;
 import cn.sysu.educationSys.pojo.qa.QuestionSpider;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import cn.sysu.educationSys.service.*;
-import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl;
 import cn.sysu.educationSys.utils.HtmlParseUtil;
 import cn.sysu.educationSys.utils.StaticVariables;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class QaQuestionController {
     private String queryFromStudent;
 
     @Autowired
-    private CoreProcessService coreProcess;
+    private CoreProcessServiceImpl coreProcess;
 
     @Autowired
     RecordService recordService;
@@ -46,6 +46,9 @@ public class QaQuestionController {
     @Autowired
     QuestionRecordMapper questionRecordMapper;
 
+    @Autowired
+    KeyWordService keyWordService;
+
 
     /**
      * 提取问题关键词保存、问题保存、匹配问题
@@ -61,13 +64,16 @@ public class QaQuestionController {
         // return target.getAnswer();
     }
 
-    @RequestMapping("/querytop3")
-    public String querytop3(@RequestParam(value = "question") String query) throws Exception {
-        queryFromStudent = query;
+    @RequestMapping("/querytop5")
+    public String querytop5(@RequestParam(value = "question") String query) throws Exception {
         recordService.questionSave(query);
         return coreProcess.subQuestion(query);
     }
 
+    @RequestMapping("/findAnByQuestion")
+    public Map<String, String> findAnByQuestion(@RequestParam(value = "question") String query) throws Exception {
+        return keyWordService.getAnByQuestion(query);
+    }
 
     /**
      * 问题爬虫 存在bug 百度知道网站爬不了

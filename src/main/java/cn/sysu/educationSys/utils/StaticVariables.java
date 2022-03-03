@@ -15,9 +15,9 @@ public class StaticVariables {
 
     // 问答系统相关
     public static final int FIND_MANY_QUESTION = 5;        // 找到多少个问题
-    public static final double SIMILARITY_MATCHING_THRESHOLD = 1; // 直接返回答案的阈值
+    public static final double SIMILARITY_MATCHING_THRESHOLD = 0.8; // 直接返回答案的阈值
     public static final String DIRECT_ANSWER = "直接返回答案";
-    public static final double MISMATCHED_THRESHOLD = 0.05; // 问题失配的阈值
+    public static final double MISMATCHED_THRESHOLD = 0.1; // 问题失配的阈值
 
 
 

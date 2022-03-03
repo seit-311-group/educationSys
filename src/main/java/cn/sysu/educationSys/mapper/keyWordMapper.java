@@ -19,4 +19,6 @@ public interface keyWordMapper {
     int updateByExampleSelective(@Param("record") keyWord record, @Param("example") keyWordExample example);
 
     int updateByExample(@Param("record") keyWord record, @Param("example") keyWordExample example);
+
+    String getAnByKeyWord(String keyword);
 }

@@ -176,7 +176,6 @@ public class QueryController {
      */
     @RequestMapping("/matchFunction")
     public String matchFunction(@RequestBody AnswerFunctionRecords answerFunctionRecords) throws JsonProcessingException {
-        System.out.println(answerFunctionRecords);
         return questionService.matchFunction(answerFunctionRecords);
     }
 

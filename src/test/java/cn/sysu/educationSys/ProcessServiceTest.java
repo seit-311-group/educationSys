@@ -1,7 +1,7 @@
 package cn.sysu.educationSys;
 
 import cn.sysu.educationSys.pojo.qa.circuitQa;
-import cn.sysu.educationSys.service.serviceImpl.CoreProcessService;
+import cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl;
 import cn.sysu.educationSys.service.StudentService;
 import cn.sysu.educationSys.utils.MatchUtil;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 public class ProcessServiceTest {
     @Autowired
-    private CoreProcessService coreProcessService;
+    private CoreProcessServiceImpl coreProcessServiceImpl;
 
     @Autowired
     StudentService studentService;
@@ -28,8 +28,8 @@ public class ProcessServiceTest {
     private cn.sysu.educationSys.service.CircuitQAService CircuitQAService;
 
     @Test
-    public void extractCandidatesTest() {
-        List<circuitQa> candidates = coreProcessService.extractCandidates("什么是换路定律？");
+    public void extractCandidatesTest() throws IOException {
+        List<circuitQa> candidates = coreProcessServiceImpl.extractCandidates("什么是换路定律？");
         if (candidates.size() == 0) {
             System.out.println("没有候选问题");
         }
@@ -39,14 +39,14 @@ public class ProcessServiceTest {
 
     @Test
     public void analysis1Test() throws IOException {
-        Map<circuitQa, Float> circuitQaFloatMap = coreProcessService.analysisTop5("什么是戴维南定理");
+        Map<circuitQa, Float> circuitQaFloatMap = coreProcessServiceImpl.analysisTop5("什么是戴维南定理");
         // list.forEach(System.out::println);
         System.out.println(circuitQaFloatMap);
     }
 
     @Test
     public void subQuestionTest() throws IOException {
-        System.out.println(coreProcessService.subQuestion("213123"));
+        System.out.println(coreProcessServiceImpl.subQuestion("213123"));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ProcessServiceTest {
 
     @Test
     public void subQueryTest() throws IOException, InterruptedException {
-        System.out.println(coreProcessService.subQuery("电导和电阻表示元件的什么特性？"));}
+        System.out.println(coreProcessServiceImpl.subQuery("电导和电阻表示元件的什么特性？"));}
 
     @Test
     public void test1(){

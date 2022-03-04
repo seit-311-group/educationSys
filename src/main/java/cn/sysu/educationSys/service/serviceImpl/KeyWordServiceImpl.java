@@ -66,13 +66,16 @@ public class KeyWordServiceImpl implements KeyWordService {
         question = extractUtil.removalOfStopWords(question);    // 去停用词 去除空格
         List<Term> seg = NLPTokenizer.segment(question);        //分词
         Map<String, String> res = new HashMap<>();
-        String an = "";
+        StringBuffer an = new StringBuffer();
         for (Term term : seg) {
             if (keyWordMapper.getAnByKeyWord(term.word) != null){
-                an += keyWordMapper.getAnByKeyWord(term.word);
+                an.append(keyWordMapper.getAnByKeyWord(term.word) + ",");
             }
         }
-        res.put("anIDs", an);
+        if (an.charAt(an.length() - 1) == ','){
+            an.deleteCharAt(an.length() - 1);
+        }
+        res.put("anIDs", an.toString());
         return res;
     }
 

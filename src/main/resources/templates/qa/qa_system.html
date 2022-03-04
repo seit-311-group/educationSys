@@ -454,6 +454,8 @@
                 text_user.appendChild(document.createElement('br'));
             }
         }
+        vm.$refs['myScrollbar'].wrap.scrollTop = vm.$refs['myScrollbar'].wrap.scrollHeight;
+
     }
 
     // 调用API寻找答案

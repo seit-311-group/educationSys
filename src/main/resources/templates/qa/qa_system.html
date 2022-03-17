@@ -854,7 +854,7 @@
                 }else if(questions.substring(0, 6) == "直接返回答案"){
                     text_user.innerHTML = questions.substring(6);
                     await this.findAnByQuestion(query)
-                    if (this.anIDs.length != 0){
+                    if (this.anIDs != null && this.anIDs.length != 0){
                         let anID = this.anIDs.split(",");
                         text_user.appendChild(document.createElement('br'));
                         let tryAn = document.createElement('p');

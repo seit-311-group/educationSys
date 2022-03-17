@@ -72,6 +72,8 @@ public class KeyWordServiceImpl implements KeyWordService {
                 an.append(keyWordMapper.getAnByKeyWord(term.word) + ",");
             }
         }
+        if (an.length() == 0)
+            return res;
         if (an.charAt(an.length() - 1) == ','){
             an.deleteCharAt(an.length() - 1);
         }

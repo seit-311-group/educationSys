@@ -21,4 +21,10 @@ public class KeyWordServiceTest {
         // System.out.println(res);
 
     }
+
+
+    @Test
+    public void test2() throws IOException {
+        keyWordService.getAnByQuestion("什么是超网孔？");
+    }
 }

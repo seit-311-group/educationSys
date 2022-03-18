@@ -1366,6 +1366,7 @@
     }
 
     // 不用async 在调用axios方法默认是异步的 所以必须要在调用axios方法的函数上再加上async和await
+    // function1 正确的公式 function2 学生输入的公式
     async function listSubmit(function1, subQuestionId, count) {
         var input = document.getElementById('input' + count);
         var function2 = input.value;

@@ -166,6 +166,26 @@
 			<artifactId>maven-compiler-plugin</artifactId>
 			<version>2.3.2</version>
 		</dependency>
+
+		<!--screw依赖-->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.30</version>
+		</dependency>
+
+		<!--数据库文档核心依赖-->
+		<dependency>
+			<groupId>cn.smallbun.screw</groupId>
+			<artifactId>screw-core</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<!-- HikariCP -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.4.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>

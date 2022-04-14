@@ -4,6 +4,9 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/circuitqa?characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
+    xa:
+      properties:
+        useInformationSchema: true
   #    password: windway!@#$
   thymeleaf:
     prefix: classpath:/templates/

@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+Test set: cn.sysu.educationSys.service.CircuitQAServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 20.335 sec <<< FAILURE! - in cn.sysu.educationSys.service.CircuitQAServiceImplTest
+test(cn.sysu.educationSys.service.CircuitQAServiceImplTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.RecordServiceImpl.wordsSave(RecordServiceImpl.java:51)
+	at cn.sysu.educationSys.service.serviceImpl.CircuitQAServiceImpl.findAnswerByQuestion(CircuitQAServiceImpl.java:91)
+	at cn.sysu.educationSys.service.CircuitQAServiceImplTest.test(CircuitQAServiceImplTest.java:21)
+
+test1(cn.sysu.educationSys.service.CircuitQAServiceImplTest)  Time elapsed: 20.335 sec  <<< ERROR!
+org.apache.http.conn.HttpHostConnectException: Connect to 172.18.219.212:5000 [/172.18.219.212] failed: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:75)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:142)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:359)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:381)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:237)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:185)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:89)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:111)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:108)
+	at cn.sysu.educationSys.utils.HttpUtil.post(HttpUtil.java:82)
+	at cn.sysu.educationSys.service.serviceImpl.CircuitQAServiceImpl.calFunctionSimilarity(CircuitQAServiceImpl.java:110)
+	at cn.sysu.educationSys.service.CircuitQAServiceImplTest.test1(CircuitQAServiceImplTest.java:26)
+

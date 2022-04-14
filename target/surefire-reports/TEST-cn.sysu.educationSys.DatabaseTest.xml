@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="cn.sysu.educationSys.DatabaseTest" time="0" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="idea.version" value="2020.2.4"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="D:\IDEA\JavaInstall\jdk\jdk8\jre\bin"/>
+    <property name="java.vm.version" value="25.302-b08"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="maven.multiModuleProjectDirectory" value="F:\Graduation\graduationDesign\educationSys"/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="F:\Graduation\graduationDesign\educationSys"/>
+    <property name="java.runtime.version" value="1.8.0_302-b08"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\zry\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="os.detected.classifier" value="windows-x86_64"/>
+    <property name="maven.ext.class.path" value="D:\IDEA\IntelliJ IDEA 2020.2.2\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="C:\Users\zry\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\IDEA\JavaInstall\jdk\jdk8\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\软件\wps套装\WPS Office\11.1.0.11365\office6;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;D:\python3.83\Scripts\;D:\python3.83\;C:\Users\zry\AppData\Local\Microsoft\WindowsApps;D:\Texlive2020\texlive\2020\bin\win32;D:\IDEA\JavaInstall\Git\Git\mingw64\bin;D:\IDEA\JavaInstall\Git\Git\bin;D:\IDEA\JavaInstall\Git\Git\mingw64\libexec\git-core;C:\Users\zry\.m2\wrapper\dists\apache-maven-3.6.3-bin\1iopthnavndlasol9gbrbg6bf2\apache-maven-3.6.3\bin;C:\Program Files\MySQL\MySQL Server 5.7\bin;C:\Users\zry\AppData\Roaming\npm;D:\IDEA\JavaInstall\jdk\jdk8\bin;D:\IDEA\JavaInstall\jdk\jdk8\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\IDEA\jmeter\apache-jmeter-5.4.1\bin;;."/>
+    <property name="os.detected.arch" value="x86_64"/>
+    <property name="maven.conf" value="C:\Users\zry\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.detected.name" value="windows"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\zry"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="zry"/>
+    <property name="java.class.path" value="C:\Users\zry\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2\boot\plexus-classworlds-2.5.2.jar;D:\IDEA\IntelliJ IDEA 2020.2.2\lib\idea_rt.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="D:\IDEA\JavaInstall\jdk\jdk8\jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2020.2.4 -s C:\Users\zry\.m2\settings.xml package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_302"/>
+    <property name="java.ext.dirs" value="D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\resources.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\rt.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\sunrsasign.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\jsse.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\jce.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\charsets.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\lib\jfr.jar;D:\IDEA\JavaInstall\jdk\jdk8\jre\classes"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="maven.home" value="C:\Users\zry\.m2\wrapper\dists\apache-maven-3.5.2-bin\28qa8v9e2mq69covern8vmdkj0\apache-maven-3.5.2"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-8/issues/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="getQuestions" classname="cn.sysu.educationSys.DatabaseTest" time="0"/>
+  <testcase name="test1" classname="cn.sysu.educationSys.DatabaseTest" time="0"/>
+</testsuite>

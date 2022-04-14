@@ -28,6 +28,11 @@ public class AddQAController {
         return addQAService.pagingAndShow(search);
     }
 
+    /**
+     * 添加问题答案对
+     * @param addMap
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/add")
     public String add(@RequestBody Map addMap){

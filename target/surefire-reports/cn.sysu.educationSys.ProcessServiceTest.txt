@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: cn.sysu.educationSys.ProcessServiceTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE! - in cn.sysu.educationSys.ProcessServiceTest
+extractCandidatesTest(cn.sysu.educationSys.ProcessServiceTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.ProcessServiceTest.extractCandidatesTest(ProcessServiceTest.java:33)
+
+subQuestionTest(cn.sysu.educationSys.ProcessServiceTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.RecordServiceImpl.wordsSave(RecordServiceImpl.java:51)
+	at cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.analysisTop5(CoreProcessServiceImpl.java:117)
+	at cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.subQuestion(CoreProcessServiceImpl.java:271)
+	at cn.sysu.educationSys.ProcessServiceTest.subQuestionTest(ProcessServiceTest.java:49)
+
+subQueryTest(cn.sysu.educationSys.ProcessServiceTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.RecordServiceImpl.wordsSave(RecordServiceImpl.java:51)
+	at cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.analysis(CoreProcessServiceImpl.java:73)
+	at cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.subQuery(CoreProcessServiceImpl.java:228)
+	at cn.sysu.educationSys.ProcessServiceTest.subQueryTest(ProcessServiceTest.java:75)
+
+analysis1Test(cn.sysu.educationSys.ProcessServiceTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.RecordServiceImpl.wordsSave(RecordServiceImpl.java:51)
+	at cn.sysu.educationSys.service.serviceImpl.CoreProcessServiceImpl.analysisTop5(CoreProcessServiceImpl.java:117)
+	at cn.sysu.educationSys.ProcessServiceTest.analysis1Test(ProcessServiceTest.java:42)
+

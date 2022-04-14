@@ -13,11 +13,19 @@ public class AnswerQuestionController {
     @Autowired
     QuestionService questionService;
 
+    /**
+     * 得到题目数量
+     * @return
+     */
     @GetMapping("/question")
     public int findAll(){
         return questionService.findAllNums();
     }
 
+    /**
+     * 更新题目的通过率
+     * @param errorOptionsCount
+     */
     @RequestMapping("/passRateUpdate")
     public void passRateUpdate(@RequestParam(value = "errorOptions")String errorOptionsCount){
         questionService.passRateUpdate(errorOptionsCount);

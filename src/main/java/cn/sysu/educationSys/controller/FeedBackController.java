@@ -20,6 +20,10 @@ public class FeedBackController {
     @Autowired
     CookieSessionService cookieSessionService;
 
+    /**
+     * 反馈功能
+     * @param feedback
+     */
     @RequestMapping("/submit")
     public void submit(@RequestBody Map feedback){
         feedBackService.insert(feedback.get("feedback").toString(),cookieSessionService.findStudentByCookie().getId());

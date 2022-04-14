@@ -33,7 +33,7 @@ public class StudentController {
     HttpServletRequest request;
 
     /**
-     * 登录 加入redis！！
+     * 登录功能
      * @param id
      * @param password
      * @return
@@ -56,7 +56,22 @@ public class StudentController {
     }
 
     /**
-     * ajax传入 传入json对象不方便
+     * 检查用户是否存在
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/checkUserExist")
+    public String checkUserExist(@RequestParam(value = "id") Long id){
+        if(studentMapperCustom.findById(id) == null){
+            return "用户不存在";
+        }else{
+            return "用户存在";
+        }
+    }
+
+    /**
+     * 注册功能
      * @param id
      * @param name
      * @param password
@@ -99,6 +114,10 @@ public class StudentController {
         return "redirect:/";
     }
 
+    /**
+     * 找到所有做过的题目
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/findAllPassedQuestion")
     public String[] findAllPassedQuestion(){
@@ -109,6 +128,11 @@ public class StudentController {
     // POST    用来新建资源（也可以用于更新资源），
     // PUT     用来更新资源，
     // DELETE  用来删除资源
+
+    /**
+     * 保存错误的知识点
+     * @param points
+     */
     @ResponseBody
     @RequestMapping("/saveErrorPoints")
     public void saveErrorPoints(@RequestParam(value = "points") String points){
@@ -116,14 +140,5 @@ public class StudentController {
     }
 
 
-    @ResponseBody
-    @RequestMapping("/checkUserExist")
-    public String checkUserExist(@RequestParam(value = "id") Long id){
-        if(studentMapperCustom.findById(id) == null){
-            return "用户不存在";
-        }else{
-            return "用户存在";
-        }
-    }
 
 }

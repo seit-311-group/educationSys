@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: cn.sysu.educationSys.AddQATest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 6.091 sec <<< FAILURE! - in cn.sysu.educationSys.AddQATest
+test1(cn.sysu.educationSys.AddQATest)  Time elapsed: 0.524 sec  <<< ERROR!
+java.lang.NumberFormatException: For input string: "null"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at cn.sysu.educationSys.service.serviceImpl.AddQAServiceImpl.addQA(AddQAServiceImpl.java:113)
+	at cn.sysu.educationSys.AddQATest.test1(AddQATest.java:35)
+
+test3(cn.sysu.educationSys.AddQATest)  Time elapsed: 0.003 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.AddQAServiceImpl.addKeyword(AddQAServiceImpl.java:140)
+	at cn.sysu.educationSys.AddQATest.test3(AddQATest.java:50)
+

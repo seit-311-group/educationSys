@@ -23,12 +23,22 @@ public class AnswerRecordsController {
     @Autowired
     CookieSessionService cookieSessionService;
 
+    /**
+     * 得到所有答题记录
+     * @param map
+     * @return
+     */
     @PostMapping("/showAllRecords")
     public List<AnswerRecords> showAllRecords(@RequestBody Map map){
         List<AnswerRecords> recordsByStudentId = answerRecordsService.findRecordsByStudentId(cookieSessionService.findStudentByCookie().getId(),map.get("questionid").toString());
         return recordsByStudentId;
     }
 
+    /**
+     * 通过做题结果找到所有知识点
+     * @param map
+     * @return
+     */
     @PostMapping("/getAllPoints")
     public String getAllPoints(@RequestBody Map map){
         return answerRecordsService.getAllPoints(map.get("pointId").toString());

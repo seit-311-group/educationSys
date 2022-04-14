@@ -1,39 +1,18 @@
 package cn.sysu.educationSys.utils;
 
-import cn.sysu.educationSys.gRPCclient.matchClient;
 import cn.sysu.educationSys.pojo.qa.circuitQa;
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.toMap;
 
 @Component
 public class MatchUtil {
-    public static circuitQa matchByRPC(List<circuitQa> candidates, String query) throws InterruptedException {
-        String[] sents = new String[candidates.size()];
-        for (int i = 0; i < candidates.size(); i++) {
-            sents[i] = candidates.get(i).getQuestion();
-        }
-        String target = "211.66.138.157:50051";
-        ManagedChannel channel = ManagedChannelBuilder.forTarget(target)
-                .usePlaintext()
-                .build();
-        try {
-            matchClient client = new matchClient(channel);
-            int index = client.match(sents, query);
-            return candidates.get(index);
-        } finally {
-            channel.shutdownNow().awaitTermination(10, TimeUnit.SECONDS);
-        }
-    }
 
     public static circuitQa match2(List<circuitQa> candidates, String query) throws IOException {
         DocVectorModel docVectorModel = new DocVectorModel(new WordVectorModel("C:/hanLP/data/polyglot-zh.txt"));

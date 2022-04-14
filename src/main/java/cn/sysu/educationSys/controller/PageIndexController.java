@@ -5,10 +5,13 @@ import cn.sysu.educationSys.mapper.StudentMapperCustom;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.service.CookieSessionService;
 import cn.sysu.educationSys.service.QuestionService;
+import cn.sysu.educationSys.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -19,6 +22,9 @@ import java.util.Map;
 public class PageIndexController {
     @Autowired
     StudentMapperCustom studentMapperCustom;
+
+    @Autowired
+    RecordService recordService;
 
     @Autowired
     QuestionService questionService;
@@ -97,6 +103,23 @@ public class PageIndexController {
     @RequestMapping("/load")
     public List<question> load(){
         return questionService.findAll();
+    }
+
+    /**
+     * 找到问答记录 并返回页面
+     * @param model
+     * @param pageNumber
+     * @param search
+     * @return
+     */
+    @RequestMapping("/record")
+    public String record(@RequestParam(value = "pageNumber", required = false) String pageNumber,
+                         @RequestParam(value = "search", required = false)String search,
+                         Model model
+    ){
+
+        recordService.pagingAndShow(search, pageNumber, model);
+        return "qa/qa_record";
     }
 
 }

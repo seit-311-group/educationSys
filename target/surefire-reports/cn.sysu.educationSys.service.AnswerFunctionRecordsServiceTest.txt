@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: cn.sysu.educationSys.service.AnswerFunctionRecordsServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE! - in cn.sysu.educationSys.service.AnswerFunctionRecordsServiceTest
+insertFeedbackTest(cn.sysu.educationSys.service.AnswerFunctionRecordsServiceTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at cn.sysu.educationSys.service.serviceImpl.CookieSessionServiceImpl.findStudentByCookie(CookieSessionServiceImpl.java:96)
+	at cn.sysu.educationSys.service.serviceImpl.AnswerFunctionRecordsServiceImpl.insertAnswerFunctionFeedback(AnswerFunctionRecordsServiceImpl.java:30)
+	at cn.sysu.educationSys.service.AnswerFunctionRecordsServiceTest.insertFeedbackTest(AnswerFunctionRecordsServiceTest.java:22)
+

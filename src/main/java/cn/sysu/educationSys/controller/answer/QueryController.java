@@ -4,14 +4,11 @@ import cn.sysu.educationSys.pojo.answer.*;
 import cn.sysu.educationSys.pojo.qa.question;
 import cn.sysu.educationSys.service.AnswerFunctionRecordsService;
 import cn.sysu.educationSys.service.QuestionService;
-import cn.sysu.educationSys.utils.FunctionSimUtil;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/solution")
@@ -21,11 +18,14 @@ public class QueryController {
     private QuestionService questionService;
 
     @Autowired
-    private FunctionSimUtil functionSimUtil;
-
-    @Autowired
     private AnswerFunctionRecordsService answerFunctionRecordsService;
 
+    /**
+     * 得到题目描述
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getDescriptionBYId")
     public String getDescriptionBYId(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -35,6 +35,13 @@ public class QueryController {
         }
         return question.getDescription();
     }
+
+    /**
+     * 得到题目分析
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getAnalysisBYId")
     public String getAnalysisBYId(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -44,6 +51,13 @@ public class QueryController {
         }
         return question.getAnalysis();
     }
+
+    /**
+     * 通过问题ID找到子问题ID
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getSubquesIDsBYId")
     public String getSubquesIDsBYId(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -53,6 +67,13 @@ public class QueryController {
         }
         return question.getSubquesid();
     }
+
+    /**
+     * 通过问题ID找到知识点ID
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getPointIDsBYId")
     public String getPointIDsBYId(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -62,6 +83,13 @@ public class QueryController {
         }
         return question.getPointid();
     }
+
+    /**
+     * 通过问题ID找到答案
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getAnswerByID")
     public String getAnswerByID(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -71,6 +99,13 @@ public class QueryController {
         }
         return question.getAnswer();
     }
+
+    /**
+     * 通过问题ID找到要添加的图片
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getAddPictureByID")
     public String getAddPictureByID(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -80,6 +115,13 @@ public class QueryController {
         }
         return question.getAddpicture();
     }
+
+    /**
+     * 通过问题ID找到要替换的图片
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getChangePictureByID")
     public String getChangePictureByID(@RequestParam(value = "id") String id) throws Exception {
         List<question> questions = questionService.getQuestionsByID(id);
@@ -90,7 +132,12 @@ public class QueryController {
         return question.getChangepicture();
     }
 
-
+    /**
+     * 通过子问题ID找到子问题的内容
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getContentBYSubquesId")
     public String getContentBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
         List<subquestion> subquestions = questionService.getSubquestionsByID(id);
@@ -100,6 +147,13 @@ public class QueryController {
         }
         return subquestion.getContent();
     }
+
+    /**
+     * 通过子问题ID找到子问题选项的答案对应Id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getAnswerBYSubquesId")
     public int getAnswerBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
         List<subquestion> subquestions = questionService.getSubquestionsByID(id);
@@ -109,6 +163,13 @@ public class QueryController {
         }
         return subquestion.getAnswer();
     }
+
+    /**
+     * 通过子问题ID找到选项的Id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getOptionIDBYSubquesId")
     public String getOptionIDBYSubquesId(@RequestParam(value = "id") String id) throws Exception {
         List<subquestion> subquestions = questionService.getSubquestionsByID(id);
@@ -120,6 +181,12 @@ public class QueryController {
     }
 
 
+    /**
+     * 通过选项Id找到选项的内容
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getContentBYOptionId")
     public String getContentBYOptionId(@RequestParam(value = "id") String id) throws Exception {
         List<option_t> option_ts = questionService.getOptionsByID(id);
@@ -130,6 +197,12 @@ public class QueryController {
         return option_t.getContent();
     }
 
+    /**
+     * 通过选项Id找到选项对应的知识点Id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getPointIDBYOptionID")
     public String getPointIDBYOptionID(@RequestParam(value = "id") String id) throws Exception {
         List<option_t> option_ts = questionService.getOptionsByID(id);
@@ -140,7 +213,12 @@ public class QueryController {
         return option_t.getPointid();
     }
 
-
+    /**
+     * 通过知识点Id找到知识点内容
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/getContentBYPointId")
     public String getContentBYPointId(@RequestParam(value = "id") String id) throws Exception {
         List<point> points = questionService.getPointsByID(id);
@@ -152,25 +230,27 @@ public class QueryController {
     }
 
     /**
-     * 找到公式匹配功能
+     * 通过子问题Id判断该子问题能否列方程
+     * @param subQuestionId
+     * @return
      */
-    @RequestMapping("/functionSim")
-    public double functionSim(@RequestParam(value = "questionId") String questionId, @RequestParam(value = "subQuestionId") String subQuestionId, String function){
-        return functionSimUtil.calSimilarity("", function);
-    }
-
     @RequestMapping("/isListEquation")
     public boolean isListEquation(@RequestParam(value = "subQuestionId") String subQuestionId){
         return questionService.isListEquation(subQuestionId);
     }
 
+    /**
+     * 通过子问题Id找到该子问题对应的正确方程
+     * @param subQuestionId
+     * @return
+     */
     @RequestMapping("/findRightFunction")
     public String findRightFunction(@RequestParam(value = "subQuestionId") String subQuestionId){
         return questionService.findRightFunction(subQuestionId);
     }
 
     /**
-     * 接收json返回一个json
+     * 公式匹配 接收json返回一个json
      * @param answerFunctionRecords
      * @return
      */
@@ -179,12 +259,22 @@ public class QueryController {
         return questionService.matchFunction(answerFunctionRecords);
     }
 
+    /**
+     * 公式匹配反馈
+     * @param answerFunctionFeedback
+     */
     @RequestMapping("/matchFunctionFeedback")
     public void matchFunctionFeedBack(@RequestBody AnswerFunctionFeedback answerFunctionFeedback){
         answerFunctionRecordsService.insertAnswerFunctionFeedback(answerFunctionFeedback);
     }
 
 
+    /**
+     * 通过子问题Id找到子问题对应的知识点
+     * @param id
+     * @return
+     * @throws JsonProcessingException
+     */
     @RequestMapping("/getSubQuestionAndPointsMap")
     public String getSubQuestionAndPointsMap(@RequestParam(value = "id") int id) throws JsonProcessingException {
         return questionService.findPointsById(id);

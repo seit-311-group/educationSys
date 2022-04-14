@@ -64,12 +64,37 @@ public class QaQuestionController {
         // return target.getAnswer();
     }
 
+    /**
+     * 匹配文本反馈前五个问题
+     * @param query
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/querytop5")
     public String querytop5(@RequestParam(value = "question") String query) throws Exception {
         recordService.questionSave(query);
         return coreProcess.subQuestion(query);
     }
 
+    /**
+     * 找到问题的子问题
+     * @param question
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/subQuery")
+    public String subQuery(@RequestParam(value = "question") String question) throws Exception {
+        String questions = coreProcess.subQuery(question);
+        if (questions.equals("")) {return StaticVariables.NO_SUBQUESTIONs;}
+        return questions;
+    }
+
+    /**
+     * 通过问题找到答题系统中题目对应的ID
+     * @param query
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/findAnByQuestion")
     public Map<String, String> findAnByQuestion(@RequestParam(value = "question") String query) throws Exception {
         return keyWordService.getAnByQuestion(query);
@@ -88,12 +113,7 @@ public class QaQuestionController {
         return spiderAnswer;
     }
 
-    @RequestMapping("/subQuery")
-    public String subQuery(@RequestParam(value = "question") String question) throws Exception {
-        String questions = coreProcess.subQuery(question);
-        if (questions.equals("")) {return StaticVariables.NO_SUBQUESTIONs;}
-        return questions;
-    }
+
 
     /**
      * bug 点完按钮 满意度反馈
@@ -115,7 +135,10 @@ public class QaQuestionController {
         return "提交成功，谢谢您的意见";
     }
 
-
+    /**
+     * 加载所有的问题
+     * @return
+     */
     @GetMapping("/loadAllQuestions")
     public Map<String, List<String>> loadAllQuestions(){
         Map<String, List<String>> map = new HashMap<>();

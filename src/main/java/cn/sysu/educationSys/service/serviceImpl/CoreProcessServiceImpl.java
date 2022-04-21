@@ -42,6 +42,9 @@ public class CoreProcessServiceImpl implements CoreProcessService{
     @Autowired
     RecordService recordService;
 
+    @Autowired
+    MatchUtil matchUtil;
+
     private List<circuitQa> circuitQas;
 
     public static List<keyWord> keyWords;
@@ -83,8 +86,7 @@ public class CoreProcessServiceImpl implements CoreProcessService{
         }
         circuitQa target = null;
         try {
-//            target = MatchUtil.matchByRPC(candidates, query);
-            target = MatchUtil.match1(candidates, query);
+            target = matchUtil.match1(candidates, query);
             logger.info("匹配结果：" + target.getQuestion());
         } catch (Exception e) {
             if (e instanceof InterruptedException) {
@@ -129,8 +131,7 @@ public class CoreProcessServiceImpl implements CoreProcessService{
         }
         Map<circuitQa, Float> target = new LinkedHashMap<>();
         try {
-//            target = MatchUtil.matchByRPC(candidates, query);
-            target = MatchUtil.matchTop5(candidates,query); // 找到最佳的五个问题
+            target = matchUtil.matchTop5(candidates,query); // 找到最佳的五个问题
             int index = 1;
             for (Map.Entry<circuitQa, Float> circuitQaFloatEntry : target.entrySet()){
                 logger.info("匹配结果：" + index++ + circuitQaFloatEntry.getKey().getQuestion());

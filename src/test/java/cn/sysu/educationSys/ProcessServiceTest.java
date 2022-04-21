@@ -25,6 +25,9 @@ public class ProcessServiceTest {
     StudentService studentService;
 
     @Autowired
+    MatchUtil matchUtil;
+
+    @Autowired
     private cn.sysu.educationSys.service.CircuitQAService CircuitQAService;
 
     @Test
@@ -50,7 +53,7 @@ public class ProcessServiceTest {
     }
 
     @Test
-    public void matchTest(){
+    public void matchTest() throws Exception {
         List<circuitQa> candidate = new ArrayList<>();
         circuitQa circuitQa1 = new circuitQa();
         circuitQa circuitQa2 = new circuitQa();
@@ -64,7 +67,7 @@ public class ProcessServiceTest {
         candidate.add(circuitQa2);
         candidate.add(circuitQa3);
         candidate.add(circuitQa4);
-        Map<circuitQa, Float> 什么是戴维南定理 = MatchUtil.matchTop5(candidate, "什么是戴维南定理");
+        Map<circuitQa, Float> 什么是戴维南定理 = matchUtil.matchTop5(candidate, "什么是戴维南定理");
         // for (circuitQa circuit: list){
         //     System.out.println(circuit.getQuestion());
         // }
